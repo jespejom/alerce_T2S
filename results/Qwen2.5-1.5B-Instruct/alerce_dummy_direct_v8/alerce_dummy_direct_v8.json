@@ -1,0 +1,650 @@
+{
+    "86": {
+        "0": {
+            "req_id": 86,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']",
+                    "1": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 20,
+                "id": "chatcmpl-afa81378f4424760af933fed3426c621",
+                "created": 1749500453,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT DISTINCT p.oid\n   FROM probability p\n   INNER JOIN ps1_ztf pz ON p.oid = pz.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6\n     AND (p.class_name IN ('cepheid',\n                           'delta_scuti',\n                           'rr_lyrae')) ),\n     ps1_closest_objects AS\n  (SELECT pz.oid,\n          pz.candid,\n          pz.objectidps1,\n          pz.sgmag1,\n          pz.srmag1,\n          pz.simag1,\n          pz.szmag1,\n          pz.distpsnr1,\n          pz.sg_score1\n   FROM ps1_ztf pz\n   INNER JOIN ztf_objects zo ON pz.oid = zo.oid\n   WHERE pz.sg_score1 > 0.8 )\nSELECT *\nFROM ztf_objects\nWHERE oid IN\n    (SELECT oid\n     FROM ps1_closest_objects\n     LIMIT 100);",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT DISTINCT p.oid\n   FROM probability p\n   INNER JOIN ps1_ztf pz ON p.oid = pz.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6\n     AND (p.class_name IN ('cepheid',\n                           'delta_scuti',\n                           'rr_lyrae')) ),\n     ps1_closest_objects AS\n  (SELECT pz.oid,\n          pz.candid,\n          pz.objectidps1,\n          pz.sgmag1,\n          pz.srmag1,\n          pz.simag1,\n          pz.szmag1,\n          pz.distpsnr1,\n          pz.sg_score1\n   FROM ps1_ztf pz\n   INNER JOIN ztf_objects zo ON pz.oid = zo.oid\n   WHERE pz.sg_score1 > 0.8 )\nSELECT *\nFROM ztf_objects\nWHERE oid IN\n    (SELECT oid\n     FROM ps1_closest_objects\n     LIMIT 100);"
+                },
+                "in_toks": 2899,
+                "out_toks": 221,
+                "id": "chatcmpl-b568861fbe2c47178eb9b1a6bb331ba8",
+                "created": 1749500453,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 86,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']",
+                    "1": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 20,
+                "id": "chatcmpl-afa81378f4424760af933fed3426c621",
+                "created": 1749500453,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT DISTINCT p.oid\n   FROM probability p\n   INNER JOIN ps1_ztf pz ON p.oid = pz.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6\n     AND (p.class_name IN ('cepheid',\n                           'delta_scuti',\n                           'rr_lyrae')) ),\n     ps1_closest_objects AS\n  (SELECT pz.oid,\n          pz.candid,\n          pz.objectidps1,\n          pz.sgmag1,\n          pz.srmag1,\n          pz.simag1,\n          pz.szmag1,\n          pz.distpsnr1,\n          pz.sg_score1\n   FROM ps1_ztf pz\n   INNER JOIN ztf_objects zo ON pz.oid = zo.oid\n   WHERE pz.sg_score1 > 0.8 )\nSELECT *\nFROM ztf_objects\nWHERE oid IN\n    (SELECT oid\n     FROM ps1_closest_objects\n     LIMIT 100);",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT DISTINCT p.oid\n   FROM probability p\n   INNER JOIN ps1_ztf pz ON p.oid = pz.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6\n     AND (p.class_name IN ('cepheid',\n                           'delta_scuti',\n                           'rr_lyrae')) ),\n     ps1_closest_objects AS\n  (SELECT pz.oid,\n          pz.candid,\n          pz.objectidps1,\n          pz.sgmag1,\n          pz.srmag1,\n          pz.simag1,\n          pz.szmag1,\n          pz.distpsnr1,\n          pz.sg_score1\n   FROM ps1_ztf pz\n   INNER JOIN ztf_objects zo ON pz.oid = zo.oid\n   WHERE pz.sg_score1 > 0.8 )\nSELECT *\nFROM ztf_objects\nWHERE oid IN\n    (SELECT oid\n     FROM ps1_closest_objects\n     LIMIT 100);"
+                },
+                "in_toks": 2899,
+                "out_toks": 221,
+                "id": "chatcmpl-d7815eee34d34871935e87d67b1afc39",
+                "created": 1749500454,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "53": {
+        "0": {
+            "req_id": 53,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']",
+                    "1": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 10,
+                "id": "chatcmpl-774f4681727e4c38b2863c2652e8510a",
+                "created": 1749500456,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH non_detection_data AS\n  (SELECT n.detection_date::DATE AS detection_date,\n          n.fid AS filter_id,\n          ztf_identifier AS ztf_identifier,\n          diffmaglim AS diff_mag_limit\n   FROM non_detection n\n   INNER JOIN OBJECT o ON n.oid = o.oid\n   WHERE o.object_name = 'ZTF18adqxemz' )\nSELECT *\nFROM non_detection_data;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH non_detection_data AS\n  (SELECT n.detection_date::DATE AS detection_date,\n          n.fid AS filter_id,\n          ztf_identifier AS ztf_identifier,\n          diffmaglim AS diff_mag_limit\n   FROM non_detection n\n   INNER JOIN OBJECT o ON n.oid = o.oid\n   WHERE o.object_name = 'ZTF18adqxemz' )\nSELECT *\nFROM non_detection_data;"
+                },
+                "in_toks": 1994,
+                "out_toks": 101,
+                "id": "chatcmpl-8bab9b3ce24e45468076b3adce0454b0",
+                "created": 1749500456,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 53,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']",
+                    "1": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 10,
+                "id": "chatcmpl-774f4681727e4c38b2863c2652e8510a",
+                "created": 1749500456,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH non_detection_data AS\n  (SELECT n.detection_date::DATE AS detection_date,\n          n.fid AS filter_id,\n          ztf_identifier AS ztf_identifier,\n          diffmaglim AS diff_mag_limit\n   FROM non_detection n\n   INNER JOIN OBJECT o ON n.oid = o.oid\n   WHERE o.ztf_identifier = 'ZTF18adqxemz' )\nSELECT *\nFROM non_detection_data;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH non_detection_data AS\n  (SELECT n.detection_date::DATE AS detection_date,\n          n.fid AS filter_id,\n          ztf_identifier AS ztf_identifier,\n          diffmaglim AS diff_mag_limit\n   FROM non_detection n\n   INNER JOIN OBJECT o ON n.oid = o.oid\n   WHERE o.ztf_identifier = 'ZTF18adqxemz' )\nSELECT *\nFROM non_detection_data;"
+                },
+                "in_toks": 1994,
+                "out_toks": 102,
+                "id": "chatcmpl-ae2e3c43b1914dbe92c80f05cc4777fd",
+                "created": 1749500456,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "36": {
+        "0": {
+            "req_id": 36,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 8,
+                "id": "chatcmpl-4b24488fae8648d28ba51baf44ef5f45",
+                "created": 1749500457,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH CATALOG (source_id,\n              ra, dec) AS\n  (SELECT 'ZTF20aaelulu',\n          123.456,\n          -78.901\n   FROM dual)\nSELECT f.name,\n       f.value\nFROM feature f\nJOIN CATALOG c ON f.oid = c.source_id\nAND f.fid = 12\nWHERE f.version = 'feature_version_latest';",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH CATALOG (source_id,\n              ra, dec) AS\n  (SELECT 'ZTF20aaelulu',\n          123.456,\n          -78.901\n   FROM dual)\nSELECT f.name,\n       f.value\nFROM feature f\nJOIN CATALOG c ON f.oid = c.source_id\nAND f.fid = 12\nWHERE f.version = 'feature_version_latest';"
+                },
+                "in_toks": 4309,
+                "out_toks": 90,
+                "id": "chatcmpl-b1eae672bc6f48a9bc146fb551fe4d9b",
+                "created": 1749500457,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 36,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 8,
+                "id": "chatcmpl-4b24488fae8648d28ba51baf44ef5f45",
+                "created": 1749500457,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH CATALOG (source_id,\n              ra, dec) AS\n  (SELECT 'ZTF20aaelulu',\n          0,\n          0\n   FROM dual)\nSELECT f.name,\n       f.value\nFROM feature f\nJOIN CATALOG c ON f.oid = c.source_id\nWHERE f.fid = 12\n  AND f.version = 'feature_version_latest';",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH CATALOG (source_id,\n              ra, dec) AS\n  (SELECT 'ZTF20aaelulu',\n          0,\n          0\n   FROM dual)\nSELECT f.name,\n       f.value\nFROM feature f\nJOIN CATALOG c ON f.oid = c.source_id\nWHERE f.fid = 12\n  AND f.version = 'feature_version_latest';"
+                },
+                "in_toks": 4309,
+                "out_toks": 79,
+                "id": "chatcmpl-ee658268fb2c488fb69bfb3858d5fc8b",
+                "created": 1749500458,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "91": {
+        "0": {
+            "req_id": 91,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']",
+                    "1": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 22,
+                "id": "chatcmpl-770e1ffa777945979d599defe46bb701",
+                "created": 1749500458,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT oid,\n          COUNT(*) AS num_detections,\n          MIN(sigmag1) - MIN(sigmag2) AS diff_g_r_magnitudes\n   FROM ps1_ztf\n   WHERE W1_W2 < 1\n   GROUP BY oid)\nSELECT z.objectidps1 AS ztf_identifier,\n       z.num_detections,\n       z.diff_g_r_magnitudes,\n       v.w1_w2 AS w1_w2,\n       v.version AS feature_version\nFROM ztf_objects z\nJOIN feature_version v ON z.version = v.version;\n\n\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT oid,\n          COUNT(*) AS num_detections,\n          MIN(sigmag1) - MIN(sigmag2) AS diff_g_r_magnitudes\n   FROM ps1_ztf\n   WHERE W1_W2 < 1\n   GROUP BY oid)\nSELECT z.objectidps1 AS ztf_identifier,\n       z.num_detections,\n       z.diff_g_r_magnitudes,\n       v.w1_w2 AS w1_w2,\n       v.version AS feature_version\nFROM ztf_objects z\nJOIN feature_version v ON z.version = v.version;\n\n\nLIMIT 100;"
+                },
+                "in_toks": 2746,
+                "out_toks": 150,
+                "id": "chatcmpl-f32a134ba70743fa97e1e6ff4005500e",
+                "created": 1749500458,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 91,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']",
+                    "1": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 22,
+                "id": "chatcmpl-770e1ffa777945979d599defe46bb701",
+                "created": 1749500458,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH min_diff_g_r AS\n  (SELECT candid,\n          MIN(sigmag1 - srmag1) AS diff_min_g_r\n   FROM ps1_ztf\n   GROUP BY candid)\nSELECT t1.candid AS ztf_identifier,\n       COUNT(*) AS num_detections,\n       t1.sigmag1 - t1.srmag1 AS diff_min_g_r,\n       t2.w1_w2 AS w1_w2,\n       v.version AS feature_version\nFROM ps1_ztf t1\nJOIN min_diff_g_r mdr ON t1.candid = mdr.candid\nLEFT JOIN feature_version v ON t1.candid = v.candidate_id\nLEFT JOIN\n  (SELECT candid,\n          SUM(w1_w2) AS w1_w2\n   FROM ps1_ztf\n   WHERE W1_W2 < 1\n   GROUP BY candid) t2 ON t1.candid = t2.candid\nWHERE t1.W1_W2 < 1\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH min_diff_g_r AS\n  (SELECT candid,\n          MIN(sigmag1 - srmag1) AS diff_min_g_r\n   FROM ps1_ztf\n   GROUP BY candid)\nSELECT t1.candid AS ztf_identifier,\n       COUNT(*) AS num_detections,\n       t1.sigmag1 - t1.srmag1 AS diff_min_g_r,\n       t2.w1_w2 AS w1_w2,\n       v.version AS feature_version\nFROM ps1_ztf t1\nJOIN min_diff_g_r mdr ON t1.candid = mdr.candid\nLEFT JOIN feature_version v ON t1.candid = v.candidate_id\nLEFT JOIN\n  (SELECT candid,\n          SUM(w1_w2) AS w1_w2\n   FROM ps1_ztf\n   WHERE W1_W2 < 1\n   GROUP BY candid) t2 ON t1.candid = t2.candid\nWHERE t1.W1_W2 < 1\nLIMIT 100;"
+                },
+                "in_toks": 2746,
+                "out_toks": 244,
+                "id": "chatcmpl-178b9e74cc3d415e8dd2c146cfc25307",
+                "created": 1749500459,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "0": {
+        "0": {
+            "req_id": 0,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 14,
+                "id": "chatcmpl-81222f3dc2eb4dbdb5b5bdb78b8333ad",
+                "created": 1749500461,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH periodic_objects AS\n  (SELECT o.oid,\n          o.possibility,\n          f.value,\n          f.name,\n          f.fid,\n          fv.version\n   FROM OBJECT o\n   JOIN feature f ON o.oid = f.oid\n   JOIN feature_version fv ON f.version = fv.version\n   WHERE o.stellar = FALSE\n     AND o.ndet > 0\n     AND o.corrected = TRUE\n     AND f.name IN ('Periodicity',\n                    'VariabilityAmplitude')\n     AND f.fid BETWEEN 1 AND 3\n     AND f.value > 0.7\n     AND f.value < 1.5\n     AND f.fid IN (1,\n                   2,\n                   3)\n     AND f.version IN ('v1.0',\n                       'v1.1') ),\n     periodic_and_yso AS\n  (SELECT po.oid,\n          po.possibility,\n          po.value,\n          po.name,\n          po.fid,\n          pv.version\n   FROM periodic_objects po\n   JOIN feature_version pv ON po.version = pv.version\n   WHERE po.name IN ('Periodicity',\n                     'VariabilityAmplitude')\n     AND po.value >= 0.5\n     AND po.fid IN (1,\n                    2,\n                    3)\n     AND po.version IN ('v1.0',\n                        'v1.1') )\nSELECT DISTINCT oid,\n                possibility,\n                value,\n                name,\n                fid,\n                VERSION\nFROM periodic_and_yso\nORDER BY possibility DESC;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH periodic_objects AS\n  (SELECT o.oid,\n          o.possibility,\n          f.value,\n          f.name,\n          f.fid,\n          fv.version\n   FROM OBJECT o\n   JOIN feature f ON o.oid = f.oid\n   JOIN feature_version fv ON f.version = fv.version\n   WHERE o.stellar = FALSE\n     AND o.ndet > 0\n     AND o.corrected = TRUE\n     AND f.name IN ('Periodicity',\n                    'VariabilityAmplitude')\n     AND f.fid BETWEEN 1 AND 3\n     AND f.value > 0.7\n     AND f.value < 1.5\n     AND f.fid IN (1,\n                   2,\n                   3)\n     AND f.version IN ('v1.0',\n                       'v1.1') ),\n     periodic_and_yso AS\n  (SELECT po.oid,\n          po.possibility,\n          po.value,\n          po.name,\n          po.fid,\n          pv.version\n   FROM periodic_objects po\n   JOIN feature_version pv ON po.version = pv.version\n   WHERE po.name IN ('Periodicity',\n                     'VariabilityAmplitude')\n     AND po.value >= 0.5\n     AND po.fid IN (1,\n                    2,\n                    3)\n     AND po.version IN ('v1.0',\n                        'v1.1') )\nSELECT DISTINCT oid,\n                possibility,\n                value,\n                name,\n                fid,\n                VERSION\nFROM periodic_and_yso\nORDER BY possibility DESC;"
+                },
+                "in_toks": 4847,
+                "out_toks": 297,
+                "id": "chatcmpl-f87aa69ead14415da1dfd00e3120fb4a",
+                "created": 1749500461,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 0,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 14,
+                "id": "chatcmpl-81222f3dc2eb4dbdb5b5bdb78b8333ad",
+                "created": 1749500461,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH periodic_objects AS\n  (SELECT o.oid,\n          o.possibility,\n          f.value,\n          f.name,\n          f.fid,\n          fv.version\n   FROM OBJECT o\n   JOIN feature f ON o.oid = f.oid\n   JOIN feature_version fv ON f.version = fv.version\n   WHERE o.stellar = FALSE\n     AND o.ndet > 0\n     AND o.corrected = TRUE\n     AND f.name IN ('Periodicity',\n                    'VariabilityAmplitude')\n     AND f.fid BETWEEN 12 AND 23\n     AND f.value >= 0.5\n     AND f.value <= 1.0\n     AND fv.name = 'period'\n     AND fv.value::float / 86400 BETWEEN 3 AND 10 )\nSELECT DISTINCT o.oid,\n                o.possibility,\n                f.value,\n                f.name,\n                f.fid,\n                fv.version\nFROM periodic_objects po\nJOIN OBJECT o ON po.oid = o.oid\nWHERE po.possibility > 0.7\nORDER BY po.possibility DESC;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH periodic_objects AS\n  (SELECT o.oid,\n          o.possibility,\n          f.value,\n          f.name,\n          f.fid,\n          fv.version\n   FROM OBJECT o\n   JOIN feature f ON o.oid = f.oid\n   JOIN feature_version fv ON f.version = fv.version\n   WHERE o.stellar = FALSE\n     AND o.ndet > 0\n     AND o.corrected = TRUE\n     AND f.name IN ('Periodicity',\n                    'VariabilityAmplitude')\n     AND f.fid BETWEEN 12 AND 23\n     AND f.value >= 0.5\n     AND f.value <= 1.0\n     AND fv.name = 'period'\n     AND fv.value::float / 86400 BETWEEN 3 AND 10 )\nSELECT DISTINCT o.oid,\n                o.possibility,\n                f.value,\n                f.name,\n                f.fid,\n                fv.version\nFROM periodic_objects po\nJOIN OBJECT o ON po.oid = o.oid\nWHERE po.possibility > 0.7\nORDER BY po.possibility DESC;"
+                },
+                "in_toks": 4847,
+                "out_toks": 224,
+                "id": "chatcmpl-7fcf0efbdc8a4a42a1bfc9306408b2aa",
+                "created": 1749500463,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "70": {
+        "0": {
+            "req_id": 70,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']",
+                    "1": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 8,
+                "id": "chatcmpl-0bf7dd7d67594a51b2bb61707acbc004",
+                "created": 1749500464,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "SELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';"
+                },
+                "in_toks": 2245,
+                "out_toks": 23,
+                "id": "chatcmpl-366fb60f6bda46c5831bf4d7d0fb55ef",
+                "created": 1749500464,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 70,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']",
+                    "1": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 8,
+                "id": "chatcmpl-0bf7dd7d67594a51b2bb61707acbc004",
+                "created": 1749500464,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "SELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';"
+                },
+                "in_toks": 2245,
+                "out_toks": 23,
+                "id": "chatcmpl-192e0eb51dd64d429fd586b4b8ef95f2",
+                "created": 1749500464,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "4": {
+        "0": {
+            "req_id": 4,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 14,
+                "id": "chatcmpl-58ae55693c234163867bc0d63bf4496a",
+                "created": 1749500465,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT o.oid,\n          o.firstmjd,\n          o.lastmjd,\n          p.classifier_name,\n          p.probability,\n          p.ranking,\n          o.deltajd,\n          o.ndethist,\n          o.ncovhist,\n          o.mjdstarthist,\n          o.mjdendhist,\n          o.corrected,\n          o.stellar,\n          o.ndet,\n          o.g_r_max,\n          o.g_r_max_corr,\n          o.g_r_mean,\n          o.g_r_mean_corr,\n          o.meanra,\n          o.meandec,\n          o.sigmara,\n          o.sigmadec,\n          o.step_id_corr,\n          o.diffpos,\n          o.reference_change\n   FROM OBJECT o\n   INNER JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND p.probability > 0.6\n     AND p.ranking = 1\n     AND o.deltajd BETWEEN '2019-01-01T00:00:00Z'::timestamp WITH TIME ZONE AND '2022-12-31T23:59:59Z'::timestamp WITH TIME ZONE\n     AND o.ndet > 50\n     AND o.band LIKE '%g%'\n     OR o.band LIKE '%r%' )\nSELECT o.oid,\n       o.candidate_identifier,\n       o.magstats_g,\n       o.magstats_gerr,\n       o.magstats_r,\n       o.magstats_rerr,\n       o.initial_rise_estimate,\n       o.band_identifiers\nFROM ztf_objects o;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT o.oid,\n          o.firstmjd,\n          o.lastmjd,\n          p.classifier_name,\n          p.probability,\n          p.ranking,\n          o.deltajd,\n          o.ndethist,\n          o.ncovhist,\n          o.mjdstarthist,\n          o.mjdendhist,\n          o.corrected,\n          o.stellar,\n          o.ndet,\n          o.g_r_max,\n          o.g_r_max_corr,\n          o.g_r_mean,\n          o.g_r_mean_corr,\n          o.meanra,\n          o.meandec,\n          o.sigmara,\n          o.sigmadec,\n          o.step_id_corr,\n          o.diffpos,\n          o.reference_change\n   FROM OBJECT o\n   INNER JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND p.probability > 0.6\n     AND p.ranking = 1\n     AND o.deltajd BETWEEN '2019-01-01T00:00:00Z'::timestamp WITH TIME ZONE AND '2022-12-31T23:59:59Z'::timestamp WITH TIME ZONE\n     AND o.ndet > 50\n     AND o.band LIKE '%g%'\n     OR o.band LIKE '%r%' )\nSELECT o.oid,\n       o.candidate_identifier,\n       o.magstats_g,\n       o.magstats_gerr,\n       o.magstats_r,\n       o.magstats_rerr,\n       o.initial_rise_estimate,\n       o.band_identifiers\nFROM ztf_objects o;"
+                },
+                "in_toks": 2586,
+                "out_toks": 325,
+                "id": "chatcmpl-1d723f404d164c11bcdad23d5269fe83",
+                "created": 1749500465,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 4,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 14,
+                "id": "chatcmpl-58ae55693c234163867bc0d63bf4496a",
+                "created": 1749500465,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT o.oid,\n          o.firstmjd,\n          o.lastmjd,\n          p.classifier_name,\n          p.probability,\n          p.ranking,\n          o.deltajd,\n          o.ndethist,\n          o.ncovhist,\n          o.mjdstarthist,\n          o.mjdendhist,\n          o.corrected,\n          o.stellar,\n          o.ndet,\n          o.g_r_max,\n          o.g_r_max_corr,\n          o.g_r_mean,\n          o.g_r_mean_corr,\n          o.meanra,\n          o.meandec,\n          o.sigmara,\n          o.sigmadec,\n          o.step_id_corr,\n          o.diffpos,\n          o.reference_change\n   FROM OBJECT o\n   INNER JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND EXTRACT(YEAR\n                 FROM o.firstmjd) BETWEEN 2019 AND 2022\n     AND p.probability > 0.6\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version LIKE '%g%'\n     AND p.classifier_version LIKE '%r%'\n     AND o.ndet > 50 )\nSELECT o.oid,\n       o.candidate_identifier,\n       o.magstats_g,\n       o.magstats_gerr,\n       o.initial_rise_estimate,\n       o.band_identifiers\nFROM ztf_objects o;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT o.oid,\n          o.firstmjd,\n          o.lastmjd,\n          p.classifier_name,\n          p.probability,\n          p.ranking,\n          o.deltajd,\n          o.ndethist,\n          o.ncovhist,\n          o.mjdstarthist,\n          o.mjdendhist,\n          o.corrected,\n          o.stellar,\n          o.ndet,\n          o.g_r_max,\n          o.g_r_max_corr,\n          o.g_r_mean,\n          o.g_r_mean_corr,\n          o.meanra,\n          o.meandec,\n          o.sigmara,\n          o.sigmadec,\n          o.step_id_corr,\n          o.diffpos,\n          o.reference_change\n   FROM OBJECT o\n   INNER JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND EXTRACT(YEAR\n                 FROM o.firstmjd) BETWEEN 2019 AND 2022\n     AND p.probability > 0.6\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version LIKE '%g%'\n     AND p.classifier_version LIKE '%r%'\n     AND o.ndet > 50 )\nSELECT o.oid,\n       o.candidate_identifier,\n       o.magstats_g,\n       o.magstats_gerr,\n       o.initial_rise_estimate,\n       o.band_identifiers\nFROM ztf_objects o;"
+                },
+                "in_toks": 2586,
+                "out_toks": 280,
+                "id": "chatcmpl-61cac5e6bd99449c9073ffbefd602c14",
+                "created": 1749500467,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "46": {
+        "0": {
+            "req_id": 46,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 10,
+                "id": "chatcmpl-785e596b4fc04dde9fcda8f93cf3b568",
+                "created": 1749500468,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "SELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;"
+                },
+                "in_toks": 2417,
+                "out_toks": 27,
+                "id": "chatcmpl-b3afd7e68316412f9e46d39046ebe4a4",
+                "created": 1749500469,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 46,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 10,
+                "id": "chatcmpl-785e596b4fc04dde9fcda8f93cf3b568",
+                "created": 1749500468,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "SELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;"
+                },
+                "in_toks": 2417,
+                "out_toks": 27,
+                "id": "chatcmpl-86e797a6d10240ae96efa7423ae05d1c",
+                "created": 1749500469,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "60": {
+        "0": {
+            "req_id": 60,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']",
+                    "1": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 10,
+                "id": "chatcmpl-b84206b3aad8405e91780f981f599322",
+                "created": 1749500469,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT 'ZTF20adadshh' AS ztf_identifier\n   UNION ALL SELECT 'ZTF21aaabvit'\n   UNION ALL SELECT 'ZTF21aaabvjk')\nSELECT mo.ztf_identifier,\n       mo.ndet,\n       mo.magmean_corr,\n       mo.magfirst_corr\nFROM magstat mo\nJOIN ztf_objects zo ON mo.oid = zo.ztf_identifier\nWHERE mo.fid = 1\n  AND mo.dubious = 0;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT 'ZTF20adadshh' AS ztf_identifier\n   UNION ALL SELECT 'ZTF21aaabvit'\n   UNION ALL SELECT 'ZTF21aaabvjk')\nSELECT mo.ztf_identifier,\n       mo.ndet,\n       mo.magmean_corr,\n       mo.magfirst_corr\nFROM magstat mo\nJOIN ztf_objects zo ON mo.oid = zo.ztf_identifier\nWHERE mo.fid = 1\n  AND mo.dubious = 0;"
+                },
+                "in_toks": 2636,
+                "out_toks": 113,
+                "id": "chatcmpl-0333cd7586c046ae890ad8585bb6ae06",
+                "created": 1749500469,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 60,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']",
+                    "1": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 10,
+                "id": "chatcmpl-b84206b3aad8405e91780f981f599322",
+                "created": 1749500469,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH ztf_objects AS\n  (SELECT 'ZTF20adadshh' AS ztf_identifier\n   UNION ALL SELECT 'ZTF21aaabvit'\n   UNION ALL SELECT 'ZTF21aaabvjk')\nSELECT ztf_identifier,\n       ndet,\n       magmean_corr,\n       magfirst_corr\nFROM magstat\nWHERE fid = 1\n  AND ztf_identifier IN\n    (SELECT ztf_identifier\n     FROM ztf_objects)\n  AND ndubious = 0;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH ztf_objects AS\n  (SELECT 'ZTF20adadshh' AS ztf_identifier\n   UNION ALL SELECT 'ZTF21aaabvit'\n   UNION ALL SELECT 'ZTF21aaabvjk')\nSELECT ztf_identifier,\n       ndet,\n       magmean_corr,\n       magfirst_corr\nFROM magstat\nWHERE fid = 1\n  AND ztf_identifier IN\n    (SELECT ztf_identifier\n     FROM ztf_objects)\n  AND ndubious = 0;"
+                },
+                "in_toks": 2636,
+                "out_toks": 105,
+                "id": "chatcmpl-45345d2fb9dc43d1ac97ba632076e5aa",
+                "created": 1749500470,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "97": {
+        "0": {
+            "req_id": 97,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 8,
+                "id": "chatcmpl-2751fdd4762c47d78f39d9ae92dd1548",
+                "created": 1749500470,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH agn_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_stamp_agn\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'stamp_classifier'\n     AND p.classifier_version = 'stamp_classifier_1.0.4'\n     AND p.probability > 0.6 ),\n     lpv_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_lc_lpv\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'lc_classifier_1.0.4'\n     AND p.probability > 0.7 )\nSELECT ao.oid,\n       ao.prob_stamp_agn,\n       lo.prob_lc_lpv\nFROM agn_objects ao\nJOIN lpv_objects lo ON ao.oid = lo.oid\nLIMIT 50;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH agn_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_stamp_agn\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'stamp_classifier'\n     AND p.classifier_version = 'stamp_classifier_1.0.4'\n     AND p.probability > 0.6 ),\n     lpv_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_lc_lpv\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'lc_classifier_1.0.4'\n     AND p.probability > 0.7 )\nSELECT ao.oid,\n       ao.prob_stamp_agn,\n       lo.prob_lc_lpv\nFROM agn_objects ao\nJOIN lpv_objects lo ON ao.oid = lo.oid\nLIMIT 50;"
+                },
+                "in_toks": 2127,
+                "out_toks": 208,
+                "id": "chatcmpl-3fa06ef53a8145f587cb457600e15737",
+                "created": 1749500470,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 97,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 8,
+                "id": "chatcmpl-2751fdd4762c47d78f39d9ae92dd1548",
+                "created": 1749500470,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "sql_query": "WITH agn_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_stamp_agn\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'stamp_classifier'\n     AND p.classifier_version = 'stamp_classifier_1.0.4'\n     AND p.probability > 0.6 ),\n     lpv_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_lc_lpv\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'lc_classifier_1.0.4'\n     AND p.probability > 0.7 )\nSELECT ao.oid,\n       ao.prob_stamp_agn,\n       lo.prob_lc_lpv\nFROM agn_objects ao\nJOIN lpv_objects lo ON ao.oid = lo.oid\nLIMIT 50;",
+            "sql_response": {
+                "responses": {
+                    "0": "WITH agn_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_stamp_agn\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'stamp_classifier'\n     AND p.classifier_version = 'stamp_classifier_1.0.4'\n     AND p.probability > 0.6 ),\n     lpv_objects AS\n  (SELECT DISTINCT o.oid,\n                   p.probability AS prob_lc_lpv\n   FROM probability p\n   INNER JOIN OBJECT o ON p.oid = o.oid\n   WHERE p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'lc_classifier_1.0.4'\n     AND p.probability > 0.7 )\nSELECT ao.oid,\n       ao.prob_stamp_agn,\n       lo.prob_lc_lpv\nFROM agn_objects ao\nJOIN lpv_objects lo ON ao.oid = lo.oid\nLIMIT 50;"
+                },
+                "in_toks": 2127,
+                "out_toks": 208,
+                "id": "chatcmpl-b75ece42cd314b42991815a799b78c26",
+                "created": 1749500472,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    }
+}

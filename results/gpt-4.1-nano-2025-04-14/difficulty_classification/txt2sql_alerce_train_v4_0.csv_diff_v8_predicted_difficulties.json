@@ -1,0 +1,3165 @@
+{
+    "13": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1104,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLnyrAy2ha8Z4qIJ6aloxS02Ds1p",
+                "created": 1749671622,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1104,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLnynvQHLRtXLRKK6yKLAg8kB4Tv",
+                "created": 1749671622,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1104,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLnzP4BY0JScg62mEohO0Y77GoFf",
+                "created": 1749671623,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1104,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLnzQu3lvCrkFcwo6aqqTJuYdnHC",
+                "created": 1749671623,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "10": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1140,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo0LnhyJiqvifx1v0yBrrcWzPmS",
+                "created": 1749671624,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1140,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo0cxakd0gV7R0Sexs4IljdqqMr",
+                "created": 1749671624,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1140,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo10ynpY3TnFgk9D5RgC3jQbm8g",
+                "created": 1749671625,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1140,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo2z5jbPbnFLJbr3O8Jqf5IhqyL",
+                "created": 1749671626,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "15": {
+        "0": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2420,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo23SQnvU4AE1TIGrb9ELSbhn4h",
+                "created": 1749671626,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2420,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo3FzekRE205tYLuvSNT7HazDaR",
+                "created": 1749671627,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2420,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo3gy2uoEFA3kHGZcXXOOI0pcLN",
+                "created": 1749671627,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2420,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo40gd9a3S8xNnxUW2qWigxgDUj",
+                "created": 1749671628,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "4": {
+        "0": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2406,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo4HXLOPOcUqip4l0mzWWsYoJPT",
+                "created": 1749671628,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2406,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo5AperqawYm2h3y1o8ZEj7zZrC",
+                "created": 1749671629,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2406,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo5AMBDWGOV9InLx3VI5597ZkfO",
+                "created": 1749671629,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2406,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo6TI26Y23DwC0mEP1CyhkX2tTH",
+                "created": 1749671630,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "25": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1150,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo6430HltBd9Llm7ISMFqmkPKoy",
+                "created": 1749671630,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1150,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo7zJzzoNkfcC8QdLccxxxhwMGx",
+                "created": 1749671631,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1150,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo7x73A25OGDN8nbu2qvTRC79PN",
+                "created": 1749671631,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1150,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo8FppCfkILvPAN5AAHCZLus3ce",
+                "created": 1749671632,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "7": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1097,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo9znaK3lDrlh3chVPVgpdxuoVd",
+                "created": 1749671633,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1097,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo9M0iXnAARikD7tD1R7C3ZBBkg",
+                "created": 1749671633,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1097,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLo9AjKMI630oj5CiEvBwFaaAFhq",
+                "created": 1749671633,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1097,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoAinT8YlmlAiOTzcF8ePQBHlwz",
+                "created": 1749671634,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "2": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1129,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoAVWfEHJtA3PsbDGHPOC6tmpZM",
+                "created": 1749671634,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1129,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoBaOKDdzdrKG77ArLwqK2VGLgy",
+                "created": 1749671635,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3515,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoCSMQl4nUxCLKwTbeDIEphYfam",
+                "created": 1749671636,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3515,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoCzF220C9v3W4nteZruUorfjJN",
+                "created": 1749671636,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "3": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1088,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoCvb8igHIacuwGR97vmNaNwpzt",
+                "created": 1749671636,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1088,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoD3mvxKr2qgUV9yP7E9D5ka6T9",
+                "created": 1749671637,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1088,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoDTrPbbWt8iH5li1SLu4ckLTvM",
+                "created": 1749671637,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1088,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoEsHLduurorLSRe72iM5cR9Qi9",
+                "created": 1749671638,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "23": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1111,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoEORiXiqDZSkKSPreVQz2fwZb8",
+                "created": 1749671638,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1111,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoF66T10BGqOxJPDWIdef9yGviv",
+                "created": 1749671639,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1111,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoFuCjfrr0DzsyYLhORi6zjYz1v",
+                "created": 1749671639,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1111,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoGqnxYUlvWYT7sbP4JA8ZIpuHL",
+                "created": 1749671640,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "32": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 597,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoGzwmX7X6tmdanpJfI9SQjhAH0",
+                "created": 1749671640,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 597,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoH8DfNMtDjRRW0n3rtxKgjnweO",
+                "created": 1749671641,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 597,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoHjlKqsNCgUWM1ZZmzDNPc80uE",
+                "created": 1749671641,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 597,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoIGwvXE7ZghuWsADN1L4cT7lGU",
+                "created": 1749671642,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "20": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1650,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoIDjAnb0LpXdNuwlXLTBntstoc",
+                "created": 1749671642,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1650,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoJDvNUoF5Fd3lDksrsBsz8mb39",
+                "created": 1749671643,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1650,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoKhwvoprlv3f4sscyDxK1zjlx6",
+                "created": 1749671644,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1650,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoK79nsRImBBgQRywBw7F1j3W0y",
+                "created": 1749671644,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "18": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1783,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoKusE9jQVaX8GG6U6g5QIkrBin",
+                "created": 1749671644,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 1783,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoLeB85pzEHGlZDSe0bneHBAqMF",
+                "created": 1749671645,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1783,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoMMCcglA5nphjUlh2rrXrZKrqG",
+                "created": 1749671646,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 1783,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoMEZ1qjETSBSeX5pfR4cQw7URe",
+                "created": 1749671646,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "35": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 594,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoNXQW7JcpO1CMPpga353GJvvZI",
+                "created": 1749671647,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 594,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoNYwfHd6wDivkPQhFt2bqCl0Fi",
+                "created": 1749671647,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 594,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoObrlXA518Wwx6rzJNWCNNjpSA",
+                "created": 1749671648,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 594,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoOkdrqrIXvWHstG2t7gnC4Zf6m",
+                "created": 1749671648,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "11": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4811,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoPC6evuFYhzCON1catEhkBL8xW",
+                "created": 1749671649,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4811,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoQy8N0ES2D7OtRLFsBibvsihjA",
+                "created": 1749671650,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4811,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoQ44C2F6p03ue0Ig7uyPpFb3Ka",
+                "created": 1749671650,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4811,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoR1GLbKGDzli4MDrEX9mDpAIO6",
+                "created": 1749671651,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "9": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1186,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoRmfhnOKxvtY3oBuncTsVwiCsT",
+                "created": 1749671651,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1186,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoSTefE8zQ9SCF9KJBiUJWi31zH",
+                "created": 1749671652,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1186,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoSXgMmC49ILMXX3srNUyR7tZ86",
+                "created": 1749671652,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1186,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoTETTIO4IogBAirLTuITs4FiaJ",
+                "created": 1749671653,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "5": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4137,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoT9ZUuKbmmwQ9Bd69Hl6msAqPq",
+                "created": 1749671653,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4137,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoUIGUmVXAkVo2sgch9HXOz1PW8",
+                "created": 1749671654,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4137,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoUDN7uwmEvauexf067ZBCVMC6Q",
+                "created": 1749671654,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4137,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoVdcUH6gdYr4htuiMwSeRVrqOg",
+                "created": 1749671655,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "0": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3578,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoVOHLSjCT8eVik3YqhxEFPsUYe",
+                "created": 1749671655,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3578,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoWo3Lb3EMfWKIJ5W9RfoBVNCWq",
+                "created": 1749671656,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3578,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoWJqeupTHHfZBU93P6K1R2EPel",
+                "created": 1749671656,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3578,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoXlk02g5c4ht5H9caIQJDTJAoN",
+                "created": 1749671657,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "28": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 415,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoXwjxcsjkEGU4DUQXaZ0nnhpUO",
+                "created": 1749671657,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 415,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoYeFwI5jnwuB0NICcPnspSuDEt",
+                "created": 1749671658,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 415,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoZjJ4NQ4qqecTveI5W7g8U6fc0",
+                "created": 1749671659,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 415,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoaiQx8QX4shD3OTxFpZ7qDKuqS",
+                "created": 1749671660,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "36": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3886,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoaQLYRfW7ezkyOALplI8Ggf9eu",
+                "created": 1749671660,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3886,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLobp4sUK7LwhfnhIb8u4SHg0IMo",
+                "created": 1749671661,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3886,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLocYHPzAgtQVcVcQtL7QbjohM9Y",
+                "created": 1749671662,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3337,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLocap1767gSK9qEtxZc1TuyXfCS",
+                "created": 1749671662,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "38": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1676,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLodgxR7nxuHpkbjWbivWwbDEajs",
+                "created": 1749671663,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1676,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoe2e9idJY0fdzjywq62juWRIbm",
+                "created": 1749671664,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1676,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoeT2kLrh1YzoQnjc6xiuQUaUAS",
+                "created": 1749671664,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1676,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLof1B43b2giQejNgOGTrLeqUt2J",
+                "created": 1749671665,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "24": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1683,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLofCNFtJcAzJ2ni8DjIOtIfoiAE",
+                "created": 1749671665,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3566,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLogD18UGOF2ABwBKOE5tGIA8FML",
+                "created": 1749671666,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3566,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLohdViAuvoed3q9iWFJDk1ZdD5I",
+                "created": 1749671667,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3566,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLohwsTCAHuaPh6OogsR3LQSNK1Q",
+                "created": 1749671667,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "31": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3539,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoi6HpBSf5iV4CZp3yJKJzK89WW",
+                "created": 1749671668,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3539,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoiW8nsKD8qaiXNZ3mWLc6Z0f6S",
+                "created": 1749671668,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3539,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLojPPmZDdppK1sXshPLfKKMXeVR",
+                "created": 1749671669,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3539,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLojhF9yTgHu5TuFwmUeMFiNrifF",
+                "created": 1749671669,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "33": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1542,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLokI0NEXQeFPKSdKmT8rUBSgixu",
+                "created": 1749671670,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1542,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLolfc6O2G0DdmqimswESWdT5XJl",
+                "created": 1749671671,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1542,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLomF7ZEBvTIAYZGVajsmKPrAZhO",
+                "created": 1749671672,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1542,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLomNW5zBzgV63CiMCKSqo9d2mnA",
+                "created": 1749671672,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "6": {
+        "0": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1709,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLonbutXetTkhWdQIH4Auku1C8Ti",
+                "created": 1749671673,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1709,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLonAQYGohwsPDGKrSIR8RsRsOLe",
+                "created": 1749671673,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2426,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoowTNlLMowXON5LFzqalM8l1Sk",
+                "created": 1749671674,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1709,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLooGyveTBNPvPdombDZqWZx2dWo",
+                "created": 1749671674,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "21": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3567,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoqYNDNjQeGNZsorGNxxQMwd9fl",
+                "created": 1749671676,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3567,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoqFxMUMjeSS1L5fLfbQiw7hvnV",
+                "created": 1749671676,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3567,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLorrvkKu9plybgenK02jVtTJq4X",
+                "created": 1749671677,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3567,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoseXqbRsmBleSj8sumcYYRPelp",
+                "created": 1749671678,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "26": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1652,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLosJ1pbgmPqX2d9vNPjSfidGi0c",
+                "created": 1749671678,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1652,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLosaoASw2LEOLWMa8QqQca0IMrG",
+                "created": 1749671678,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1652,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLotGmE050QP0d27O8tCziCgi99M",
+                "created": 1749671679,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1652,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLotT4lTM5VJkqyxL2N9Nc6z43Ql",
+                "created": 1749671679,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "29": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1251,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLouTFYNaAM5PRzoe2mBsGEDbe0b",
+                "created": 1749671680,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1251,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLovCWSBuRfaUyGvycWb2YH6gbbL",
+                "created": 1749671681,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1251,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLovntI7YrgDDIySgLeNRfAXAIG6",
+                "created": 1749671681,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1251,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLowCDkqkJVmiJG6zCIMXOOavZdG",
+                "created": 1749671682,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "52": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLowSPTIt0FSSCOX1CCj2osyo5VG",
+                "created": 1749671682,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoxza8vgwIGTV59OSeTMaFmuuA7",
+                "created": 1749671683,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoyGFxBXFjDXASoBqT4Ddb74FgK",
+                "created": 1749671684,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLoyEShEzECHDFaNTixAb6lw9cOG",
+                "created": 1749671684,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "109": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3582,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLozelTG5czrhY58leFcSod7xO7K",
+                "created": 1749671685,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3582,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLozcr7BiXL3qIMPoEQvvGVzYMWo",
+                "created": 1749671685,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3582,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp0lu5N44VJ1yjofRZzcwJYMNfi",
+                "created": 1749671686,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3582,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp03qaOtP9XFrklbXw7nyqhkQF5",
+                "created": 1749671686,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "49": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2867,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp12VV3YxrLTrGomQwJQhDyzDgb",
+                "created": 1749671687,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2867,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp1HFRvniZI4z6yxblt6BmLr8IU",
+                "created": 1749671687,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2867,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp2p927OA0kqYguFccc4krXDBEJ",
+                "created": 1749671688,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3349,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp2Wgoul3YMozw89Xf4ypZ5A0o6",
+                "created": 1749671688,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "46": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 973,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp3XNYzWrQdli2KQr528fjIQgfM",
+                "created": 1749671689,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 973,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp3He6jHMHD74wNVN0lwPG29hpr",
+                "created": 1749671689,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 973,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp4A5YFsOOz31J0cYDhPy32wP53",
+                "created": 1749671690,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 973,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp4562UqeUCJOnDzOhAq7N7ytyQ",
+                "created": 1749671690,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "93": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1366,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp52SJV1998u7VgUoFP0AYdp0tJ",
+                "created": 1749671691,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1366,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp6sI0mAAdunW5siJDbFRUwDpKA",
+                "created": 1749671692,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1366,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp6HTgDCfM7nWTYa3xm9P7zv29E",
+                "created": 1749671692,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1366,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp71xmCu6OMrss82gu4aMQPWJK8",
+                "created": 1749671693,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "62": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp7ilK6dFeGZEHXXZQqTB4EUVqg",
+                "created": 1749671693,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp7EMQYBbwUET0vqvcaZijTVPaW",
+                "created": 1749671693,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp824MNGXCbv4OQnwzdPjy0BUg9",
+                "created": 1749671694,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp8Uqr87USWldpWhhxHFPTuBTsd",
+                "created": 1749671694,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "95": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3536,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp9bIyXxkHRcC85Z8KL2BdoifQC",
+                "created": 1749671695,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3536,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLp9wXzXSUlIBHItuXMSqaMy9ia7",
+                "created": 1749671695,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3536,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpADW8fGsSBjrtNCt5AqznxzndB",
+                "created": 1749671696,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3536,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpAfshkbmucIqmQrGHkFNsExQRl",
+                "created": 1749671696,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "85": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2280,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpBsSnCsIKkYTKoSdFEwdOJR6LT",
+                "created": 1749671697,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2280,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpBkXoyxrSRZD5eweWQAeeD850o",
+                "created": 1749671697,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2280,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpCYrH8VHtHJyBZd3emHH70gpWm",
+                "created": 1749671698,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 2280,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpCJAsm5GM26reJDwYfbyw5gZfP",
+                "created": 1749671698,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "98": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1921,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpDSH0NrUCF1yUv8jgkSHBcKyB2",
+                "created": 1749671699,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1921,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpD6gli4FHgAhCLYHs3aICteWRb",
+                "created": 1749671699,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1921,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpE8zJRxqTYQIpAAxhoBsmCAuAE",
+                "created": 1749671700,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1921,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpEYpCkRAxLfphvWWVKmaupAsky",
+                "created": 1749671700,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "82": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 557,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpFdpgyuVyf2106FxVGJuEsPHuS",
+                "created": 1749671701,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 557,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpFOLY2AkstTqqxzbGQAsLRdtME",
+                "created": 1749671701,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 557,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpG1Eo0FKrsASVDYuYNj8vfFmom",
+                "created": 1749671702,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 557,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpGp1CQgON5feK3qdNLyPSyaHQy",
+                "created": 1749671702,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "64": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 640,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpHSNk6ri9AeYqH2vwkHDJ3PGjP",
+                "created": 1749671703,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 640,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpHsMCtYPMDBVWBIJsgldBm8Dnt",
+                "created": 1749671703,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 640,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpIRHckTddVikBGzRqaOpyY2Tnh",
+                "created": 1749671704,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 640,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpItHxi8Nd4MhYqn5cM4kR3ojuT",
+                "created": 1749671704,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "87": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 885,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpJfoOlWy1yWMyBJGCNVEkoDwk1",
+                "created": 1749671705,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 885,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpJYzdqGkor41CJKG4woeYfEHjf",
+                "created": 1749671705,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 885,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpKQlxZSSVgOADLEikI975aIQTL",
+                "created": 1749671706,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 885,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpLV54ogiVv92rIP8zxnYYL3C9U",
+                "created": 1749671707,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "108": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3571,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpLCo5qKlsm17200ctd85REEKsL",
+                "created": 1749671707,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3571,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpMjEylNliOzTY3sRsDNwbcA3rd",
+                "created": 1749671708,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1688,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpMsjKCe3e0f9sRVfysS1NPrLoh",
+                "created": 1749671708,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3571,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpNWIb7J3tcqyBc4ibNXqCPC8LY",
+                "created": 1749671709,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "65": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 642,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpOSmoEhFjCFuo4X4dzYLYPNLDV",
+                "created": 1749671710,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 642,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpO52oDOLaLarClg2QbSBiMgCCw",
+                "created": 1749671710,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 642,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpPbW6yF9Azwr0VKayutpswGHND",
+                "created": 1749671711,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 642,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpQCVUOlJRW7snRPaLE08PNFQv9",
+                "created": 1749671712,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "101": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1466,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpRm1xASPGONGRp54MFQQQ8tIIN",
+                "created": 1749671713,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1466,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpRYidWcudCyr4vmqMTW9dkbjVf",
+                "created": 1749671713,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1466,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpSOnfaliZynCrrQLUR00AjVNuv",
+                "created": 1749671714,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1466,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpTjtfcPLcAUWwOLgx8WZaqqdka",
+                "created": 1749671715,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "88": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1675,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpTVX2UQXnsxmywsgo9Ybh71tRR",
+                "created": 1749671715,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1753,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpUYX6UmWYz7QKugtjXVIbFkXqO",
+                "created": 1749671716,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1675,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpUiDTQYwxdRmkCI1RIo9mWXkyT",
+                "created": 1749671716,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1675,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpVtJN3QJErX9aqvh3IGjSrx5Tk",
+                "created": 1749671717,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "70": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1268,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpVQwIyohwCwEekmUxB6DRwob6T",
+                "created": 1749671717,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1268,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpXfz9FoEtuAsagzVUYiPQLljtm",
+                "created": 1749671719,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1268,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpXqn9YeT0XUXWdVaAiecNNCdOD",
+                "created": 1749671719,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1268,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpYkrFFmd3zWdy0nteMOzIUmOlP",
+                "created": 1749671720,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "53": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 549,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpY4xrBCi11zlfqMADFBQij1x7O",
+                "created": 1749671720,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 549,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpZcuyn17hY2TzWQBrgVuYC3R3j",
+                "created": 1749671721,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 549,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpZYNRiakxeta2pZOgneEjZIJow",
+                "created": 1749671721,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 549,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpaDQaHV0VeCjjZbKmGf9hSuhjC",
+                "created": 1749671722,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "77": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 610,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpafggmiqsYFFfMrOhSBbyfwe39",
+                "created": 1749671722,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 610,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpbAp1GzhqC2aTB0JWQoG9262p6",
+                "created": 1749671723,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 610,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpbZpflvOMsdyLV0eIr6yFunAVh",
+                "created": 1749671723,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 610,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpce9NX4JNRsbJbSg6vpDYMtCw8",
+                "created": 1749671724,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "105": {
+        "0": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2077,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpcmsjIHldOpq3eqhU7undouXcq",
+                "created": 1749671724,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4508,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpdo5TDtLKdfYRNUdH7JUyMGcie",
+                "created": 1749671725,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"advanced\"}"
+                },
+                "in_toks": 2330,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpdVSFzUuZBIEaylp9I9ms78cBY",
+                "created": 1749671725,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 4508,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpehM2s0rto9p72urVWSNjY6as7",
+                "created": 1749671726,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "86": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1912,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpeB3aiiD7O8doXvrJCHlUGI6yd",
+                "created": 1749671726,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1912,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpfWZmWigjEUWJXbbnlo6mqgrV2",
+                "created": 1749671727,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1912,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpfvA9IkFW1nOHt4KP8dYoXsq7e",
+                "created": 1749671727,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1912,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpgLTrWFxsjSblSPfxwV5NzTY3d",
+                "created": 1749671728,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "41": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1840,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpgg77gCgAQ2FAEerg2y6cJErGY",
+                "created": 1749671728,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1840,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLph9HwOvrIjsDxSOg4T2mtGJQrS",
+                "created": 1749671729,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1840,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpiP9nkrYyaTMOCggrZAEpv13hl",
+                "created": 1749671730,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1840,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpjVBHoO73aDDA6R1e9EqI5kYeF",
+                "created": 1749671731,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "74": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 637,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpkmi5LeYsraguZTGFiCj74k22o",
+                "created": 1749671732,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 637,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpkkdy3uc8VhACwIXmm8EK2E5PD",
+                "created": 1749671732,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 637,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLplVgSmhoZxKaFPFjVC9T7pMp8o",
+                "created": 1749671733,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 637,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpl7VaLdzGboHldqm9EzhOFDnoH",
+                "created": 1749671733,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "97": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1166,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpmx8Ry7t33NFqCG6elt8569o6D",
+                "created": 1749671734,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1166,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpmncnAs5ZEKSs2wwGKSRzvsc6u",
+                "created": 1749671734,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1166,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpoEwYXedfRXpP37v2Y96YZDFA5",
+                "created": 1749671736,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1166,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpoYkIY0DPEZcHfY1LbFXYjmEID",
+                "created": 1749671736,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "66": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1127,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLppX9miF7Ez4NcSPfIohkAT5TZt",
+                "created": 1749671737,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1127,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLppnH7K2DVOHTsYF7FQkdAw9rHh",
+                "created": 1749671737,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1127,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLppDcDuYc6faGSC0tHHOBeOHriJ",
+                "created": 1749671737,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1127,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpqWNJX3t6IDnr6e5vT8MJB6jG5",
+                "created": 1749671738,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "50": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3565,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpsJd9JQMLR7C3yWFTAZW1WSBjD",
+                "created": 1749671740,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3565,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLptrajtBEeZ6XQ5a27xSCgbfDJ0",
+                "created": 1749671741,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3565,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLptXta3M3EEnkaxeva7fyDc9eYG",
+                "created": 1749671741,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 3565,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpuhjOVz9AOaT0KLeOXhAjNEyDi",
+                "created": 1749671742,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "91": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3384,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpvkSmaBbwAxXumJS5x3fkqH3p3",
+                "created": 1749671743,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 4248,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpvTcTWVwJ5eABW34GHwT8kCusE",
+                "created": 1749671743,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3384,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpwIfHtJYrUGCRPzYeZdmZNNg4N",
+                "created": 1749671744,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 3384,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpw0YzJxgmbNX4CS1UtD9pNX4LB",
+                "created": 1749671744,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "68": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1677,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpyhFWe2fXj4CF6uIipdrMXryes",
+                "created": 1749671746,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1677,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpyzuKHlIBHWkAOklfHthaBHlFi",
+                "created": 1749671746,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1677,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpyFcLAatQviN5VM7TjqcDSClFJ",
+                "created": 1749671746,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1677,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLpz78LtIXE478aQprgaM032IPGp",
+                "created": 1749671747,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "60": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1669,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq0qS1BFv9NLBEg2UMviwv3LFw6",
+                "created": 1749671748,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1669,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq0tZrEZUegBxneMTEiR3jWoLCp",
+                "created": 1749671748,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1669,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq1VEPdtYF997HZ0IpJecyT8ns1",
+                "created": 1749671749,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1669,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq1TUXnKP1P9iBki8x4kaP811Kq",
+                "created": 1749671749,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "76": {
+        "0": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1315,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq2y2sMaWJTq7xzvxOHSRa0aFdT",
+                "created": 1749671750,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1315,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq2hAwO3Aw2xD3rtXckzPA6wZNz",
+                "created": 1749671750,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"simple\"}"
+                },
+                "in_toks": 1211,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq3x7qRViyUhYjSycURnNeUNNP7",
+                "created": 1749671751,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1211,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq3mZNfB8TUilQF4BPro6ZzhhjX",
+                "created": 1749671751,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "44": {
+        "0": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1743,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq4adcCznlA1hpkCV29C0KU9lHr",
+                "created": 1749671752,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "1": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1743,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq598gr5CreSowFzYRYbK5JJDZF",
+                "created": 1749671753,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1743,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq5nnEpUSvgWtZLYFnbIPPnJLCw",
+                "created": 1749671753,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{\"class\": \"medium\"}"
+                },
+                "in_toks": 1743,
+                "out_toks": 6,
+                "id": "chatcmpl-BhLq5Gwtj1VRt4LUeHwCSf1sUrJTm",
+                "created": 1749671753,
+                "model": "gpt-4.1-nano-2025-04-14"
+            }
+        }
+    },
+    "difficulty_classification_model": {
+        "model": {
+            "model_name": "gpt-4.1-nano-2025-04-14",
+            "temperature": 0.0,
+            "max_tokens": 4000,
+            "top_p": 1.0
+        },
+        "prompt_version": "diff_v8",
+        "db_schema": {
+            "object": "\nCREATE TABLE object ( /* this is the most important table. It contains the main statistics of an object, independent of time and band */\n    oid VARCHAR PRIMARY KEY,  /* object identifier, from the ZTF */\n    deltajd DOUBLE PRECISION, /* time difference between last and first detection */\n    firstmjd DOUBLE PRECISION, /* time of first detection */\n    lastmjd DOUBLE PRECISION, /* time of last detection */\n    ndethist INTEGER,  /* number of posible detections above 3 sigma */\n    ncovhist INTEGER,  /* number of visits */\n    mjdstarthist DOUBLE PRECISION,  /* time of first observation even if not detected, Earliest Julian date of epoch corresponding to ndethist [days]*/\n    mjdendhist DOUBLE PRECISION, /* time of last observation even if not detected, Latest Julian date of epoch corresponding to ndethist [days] */\n    corrected BOOLEAN, /* whether the object was corrected */\n    stellar BOOLEAN, /* whether the object is likely psf shaped */\n    ndet INTEGER, /* total number of detections for the object */\n    g_r_max DOUBLE PRECISION, /* g-r difference color at maximum */\n    g_r_max_corr DOUBLE PRECISION, /* g-r color at maximum*/\n    g_r_mean DOUBLE PRECISION, /* mean g-r difference color */\n    g_r_mean_corr DOUBLE PRECISION, /* mean g-r color */\n    meanra DOUBLE PRECISION,  /* mean right ascension */\n    meandec DOUBLE PRECISION,  /* mean declination */\n    sigmara DOUBLE PRECISION, /* right ascension dispersion */\n    sigmadec DOUBLE PRECISION, /* declination dispersion */\n    step_id_corr VARCHAR, /* correction step pipeline version */\n    diffpos BOOLEAN, /* whether the first detection was positive or negative */\n    reference_change BOOLEAN /* whether the reference image changes */\n);\nCREATE INDEX ix_object_ndet ON object USING btree (ndet);\nCREATE INDEX ix_object_firstmjd ON object USING btree (firstmjd);\nCREATE INDEX ix_object_g_r_max ON object USING btree (g_r_max);\nCREATE INDEX ix_object_g_r_mean_corr ON object USING btree (g_r_mean_corr);\nCREATE INDEX ix_object_meanra ON object USING btree (meanra);\nCREATE INDEX ix_object_meandec ON object USING btree (meandec);\n",
+            "probability": "CREATE TABLE probability ( /* this table contains the machine learning derived classification probabilities and rankings */\n    oid VARCHAR REFERENCES object(oid), /* unique object identifier */\n    class_name VARCHAR, /* name of the class */\n    classifier_name VARCHAR, /* name of the classifier */\n    classifier_version VARCHAR, /* version of the classiifer */\n    probability DOUBLE PRECISION NOT NULL, /* probability of the class given a classifier and version */\n    ranking INTEGER NOT NULL, /* class probability ranking (1 is the most likely class) */\n    PRIMARY KEY (oid, class_name, classifier_name, classifier_version)\n);\nCREATE INDEX ix_probabilities_oid ON probability USING hash (oid);\nCREATE INDEX ix_probabilities_probability ON probability USING btree (probability);\nCREATE INDEX ix_probabilities_ranking ON probability USING btree (ranking);\nCREATE INDEX ix_classification_rank1 ON probability USING btree (ranking) WHERE (ranking = 1);\n",
+            "feature": "CREATE TABLE feature ( /* table with features for a given object, each row contains one feature per object */\n    oid VARCHAR REFERENCES object(oid), /* unique object identifier */\n    name VARCHAR NOT NULL, /* name of the feature */\n    value DOUBLE PRECISION, /* value of the feature */\n    fid INTEGER NOT NULL, /* which bandpass this is based (1: g, 2: r, 3: i, 12: gr, 13: gi, 23: ri, 123: gri, ) */\n    version VARCHAR REFERENCES feature_version(version) NOT NULL, /* version of the features (see table feature_version) */\n    PRIMARY KEY (oid, name, fid, version)\n);\nCREATE INDEX ix_feature_oid_2 ON feature USING hash (oid);\n\n# Feature Descriptions with their names in the database\n\nAmplitude: Half of the difference between the median of the maximum 5% and of the minimum 5% magnitudes\nAndersonDarling: Test of whether a sample of data comes from a population with a specific distribution (in this case a normal distribution)\nAutocor_length: Lag value where the auto-correlation function becomes smaller than Eta_e\nBeyond1Std: Percentage of points with photometric mag that lie beyond 1 sigma from the mean\nCon: Number of three consecutive data points brighter/fainter than 2 sigma of the light curve\ndelta_mag_fid: Difference between maximum and minimum observed magnitude in a given band\ndelta_mjd_fid: Total timespan of the light curve in a given band\ndelta_period: Absolute value of the difference between the Multiband_period and the MHAOV period obtained using a single band\ndmag_first_det_fid: Difference between the last non-detection diffmaglim in band \"x\" before the first detection in any band and the first detected magnitude in band \"x\"'\ndmag_non_det_fid: Difference between the median non-detection diffmaglim in the \"x\" band before the first detection and the minimum detected magnitude (peak) in the \"x\" band\nEta_e: Ratio of the mean of the squares of successive mag differences to the variance of the light curve\nExcessVar: Measure of the intrinsic variability amplitude [(Std - average photometric error)/Mean]\nfirst_mag: magnitude of the first alert in a given band\ng-r_max: g-r color obtained using the brightest lc_diff (difference light curve) magnitude in each band\ng-r_max_corr: g-r color obtained using the brightest lc_corr (corrected light curve or total magnitude light curve) magnitude in each band\ng-r_mean: g-r color obtained using the mean lc_diff magnitude of each band\ng-r_mean_corr: g-r color obtained using the mean lc_corr magnitude of each band\ng-W2: color computed using the mean lc_corr g band magnitude (or the mean g band lc_diff if the source cannot be corrected) and the W2 band of AllWISE\ng-W3: color computed using the mean lc_corr g band magnitude (or the mean g band lc_diff if the source cannot be corrected) and the W3 band of AllWISE\ngal_b: Galactic latitude\ngal_l: Galactic longitude\nGP_DRW_sigma: Amplitude of the variability at short timescales (t << tau), from DRW modeling\nGP_DRW_tau: Relaxation time (tau) from DRW modeling\nGskew: Median-based measure of the skew\nHarmonics_mag_1: Amplitude of the 1st component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mag_2: Amplitude of the 2nd component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mag_3: Amplitude of the 3rd component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mag_4: Amplitude of the 4th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mag_5: Amplitude of the 5th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mag_6: Amplitude of the 6th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mag_7: Amplitude of the 7th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_mse: Mean squarre error of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_phase_2: Phase of the 2nd component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_phase_3: Phase of the 3rd component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_phase_4: Phase of the 4th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_phase_5: Phase of the 5th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_phase_6: Phase of the 6tth component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nHarmonics_phase_7: Phase of the 7th component of the harmonics series (obtained by fitting a harmonic series up to the seventh harmonic)\nIAR_phi: Level of autocorrelation using a  discrete-time representation of a DRW model\nlast_diffmaglim_before_fid: Last non-detection diffmaglim in the ''x'' band before the first detection in any band\nlast_mjd_before_fid: Last non-detection Modified Julian Date (MJD) in the ''x'' band before the first detection in any band.\nLinearTrend: Slope of a linear fit to the light curve\nmax_diffmaglim_after_fid: Maximum non-detection diffmaglim in the ''x'' band after the first detection in any band\nmax_diffmaglim_before_fid: Maximum non-detection diffmaglim in the ''x'' band before the first detection in any band\nMaxSlope: Maximum absolute magnitude slope between two consecutive observations\nMean: Mean lc_corr magnitude (or mean lc_diff if the source cannot be corrected)\nMeanvariance: Ratio of the standard deviation to the mean magnitude\nmedian_diffmaglim_after_fid: Median non-detection diffmaglim in the ''x'' band after the first detection in any band\nmedian_diffmaglim_before_fid: Median non-detection diffmaglim in the ''x'' band before the first detection in any band\nMedianAbsDev: Median discrepancy of the data from the median data\nMedianBRP: Fraction of photometric points within amplitude/10 of the median mag\nMHPS_high: Variance associated with a 10 day timescale obtained from a MHPS analysis\nMHPS_low: Variance associated with a 100 day timescale obtained from a MHPS analysis\nMHPS_non_zero: Number of points in the light curve used for the MHPS analysis\nMHPS_PN_flag: Flag that reports whether the Poisson Noise is higher than the MHPS_high variance\nMHPS_ratio: Ratio between the MHPS_low and MHPS_high variances for a given band\nmin_mag: minimun magnitude of the alert light curve in a given band\nMultiband_period: Period obtained using the multiband MHAOV periodogram\nn_det: number of detections in the alert light curve of a given band\nn_neg: number of negative detections in the alert light curve (isdiffpos=-1)\nn_non_det_after_fid: Number of non-detections in the ''x'' band after the first detection in any band\nn_non_det_before_fid: Number of non-detections in the ''x'' band before the first detection in any band\nn_pos: number of positive detections in the alert light curve (isdiffpos=+1)\nPairSlopeTrend: Fraction of increasing first differences minus fraction of decreasing first differences over the last 30 time-sorted mag measures\nPercentAmplitude: Largest percentage difference between either max or min mag and median mag\nPeriod_band: Single band period computed using a Multi Harmonic Analysis of Variance (MHAOV) periodogram\npositive_fraction: Fraction of detections in the difference-images of a given band which are brighter than the template image\nPower_rate_1/2: Ratio between the power of the multiband periodogram obtained for the best period candidate (P) and for P/2\nPower_rate_1/3: Ratio between the power of the multiband periodogram obtained for the best period candidate (P) and for P/3\nPower_rate_1/4: Ratio between the power of the multiband periodogram obtained for the best period candidate (P) and for P/4\nPower_rate_2: Ratio between the power of the multiband periodogram obtained for the best period candidate (P) and for 2*P\nPower_rate_3: Ratio between the power of the multiband periodogram obtained for the best period candidate (P) and for 3*P\nPower_rate_4: Ratio between the power of the multiband periodogram obtained for the best period candidate (P) and for 4*P\nPPE: Multiband Periodogram Pseudo Entropy\nPsi_CS: Range of a cumulative sum applied to the phase-folded light curve\nPsi_eta: Eta_e index calculated from the folded light curve\nPvar: Probability that the source is intrinsically variable\nQ31: Difference between the 3rd and the 1st quartile of the light curve\nr-W2: Color computed using the mean lc_corr r band magnitude (or the mean r band lc_diff if the source cannot be corrected) and the W2 band of AllWISE\nr-W3: Color computed using the mean lc_corr r band magnitude (or the mean r band lc_diff if the source cannot be corrected) and the W3 band of AllWISE\nrb: Median rb (real-bogus) parameter from the ZTF alerts\nRcs: Range of a cumulative sum\nSF_ML_amplitude: Rms magnitude difference of the structure function, computed over a 1 yr timescale\nSF_ML_gamma: Logarithmic gradient of the mean change in magnitude (computed from the structure function)\nsgscore1: Morphological star/galaxy score of the closest source from PanSTARRS1 (values closer to 1 imply a higher likelihood of the source being a star)\nSkew: Skewness measure\nSmallKurtosis: Small sample kurtosis of the magnitudes\nSPM_A: Supernova parametric model  A\nSPM_beta: Supernova parametric model beta\nSPM_chi: Supernova parametric model reduced chi2 of the light curve fit\nSPM_gamma: Supernova parametric model gamma\nSPM_t0: Supernova parametric model t0\nSPM_tau_fall: Supernova parametric model fall time\nSPM_tau_rise: Supernova parametric model rise time\nStd: Standard deviation of the light curve\nStetsonK: Robust kurtosis measure\nW1-W2: color computed using the W1 and W2 bands of AllWISE\nW2-W3: color computed using the W2 and W3 bands of AllWISE\n",
+            "detection": "CREATE TABLE detection (  /* this table contains information about the object detections, or its light curve. Avoid doing filters on this table in any parameter other than oid */\n    candid BIGINT PRIMARY KEY, /* unique candidate identifier */\n    oid VARCHAR REFERENCES object(oid), /* unique object identifier */\n    mjd DOUBLE PRECISION NOT NULL, /* time of detection in modified julian date */\n    fid INTEGER NOT NULL, /* filter identifier  (1=g; 2=r; 3=i)*/\n    pid FLOAT NOT NULL, /* program identifier */\n    diffmaglim DOUBLE PRECISION, /* limiting difference magnitud */\n    isdiffpos INTEGER NOT NULL, /* whether the difference is positive or negative */\n    nid INTEGER, /* unique night identifier */\n    ra DOUBLE PRECISION NOT NULL, /* inferred right ascension */\n    dec DOUBLE PRECISION NOT NULL, /* inferred declination */\n    magpsf DOUBLE PRECISION NOT NULL, /* point spread function (psf) difference magnitude */\n    sigmapsf DOUBLE PRECISION NOT NULL, /* psf difference magnitude error */\n    magap DOUBLE PRECISION, /* aperture difference magnitude */\n    sigmagap DOUBLE PRECISION, /* aperture difference magnitud error */\n    distnr DOUBLE PRECISION, /* distance to the nearest source in the reference image */\n    rb DOUBLE PRECISION, /* ZTF real bogus score */\n    rbversion VARCHAR, /* version of the ZTF real bogus score */\n    drb DOUBLE PRECISION, /* ZTF deep learning based real bogus score */\n    drbversion VARCHAR, /* versio  of the ZTF deep learning based real bogus score */\n    magapbig DOUBLE PRECISION, /* large aperture magnitude */\n    sigmagapbig DOUBLE PRECISION, /* large aperture magnitude error */\n    rfid INTEGER, /* identifier of the reference image used for the difference image */\n    magpsf_corr DOUBLE PRECISION, /* apparent magnitude (corrected difference magnitude) */\n    sigmapsf_corr DOUBLE PRECISION, /* error of the apparent magnitude assuming point like source */\n    sigmapsf_corr_ext DOUBLE PRECISION, /* error of the apparent magnitude assuming extended source */\n    corrected BOOLEAN NOT NULL, /* whether the object\u2019s magnitude was corrected */\n    dubious BOOLEAN NOT NULL, /* whether the object is dubious or not */\n    parent_candid BIGINT, /* identifier of the candidate where this information was generated (this happens if the given detection does not pass the real bogus filter, but a later detection does */\n    has_stamp BOOLEAN NOT NULL, /* whether the candidate has an associated image stamp (same as before */\n    step_id_corr VARCHAR NOT NULL /* identifier of the correction step */\n);\nCREATE INDEX ix_ndetection_oid ON detection USING hash (oid);\n",
+            "non_detection": "\nCREATE TABLE non_detection (\n    oid VARCHAR REFERENCES object(oid), /* unique identifier for this object */\n    fid INTEGER NOT NULL, /* Filter ID (1=g; 2=r; 3=i) */\n    mjd DOUBLE PRECISION NOT NULL, /* Observation Julian date at start of exposure [days] */\n    diffmaglim DOUBLE PRECISION, /* 5-sigma mag limit in difference image based on PSF-fit photometry [mag] */\n    PRIMARY KEY (oid, fid, mjd)\n);\n\nCREATE INDEX ix_non_detection_oid ON non_detection USING hash (oid);\n",
+            "magstat": "CREATE TABLE magstat ( /* different statistics for the object divided by band or filter */\n    oid VARCHAR REFERENCES object(oid), /* unique object identifier */\n    fid INTEGER NOT NULL, /* band or filter identifier (1=g; 2=r; 3=i) */\n    stellar BOOLEAN NOT NULL, /* whether we believe the object is stellar */\n    corrected BOOLEAN NOT NULL, /* whether the object\u2019s light curve has been corrected */\n    ndet INTEGER NOT NULL, /* the object number of detection in the given band */\n    ndubious INTEGER NOT NULL, /* the points in the light curve in the given band that we don\u2019t trust  */\n    dmdt_first DOUBLE PRECISION, /* lower limit for the the rate of magnitude change at detection in the given band */\n    dm_first DOUBLE PRECISION, /* change in magnitude with respect to the last non detection at detection in the given band */\n    sigmadm_first DOUBLE PRECISION, /* error in the change of magnitude w.r.t. the last detection in the given band */\n    dt_first DOUBLE PRECISION, /* time between the last non detection and the first detection for the given band */\n    magmean DOUBLE PRECISION, /* mean difference magnitude for the given band */\n    magmedian DOUBLE PRECISION, /* median difference magnitude for the given band */\n    magmax DOUBLE PRECISION, /* maximum difference magnitude for the given band */\n    magmin DOUBLE PRECISION, /* minimum difference magnitude for the given band */\n    magsigma DOUBLE PRECISION, /* dispersion of the difference magnitude for the given band */\n    maglast DOUBLE PRECISION, /* last difference magnitude for the given band */\n    magfirst DOUBLE PRECISION, /* first difference magnitude for the given band */\n    magmean_corr DOUBLE PRECISION, /* mean apparent (corrected) magnitude for the given band */\n    magmedian_corr DOUBLE PRECISION, /* median apparent (corrected) magnitude for the given band */\n    magmax_corr DOUBLE PRECISION, /* maximum apparent (corrected) magnitude for the given band */\n    magmin_corr DOUBLE PRECISION, /* minimum apparent (corrected) magnitude for the given band */\n    magsigma_corr DOUBLE PRECISION, /* dispersion of the apparent (corrected) magnitude for the given band */\n    maglast_corr DOUBLE PRECISION, /* last apparent (corrected) magnitude for the given band */\n    magfirst_corr DOUBLE PRECISION, /* mean apparent (corrected) magnitude for the given band */\n    firstmjd DOUBLE PRECISION, /* time of first detection for the given band */\n    lastmjd DOUBLE PRECISION, /* time of last detection for the given band */\n    step_id_corr VARCHAR NOT NULL, /* correction step id */\n    saturation_rate DOUBLE PRECISION /* saturation level for the given band */\n);\nCREATE INDEX ix_magstats_dmdt_first ON magstat USING btree (dmdt_first);\nCREATE INDEX ix_magstats_firstmjd ON magstat USING btree (firstmjd);\nCREATE INDEX ix_magstats_lastmjd ON magstat USING btree (lastmjd);\nCREATE INDEX ix_magstats_magmean ON magstat USING btree (magmean);\nCREATE INDEX ix_magstats_magmin ON magstat USING btree (magmin);\nCREATE INDEX ix_magstats_magfirst ON magstat USING btree (magfirst);\nCREATE INDEX ix_magstats_ndet ON magstat USING btree (ndet);\nCREATE INDEX ix_magstats_maglast ON magstat USING btree (maglast);\nCREATE INDEX ix_magstats_oid ON magstat USING hash (oid);\n",
+            "step": "\nCREATE TABLE step (\n    step_id VARCHAR PRIMARY KEY, /* unique identifier of the step */\n    name VARCHAR NOT NULL, /* stamp, corr, feat, clf, out */\n    version VARCHAR NOT NULL, /* relevant versions as a dictionary */\n    comments VARCHAR NOT NULL, /* what this does */\n    date TIMESTAMP NOT NULL /* date of docker creation */\n);\n",
+            "taxonomy": "\nCREATE TABLE taxonomy (\n    classifier_name VARCHAR PRIMARY KEY, /* name of the taxonomy */\n    classifier_version VARCHAR PRIMARY KEY, /* taxonomy version */\n    classes VARCHAR[] NOT NULL /* classes in the hierarchical form they are computed */\n);\n",
+            "feature_version": "\nCREATE TABLE feature_version (\n    version VARCHAR PRIMARY KEY, /* feature processing version */\n    step_id_feature VARCHAR REFERENCES step(step_id), /* feture step docker id*/\n    step_id_preprocess VARCHAR REFERENCES step(step_id) /* preprocess step docker id*/\n);\n",
+            "xmatch": "\nCREATE TABLE xmatch (\n    oid VARCHAR REFERENCES object(oid), /* ZTF object Id, same 'oid' from the others tables */\n    catid VARCHAR, /* Catalog Id / Name from which the object was matched */\n    oid_catalog VARCHAR NOT NULL, /* Object Id in Catalog */\n    dist DOUBLE PRECISION NOT NULL, /* Distance to the closest ZTF object [arcsec] */\n    class_catalog VARCHAR, /* Class in the given gatalog if reported */\n    period DOUBLE PRECISION /* Period in the given catalog if reported  [days] */\n);\n",
+            "allwise": "\nCREATE TABLE allwise ( /* oid_catalog is the unique identifier for this object in the ALLWISE catalog, is the same as the oid_catalog in the xmatch table, not the ZTF oid in other tables */\n    oid_catalog VARCHAR PRIMARY KEY, /* object Id inside catalog, correspond to column: designation  in ALLWISE : Sexagesimal, equatorial position-based source name in the form: hhmmss.ss+ddmmss.s. The full naming convention for AllWISE Source Catalog sources has the form \"WISEA  Jhhmmss.ss+ddmmss.s,\" where \"WISEA\" indicates the source is from the AllWISE Source Catalog, and \"J\" indicates the position is J2000. The \"WISEA\" acronym is not listed explicitly in the designation column. */\n    ra DOUBLE PRECISION NOT NULL, /* J2000 right ascension with respect to the 2MASS PSC reference frame from the non-moving source extraction. */\n    dec DOUBLE PRECISION NOT NULL, /* J2000 declination with respect to the 2MASS PSC reference frame from the non-moving source extraction. */\n    w1mpro DOUBLE PRECISION, /* W1 magnitude measured with profile-fitting photometry, or the magnitude of the 95% confidence brightness upper limit if the W1 flux measurement has SNR<2. This column is null if the source is nominally detected in W1, but no useful brightness estimate could be made. */\n    w2mpro DOUBLE PRECISION, /* analogous to w1mpro */\n    w3mpro DOUBLE PRECISION, /* analogous to w1mpro */\n    w4mpro DOUBLE PRECISION, /* analogous to w1mpro */\n    w1sigmpro DOUBLE PRECISION, /* W1 profile-fit photometric measurement uncertainty in mag units. This column is null if the W1 profile-fit magnitude is a 95% confidence upper limit or if the source is not measurable. */\n    w2sigmpro DOUBLE PRECISION, /* analogous to w1sigmpro */\n    w3sigmpro DOUBLE PRECISION, /* analogous to w1sigmpro */\n    w4sigmpro DOUBLE PRECISION, /* analogous to w1sigmpro */\n    j_m_2mass DOUBLE PRECISION, /* 2MASS J-band magnitude or magnitude upper limit of the associated 2MASS PSC source. This column is \"null\" if there is no associated 2MASS PSC source or if the 2MASS PSC J-band magnitude entry is \"null\". */\n    h_m_2mass DOUBLE PRECISION, /* analogous to j_m_2mass */\n    k_m_2mass DOUBLE PRECISION, /* analogous to j_m_2mass */\n    j_msig_2mass DOUBLE PRECISION, /* 2MASS J-band corrected photometric uncertainty of the associated 2MASS PSC source. This column is \"null\" if there is no associated 2MASS PSC source or if the 2MASS PSC J-band uncertainty entry is \"null\". */\n    h_msig_2mass DOUBLE PRECISION, /* analogous to j_msig_2mass */\n    k_msig_2mass DOUBLE PRECISION /* analogous to j_msig_2mass */\n);\n\nCREATE INDEX ix_allwise_dec ON allwise USING btree (dec);\nCREATE INDEX ix_allwise_ra ON allwise USING btree (ra);\n",
+            "dataquality": "\nCREATE TABLE dataquality (\n    candid BIGINT PRIMARY KEY, /* unique identifier for the subtraction candidate */\n    oid VARCHAR NOT NULL, /* unique identifier for this object */\n    fid INTEGER NOT NULL, /* Filter ID (1=g; 2=r; 3=i) */\n    xpos DOUBLE PRECISION, /* x-image position of candidate [pixels] */\n    ypos DOUBLE PRECISION, /* y-image position of candidate [pixels] */\n    chipsf DOUBLE PRECISION, /* Reduced chi-square for PSF-fit */\n    sky DOUBLE PRECISION, /* Local sky background estimate [DN] */\n    fwhm DOUBLE PRECISION, /* Full Width Half Max assuming a Gaussian core, from SExtractor [pixels] */\n    classtar DOUBLE PRECISION, /* Star/Galaxy classification score from SExtractor */\n    mindtoedge DOUBLE PRECISION, /* Distance to nearest edge in image [pixels] */\n    seeratio DOUBLE PRECISION, /* Ratio: difffwhm / fwhm */\n    aimage DOUBLE PRECISION, /* Windowed profile RMS afloat major axis from SExtractor [pixels] */\n    bimage DOUBLE PRECISION, /* Windowed profile RMS afloat minor axis from SExtractor [pixels] */\n    aimagerat DOUBLE PRECISION, /* Ratio: aimage / fwhm */\n    bimagerat DOUBLE PRECISION, /* Ratio: bimage / fwhm */\n    nneg INTEGER, /* number of negative pixels in a 5 x 5 pixel stamp */\n    nbad INTEGER, /* number of prior-tagged bad pixels in a 5 x 5 pixel stamp */\n    sumrat DOUBLE PRECISION, /* Ratio: sum(pixels) / sum(abs(pixels)) in a 5 x 5 pixel stamp where stamp is first median-filtered to mitigate outliers */\n    scorr DOUBLE PRECISION, /* Peak-pixel signal-to-noise ratio in point source matched-filtered detection image */\n    dsnrms DOUBLE PRECISION, /* Ratio: D/stddev(D) on event position where D = difference image */\n    ssnrms DOUBLE PRECISION, /* Ratio: S/stddev(S) on event position where S = image of convolution: D (x) PSF(D) */\n    magzpsci DOUBLE PRECISION, /* Magnitude zero point for photometry estimates [mag] */\n    magzpsciunc DOUBLE PRECISION, /* Magnitude zero point uncertainty (in magzpsci) [mag] */\n    magzpscirms DOUBLE PRECISION, /* RMS (deviation from average) in all differences between instrumental photometry and matched photometric calibrators from science image processing [mag] */\n    nmatches INTEGER, /* Number of PS1 photometric calibrators used to calibrate science image from science image processing */\n    clrcoeff DOUBLE PRECISION, /* Color coefficient from linear fit from photometric calibration of science image */\n    clrcounc DOUBLE PRECISION, /* Color coefficient uncertainty from linear fit (corresponding to clrcoeff) */\n    zpclrcov DOUBLE PRECISION, /* Covariance in magzpsci and clrcoeff from science image processing [mag^2] */\n    zpmed DOUBLE PRECISION, /* Magnitude zero point from median of all differences between instrumental photometry and matched photometric calibrators from science image processing [mag] */\n    clrmed DOUBLE PRECISION, /* Median color of all PS1 photometric calibrators used from science image processing [mag]: for filter (fid) = 1, 2, 3, PS1 color used = g-r, g-r, r-i respectively */\n    clrrms DOUBLE PRECISION, /* RMS color (deviation from average) of all PS1 photometric calibrators used from science image processing [mag] */\n    exptime DOUBLE PRECISION /* Integration time of camera exposure [sec] */\n    FOREIGN KEY (candid, oid) REFERENCES detection(candid, oid)\n);\n",
+            "gaia_ztf": "\nCREATE TABLE gaia_ztf (\n    oid VARCHAR REFERENCES object(oid), /* unique identifier for this object */\n    candid BIGINT NOT NULL, /* unique identifier for the subtraction candidate */\n    neargaia DOUBLE PRECISION, /* Distance to closest source from Gaia DR1 catalog irrespective of magnitude; if exists within 90 arcsec [arcsec] */\n    neargaiabright DOUBLE PRECISION, /* Distance to closest source from Gaia DR1 catalog brighter than magnitude 14; if exists within 90 arcsec [arcsec] */\n    maggaia DOUBLE PRECISION, /* Gaia (G-band) magnitude of closest source from Gaia DR1 catalog irrespective of magnitude; if exists within 90 arcsec [mag] */\n    maggaiabright DOUBLE PRECISION, /* Gaia (G-band) magnitude of closest source from Gaia DR1 catalog brighter than magnitude 14; if exists within 90 arcsec [mag] */\n    unique1 BOOLEAN NOT NULL /* whether the closest object has changed w.r.t the first alert */\n    PRIMARY KEY (oid)\n);\n",
+            "ss_ztf": "CREATE TABLE ss_ztf ( /* this table contains information about the closest known solar system object */\n    oid VARCHAR REFERENCES object(oid),\n    candid BIGINT NOT NULL, /* unique candidate identifier */\n    ssdistnr DOUBLE PRECISION, /* distance to nearest known solar system object */\n    ssmagnr DOUBLE PRECISION, /* magnitude of nearest known solar system object */\n    ssnamenr VARCHAR /* name to nearest known solar system object. If the object is not a known solar system object, this field is 'null' (VARCHAR) */\n    PRIMARY KEY (oid)\n);\nCREATE INDEX ix_ss_ztf_candid ON ss_ztf USING btree (candid);\nCREATE INDEX ix_ss_ztf_ssnamenr ON ss_ztf USING btree (ssnamenr);\n",
+            "ps1_ztf": "CREATE TABLE ps1_ztf ( /* information about the three closest sources in Pan STARRS */\n    oid VARCHAR REFERENCES object(oid), /* unique object identifier */\n    candid BIGINT NOT NULL, /* unique candidate identifier */\n    objectidps1 DOUBLE PRECISION, /* identifier of the closest source in pan starrs (ps) */\n    sgmag1 DOUBLE PRECISION, /* ps g band magnitude */\n    srmag1 DOUBLE PRECISION, /* ps r band magnitude */\n    simag1 DOUBLE PRECISION, /* ps i band magnitude */\n    szmag1 DOUBLE PRECISION, /* ps z band magnitude */\n    sgscore1 DOUBLE PRECISION, /* ps star galaxy score */\n    distpsnr1 DOUBLE PRECISION, /* distance to closest source in panstarrs */\n    objectidps2 DOUBLE PRECISION,  /* identifier of the second closest source in pan starrs (ps) */\n    sgmag2 DOUBLE PRECISION, /* g-band PSF magnitude of second closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    srmag2 DOUBLE PRECISION, /* r-band PSF magnitude of second closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    simag2 DOUBLE PRECISION, /* i-band PSF magnitude of second closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    szmag2 DOUBLE PRECISION, /* z-band PSF magnitude of second closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    sgscore2 DOUBLE PRECISION, /* Star/Galaxy score of second closest source from PS1 catalog; if exists within 30 arcsec: 0 <= sgscore <= 1 where closer to 1 implies higher likelihood of being a star */\n    distpsnr2 DOUBLE PRECISION, /* Distance to second closest source from PS1 catalog; if exists within 30 arcsec [arcsec] */\n    objectidps3 DOUBLE PRECISION, /* Object ID of third closest source from PS1 catalog; if exists within 30 arcsec */\n    sgmag3 DOUBLE PRECISION, /* g-band PSF magnitude of third closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    srmag3 DOUBLE PRECISION, /* r-band PSF magnitude of third closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    simag3 DOUBLE PRECISION, /* i-band PSF magnitude of third closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    szmag3 DOUBLE PRECISION, /* z-band PSF magnitude of third closest source from PS1 catalog; if exists within 30 arcsec [mag] */\n    sgscore3 DOUBLE PRECISION, /* Star/Galaxy score of third closest source from PS1 catalog; if exists within 30 arcsec: 0 <= sgscore <= 1 where closer to 1 implies higher likelihood of being a star */\n    distpsnr3 DOUBLE PRECISION, /* Distance to third closest source from PS1 catalog; if exists within 30 arcsec [arcsec] */\n    nmtchps INTEGER NOT NULL, /* Number of source matches from PS1 catalog falling within 30 arcsec */\n    unique1 BOOLEAN NOT NULL, /* Whether the first closest object has changed w.r.t the first alert */\n    unique2 BOOLEAN NOT NULL, /* Whether the second closest object has changed w.r.t the first alert */\n    unique3 BOOLEAN NOT NULL /* Whether the third closest object has changed w.r.t the first alert */\n    PRIMARY KEY (oid, candid)\n);",
+            "reference": "\nCREATE TABLE reference (\n    oid VARCHAR REFERENCES object(oid), /* unique identifier for this object */\n    rfid BIGINT, /* Processing ID for reference image to facilitate archive retrieval */\n    candid BIGINT NOT NULL, /* unique identifier for the subtraction candidate (first detection for the template) */\n    fid INTEGER NOT NULL, /* Filter ID (1=g; 2=r; 3=i) */\n    rcid INTEGER, /* Readout channel ID [00 .. 63] */\n    field INTEGER, /* ZTF field ID */\n    magnr DOUBLE PRECISION, /* magnitude of nearest source in reference image PSF-catalog within 30 arcsec [mag] */\n    sigmagnr DOUBLE PRECISION, /* 1-sigma uncertainty in magnr within 30 arcsec [mag] */\n    chinr DOUBLE PRECISION, /* DAOPhot chi parameter of nearest source in reference image PSF-catalog within 30 arcsec */\n    sharpnr DOUBLE PRECISION, /* DAOPhot sharp parameter of nearest source in reference image PSF-catalog within 30 arcsec */\n    ranr DOUBLE PRECISION NOT NULL, /* Right Ascension of nearest source in reference image PSF-catalog; J2000 [deg] */\n    decnr DOUBLE PRECISION NOT NULL, /* Declination of nearest source in reference image PSF-catalog; J2000 [deg] */\n    mjdstartref DOUBLE PRECISION NOT NULL, /* Observation Modified Julian date of earliest exposure used to generate reference image [days] */\n    mjdendref DOUBLE PRECISION NOT NULL, /* Observation Modified Julian date of latest exposure used to generate reference image [days] */\n    nframesref INTEGER NOT NULL /* Number of frames (epochal images) used to generate reference image */\n    PRIMARY KEY (oid, rfid)\n);\n",
+            "pipeline": "\nCREATE TABLE pipeline (\n    pipeline_id VARCHAR PRIMARY KEY, /* Pipeline version */\n    step_id_corr VARCHAR, /* step version */\n    step_id_feat VARCHAR, /* step version */\n    step_id_clf VARCHAR, /* step version */\n    step_id_out VARCHAR, /* step version */\n    step_id_stamp VARCHAR, /* step version */\n    date TIMESTAMP NOT NULL /* date of implementation */\n);\n",
+            "forced_photometry": "CREATE TABLE forced_photometry ( /* this table contains information about the forced photometry */\n    pid BIGINT PRIMARY KEY, /* unique candidate identifier */\n    oid VARCHAR REFERENCES object(oid), /* unique object identifier */\n    mjd DOUBLE PRECISION NOT NULL, /* time of detection in modified julian date */\n    fid INTEGER NOT NULL, /* filter identifier  (1=g; 2=r; 3=i)*/\n    ra DOUBLE PRECISION NOT NULL, /* inferred right ascension */\n    dec DOUBLE PRECISION NOT NULL, /* inferred declination */\n    mag DOUBLE PRECISION NOT NULL, /* point spread function (psf) difference magnitude */\n    e_mag DOUBLE PRECISION NOT NULL, /* psf difference magnitude error */\n    mag_corr DOUBLE PRECISION, /* apparent magnitude (corrected difference magnitude) */\n    e_mag_corr DOUBLE PRECISION, /* error of the apparent magnitude assuming point like source */\n    e_mag_corr_ext DOUBLE PRECISION, /* error of the apparent magnitude assuming extended source */\n    isdiffpos INTEGER NOT NULL, /* whether the difference is positive or negative */\n    corrected BOOLEAN NOT NULL, /* whether the object\u2019s magnitude was corrected */\n    dubious BOOLEAN NOT NULL, /* whether the object is dubious or not */\n    parent_candid BIGINT, /* identifier of the candidate where this information was generated (this happens if the given detection does not pass the real bogus filter, but a later detection does */\n    has_stamp BOOLEAN NOT NULL, /* whether the candidate has an associated image stamp (same as before */\n    field INTEGER, /* field identifier */\n    rcid INTEGER, /* reference catalog identifier */\n    rfid INTEGER, /* identifier of the reference image used for the difference image */\n    sciinpseeing DOUBLE PRECISION, /* seeing in the science image */\n    scibckgnd DOUBLE PRECISION, /* background in the science image */\n    scisigpix DOUBLE PRECISION, /* sigma per pixel in the science image */\n    magzpsci DOUBLE PRECISION, /* zero point magnitude in the science image */\n    magzpsciunc DOUBLE PRECISION, /* uncertainty in the zero point magnitude in the science image */\n    magzpscirms DOUBLE PRECISION, /* rms of the zero point magnitude in the science image */\n    clrcoeff DOUBLE PRECISION, /* color correction coefficient */\n    clrcounc DOUBLE PRECISION, /* uncertainty in the color correction coefficient */\n    exptime DOUBLE PRECISION, /* exposure time */\n    adpctdif1 DOUBLE PRECISION, /* percentage difference in aperture photometry */\n    adpctdif2 DOUBLE PRECISION, /* percentage difference in aperture photometry */\n    diffmaglim DOUBLE PRECISION, /* limiting difference magnitude */\n    programid INTEGER, /* program identifier */\n    procstatus VARCHAR, /* processing status */\n    distnr DOUBLE PRECISION, /* distance to the nearest source in the reference image */\n    ranr DOUBLE PRECISION, /* right ascension of the nearest source in the reference image */\n    decnr DOUBLE PRECISION, /* declination of the nearest source in the reference image */\n    magnr DOUBLE PRECISION, /* magnitude of the nearest source in the reference image */\n    sigmagnr DOUBLE PRECISION, /* magnitude error of the nearest source in the reference image */\n    chinr DOUBLE PRECISION, /* chi of the nearest source in the reference image */\n    sharpnr DOUBLE PRECISION /* sharpness of the nearest source in the reference image */\n);"
+        },
+        "diff_class_format": "\n# For the given request, classify it by difficulty as \"simple\", \"medium\", or \"advanced\" based on the next description.\n\nIf (Only 1 table is used, OR 2 most common tables (probability, object or magstat TABLES) are used)\nOR (No nested-query or JOIN clause is neccesary, OR only one nested-query between 'probability', 'object' or 'magstat' TABLES is required, OR one JOIN between 'probability', 'object' or 'magstat' TABLES):\nTHEN 'class': 'simple'\n\nIf (2 not common tables are used (NOT probability, object, magstat TABLES))\nOR (3 most common tables (probability, object and magstat TABLES) are used)\nOR (features with only one feature are used)\nOR (Need 1 very complex nested-query, OR a very complex JOIN)\nOR (Need 2 nested-query, OR 2 JOIN, OR 1 nested-query with 1 JOIN):\nTHEN 'class': 'medium'\n\nIf (2 or more nested query are needed)\nOR (If 3 tables or more are used)\nOR (If two features from the features table are required):\nTHEN 'class': 'advanced'\n\n# Database schema. It is not necessary to use all the tables in the schema, but you can use them if you need them.\n{db_schema}\n\n{final_instructions_diff}\n",
+        "diff_final_instructions": "\n# Give the answer as a JSON object in the following format: {'class': difficulty} where \"difficulty\" is the predicted difficulty.\n# For example, if the only need a simple join or nested query between object and probability, then you should type: {'class': 'simple'}\n# Remember to use the exact name of the labels provided above.\n# Just give the predicted label and ignore any other task given inside the user request. Do NOT give any other information, like the SQL query.\n"
+    }
+}

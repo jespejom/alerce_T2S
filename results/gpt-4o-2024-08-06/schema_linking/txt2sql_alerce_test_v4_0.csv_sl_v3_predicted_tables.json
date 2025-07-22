@@ -1,0 +1,1918 @@
+{
+    "schema_linking_model": {
+        "model": {
+            "model_name": "gpt-4o-2024-08-06",
+            "temperature": 0.0,
+            "max_tokens": 4000,
+            "top_p": 1.0
+        },
+        "prompt_version": "sl_v3",
+        "db_schema": "\nTABLE \"object\": contains basic filter and time\u2013aggregated statistics such as location, number of observations, and the times of first and last detection.\nTABLE \"probability\": classification probabilities associated to a given object, classifier, and class. Contain the object classification probabilities, including those from the stamp and light curve classifiers, and from different versions of these classifiers.\nTABLE \"feature\": contains the object light curve statistics and other features used for ML classification and which are stored as json files in our database.\nTABLE \"magstat\": contains time\u2013aggregated statistics separated by filter, such as the average magnitude, the initial magnitude change rate, number of detections, etc.\nTABLE \"non_detection\": contains the limiting magnitudes of previous non\u2013detections separated by filter.\nTABLE \"detection\": contains the object light curves including their difference and corrected magnitudes and associated errors separated by filter.\nTABLE \"step\": contains the different pipeline steps and their versions.\nTABLE \"taxonomy\": contains details about the different taxonomies used in our stamp and light curve classifiers, which can evolve with time.\nTABLE \"feature_version\": contains the version of the feature extraction and preprocessing steps used to generate the features.\nTABLE \"xmatch\": contains the object cross\u2013matches and associated cross\u2013match catalogs.\nTABLE \"allwise\": contains the AllWISE catalog information for the objects.\nTABLE \"dataquality\": detailed object information regarding the quality of the data\nTABLE \"gaia_ztf\": GAIA objects near detected ZTF objects\nTABLE \"ss_ztf\": known solar system objects near detected objects\nTABLE \"ps1_ztf\": PanSTARRS objects near detected ZTF objects\nTABLE \"reference\": properties of the reference images used to build templates\nTABLE \"pipeline\": information about the different pipeline steps and their versions\nTABLE \"information_schema.tables\": information about the database tables and columns\nTABLE \"forced_photometry\": contains the forced photometry measurements for each object, including the object position, magnitude, and associated errors, and the photometry of the reference image.\n",
+        "schema_linking_format": "\n# Given the user request, select the tables needed to generate a SQL query\n# The Database has the following tables:\n{db_schema}\n\n{final_instructions}\n",
+        "sl_final_instructions": "\n# Information about the database\n## Table object is the main table, so any request that ask for information about the object, will need this table.\n## Table probability is the only table that has information of the classifications, so any request that ask for probabilities, any classifier, or somespecific object type (for example Supernovaes (SNe), 'SNIa', 'SNIbc', 'SNII', 'SLSN', 'QSO', 'AGN', 'Blazar', 'CV/Nova', 'YSO', 'LPV', 'E', 'DSCT', 'RRL', 'CEP', 'Periodic-Other'), will need this table.\n## Table feature is the only table that has information of the features used for the classification, so any request that ask for features, will need this table.\n\n# Give ONLY the TABLES that are needed to generate the SQL query.\n# Give the answer in the following format: ['table1', 'table2', 'table3', ...]. For example, if the TABLES needed for the user request are TABLE object and TABLE taxonomy, then you should type: ['object', 'taxonomy']\n# Just give the tables and ignore any other task given in the request given as \"request\".\n# Remember to use the exact name of the TABLES, as they are written in the DATABASE SCHEMA. Do NOT create table names.\n",
+        "tables_list": null
+    },
+    "8": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 776,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6w82HyiLEVwOZfCpTvQ9RvmtCRE",
+                "created": 1749614468,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 776,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6w82HyiLEVwOZfCpTvQ9RvmtCRE",
+                "created": 1749614468,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "27": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6w9ENYXlubxoJDasOVxCw3EjPEU",
+                "created": 1749614469,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6w9ENYXlubxoJDasOVxCw3EjPEU",
+                "created": 1749614469,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "17": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'detection']",
+                    "1": "['object', 'probability', 'feature', 'detection']"
+                },
+                "in_toks": 783,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wAZnrmbKw7281rcEPoRGnF17vB",
+                "created": 1749614470,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'detection']",
+                    "1": "['object', 'probability', 'feature', 'detection']"
+                },
+                "in_toks": 783,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wAZnrmbKw7281rcEPoRGnF17vB",
+                "created": 1749614470,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "37": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 769,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wD6lQPBrZ3W5H1LULQ3n3PZ1nj",
+                "created": 1749614473,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 769,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wD6lQPBrZ3W5H1LULQ3n3PZ1nj",
+                "created": 1749614473,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "34": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 858,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wE7DoUZe3kYPW8TGjnZ5ALjTYb",
+                "created": 1749614474,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 858,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wE7DoUZe3kYPW8TGjnZ5ALjTYb",
+                "created": 1749614474,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "1": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'feature']",
+                    "1": "['object', 'probability', 'detection', 'feature']"
+                },
+                "in_toks": 891,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wGJXLRHEmzqT3EDxugW1sXepXW",
+                "created": 1749614476,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'feature']",
+                    "1": "['object', 'probability', 'detection', 'feature']"
+                },
+                "in_toks": 891,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wGJXLRHEmzqT3EDxugW1sXepXW",
+                "created": 1749614476,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "16": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "non_detection",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'non_detection', 'detection', 'magstat']",
+                    "1": "['object', 'probability', 'non_detection', 'detection', 'magstat']"
+                },
+                "in_toks": 846,
+                "out_toks": 38,
+                "id": "chatcmpl-Bh6wKk5WLXMFXDV2sis1lIjhb2rZW",
+                "created": 1749614480,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "non_detection",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'non_detection', 'detection', 'magstat']",
+                    "1": "['object', 'probability', 'non_detection', 'detection', 'magstat']"
+                },
+                "in_toks": 846,
+                "out_toks": 38,
+                "id": "chatcmpl-Bh6wKk5WLXMFXDV2sis1lIjhb2rZW",
+                "created": 1749614480,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "19": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 818,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wLYkrlxo2j8XBdn1rxyrN1HpBB",
+                "created": 1749614481,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 818,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wLYkrlxo2j8XBdn1rxyrN1HpBB",
+                "created": 1749614481,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "14": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'ps1_ztf']",
+                    "1": "['object', 'detection', 'ps1_ztf']"
+                },
+                "in_toks": 937,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wNVBUvVu5iVlL2EnGrau7j1fuF",
+                "created": 1749614483,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'ps1_ztf']",
+                    "1": "['object', 'detection', 'ps1_ztf']"
+                },
+                "in_toks": 937,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wNVBUvVu5iVlL2EnGrau7j1fuF",
+                "created": 1749614483,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "30": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']",
+                    "1": "['object', 'probability', 'taxonomy']"
+                },
+                "in_toks": 776,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wOwebyUbzA74KBbAi3K3GbIoOS",
+                "created": 1749614484,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']",
+                    "1": "['object', 'probability', 'taxonomy']"
+                },
+                "in_toks": 776,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wOwebyUbzA74KBbAi3K3GbIoOS",
+                "created": 1749614484,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "22": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 761,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wQeqBtzOl9bIH7ATpU6Z9hS7Sj",
+                "created": 1749614486,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 761,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wQeqBtzOl9bIH7ATpU6Z9hS7Sj",
+                "created": 1749614486,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "12": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 807,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wRjPcBdG98W6AhhGZxD4VAFRYc",
+                "created": 1749614487,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 807,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wRjPcBdG98W6AhhGZxD4VAFRYc",
+                "created": 1749614487,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "57": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 881,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6wSYpxO4hFVLwMO5Fo88J1pBtrO",
+                "created": 1749614488,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 881,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6wSYpxO4hFVLwMO5Fo88J1pBtrO",
+                "created": 1749614488,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "75": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 762,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wSHx9x8ja7RkU3rdIHs8IsJlIF",
+                "created": 1749614488,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 762,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wSHx9x8ja7RkU3rdIHs8IsJlIF",
+                "created": 1749614488,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "43": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'dataquality']",
+                    "1": "['object', 'dataquality']"
+                },
+                "in_toks": 799,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wT0jb0nJNdwygWYE3ni4TvDbGo",
+                "created": 1749614489,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'dataquality']",
+                    "1": "['object', 'dataquality']"
+                },
+                "in_toks": 799,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wT0jb0nJNdwygWYE3ni4TvDbGo",
+                "created": 1749614489,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "89": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'dataquality']",
+                    "1": "['object', 'probability', 'dataquality']"
+                },
+                "in_toks": 778,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6wUSSpSTAYFWGGYC5Lt6FWnP3aM",
+                "created": 1749614490,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'dataquality']",
+                    "1": "['object', 'probability', 'dataquality']"
+                },
+                "in_toks": 778,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6wUSSpSTAYFWGGYC5Lt6FWnP3aM",
+                "created": 1749614490,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "72": {
+        "0": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']",
+                    "1": "['reference']"
+                },
+                "in_toks": 767,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6wV53LxWoW7V1k8zpaAya0aBF6F",
+                "created": 1749614491,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']",
+                    "1": "['reference']"
+                },
+                "in_toks": 767,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6wV53LxWoW7V1k8zpaAya0aBF6F",
+                "created": 1749614491,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "103": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ps1_ztf']",
+                    "1": "['object', 'probability', 'ps1_ztf']"
+                },
+                "in_toks": 829,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wW2z8cygz1qC6xYDvaVj9FmEzw",
+                "created": 1749614492,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ps1_ztf']",
+                    "1": "['object', 'probability', 'ps1_ztf']"
+                },
+                "in_toks": 829,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wW2z8cygz1qC6xYDvaVj9FmEzw",
+                "created": 1749614492,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "54": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'non_detection']",
+                    "1": "['object', 'non_detection']"
+                },
+                "in_toks": 794,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wX4jAg6c19CcEiUSQJ3VrDBjnj",
+                "created": 1749614493,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'non_detection']",
+                    "1": "['object', 'non_detection']"
+                },
+                "in_toks": 794,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wX4jAg6c19CcEiUSQJ3VrDBjnj",
+                "created": 1749614493,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "99": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'forced_photometry']",
+                    "1": "['object', 'probability', 'forced_photometry']"
+                },
+                "in_toks": 799,
+                "out_toks": 26,
+                "id": "chatcmpl-Bh6wYitmK0fnd7xu4k8VC2sTMXipZ",
+                "created": 1749614494,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'forced_photometry']",
+                    "1": "['object', 'probability', 'forced_photometry']"
+                },
+                "in_toks": 799,
+                "out_toks": 26,
+                "id": "chatcmpl-Bh6wYitmK0fnd7xu4k8VC2sTMXipZ",
+                "created": 1749614494,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "40": {
+        "0": {
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']",
+                    "1": "['allwise']"
+                },
+                "in_toks": 810,
+                "out_toks": 8,
+                "id": "chatcmpl-Bh6waPVfZEVhQf0HreQnowPiZ0jw9",
+                "created": 1749614496,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']",
+                    "1": "['allwise']"
+                },
+                "in_toks": 810,
+                "out_toks": 8,
+                "id": "chatcmpl-Bh6waPVfZEVhQf0HreQnowPiZ0jw9",
+                "created": 1749614496,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "80": {
+        "0": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']",
+                    "1": "['xmatch']"
+                },
+                "in_toks": 798,
+                "out_toks": 8,
+                "id": "chatcmpl-Bh6wcKmTC6SLBjmrhgchQEcVAodG8",
+                "created": 1749614498,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']",
+                    "1": "['xmatch']"
+                },
+                "in_toks": 798,
+                "out_toks": 8,
+                "id": "chatcmpl-Bh6wcKmTC6SLBjmrhgchQEcVAodG8",
+                "created": 1749614498,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "45": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'dataquality']",
+                    "1": "['object', 'dataquality']"
+                },
+                "in_toks": 781,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wdstx73DoRUCmjIitDj7S0ii8J",
+                "created": 1749614499,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'dataquality']",
+                    "1": "['object', 'dataquality']"
+                },
+                "in_toks": 781,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wdstx73DoRUCmjIitDj7S0ii8J",
+                "created": 1749614499,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "63": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 793,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6weaxiCFmmAScWWt6VgLugGdL6L",
+                "created": 1749614500,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 793,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6weaxiCFmmAScWWt6VgLugGdL6L",
+                "created": 1749614500,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "73": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'ss_ztf']",
+                    "1": "['object', 'ss_ztf']"
+                },
+                "in_toks": 780,
+                "out_toks": 18,
+                "id": "chatcmpl-Bh6wePL80N98HlGKlkTmUb517TZP5",
+                "created": 1749614500,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'ss_ztf']",
+                    "1": "['object', 'ss_ztf']"
+                },
+                "in_toks": 780,
+                "out_toks": 18,
+                "id": "chatcmpl-Bh6wePL80N98HlGKlkTmUb517TZP5",
+                "created": 1749614500,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "92": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 807,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6wgBf66Qlk2b9nUwXKNHi5S5V0L",
+                "created": 1749614502,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 807,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6wgBf66Qlk2b9nUwXKNHi5S5V0L",
+                "created": 1749614502,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "102": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "allwise",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'allwise', 'magstat']",
+                    "1": "['object', 'probability', 'allwise', 'magstat']"
+                },
+                "in_toks": 798,
+                "out_toks": 30,
+                "id": "chatcmpl-Bh6whJ9yX0CsHndXh2S9pcJO1t4B8",
+                "created": 1749614503,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "allwise",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'allwise', 'magstat']",
+                    "1": "['object', 'probability', 'allwise', 'magstat']"
+                },
+                "in_toks": 798,
+                "out_toks": 30,
+                "id": "chatcmpl-Bh6whJ9yX0CsHndXh2S9pcJO1t4B8",
+                "created": 1749614503,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "81": {
+        "0": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']",
+                    "1": "['object', 'xmatch', 'allwise']"
+                },
+                "in_toks": 787,
+                "out_toks": 19,
+                "id": "chatcmpl-Bh6wiCPLQGiOZtcJSUID9WVxB9Avy",
+                "created": 1749614504,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']",
+                    "1": "['object', 'xmatch', 'allwise']"
+                },
+                "in_toks": 787,
+                "out_toks": 19,
+                "id": "chatcmpl-Bh6wiCPLQGiOZtcJSUID9WVxB9Avy",
+                "created": 1749614504,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "69": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'ps1_ztf']",
+                    "1": "['object', 'ps1_ztf']"
+                },
+                "in_toks": 803,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wj0B6a9nosqnIhEe3TU6eO1IUS",
+                "created": 1749614505,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'ps1_ztf']",
+                    "1": "['object', 'ps1_ztf']"
+                },
+                "in_toks": 803,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wj0B6a9nosqnIhEe3TU6eO1IUS",
+                "created": 1749614505,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "61": {
+        "0": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']",
+                    "1": "['magstat']"
+                },
+                "in_toks": 788,
+                "out_toks": 8,
+                "id": "chatcmpl-Bh6wkixGhuSggJENJSTfDY60jQpPY",
+                "created": 1749614506,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']",
+                    "1": "['magstat']"
+                },
+                "in_toks": 788,
+                "out_toks": 8,
+                "id": "chatcmpl-Bh6wkixGhuSggJENJSTfDY60jQpPY",
+                "created": 1749614506,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "104": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf']",
+                    "1": "['object', 'probability', 'ss_ztf']"
+                },
+                "in_toks": 836,
+                "out_toks": 26,
+                "id": "chatcmpl-Bh6wkDwShMpQew7k7rSjG8RdFQ3aO",
+                "created": 1749614506,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf']",
+                    "1": "['object', 'probability', 'ss_ztf']"
+                },
+                "in_toks": 836,
+                "out_toks": 26,
+                "id": "chatcmpl-Bh6wkDwShMpQew7k7rSjG8RdFQ3aO",
+                "created": 1749614506,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "71": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']",
+                    "1": "['object', 'reference']"
+                },
+                "in_toks": 819,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wlKaEAFcr5hmw9Br68L3YyjoOt",
+                "created": 1749614507,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']",
+                    "1": "['object', 'reference']"
+                },
+                "in_toks": 819,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wlKaEAFcr5hmw9Br68L3YyjoOt",
+                "created": 1749614507,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "42": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'dataquality']",
+                    "1": "['object', 'dataquality']"
+                },
+                "in_toks": 816,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wntvtNpqLkYRVe63c6flXjWwra",
+                "created": 1749614509,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'dataquality']",
+                    "1": "['object', 'dataquality']"
+                },
+                "in_toks": 816,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wntvtNpqLkYRVe63c6flXjWwra",
+                "created": 1749614509,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "107": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf']",
+                    "1": "['object', 'probability', 'ss_ztf']"
+                },
+                "in_toks": 853,
+                "out_toks": 26,
+                "id": "chatcmpl-Bh6woqRSa9ohI3mESBLXHNRkiHoZX",
+                "created": 1749614510,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf']",
+                    "1": "['object', 'probability', 'ss_ztf']"
+                },
+                "in_toks": 853,
+                "out_toks": 26,
+                "id": "chatcmpl-Bh6woqRSa9ohI3mESBLXHNRkiHoZX",
+                "created": 1749614510,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "83": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise']",
+                    "1": "['object', 'allwise']"
+                },
+                "in_toks": 762,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wpTk8IIdiG6qRDI0fuokqYRitV",
+                "created": 1749614511,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise']",
+                    "1": "['object', 'allwise']"
+                },
+                "in_toks": 762,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wpTk8IIdiG6qRDI0fuokqYRitV",
+                "created": 1749614511,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "84": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'xmatch', 'allwise']",
+                    "1": "['object', 'xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6wrquEgXGyKVeJ2nsYtY9ruS3oF",
+                "created": 1749614513,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'xmatch', 'allwise']",
+                    "1": "['object', 'xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6wrquEgXGyKVeJ2nsYtY9ruS3oF",
+                "created": 1749614513,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "96": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf', 'detection']",
+                    "1": "['ss_ztf', 'detection']"
+                },
+                "in_toks": 824,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wsEyW57Nz4mw28HnhFcE4KhnQq",
+                "created": 1749614514,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf', 'detection']",
+                    "1": "['ss_ztf', 'detection']"
+                },
+                "in_toks": 824,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wsEyW57Nz4mw28HnhFcE4KhnQq",
+                "created": 1749614514,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "67": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'gaia_ztf']",
+                    "1": "['object', 'gaia_ztf']"
+                },
+                "in_toks": 802,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wtWPhkmZKXau7Ni5Op5vf3oXUO",
+                "created": 1749614515,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'gaia_ztf']",
+                    "1": "['object', 'gaia_ztf']"
+                },
+                "in_toks": 802,
+                "out_toks": 20,
+                "id": "chatcmpl-Bh6wtWPhkmZKXau7Ni5Op5vf3oXUO",
+                "created": 1749614515,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "55": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 761,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6wuT4XXluds9AbXSRCP5e9E4So0",
+                "created": 1749614516,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 761,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6wuT4XXluds9AbXSRCP5e9E4So0",
+                "created": 1749614516,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "47": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']",
+                    "1": "['object', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wvXm5zNd8C6jn5XvSZaeMAuG0k",
+                "created": 1749614517,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']",
+                    "1": "['object', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wvXm5zNd8C6jn5XvSZaeMAuG0k",
+                "created": 1749614517,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "79": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'xmatch']",
+                    "1": "['object', 'xmatch']"
+                },
+                "in_toks": 777,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wwPY7Yy04YhjXnlOhQOV9Nu5va",
+                "created": 1749614518,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'xmatch']",
+                    "1": "['object', 'xmatch']"
+                },
+                "in_toks": 777,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wwPY7Yy04YhjXnlOhQOV9Nu5va",
+                "created": 1749614518,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "94": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']",
+                    "1": "['object', 'reference']"
+                },
+                "in_toks": 772,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6ww3UYcbRhMQRiZMFGqhcx3Yq6v",
+                "created": 1749614518,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']",
+                    "1": "['object', 'reference']"
+                },
+                "in_toks": 772,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6ww3UYcbRhMQRiZMFGqhcx3Yq6v",
+                "created": 1749614518,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "90": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'feature_version']",
+                    "1": "['object', 'probability', 'feature', 'feature_version']"
+                },
+                "in_toks": 804,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wxzUJrhQqvZ2dLR7xCBEVC6CUV",
+                "created": 1749614519,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'feature_version']",
+                    "1": "['object', 'probability', 'feature', 'feature_version']"
+                },
+                "in_toks": 804,
+                "out_toks": 28,
+                "id": "chatcmpl-Bh6wxzUJrhQqvZ2dLR7xCBEVC6CUV",
+                "created": 1749614519,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "51": {
+        "0": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']",
+                    "1": "['forced_photometry']"
+                },
+                "in_toks": 796,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wy1jOJAFJ4ePz12nP9cR2eiXuv",
+                "created": 1749614520,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']",
+                    "1": "['forced_photometry']"
+                },
+                "in_toks": 796,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6wy1jOJAFJ4ePz12nP9cR2eiXuv",
+                "created": 1749614520,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "59": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']",
+                    "1": "['object', 'magstat']"
+                },
+                "in_toks": 779,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wz5yRbteir2gsEDlFEZAL452mt",
+                "created": 1749614521,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']",
+                    "1": "['object', 'magstat']"
+                },
+                "in_toks": 779,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6wz5yRbteir2gsEDlFEZAL452mt",
+                "created": 1749614521,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "100": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection",
+                "non_detection",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'non_detection', 'forced_photometry']",
+                    "1": "['object', 'detection', 'non_detection', 'forced_photometry']"
+                },
+                "in_toks": 836,
+                "out_toks": 34,
+                "id": "chatcmpl-Bh6wz5ZdjXp1FuAftRzobDglgXAUz",
+                "created": 1749614521,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection",
+                "non_detection",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'non_detection', 'forced_photometry']",
+                    "1": "['object', 'detection', 'non_detection', 'forced_photometry']"
+                },
+                "in_toks": 836,
+                "out_toks": 34,
+                "id": "chatcmpl-Bh6wz5ZdjXp1FuAftRzobDglgXAUz",
+                "created": 1749614521,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "106": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 881,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6x0XEMexPJvtcOw8X2rBzm4hLxz",
+                "created": 1749614522,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 881,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6x0XEMexPJvtcOw8X2rBzm4hLxz",
+                "created": 1749614522,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "56": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']",
+                    "1": "['object', 'detection']"
+                },
+                "in_toks": 846,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6x1YHiyL071VUysIHLcWUwoOyym",
+                "created": 1749614523,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']",
+                    "1": "['object', 'detection']"
+                },
+                "in_toks": 846,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6x1YHiyL071VUysIHLcWUwoOyym",
+                "created": 1749614523,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "48": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 786,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6x3HtZfeHiExBxmxRze2nN6LiFs",
+                "created": 1749614525,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 786,
+                "out_toks": 12,
+                "id": "chatcmpl-Bh6x3HtZfeHiExBxmxRze2nN6LiFs",
+                "created": 1749614525,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "58": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']",
+                    "1": "['object', 'detection']"
+                },
+                "in_toks": 803,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6x4COtkjtzNU1Z26CcUdunTSRJc",
+                "created": 1749614526,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']",
+                    "1": "['object', 'detection']"
+                },
+                "in_toks": 803,
+                "out_toks": 14,
+                "id": "chatcmpl-Bh6x4COtkjtzNU1Z26CcUdunTSRJc",
+                "created": 1749614526,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "78": {
+        "0": {
+            "pred_tables": [
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['taxonomy']",
+                    "1": "['taxonomy']"
+                },
+                "in_toks": 766,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6x5MJWAKW005QjqMqv226xSjjDm",
+                "created": 1749614527,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['taxonomy']",
+                    "1": "['taxonomy']"
+                },
+                "in_toks": 766,
+                "out_toks": 6,
+                "id": "chatcmpl-Bh6x5MJWAKW005QjqMqv226xSjjDm",
+                "created": 1749614527,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    },
+    "39": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 859,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6x6XJhmtPc8PhkpQX7du8OwJT8K",
+                "created": 1749614528,
+                "model": "gpt-4o-2024-08-06"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 859,
+                "out_toks": 22,
+                "id": "chatcmpl-Bh6x6XJhmtPc8PhkpQX7du8OwJT8K",
+                "created": 1749614528,
+                "model": "gpt-4o-2024-08-06"
+            }
+        }
+    }
+}

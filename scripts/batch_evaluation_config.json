@@ -1,0 +1,68 @@
+{
+    "experiments": [
+        {
+            "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+            "data_format": "csv",
+            "model_name": "Qwen2.5-1.5B-Instruct",
+            "save_path": "./results",
+            "exp_name": "alerce_train_sbs_v4",
+            "parallel": true,
+            "num_processes": 2,
+            "access_time": 2,
+            "n_tries": 7,
+            "alias_handling": true,
+            "self_correction": "both"
+        },{
+            "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+            "data_format": "csv",
+            "model_name": "claude-3-haiku-20240307",
+            "save_path": "./results",
+            "exp_name": "alerce_train_sbs_v4",
+            "parallel": true,
+            "num_processes": 2,
+            "access_time": 2,
+            "n_tries": 7,
+            "alias_handling": true,
+            "self_correction": "both"
+        },
+        {
+            "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+            "data_format": "csv",
+            "model_name": "claude-3-haiku-20240307",
+            "save_path": "./results",
+            "exp_name": "alerce_train_direct_v8",
+            "parallel": true,
+            "num_processes": 2,
+            "access_time": 2,
+            "n_tries": 7,
+            "alias_handling": true,
+            "self_correction": "both"
+        },
+        {
+            "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+            "data_format": "csv",
+            "model_name": "claude-3-haiku-20240307",
+            "save_path": "./results",
+            "exp_name": "alerce_train_sbscot_v1",
+            "parallel": true,
+            "num_processes": 2,
+            "access_time": 2,
+            "n_tries": 7,
+            "alias_handling": true,
+            "self_correction": "both"
+        },
+        {
+            "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+            "data_format": "csv",
+            "model_name": "gpt-4.1-nano-2025-04-14",
+            "save_path": "./results",
+            "exp_name": "alerce_train_direct_v8",
+            "parallel": true,
+            "num_processes": 2,
+            "access_time": 2,
+            "n_tries": 7,
+            "alias_handling": true,
+            "self_correction": "both"
+        }
+    ]
+}

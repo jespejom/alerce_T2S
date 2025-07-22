@@ -1,0 +1,1300 @@
+{
+    "86": {
+        "0": {
+            "req_id": 86,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['probability', 'ps1_ztf']"
+                    },
+                    "1": {
+                        "response": "['probability', 'ps1_ztf']"
+                    }
+                },
+                "in_toks": 660,
+                "out_toks": 22,
+                "id": "chatcmpl-BcTh2db6pbyju0E2DfYDqcefZF5sS",
+                "created": 1748510304,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "advanced"
+                    }
+                },
+                "in_toks": 1261,
+                "out_toks": 1,
+                "id": "chatcmpl-BcTh41z11TpTyzP1WezFjIz1Fc9NV",
+                "created": 1748510306,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To decompose the user request into a systematic plan for generating the appropriate PostgreSQL query, I will outline each step in detail, considering the database schema, the necessary conditions, and the optimal query structure.\n\n1. **Identify the relevant probability entries for the objects:**\n   - Filter the 'probability' table to include only entries where:\n     - 'classifier_name' equals 'lc_classifier' (or the specified version 'hierarchical_rf_1.1.0' if versioning is considered; otherwise, default to 'lc_classifier').\n     - 'ranking' equals 1 to ensure only the most probable class per object.\n   - From this filtered set, select objects where the 'class_name' is either 'CEP', 'DSCT', or 'RRL'.\n   - Further filter these entries to include only those with 'probability' greater than 0.6.\n   \n2. **Extract the object identifiers (oids) that meet the probability criteria:**\n   - Use a subquery to select 'oid's from the filtered 'probability' table that satisfy the above conditions.\n   \n3. **Identify objects with their closest PS1 sources having a star/galaxy score > 0.8:**\n   - Join the set of 'oid's obtained in step 2 with the 'ps1_ztf' table.\n   - Filter the 'ps1_ztf' entries where 'sgscore1' (or possibly 'sgscore2' and 'sgscore3' if considering multiple closest sources) is greater than 0.8.\n   - Since the user specifies \"their closest PS1 objects,\" focus on 'sgscore1' (the closest source). If needed, consider additional closest sources, but the primary interpretation is the first.\n   \n4. **Combine the probability and PS1 star/galaxy score conditions:**\n   - Use an INNER JOIN between the filtered 'probability' subquery and 'ps1_ztf' on 'oid'.\n   - Ensure that only objects satisfying both the probability threshold and the star/galaxy score threshold are included.\n   \n5. **Limit the number of results:**\n   - Apply a LIMIT clause to restrict the output to at most 100 rows.\n   \n6. **Select all columns from both tables:**\n   - Retrieve all columns from the 'probability' table and the 'ps1_ztf' table for the selected objects.\n   - Since the user requests \"all columns\" from both tables, explicitly specify the columns",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To decompose the user request into a systematic plan for generating the appropriate PostgreSQL query, I will outline each step in detail, considering the database schema, the necessary conditions, and the optimal query structure.\n\n1. **Identify the relevant probability entries for the objects:**\n   - Filter the 'probability' table to include only entries where:\n     - 'classifier_name' equals 'lc_classifier' (or the specified version 'hierarchical_rf_1.1.0' if versioning is considered; otherwise, default to 'lc_classifier').\n     - 'ranking' equals 1 to ensure only the most probable class per object.\n   - From this filtered set, select objects where the 'class_name' is either 'CEP', 'DSCT', or 'RRL'.\n   - Further filter these entries to include only those with 'probability' greater than 0.6.\n   \n2. **Extract the object identifiers (oids) that meet the probability criteria:**\n   - Use a subquery to select 'oid's from the filtered 'probability' table that satisfy the above conditions.\n   \n3. **Identify objects with their closest PS1 sources having a star/galaxy score > 0.8:**\n   - Join the set of 'oid's obtained in step 2 with the 'ps1_ztf' table.\n   - Filter the 'ps1_ztf' entries where 'sgscore1' (or possibly 'sgscore2' and 'sgscore3' if considering multiple closest sources) is greater than 0.8.\n   - Since the user specifies \"their closest PS1 objects,\" focus on 'sgscore1' (the closest source). If needed, consider additional closest sources, but the primary interpretation is the first.\n   \n4. **Combine the probability and PS1 star/galaxy score conditions:**\n   - Use an INNER JOIN between the filtered 'probability' subquery and 'ps1_ztf' on 'oid'.\n   - Ensure that only objects satisfying both the probability threshold and the star/galaxy score threshold are included.\n   \n5. **Limit the number of results:**\n   - Apply a LIMIT clause to restrict the output to at most 100 rows.\n   \n6. **Select all columns from both tables:**\n   - Retrieve all columns from the 'probability' table and the 'ps1_ztf' table for the selected objects.\n   - Since the user requests \"all columns\" from both tables, explicitly specify the columns"
+                    }
+                },
+                "in_toks": 3063,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjHw2w9YO2JY0KTkzyubQhWTmvQ",
+                "created": 1748510443,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Select objects with high probability of being Cepheid, delta Scuti, or RR Lyrae\nWITH filtered_prob AS (\n    SELECT p.oid\n    FROM probability p\n    WHERE p.classifier_name = 'hierarchical_rf_1.1.0'\n      AND p.ranking = 1\n      AND p.probability > 0.6\n      AND p.class_name IN ('CEP', 'DSCT', 'RRL')\n)\n-- Join with ps1_ztf to filter objects with star/galaxy score > 0.8\nSELECT p.*, ps1.*\nFROM probability p\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE p.oid IN (SELECT oid FROM filtered_prob)\n  AND ps1.sgscore1 > 0.8\nLIMIT 100;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select objects with high probability of being Cepheid, delta Scuti, or RR Lyrae\nWITH filtered_prob AS (\n    SELECT p.oid\n    FROM probability p\n    WHERE p.classifier_name = 'hierarchical_rf_1.1.0'\n      AND p.ranking = 1\n      AND p.probability > 0.6\n      AND p.class_name IN ('CEP', 'DSCT', 'RRL')\n)\n-- Join with ps1_ztf to filter objects with star/galaxy score > 0.8\nSELECT p.*, ps1.*\nFROM probability p\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE p.oid IN (SELECT oid FROM filtered_prob)\n  AND ps1.sgscore1 > 0.8\nLIMIT 100;\n```"
+                    }
+                },
+                "in_toks": 1666,
+                "out_toks": 177,
+                "id": "chatcmpl-BcTt0OQd3McViVlBzM7XLlYyacZzz",
+                "created": 1748511046,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 86,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['probability', 'ps1_ztf']"
+                    },
+                    "1": {
+                        "response": "['probability', 'ps1_ztf']"
+                    }
+                },
+                "in_toks": 660,
+                "out_toks": 22,
+                "id": "chatcmpl-BcTh2db6pbyju0E2DfYDqcefZF5sS",
+                "created": 1748510304,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "advanced"
+                    }
+                },
+                "in_toks": 1261,
+                "out_toks": 1,
+                "id": "chatcmpl-BcTh6tvYgbTrOyHVGpMphp34fh0yW",
+                "created": 1748510308,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To decompose the user request into a systematic plan for generating the appropriate PostgreSQL query, I will outline each step in detail, considering the database schema, the necessary conditions, and the optimal query structure.\n\n1. **Identify the relevant probability entries for the objects:**\n   - Filter the 'probability' table to include only entries where:\n     - 'classifier_name' equals 'lc_classifier' (or the specified version 'hierarchical_rf_1.1.0' if versioning is considered; otherwise, default to 'lc_classifier').\n     - 'ranking' equals 1 to ensure only the most probable class per object.\n   - Further filter these entries to include only those where:\n     - 'class_name' is one of 'CEP', 'DSCT', or 'RRL'.\n     - 'probability' exceeds 0.6.\n   - This step results in a subset of object identifiers ('oid') that meet the probability criteria for the specified classes.\n\n2. **Construct a subquery to select these object identifiers ('oid'):**\n   - Use the filtered 'probability' table as a subquery, selecting only the 'oid' values that satisfy the above conditions.\n   - This subquery isolates the objects of interest based on their light curve classification probabilities.\n\n3. **Retrieve the 'oid's from the subquery for further filtering:**\n   - Use the list of 'oid's obtained to filter the main dataset, ensuring subsequent joins only consider objects with the desired classification probabilities.\n\n4. **Filter the 'ps1_ztf' table based on the star/galaxy score:**\n   - Join the 'ps1_ztf' table with the subquery of 'oid's to restrict to objects that are among those with high probability of being Cepheid, delta Scuti, or RR Lyrae.\n   - Apply an additional condition where 'sgscore1' (or the relevant star/galaxy score column) exceeds 0.8.\n   - This ensures only objects with a high likelihood of being stars are included.\n\n5. **Combine the filtered 'probability' and 'ps1_ztf' data:**\n   - Select all columns from both tables for the objects that meet the above criteria.\n   - Use a JOIN operation between the filtered 'probability' subquery and the 'ps1_ztf' table on 'oid' to retrieve the combined data.\n\n6. **Limit the result to at most 100 rows:**\n   - Apply a 'LIMIT 100",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To decompose the user request into a systematic plan for generating the appropriate PostgreSQL query, I will outline each step in detail, considering the database schema, the necessary conditions, and the optimal query structure.\n\n1. **Identify the relevant probability entries for the objects:**\n   - Filter the 'probability' table to include only entries where:\n     - 'classifier_name' equals 'lc_classifier' (or the specified version 'hierarchical_rf_1.1.0' if versioning is considered; otherwise, default to 'lc_classifier').\n     - 'ranking' equals 1 to ensure only the most probable class per object.\n   - Further filter these entries to include only those where:\n     - 'class_name' is one of 'CEP', 'DSCT', or 'RRL'.\n     - 'probability' exceeds 0.6.\n   - This step results in a subset of object identifiers ('oid') that meet the probability criteria for the specified classes.\n\n2. **Construct a subquery to select these object identifiers ('oid'):**\n   - Use the filtered 'probability' table as a subquery, selecting only the 'oid' values that satisfy the above conditions.\n   - This subquery isolates the objects of interest based on their light curve classification probabilities.\n\n3. **Retrieve the 'oid's from the subquery for further filtering:**\n   - Use the list of 'oid's obtained to filter the main dataset, ensuring subsequent joins only consider objects with the desired classification probabilities.\n\n4. **Filter the 'ps1_ztf' table based on the star/galaxy score:**\n   - Join the 'ps1_ztf' table with the subquery of 'oid's to restrict to objects that are among those with high probability of being Cepheid, delta Scuti, or RR Lyrae.\n   - Apply an additional condition where 'sgscore1' (or the relevant star/galaxy score column) exceeds 0.8.\n   - This ensures only objects with a high likelihood of being stars are included.\n\n5. **Combine the filtered 'probability' and 'ps1_ztf' data:**\n   - Select all columns from both tables for the objects that meet the above criteria.\n   - Use a JOIN operation between the filtered 'probability' subquery and the 'ps1_ztf' table on 'oid' to retrieve the combined data.\n\n6. **Limit the result to at most 100 rows:**\n   - Apply a 'LIMIT 100"
+                    }
+                },
+                "in_toks": 3063,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjIvcsmhtFf234tmz7cW99O07LI",
+                "created": 1748510444,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Subquery to select objects with high probability (>0.6) of being Cepheid, DSCT, or RRL\nWITH high_prob_objects AS (\n    SELECT oid\n    FROM probability\n    WHERE classifier_name = 'hierarchical_rf_1.1.0'\n      AND ranking = 1\n      AND class_name IN ('CEP', 'DSCT', 'RRL')\n      AND probability > 0.6\n)\n-- Main query to join with ps1_ztf and filter by star/galaxy score\nSELECT p.*, ps.*\nFROM probability p\nJOIN ps1_ztf ps ON p.oid = ps.oid\nWHERE p.oid IN (SELECT oid FROM high_prob_objects)\n  AND ps.sgscore1 > 0.8\nLIMIT 100;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Subquery to select objects with high probability (>0.6) of being Cepheid, DSCT, or RRL\nWITH high_prob_objects AS (\n    SELECT oid\n    FROM probability\n    WHERE classifier_name = 'hierarchical_rf_1.1.0'\n      AND ranking = 1\n      AND class_name IN ('CEP', 'DSCT', 'RRL')\n      AND probability > 0.6\n)\n-- Main query to join with ps1_ztf and filter by star/galaxy score\nSELECT p.*, ps.*\nFROM probability p\nJOIN ps1_ztf ps ON p.oid = ps.oid\nWHERE p.oid IN (SELECT oid FROM high_prob_objects)\n  AND ps.sgscore1 > 0.8\nLIMIT 100;\n```"
+                    }
+                },
+                "in_toks": 1666,
+                "out_toks": 167,
+                "id": "chatcmpl-BcTt0hd2U4XXdvpa5ZHoPQgmahbO8",
+                "created": 1748511046,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    },
+    "53": {
+        "0": {
+            "req_id": 53,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "non_detection",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['non_detection', 'object']"
+                    },
+                    "1": {
+                        "response": "['non_detection', 'object']"
+                    }
+                },
+                "in_toks": 598,
+                "out_toks": 14,
+                "id": "chatcmpl-BcTh7a9qKnVagVt1QuS7EaWFyhFyv",
+                "created": 1748510309,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "simple: simple"
+                    }
+                },
+                "in_toks": 812,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThLOYZFLBwCfirmoItOEljpr3tD",
+                "created": 1748510323,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\nSELECT \n    nd.mjd AS date,\n    nd.fid AS filter_id,\n    nd.oid AS ztf_id,\n    nd.diffmaglim AS mag_limit\nFROM \n    non_detection nd\nWHERE \n    nd.oid = 'ZTF18adqxemz';\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\nSELECT \n    nd.mjd AS date,\n    nd.fid AS filter_id,\n    nd.oid AS ztf_id,\n    nd.diffmaglim AS mag_limit\nFROM \n    non_detection nd\nWHERE \n    nd.oid = 'ZTF18adqxemz';\n```"
+                    }
+                },
+                "in_toks": 2350,
+                "out_toks": 62,
+                "id": "chatcmpl-BcTjLATDorefUCZiWVzFkhQYb2Qnd",
+                "created": 1748510447,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 53,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "non_detection",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['non_detection', 'object']"
+                    },
+                    "1": {
+                        "response": "['non_detection', 'object']"
+                    }
+                },
+                "in_toks": 598,
+                "out_toks": 14,
+                "id": "chatcmpl-BcTh7a9qKnVagVt1QuS7EaWFyhFyv",
+                "created": 1748510309,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "simple: simple"
+                    }
+                },
+                "in_toks": 812,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThMVI3I0yn0XtiwLenaj63dspje",
+                "created": 1748510324,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\nSELECT \n    nd.mjd AS date,\n    nd.fid AS filter_id,\n    nd.oid AS ztf_id,\n    nd.diffmaglim AS mag_limit\nFROM \n    non_detection nd\nWHERE \n    nd.oid = 'ZTF18adqxemz';\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\nSELECT \n    nd.mjd AS date,\n    nd.fid AS filter_id,\n    nd.oid AS ztf_id,\n    nd.diffmaglim AS mag_limit\nFROM \n    non_detection nd\nWHERE \n    nd.oid = 'ZTF18adqxemz';\n```"
+                    }
+                },
+                "in_toks": 2350,
+                "out_toks": 62,
+                "id": "chatcmpl-BcTjMXpQGoBt3FHrqniDSo7uulfM5",
+                "created": 1748510448,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    },
+    "36": {
+        "0": {
+            "req_id": 36,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "feature",
+                "detection",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['feature', 'detection', 'object']"
+                    },
+                    "1": {
+                        "response": "['feature', 'detection', 'object']"
+                    }
+                },
+                "in_toks": 591,
+                "out_toks": 20,
+                "id": "chatcmpl-BcThMQ8RsdM55q463ZmklUl9LzVBV",
+                "created": 1748510324,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "simple: simple"
+                    }
+                },
+                "in_toks": 3654,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThOz8umwnNFUrKV801aN0wQRp2f",
+                "created": 1748510326,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "SELECT \n    f.oid,\n    f.name,\n    f.value\nFROM feature f\nWHERE f.oid = 'ZTF20aaelulu';",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "SELECT \n    f.oid,\n    f.name,\n    f.value\nFROM feature f\nWHERE f.oid = 'ZTF20aaelulu';"
+                    }
+                },
+                "in_toks": 5192,
+                "out_toks": 32,
+                "id": "chatcmpl-BcTjOBOIAYS5hlFsv3ERTmsATyPT4",
+                "created": 1748510450,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 36,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "feature",
+                "detection",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['feature', 'detection', 'object']"
+                    },
+                    "1": {
+                        "response": "['feature', 'detection', 'object']"
+                    }
+                },
+                "in_toks": 591,
+                "out_toks": 20,
+                "id": "chatcmpl-BcThMQ8RsdM55q463ZmklUl9LzVBV",
+                "created": 1748510324,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "simple: simple"
+                    }
+                },
+                "in_toks": 3654,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThRgSppAFox3zzCeY8HijguJz9k",
+                "created": 1748510329,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "SELECT \n    f.oid,\n    f.name,\n    f.value\nFROM \n    feature f\nWHERE \n    f.oid = 'ZTF20aaelulu';",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "SELECT \n    f.oid,\n    f.name,\n    f.value\nFROM \n    feature f\nWHERE \n    f.oid = 'ZTF20aaelulu';"
+                    }
+                },
+                "in_toks": 5192,
+                "out_toks": 36,
+                "id": "chatcmpl-BcTjP03XMUz0N6FET41xArkLis4i2",
+                "created": 1748510451,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    },
+    "91": {
+        "0": {
+            "req_id": 91,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "feature",
+                "magstat",
+                "xmatch",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'feature', 'magstat', 'xmatch', 'feature_version']"
+                    },
+                    "1": {
+                        "response": "['object', 'feature', 'magstat', 'xmatch', 'feature_version']"
+                    }
+                },
+                "in_toks": 638,
+                "out_toks": 36,
+                "id": "chatcmpl-BcThWiyUukalb9QJSoisXIcmmaxCl",
+                "created": 1748510334,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": "```sql\n-- Select ZTF objects with W1-W2 color less than 1, including specific properties\nSELECT \n    o.oid AS ztf_identifier,\n    o.ndet AS number_of_detections,\n    -- Calculate difference between g-r_max and r-r_max (assuming g-r_max and r-r_max are features)\n    (f_g_r_max.value - f_r_r_max.value) AS mag_diff_g_r,\n    -- W1-W2 feature value renamed as w1_w2\n    f_w1_w2.value AS w1_w2,\n    -- Feature version for W1-W2\n    f_w1_w2.version AS feature_version\nFROM \n    object o\n-- Join with feature for g-r_max (g-band g-r_max)\nJOIN \n    feature f_g_r_max ON o.oid = f_g_r_max.oid AND f_g_r_max.name = 'g-r_max' AND f_g_r_max.fid = 1\n-- Join with feature for r-r_max (r-band g-r_max)\nJOIN \n    feature f_r_r_max ON o.oid = f_r_r_max.oid AND f_r_r_max.name = 'g-r_max' AND f_r_r_max.fid = 2\n-- Join with feature for W1-W2 color\nJOIN \n    feature f_w1_w2 ON o.oid = f_w1_w2.oid AND f_w1_w2.name = 'W1-W2'\n-- Filter for W1-W2 color less than 1\nWHERE \n    f_w1_w2.value < 1\n-- Limit to 100 results\nLIMIT 100;\n```",
+            "sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select ZTF objects with W1-W2 color less than 1, including specific properties\nSELECT \n    o.oid AS ztf_identifier,\n    o.ndet AS number_of_detections,\n    -- Calculate difference between g-r_max and r-r_max (assuming g-r_max and r-r_max are features)\n    (f_g_r_max.value - f_r_r_max.value) AS mag_diff_g_r,\n    -- W1-W2 feature value renamed as w1_w2\n    f_w1_w2.value AS w1_w2,\n    -- Feature version for W1-W2\n    f_w1_w2.version AS feature_version\nFROM \n    object o\n-- Join with feature for g-r_max (g-band g-r_max)\nJOIN \n    feature f_g_r_max ON o.oid = f_g_r_max.oid AND f_g_r_max.name = 'g-r_max' AND f_g_r_max.fid = 1\n-- Join with feature for r-r_max (r-band g-r_max)\nJOIN \n    feature f_r_r_max ON o.oid = f_r_r_max.oid AND f_r_r_max.name = 'g-r_max' AND f_r_r_max.fid = 2\n-- Join with feature for W1-W2 color\nJOIN \n    feature f_w1_w2 ON o.oid = f_w1_w2.oid AND f_w1_w2.name = 'W1-W2'\n-- Filter for W1-W2 color less than 1\nWHERE \n    f_w1_w2.value < 1\n-- Limit to 100 results\nLIMIT 100;\n```"
+                    }
+                },
+                "in_toks": 4789,
+                "out_toks": 342,
+                "id": "chatcmpl-BcUEJSEhZWFuLx2Af3aHnMREES7zr",
+                "created": 1748512367,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "label: simple"
+                    }
+                },
+                "in_toks": 3890,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThc5dS89M40ZnIIpgRG8AFynHre",
+                "created": 1748510340,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\n-- Select specific columns for objects with W1-W2 color less than 1\nSELECT \n    o.oid AS ztf_identifier,\n    o.ndet AS number_of_detections,\n    (f_g.magdif_magmin - f_r.magdif_magmin) AS mag_diff_g_r,\n    f_w1_w2.value AS w1_w2,\n    f_w1_w2.version AS feature_version\nFROM \n    object o\n-- Join with feature table for g-band difference magnitude\nJOIN \n    feature f_g ON o.oid = f_g.oid AND f_g.name = 'magdif_magmin' AND f_g.fid = 1\n-- Join with feature table for r-band difference magnitude\nJOIN \n    feature f_r ON o.oid = f_r.oid AND f_r.name = 'magdif_magmin' AND f_r.fid = 2\n-- Join with feature table for W1-W2 color\nJOIN \n    feature f_w1_w2 ON o.oid = f_w1_w2.oid AND f_w1_w2.name = 'W1-W2'\n-- Filter for W1-W2 color less than 1\nWHERE \n    f_w1_w2.value < 1\n-- Limit to 100 results\nLIMIT 100;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select specific columns for objects with W1-W2 color less than 1\nSELECT \n    o.oid AS ztf_identifier,\n    o.ndet AS number_of_detections,\n    (f_g.magdif_magmin - f_r.magdif_magmin) AS mag_diff_g_r,\n    f_w1_w2.value AS w1_w2,\n    f_w1_w2.version AS feature_version\nFROM \n    object o\n-- Join with feature table for g-band difference magnitude\nJOIN \n    feature f_g ON o.oid = f_g.oid AND f_g.name = 'magdif_magmin' AND f_g.fid = 1\n-- Join with feature table for r-band difference magnitude\nJOIN \n    feature f_r ON o.oid = f_r.oid AND f_r.name = 'magdif_magmin' AND f_r.fid = 2\n-- Join with feature table for W1-W2 color\nJOIN \n    feature f_w1_w2 ON o.oid = f_w1_w2.oid AND f_w1_w2.name = 'W1-W2'\n-- Filter for W1-W2 color less than 1\nWHERE \n    f_w1_w2.value < 1\n-- Limit to 100 results\nLIMIT 100;\n```"
+                    }
+                },
+                "in_toks": 5427,
+                "out_toks": 273,
+                "id": "chatcmpl-BcTjQJD5GpgtyZmzD3NBZfPGRs93G",
+                "created": 1748510452,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": true
+        },
+        "1": {
+            "req_id": 91,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "feature",
+                "magstat",
+                "xmatch",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'feature', 'magstat', 'xmatch', 'feature_version']"
+                    },
+                    "1": {
+                        "response": "['object', 'feature', 'magstat', 'xmatch', 'feature_version']"
+                    }
+                },
+                "in_toks": 638,
+                "out_toks": 36,
+                "id": "chatcmpl-BcThWiyUukalb9QJSoisXIcmmaxCl",
+                "created": 1748510334,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": "```sql\n-- Select objects with 'W1-W2' color less than 1, including relevant features and statistics\nWITH w1_w2_feature AS (\n    SELECT f.oid, f.value AS w1_w2, f.version\n    FROM feature f\n    WHERE f.name = 'W1-W2'\n),\ng_r_max_feature AS (\n    SELECT f.oid, f.value AS g_r_max\n    FROM feature f\n    WHERE f.name = 'g-r_max'\n),\nr_w2_feature AS (\n    SELECT f.oid, f.value AS r_w2\n    FROM feature f\n    WHERE f.name = 'r-W2'\n),\nobject_detection_counts AS (\n    -- Count total detections per object from magstat table\n    SELECT oid, COUNT(*) AS ndet\n    FROM magstat\n    GROUP BY oid\n)\nSELECT \n    o.oid, \n    odc.ndet, \n    (g.g_r_max - r.r_w2) AS g_r_diff, \n    w.w1_w2 AS w1_w2, \n    w.version\nFROM object o\n-- Join with detection counts\nJOIN object_detection_counts odc ON o.oid = odc.oid\n-- Join with W1-W2 feature\nJOIN w1_w2_feature w ON o.oid = w.oid\n-- Join with g-r_max feature\nJOIN g_r_max_feature g ON o.oid = g.oid\n-- Join with r-W2 feature\nJOIN r_w2_feature r ON o.oid = r.oid\n-- Filter objects where W1-W2 color is less than 1\nWHERE w.w1_w2 < 1\n-- Limit to 100 results for performance\nLIMIT 100;\n```",
+            "sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select objects with 'W1-W2' color less than 1, including relevant features and statistics\nWITH w1_w2_feature AS (\n    SELECT f.oid, f.value AS w1_w2, f.version\n    FROM feature f\n    WHERE f.name = 'W1-W2'\n),\ng_r_max_feature AS (\n    SELECT f.oid, f.value AS g_r_max\n    FROM feature f\n    WHERE f.name = 'g-r_max'\n),\nr_w2_feature AS (\n    SELECT f.oid, f.value AS r_w2\n    FROM feature f\n    WHERE f.name = 'r-W2'\n),\nobject_detection_counts AS (\n    -- Count total detections per object from magstat table\n    SELECT oid, COUNT(*) AS ndet\n    FROM magstat\n    GROUP BY oid\n)\nSELECT \n    o.oid, \n    odc.ndet, \n    (g.g_r_max - r.r_w2) AS g_r_diff, \n    w.w1_w2 AS w1_w2, \n    w.version\nFROM object o\n-- Join with detection counts\nJOIN object_detection_counts odc ON o.oid = odc.oid\n-- Join with W1-W2 feature\nJOIN w1_w2_feature w ON o.oid = w.oid\n-- Join with g-r_max feature\nJOIN g_r_max_feature g ON o.oid = g.oid\n-- Join with r-W2 feature\nJOIN r_w2_feature r ON o.oid = r.oid\n-- Filter objects where W1-W2 color is less than 1\nWHERE w.w1_w2 < 1\n-- Limit to 100 results for performance\nLIMIT 100;\n```"
+                    }
+                },
+                "in_toks": 4648,
+                "out_toks": 362,
+                "id": "chatcmpl-BcUIwlGMasfaY2TAyfEWAZefDfOXY",
+                "created": 1748512654,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "medium"
+                    }
+                },
+                "in_toks": 3890,
+                "out_toks": 1,
+                "id": "chatcmpl-BcThhfptVoVM7zNPMM5pfffB6Af1X",
+                "created": 1748510345,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To generate the desired PostgreSQL query for retrieving ZTF objects with specific conditions, the following step-by-step decomposition plan should be followed:\n\n1. **Identify the main table containing object identifiers and detection counts:**\n   - Use the `object` table to access the primary object information.\n   - Select the `oid` column for the ZTF object identifier.\n   - Select the `ndet` column for the number of detections.\n\n2. **Retrieve the feature value for 'W1-W2' color:**\n   - Use the `feature` table to find the feature named 'W1-W2'.\n   - Filter the `feature` table to include only rows where `name='W1-W2'`.\n   - Join this filtered feature data with the `object` table on `oid` to associate each object with its 'W1-W2' feature value.\n   - Rename the feature value column to `w1_w2` in the output.\n\n3. **Obtain the feature version for 'W1-W2':**\n   - Join with the `feature_version` table on `version` to retrieve the `step_id_feature`.\n   - Select the `version` column from `feature_version` to include in the output.\n\n4. **Calculate the difference between minimum g- and r-band difference magnitudes:**\n   - Use the `feature` table again to find features corresponding to `name='g-r_max'` and `name='r-W2'`.\n   - Filter for these features separately, joining each with the `object` table on `oid`.\n   - For each object, find the minimum `value` for `g-r_max` and `r-W2`.\n   - Compute the difference: `min(g-r_max) - min(r-W2)` for each object.\n\n5. **Apply the condition on 'W1-W2' color:**\n   - Filter objects where the 'W1-W2' feature value (`w1_w2`) is less than 1.\n\n6. **Limit the number of results:**\n   - Use a `LIMIT 100` clause to restrict the output to at most 100 rows.\n\n7. **Select the final columns:**\n   - `oid` as the ZTF identifier.\n   - `ndet` as the number of detections.\n   - The computed difference between the minimum g- and r-band difference magnitudes.\n   - The `w1_w2` feature value.\n   - The `version` of the feature",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To generate the desired PostgreSQL query for retrieving ZTF objects with specific conditions, the following step-by-step decomposition plan should be followed:\n\n1. **Identify the main table containing object identifiers and detection counts:**\n   - Use the `object` table to access the primary object information.\n   - Select the `oid` column for the ZTF object identifier.\n   - Select the `ndet` column for the number of detections.\n\n2. **Retrieve the feature value for 'W1-W2' color:**\n   - Use the `feature` table to find the feature named 'W1-W2'.\n   - Filter the `feature` table to include only rows where `name='W1-W2'`.\n   - Join this filtered feature data with the `object` table on `oid` to associate each object with its 'W1-W2' feature value.\n   - Rename the feature value column to `w1_w2` in the output.\n\n3. **Obtain the feature version for 'W1-W2':**\n   - Join with the `feature_version` table on `version` to retrieve the `step_id_feature`.\n   - Select the `version` column from `feature_version` to include in the output.\n\n4. **Calculate the difference between minimum g- and r-band difference magnitudes:**\n   - Use the `feature` table again to find features corresponding to `name='g-r_max'` and `name='r-W2'`.\n   - Filter for these features separately, joining each with the `object` table on `oid`.\n   - For each object, find the minimum `value` for `g-r_max` and `r-W2`.\n   - Compute the difference: `min(g-r_max) - min(r-W2)` for each object.\n\n5. **Apply the condition on 'W1-W2' color:**\n   - Filter objects where the 'W1-W2' feature value (`w1_w2`) is less than 1.\n\n6. **Limit the number of results:**\n   - Use a `LIMIT 100` clause to restrict the output to at most 100 rows.\n\n7. **Select the final columns:**\n   - `oid` as the ZTF identifier.\n   - `ndet` as the number of detections.\n   - The computed difference between the minimum g- and r-band difference magnitudes.\n   - The `w1_w2` feature value.\n   - The `version` of the feature"
+                    }
+                },
+                "in_toks": 5422,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjJoB9kDrt0m1IKJJorujC1wXvg",
+                "created": 1748510445,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\nWITH w1_w2_feature AS (\n    SELECT f.oid, f.value AS w1_w2, f.version\n    FROM feature f\n    WHERE f.name = 'W1-W2'\n),\ng_r_max_feature AS (\n    SELECT f.oid, MIN(f.value) AS min_g_r_max\n    FROM feature f\n    WHERE f.name = 'g-r_max'\n    GROUP BY f.oid\n),\nr_w2_feature AS (\n    SELECT f.oid, MIN(f.value) AS min_r_w2\n    FROM feature f\n    WHERE f.name = 'r-W2'\n    GROUP BY f.oid\n)\nSELECT o.oid, o.ndet, \n       (g.min_g_r_max - r.min_r_w2) AS g_r_diff,\n       w.w1_w2, w.version\nFROM object o\nJOIN w1_w2_feature w ON o.oid = w.oid\nJOIN g_r_max_feature g ON o.oid = g.oid\nJOIN r_w2_feature r ON o.oid = r.oid\nWHERE w.w1_w2 < 1\nLIMIT 100;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\nWITH w1_w2_feature AS (\n    SELECT f.oid, f.value AS w1_w2, f.version\n    FROM feature f\n    WHERE f.name = 'W1-W2'\n),\ng_r_max_feature AS (\n    SELECT f.oid, MIN(f.value) AS min_g_r_max\n    FROM feature f\n    WHERE f.name = 'g-r_max'\n    GROUP BY f.oid\n),\nr_w2_feature AS (\n    SELECT f.oid, MIN(f.value) AS min_r_w2\n    FROM feature f\n    WHERE f.name = 'r-W2'\n    GROUP BY f.oid\n)\nSELECT o.oid, o.ndet, \n       (g.min_g_r_max - r.min_r_w2) AS g_r_diff,\n       w.w1_w2, w.version\nFROM object o\nJOIN w1_w2_feature w ON o.oid = w.oid\nJOIN g_r_max_feature g ON o.oid = g.oid\nJOIN r_w2_feature r ON o.oid = r.oid\nWHERE w.w1_w2 < 1\nLIMIT 100;\n```"
+                    }
+                },
+                "in_toks": 1644,
+                "out_toks": 239,
+                "id": "chatcmpl-BcTt1ROicJNrDpmUTSy3vcaE8Lq1I",
+                "created": 1748511047,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": true
+        }
+    },
+    "0": {
+        "0": {
+            "req_id": 0,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "magstat",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'probability', 'feature', 'magstat', 'feature_version']"
+                    },
+                    "1": {
+                        "response": "['object', 'probability', 'feature', 'magstat', 'feature_version']"
+                    }
+                },
+                "in_toks": 648,
+                "out_toks": 36,
+                "id": "chatcmpl-BcThiLT3mbuW6hEFS9rWNeAEYWkRm",
+                "created": 1748510346,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "advanced"
+                    }
+                },
+                "in_toks": 3906,
+                "out_toks": 1,
+                "id": "chatcmpl-BcThlmY9uqXo3gO35kigv1XjpCjme",
+                "created": 1748510349,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To generate a PostgreSQL query that retrieves objects likely to be Young Stellar Objects (YSOs) with the specified conditions, the following systematic steps should be taken:\n\n1. **Identify the Probability of Being a YSO:**\n   - Create a subquery on the 'probability' table filtering for objects with 'class_name' = 'YSO', 'classifier_name' = 'lc_classifier', and 'ranking' = 1 to ensure the most probable classification.\n   - Filter for 'probability' > 0.7 to select objects with high likelihood of being YSOs.\n   - Select the 'oid' and 'probability' for these objects.\n\n2. **Retrieve Objects with Periodic Variability:**\n   - From the 'probability' subquery, identify objects that also have a high probability of being periodic according to the hierarchical classifier:\n     - Filter on 'class_name' = 'Periodic' in the 'probability' table with 'classifier_name' = 'lc_classifier_top' and 'ranking' = 1.\n   - Use an INNER JOIN between the YSO probability subquery and the periodicity probability subquery on 'oid' to get objects that are both likely YSOs and periodic.\n\n3. **Filter for Photometric Periods Between 3 and 10 Days:**\n   - Use the 'feature' table to retrieve the 'Multiband_period' feature for the objects identified.\n   - Filter the 'feature' table where 'name' = 'Multiband_period', 'fid' corresponds to the filter used (e.g., 'fid' = 1 for g-band, or include all filters if needed), and 'value' between 3 and 10 days.\n   - Ensure that the 'version' of the feature is the latest or as specified, or include all versions if not specified.\n\n4. **Select for Variation Amplitude Greater Than 0.5 Magnitude:**\n   - Retrieve the 'Amplitude' feature from the 'feature' table for the same objects.\n   - Filter where 'name' = 'Amplitude' and 'value' > 0.5.\n   - Similar to the period feature, consider the 'fid' and 'version' as needed.\n\n5. **Combine the Filters:**\n   - Use nested subqueries or INTERSECT operations to ensure objects satisfy all three conditions:\n     - High probability of being YSO (>0.7).\n     - High probability of being periodic.\n     - Period between 3 and 10",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To generate a PostgreSQL query that retrieves objects likely to be Young Stellar Objects (YSOs) with the specified conditions, the following systematic steps should be taken:\n\n1. **Identify the Probability of Being a YSO:**\n   - Create a subquery on the 'probability' table filtering for objects with 'class_name' = 'YSO', 'classifier_name' = 'lc_classifier', and 'ranking' = 1 to ensure the most probable classification.\n   - Filter for 'probability' > 0.7 to select objects with high likelihood of being YSOs.\n   - Select the 'oid' and 'probability' for these objects.\n\n2. **Retrieve Objects with Periodic Variability:**\n   - From the 'probability' subquery, identify objects that also have a high probability of being periodic according to the hierarchical classifier:\n     - Filter on 'class_name' = 'Periodic' in the 'probability' table with 'classifier_name' = 'lc_classifier_top' and 'ranking' = 1.\n   - Use an INNER JOIN between the YSO probability subquery and the periodicity probability subquery on 'oid' to get objects that are both likely YSOs and periodic.\n\n3. **Filter for Photometric Periods Between 3 and 10 Days:**\n   - Use the 'feature' table to retrieve the 'Multiband_period' feature for the objects identified.\n   - Filter the 'feature' table where 'name' = 'Multiband_period', 'fid' corresponds to the filter used (e.g., 'fid' = 1 for g-band, or include all filters if needed), and 'value' between 3 and 10 days.\n   - Ensure that the 'version' of the feature is the latest or as specified, or include all versions if not specified.\n\n4. **Select for Variation Amplitude Greater Than 0.5 Magnitude:**\n   - Retrieve the 'Amplitude' feature from the 'feature' table for the same objects.\n   - Filter where 'name' = 'Amplitude' and 'value' > 0.5.\n   - Similar to the period feature, consider the 'fid' and 'version' as needed.\n\n5. **Combine the Filters:**\n   - Use nested subqueries or INTERSECT operations to ensure objects satisfy all three conditions:\n     - High probability of being YSO (>0.7).\n     - High probability of being periodic.\n     - Period between 3 and 10"
+                    }
+                },
+                "in_toks": 5708,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjM7pOk78rylroJpsFzet8KSVN2",
+                "created": 1748510448,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Subquery for objects likely to be YSOs with probability > 0.7\nWITH yso_candidates AS (\n    SELECT p.oid, p.probability\n    FROM probability p\n    WHERE p.class_name = 'YSO'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.ranking = 1\n      AND p.probability > 0.7\n),\n-- Subquery for objects with high probability of being periodic\nperiodic_candidates AS (\n    SELECT p.oid\n    FROM probability p\n    WHERE p.class_name = 'Periodic'\n      AND p.classifier_name = 'lc_classifier_top'\n      AND p.ranking = 1\n),\n-- Filter objects that are both YSO candidates and periodic\nobjects_with_periodicity AS (\n    SELECT y.oid, y.probability\n    FROM yso_candidates y\n    INNER JOIN periodic_candidates p ON y.oid = p.oid\n),\n-- Retrieve features for these objects\nfeatures AS (\n    SELECT f.oid, f.name, f.value, f.fid, f.version\n    FROM feature f\n    WHERE f.oid IN (SELECT oid FROM objects_with_periodicity)\n),\n-- Filter for photometric period between 3 and 10 days\nperiod_features AS (\n    SELECT oid, value AS period_value, fid, version\n    FROM features\n    WHERE name = 'Multiband_period'\n      AND value BETWEEN 3 AND 10\n),\n-- Filter for amplitude greater than 0.5 mag\namplitude_features AS (\n    SELECT oid, value AS amplitude_value, fid, version\n    FROM features\n    WHERE name = 'Amplitude'\n      AND value > 0.5\n)\n-- Final selection, joining all conditions and sorting by probability descending\nSELECT\n    y.oid,\n    y.probability,\n    pf.period_value AS value,\n    'Multiband_period' AS name,\n    pf.fid,\n    pf.version\nFROM objects_with_periodicity y\nJOIN period_features pf ON y.oid = pf.oid\nJOIN amplitude_features af ON y.oid = af.oid\nORDER BY y.probability DESC;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Subquery for objects likely to be YSOs with probability > 0.7\nWITH yso_candidates AS (\n    SELECT p.oid, p.probability\n    FROM probability p\n    WHERE p.class_name = 'YSO'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.ranking = 1\n      AND p.probability > 0.7\n),\n-- Subquery for objects with high probability of being periodic\nperiodic_candidates AS (\n    SELECT p.oid\n    FROM probability p\n    WHERE p.class_name = 'Periodic'\n      AND p.classifier_name = 'lc_classifier_top'\n      AND p.ranking = 1\n),\n-- Filter objects that are both YSO candidates and periodic\nobjects_with_periodicity AS (\n    SELECT y.oid, y.probability\n    FROM yso_candidates y\n    INNER JOIN periodic_candidates p ON y.oid = p.oid\n),\n-- Retrieve features for these objects\nfeatures AS (\n    SELECT f.oid, f.name, f.value, f.fid, f.version\n    FROM feature f\n    WHERE f.oid IN (SELECT oid FROM objects_with_periodicity)\n),\n-- Filter for photometric period between 3 and 10 days\nperiod_features AS (\n    SELECT oid, value AS period_value, fid, version\n    FROM features\n    WHERE name = 'Multiband_period'\n      AND value BETWEEN 3 AND 10\n),\n-- Filter for amplitude greater than 0.5 mag\namplitude_features AS (\n    SELECT oid, value AS amplitude_value, fid, version\n    FROM features\n    WHERE name = 'Amplitude'\n      AND value > 0.5\n)\n-- Final selection, joining all conditions and sorting by probability descending\nSELECT\n    y.oid,\n    y.probability,\n    pf.period_value AS value,\n    'Multiband_period' AS name,\n    pf.fid,\n    pf.version\nFROM objects_with_periodicity y\nJOIN period_features pf ON y.oid = pf.oid\nJOIN amplitude_features af ON y.oid = af.oid\nORDER BY y.probability DESC;\n```"
+                    }
+                },
+                "in_toks": 1654,
+                "out_toks": 449,
+                "id": "chatcmpl-BcTt49PZ2MWILGT6VxGxIsj3ltJvR",
+                "created": 1748511050,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 0,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "magstat",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'probability', 'feature', 'magstat', 'feature_version']"
+                    },
+                    "1": {
+                        "response": "['object', 'probability', 'feature', 'magstat', 'feature_version']"
+                    }
+                },
+                "in_toks": 648,
+                "out_toks": 36,
+                "id": "chatcmpl-BcThiLT3mbuW6hEFS9rWNeAEYWkRm",
+                "created": 1748510346,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": "```sql\n-- Select objects with high probability of being YSOs, with additional constraints to optimize query performance\nWITH yso_candidates AS (\n    SELECT p.oid, p.probability\n    FROM probability p\n    WHERE p.class_name = 'YSO'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.ranking = 1\n      AND p.probability > 0.7\n),\n-- Find objects with periodic features between 3 and 10 days in any band\nperiodic_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name = 'Multiband_period'\n      AND f.value BETWEEN 3 AND 10\n      AND f.fid IN (1, 2, 3) -- bands g, r, i\n),\n-- Find objects with amplitude variation greater than 0.5 mag\namplitude_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name = 'Amplitude'\n      AND f.value > 0.5\n)\n-- Join all conditions to get final list\nSELECT\n    yso_candidates.oid,\n    yso_candidates.probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM yso_candidates\nJOIN feature f ON yso_candidates.oid = f.oid\nWHERE f.oid IN (SELECT oid FROM periodic_objects)\n  AND f.oid IN (SELECT oid FROM amplitude_objects)\n  -- Additional join to ensure the object also has the probability condition\n  AND f.oid IN (SELECT oid FROM probability p WHERE p.oid = yso_candidates.oid AND p.probability > 0.7)\nORDER BY yso_candidates.probability DESC;\n```",
+            "sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select objects with high probability of being YSOs, with additional constraints to optimize query performance\nWITH yso_candidates AS (\n    SELECT p.oid, p.probability\n    FROM probability p\n    WHERE p.class_name = 'YSO'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.ranking = 1\n      AND p.probability > 0.7\n),\n-- Find objects with periodic features between 3 and 10 days in any band\nperiodic_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name = 'Multiband_period'\n      AND f.value BETWEEN 3 AND 10\n      AND f.fid IN (1, 2, 3) -- bands g, r, i\n),\n-- Find objects with amplitude variation greater than 0.5 mag\namplitude_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name = 'Amplitude'\n      AND f.value > 0.5\n)\n-- Join all conditions to get final list\nSELECT\n    yso_candidates.oid,\n    yso_candidates.probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM yso_candidates\nJOIN feature f ON yso_candidates.oid = f.oid\nWHERE f.oid IN (SELECT oid FROM periodic_objects)\n  AND f.oid IN (SELECT oid FROM amplitude_objects)\n  -- Additional join to ensure the object also has the probability condition\n  AND f.oid IN (SELECT oid FROM probability p WHERE p.oid = yso_candidates.oid AND p.probability > 0.7)\nORDER BY yso_candidates.probability DESC;\n```"
+                    }
+                },
+                "in_toks": 4877,
+                "out_toks": 363,
+                "id": "chatcmpl-BcUEKtqDs3jC3zkvmjb1HtbTqBWP8",
+                "created": 1748512368,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "advanced"
+                    }
+                },
+                "in_toks": 3906,
+                "out_toks": 1,
+                "id": "chatcmpl-BcThou7UAUzn61E68a5Dv5JMP0xdz",
+                "created": 1748510352,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To generate a PostgreSQL query that retrieves objects likely to be Young Stellar Objects (YSOs) with the specified conditions, the following systematic steps should be taken:\n\n1. **Identify the Probability of Being a YSO:**\n   - Create a subquery on the 'probability' table filtering for objects with 'class_name' = 'YSO', 'classifier_name' = 'lc_classifier', and 'ranking' = 1 to ensure the most probable classification.\n   - Filter for 'probability' > 0.7 to select objects with high likelihood of being YSOs.\n   - Select the 'oid' and 'probability' for these objects.\n\n2. **Retrieve Objects with Periodic Variability:**\n   - Use the 'probability' subquery as a base to filter objects.\n   - For each object, verify the presence of a significant periodicity feature:\n     - Query the 'feature' table for features with 'name' indicating a period (e.g., 'Multiband_period' or other relevant period features).\n     - Filter features where 'value' is between 3 and 10 days.\n     - Ensure the 'fid' (filter id) corresponds to the filters of interest (e.g., g, r, i bands, typically 'fid' values 1, 2, 3).\n     - Confirm the 'version' of the feature matches the latest or relevant version, or include all versions if unspecified.\n\n3. **Check for Variation Amplitude Greater Than 0.5 Magnitudes:**\n   - Query the 'feature' table for features related to amplitude, such as 'Amplitude' or similar.\n   - Filter for 'value' > 0.5.\n   - Match these amplitude features to the objects identified in the previous step, ensuring they belong to the same 'oid'.\n\n4. **Combine Periodicity and Amplitude Conditions:**\n   - Use nested subqueries or INTERSECT operations to ensure objects meet both the period and amplitude criteria.\n   - This involves intersecting the sets of 'oid's that satisfy each condition.\n\n5. **Join with the Probability Data:**\n   - Join the filtered 'oid's with the probability subquery to retrieve the probability values.\n   - Order the final result by 'probability' in descending order.\n\n6. **Select the Required Columns:**\n   - For each object, return:\n     - The object identifier ('oid')\n     - The probability of being a YSO\n     - The 'value' and 'name",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To generate a PostgreSQL query that retrieves objects likely to be Young Stellar Objects (YSOs) with the specified conditions, the following systematic steps should be taken:\n\n1. **Identify the Probability of Being a YSO:**\n   - Create a subquery on the 'probability' table filtering for objects with 'class_name' = 'YSO', 'classifier_name' = 'lc_classifier', and 'ranking' = 1 to ensure the most probable classification.\n   - Filter for 'probability' > 0.7 to select objects with high likelihood of being YSOs.\n   - Select the 'oid' and 'probability' for these objects.\n\n2. **Retrieve Objects with Periodic Variability:**\n   - Use the 'probability' subquery as a base to filter objects.\n   - For each object, verify the presence of a significant periodicity feature:\n     - Query the 'feature' table for features with 'name' indicating a period (e.g., 'Multiband_period' or other relevant period features).\n     - Filter features where 'value' is between 3 and 10 days.\n     - Ensure the 'fid' (filter id) corresponds to the filters of interest (e.g., g, r, i bands, typically 'fid' values 1, 2, 3).\n     - Confirm the 'version' of the feature matches the latest or relevant version, or include all versions if unspecified.\n\n3. **Check for Variation Amplitude Greater Than 0.5 Magnitudes:**\n   - Query the 'feature' table for features related to amplitude, such as 'Amplitude' or similar.\n   - Filter for 'value' > 0.5.\n   - Match these amplitude features to the objects identified in the previous step, ensuring they belong to the same 'oid'.\n\n4. **Combine Periodicity and Amplitude Conditions:**\n   - Use nested subqueries or INTERSECT operations to ensure objects meet both the period and amplitude criteria.\n   - This involves intersecting the sets of 'oid's that satisfy each condition.\n\n5. **Join with the Probability Data:**\n   - Join the filtered 'oid's with the probability subquery to retrieve the probability values.\n   - Order the final result by 'probability' in descending order.\n\n6. **Select the Required Columns:**\n   - For each object, return:\n     - The object identifier ('oid')\n     - The probability of being a YSO\n     - The 'value' and 'name"
+                    }
+                },
+                "in_toks": 5708,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjJV0rzgYOdxcaAChrjem0qidXZ",
+                "created": 1748510445,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Subquery to select objects with high probability of being YSOs\nWITH yso_candidates AS (\n    SELECT p.oid, p.probability\n    FROM probability p\n    WHERE p.class_name = 'YSO'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.ranking = 1\n      AND p.probability > 0.7\n),\n-- Subquery to find objects with periodic features between 3 and 10 days\nperiodic_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name IN ('Multiband_period') -- assuming 'Multiband_period' indicates period features\n      AND f.value BETWEEN 3 AND 10\n      AND f.fid IN (1, 2, 3) -- assuming fid 1, 2, 3 correspond to g, r, i bands\n),\n-- Subquery to find objects with amplitude variation greater than 0.5 mag\namplitude_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name = 'Amplitude' -- assuming 'Amplitude' indicates variation amplitude\n      AND f.value > 0.5\n)\n-- Final selection joining all conditions\nSELECT\n    yso_candidates.oid,\n    yso_candidates.probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM yso_candidates\nJOIN feature f ON yso_candidates.oid = f.oid\nWHERE f.oid IN (SELECT oid FROM periodic_objects)\n  AND f.oid IN (SELECT oid FROM amplitude_objects)\nORDER BY yso_candidates.probability DESC;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Subquery to select objects with high probability of being YSOs\nWITH yso_candidates AS (\n    SELECT p.oid, p.probability\n    FROM probability p\n    WHERE p.class_name = 'YSO'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.ranking = 1\n      AND p.probability > 0.7\n),\n-- Subquery to find objects with periodic features between 3 and 10 days\nperiodic_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name IN ('Multiband_period') -- assuming 'Multiband_period' indicates period features\n      AND f.value BETWEEN 3 AND 10\n      AND f.fid IN (1, 2, 3) -- assuming fid 1, 2, 3 correspond to g, r, i bands\n),\n-- Subquery to find objects with amplitude variation greater than 0.5 mag\namplitude_objects AS (\n    SELECT DISTINCT f.oid\n    FROM feature f\n    WHERE f.name = 'Amplitude' -- assuming 'Amplitude' indicates variation amplitude\n      AND f.value > 0.5\n)\n-- Final selection joining all conditions\nSELECT\n    yso_candidates.oid,\n    yso_candidates.probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM yso_candidates\nJOIN feature f ON yso_candidates.oid = f.oid\nWHERE f.oid IN (SELECT oid FROM periodic_objects)\n  AND f.oid IN (SELECT oid FROM amplitude_objects)\nORDER BY yso_candidates.probability DESC;\n```"
+                    }
+                },
+                "in_toks": 1654,
+                "out_toks": 345,
+                "id": "chatcmpl-BcTt60oFppskObddja4rIMLu2O9Ht",
+                "created": 1748511052,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": true
+        }
+    },
+    "70": {
+        "0": {
+            "req_id": 70,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'reference']"
+                    },
+                    "1": {
+                        "response": "['object', 'reference']"
+                    }
+                },
+                "in_toks": 587,
+                "out_toks": 12,
+                "id": "chatcmpl-BcThpcemwnFwL9ibychcA4VJTvd1j",
+                "created": 1748510353,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "medium: simple"
+                    }
+                },
+                "in_toks": 1064,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThqum9HMzW1Nt8S7vMlIkP4ZYiS",
+                "created": 1748510354,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\n-- Retrieve all columns for the object with oid 'ZTF22aayjqah' from the reference table\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Retrieve all columns for the object with oid 'ZTF22aayjqah' from the reference table\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';\n```"
+                    }
+                },
+                "in_toks": 2601,
+                "out_toks": 44,
+                "id": "chatcmpl-BcTjPLwzgZTv9Gx7BbQ86LHcsXk5c",
+                "created": 1748510451,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 70,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'reference']"
+                    },
+                    "1": {
+                        "response": "['object', 'reference']"
+                    }
+                },
+                "in_toks": 587,
+                "out_toks": 12,
+                "id": "chatcmpl-BcThpcemwnFwL9ibychcA4VJTvd1j",
+                "created": 1748510353,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "reference: simple"
+                    }
+                },
+                "in_toks": 1064,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThszBCqZN1HaIIN6B4SjU7Ql5op",
+                "created": 1748510356,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\n-- Retrieve all columns for the object with oid 'ZTF22aayjqah' from the reference table\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Retrieve all columns for the object with oid 'ZTF22aayjqah' from the reference table\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';\n```"
+                    }
+                },
+                "in_toks": 2601,
+                "out_toks": 44,
+                "id": "chatcmpl-BcTjMu0l9Kz1jMYXI8tiTtanAqqv4",
+                "created": 1748510448,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    },
+    "4": {
+        "0": {
+            "req_id": 4,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "magstat",
+                "feature",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'probability', 'detection', 'magstat', 'feature', 'taxonomy']"
+                    },
+                    "1": {
+                        "response": "['object', 'probability', 'detection', 'magstat', 'feature', 'taxonomy']"
+                    }
+                },
+                "in_toks": 642,
+                "out_toks": 42,
+                "id": "chatcmpl-BcThswEbNojLuu9XuqU0avAjkvGkM",
+                "created": 1748510356,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": "-- Corrected SQL query with proper syntax, table/column references, and comments\nWITH classified_objects AS (\n    SELECT p.oid\n    FROM probability p\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.probability > 0.6\n      AND p.ranking = 1\n),\nobjects_time_window AS (\n    SELECT o.oid, o.firstmjd, o.lastmjd\n    FROM object o\n    WHERE o.firstmjd BETWEEN 58549 AND 59958 -- 2019-01-01 to 2022-12-31\n      AND o.lastmjd BETWEEN 58549 AND 59958\n),\nobjects_detection_counts AS (\n    SELECT o.oid, o.ndet\n    FROM object o\n    WHERE o.ndet > 50\n),\nlight_curve_data AS (\n    SELECT\n        d.oid,\n        d.candid,\n        d.mjd,\n        d.magpsf,\n        d.sigmapsf,\n        d.fid\n    FROM detection d\n    WHERE d.fid IN (1, 2) -- g and r bands\n      AND d.magpsf IS NOT NULL\n      AND d.sigmapsf IS NOT NULL\n),\nearly_detections AS (\n    SELECT\n        lcd.oid,\n        lcd.candid,\n        lcd.mjd,\n        lcd.magpsf,\n        lcd.sigmapsf,\n        lcd.fid,\n        ROW_NUMBER() OVER (PARTITION BY lcd.oid, lcd.fid ORDER BY lcd.mjd) AS rn\n    FROM light_curve_data lcd\n),\ninitial_rise_estimates AS (\n    SELECT\n        ed.oid,\n        ed.fid,\n        -- Approximate initial rise rate: difference between 3rd and 1st detection divided by time difference\n        -- Ensure that the 3rd detection exists\n        ( \n            (SELECT magpsf FROM early_detections ed2 WHERE ed2.oid = ed.oid AND ed2.fid = ed.fid AND ed2.rn = 3)\n            - (SELECT magpsf FROM early_detections ed1 WHERE ed1.oid = ed.oid AND ed1.fid = ed.fid AND ed1.rn = 1)\n        ) / NULLIF(\n            (\n                (SELECT mj",
+            "sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "-- Corrected SQL query with proper syntax, table/column references, and comments\nWITH classified_objects AS (\n    SELECT p.oid\n    FROM probability p\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.probability > 0.6\n      AND p.ranking = 1\n),\nobjects_time_window AS (\n    SELECT o.oid, o.firstmjd, o.lastmjd\n    FROM object o\n    WHERE o.firstmjd BETWEEN 58549 AND 59958 -- 2019-01-01 to 2022-12-31\n      AND o.lastmjd BETWEEN 58549 AND 59958\n),\nobjects_detection_counts AS (\n    SELECT o.oid, o.ndet\n    FROM object o\n    WHERE o.ndet > 50\n),\nlight_curve_data AS (\n    SELECT\n        d.oid,\n        d.candid,\n        d.mjd,\n        d.magpsf,\n        d.sigmapsf,\n        d.fid\n    FROM detection d\n    WHERE d.fid IN (1, 2) -- g and r bands\n      AND d.magpsf IS NOT NULL\n      AND d.sigmapsf IS NOT NULL\n),\nearly_detections AS (\n    SELECT\n        lcd.oid,\n        lcd.candid,\n        lcd.mjd,\n        lcd.magpsf,\n        lcd.sigmapsf,\n        lcd.fid,\n        ROW_NUMBER() OVER (PARTITION BY lcd.oid, lcd.fid ORDER BY lcd.mjd) AS rn\n    FROM light_curve_data lcd\n),\ninitial_rise_estimates AS (\n    SELECT\n        ed.oid,\n        ed.fid,\n        -- Approximate initial rise rate: difference between 3rd and 1st detection divided by time difference\n        -- Ensure that the 3rd detection exists\n        ( \n            (SELECT magpsf FROM early_detections ed2 WHERE ed2.oid = ed.oid AND ed2.fid = ed.fid AND ed2.rn = 3)\n            - (SELECT magpsf FROM early_detections ed1 WHERE ed1.oid = ed.oid AND ed1.fid = ed.fid AND ed1.rn = 1)\n        ) / NULLIF(\n            (\n                (SELECT mj"
+                    }
+                },
+                "in_toks": 5715,
+                "out_toks": 512,
+                "id": "chatcmpl-BcUELoEmA3LgiYkWaHd0eBtsO8vxX",
+                "created": 1748512369,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "advanced: advanced"
+                    }
+                },
+                "in_toks": 4429,
+                "out_toks": 3,
+                "id": "chatcmpl-BcThwrfNQwjHxbY7rg3aJ2QYUIqLX",
+                "created": 1748510360,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To generate a comprehensive query that retrieves the specified information about objects classified as SN II within the period 2019-2022, with a probability threshold and additional light curve criteria, the following decomposition plan should be followed:\n\n1. **Identify the relevant objects based on classification and probability:**\n   - Use the 'probability' table to filter objects where:\n     - 'class_name' = 'SNII' (corresponding to Supernova Type II).\n     - 'classifier_name' = 'lc_classifier' (default classifier for light curves).\n     - 'probability' > 0.6.\n     - 'ranking' = 1 (most probable classification).\n   - Restrict the selection to objects with classification probabilities meeting these criteria.\n\n2. **Filter objects based on observation time window:**\n   - Use the 'object' table to select objects with:\n     - 'firstmjd' and 'lastmjd' falling within the date range corresponding to years 2019-2022.\n     - Convert the years to Julian dates or MJD ranges, e.g., from 2019-01-01 to 2022-12-31.\n   - Ensure only objects observed within this period are included.\n\n3. **Apply the detection count criterion:**\n   - Use the 'magstat' table to filter objects with:\n     - 'ndet' > 50 in at least one band (g or r).\n   - This ensures the objects have sufficient detections for reliable light curve analysis.\n\n4. **Calculate the initial rise estimate in the light curve:**\n   - Use the 'detection' table to retrieve time-series data ('mjd', 'magpsf', 'sigmapsf', 'fid') for each object.\n   - For each object, identify the earliest detections (e.g., first few detections) in the g and r bands.\n   - Compute the initial rise rate by fitting a linear model to the early magnitudes versus time (MJD) in each band.\n   - Select the initial rise estimate as the slope of this fit, ensuring it exceeds 0.5 mag/day.\n   - This step may involve nested subqueries or window functions to isolate the earliest detections and perform the fit.\n\n5. **Filter detections based on the band and magnitude errors:**\n   - For each detection, ensure:\n     - 'fid' corresponds to g (fid=1) or r (fid=2).\n     - 'sigmapsf' (magnitude error",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To generate a comprehensive query that retrieves the specified information about objects classified as SN II within the period 2019-2022, with a probability threshold and additional light curve criteria, the following decomposition plan should be followed:\n\n1. **Identify the relevant objects based on classification and probability:**\n   - Use the 'probability' table to filter objects where:\n     - 'class_name' = 'SNII' (corresponding to Supernova Type II).\n     - 'classifier_name' = 'lc_classifier' (default classifier for light curves).\n     - 'probability' > 0.6.\n     - 'ranking' = 1 (most probable classification).\n   - Restrict the selection to objects with classification probabilities meeting these criteria.\n\n2. **Filter objects based on observation time window:**\n   - Use the 'object' table to select objects with:\n     - 'firstmjd' and 'lastmjd' falling within the date range corresponding to years 2019-2022.\n     - Convert the years to Julian dates or MJD ranges, e.g., from 2019-01-01 to 2022-12-31.\n   - Ensure only objects observed within this period are included.\n\n3. **Apply the detection count criterion:**\n   - Use the 'magstat' table to filter objects with:\n     - 'ndet' > 50 in at least one band (g or r).\n   - This ensures the objects have sufficient detections for reliable light curve analysis.\n\n4. **Calculate the initial rise estimate in the light curve:**\n   - Use the 'detection' table to retrieve time-series data ('mjd', 'magpsf', 'sigmapsf', 'fid') for each object.\n   - For each object, identify the earliest detections (e.g., first few detections) in the g and r bands.\n   - Compute the initial rise rate by fitting a linear model to the early magnitudes versus time (MJD) in each band.\n   - Select the initial rise estimate as the slope of this fit, ensuring it exceeds 0.5 mag/day.\n   - This step may involve nested subqueries or window functions to isolate the earliest detections and perform the fit.\n\n5. **Filter detections based on the band and magnitude errors:**\n   - For each detection, ensure:\n     - 'fid' corresponds to g (fid=1) or r (fid=2).\n     - 'sigmapsf' (magnitude error"
+                    }
+                },
+                "in_toks": 6231,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjQDkI4Hr1m6SMWHDyb2G9tTTQo",
+                "created": 1748510452,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Select objects classified as SN II with high probability and sufficient detections within 2019-2022\nWITH classified_objects AS (\n    SELECT p.oid\n    FROM probability p\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.probability > 0.6\n      AND p.ranking = 1\n),\nobjects_time_window AS (\n    SELECT o.oid, o.firstmjd, o.lastmjd\n    FROM object o\n    WHERE o.firstmjd BETWEEN 58549 AND 59958 -- MJD for 2019-01-01 to 2022-12-31\n      AND o.lastmjd BETWEEN 58549 AND 59958\n),\nobjects_detection_counts AS (\n    SELECT o.oid, o.ndet\n    FROM object o\n    WHERE o.ndet > 50\n),\nlight_curve_data AS (\n    SELECT\n        d.oid,\n        d.candidate_id,\n        d.mjd,\n        d.magpsf,\n        d.sigmapsf,\n        d.fid\n    FROM detection d\n    WHERE d.fid IN (1, 2) -- g and r bands\n      AND d.magpsf IS NOT NULL\n      AND d.sigmapsf IS NOT NULL\n),\nearly_detections AS (\n    SELECT\n        lcd.oid,\n        lcd.candidate_id,\n        lcd.mjd,\n        lcd.magpsf,\n        lcd.sigmapsf,\n        lcd.fid,\n        ROW_NUMBER() OVER (PARTITION BY lcd.oid, lcd.fid ORDER BY lcd.mjd) AS rn\n    FROM light_curve_data lcd\n),\ninitial_rise_estimates AS (\n    SELECT\n        ed.oid,\n        ed.fid,\n        -- Calculate the slope of early detections (e.g., first 3 detections)\n        -- Using linear regression: slope = covariance / variance\n        -- For simplicity, approximate with a linear fit over first few points\n        -- Here, we use a simple approach: difference between first and third detection divided by time difference\n        ( (SELECT magpsf FROM early_detections ed2 WHERE ed2.oid = ed.oid AND ed2.fid = ed.fid AND ed2.rn = 3) - \n          (SELECT magpsf FROM",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select objects classified as SN II with high probability and sufficient detections within 2019-2022\nWITH classified_objects AS (\n    SELECT p.oid\n    FROM probability p\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII'\n      AND p.classifier_name = 'lc_classifier'\n      AND p.probability > 0.6\n      AND p.ranking = 1\n),\nobjects_time_window AS (\n    SELECT o.oid, o.firstmjd, o.lastmjd\n    FROM object o\n    WHERE o.firstmjd BETWEEN 58549 AND 59958 -- MJD for 2019-01-01 to 2022-12-31\n      AND o.lastmjd BETWEEN 58549 AND 59958\n),\nobjects_detection_counts AS (\n    SELECT o.oid, o.ndet\n    FROM object o\n    WHERE o.ndet > 50\n),\nlight_curve_data AS (\n    SELECT\n        d.oid,\n        d.candidate_id,\n        d.mjd,\n        d.magpsf,\n        d.sigmapsf,\n        d.fid\n    FROM detection d\n    WHERE d.fid IN (1, 2) -- g and r bands\n      AND d.magpsf IS NOT NULL\n      AND d.sigmapsf IS NOT NULL\n),\nearly_detections AS (\n    SELECT\n        lcd.oid,\n        lcd.candidate_id,\n        lcd.mjd,\n        lcd.magpsf,\n        lcd.sigmapsf,\n        lcd.fid,\n        ROW_NUMBER() OVER (PARTITION BY lcd.oid, lcd.fid ORDER BY lcd.mjd) AS rn\n    FROM light_curve_data lcd\n),\ninitial_rise_estimates AS (\n    SELECT\n        ed.oid,\n        ed.fid,\n        -- Calculate the slope of early detections (e.g., first 3 detections)\n        -- Using linear regression: slope = covariance / variance\n        -- For simplicity, approximate with a linear fit over first few points\n        -- Here, we use a simple approach: difference between first and third detection divided by time difference\n        ( (SELECT magpsf FROM early_detections ed2 WHERE ed2.oid = ed.oid AND ed2.fid = ed.fid AND ed2.rn = 3) - \n          (SELECT magpsf FROM"
+                    }
+                },
+                "in_toks": 1648,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTt9ndHvs0z4TOJ4Ku7hkrR64ynU",
+                "created": 1748511055,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": true
+        },
+        "1": {
+            "req_id": 4,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "magstat",
+                "feature",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'probability', 'detection', 'magstat', 'feature', 'taxonomy']"
+                    },
+                    "1": {
+                        "response": "['object', 'probability', 'detection', 'magstat', 'feature', 'taxonomy']"
+                    }
+                },
+                "in_toks": 642,
+                "out_toks": 42,
+                "id": "chatcmpl-BcThswEbNojLuu9XuqU0avAjkvGkM",
+                "created": 1748510356,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": "-- Corrected SQL query with proper syntax, schema references, and comments\nWITH date_range AS (\n    SELECT \n        2458484.5 AS start_mjd, -- Julian date for 2019-01-01\n        2459945.5 AS end_mjd  -- Julian date for 2022-12-31\n),\nclassified_objects AS (\n    SELECT o.oid\n    FROM object o\n    JOIN probability p ON o.oid = p.oid\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII' -- Class name for Type II Supernovae\n      AND p.ranking = 1\n      AND p.probability > 0.6\n      AND o.ndet > 50\n      AND o.firstmjd <= (SELECT end_mjd FROM date_range)\n      AND o.lastmjd >= (SELECT start_mjd FROM date_range)\n),\ndetections AS (\n    SELECT d.oid, d.mjd, d.magpsf, d.sigmapsf, d.fid\n    FROM detection d\n    WHERE d.oid IN (SELECT oid FROM classified_objects)\n),\nrise_rates AS (\n    SELECT \n        d.oid,\n        -- Max detection time in g-band (fid=1)\n        MAX(CASE WHEN d.fid = 1 THEN d.mjd END) AS max_mjd_g,\n        -- Max detection time in r-band (fid=2)\n        MAX(CASE WHEN d.fid = 2 THEN d.mjd END) AS max_mjd_r,\n        -- First detection time in g-band\n        MIN(CASE WHEN d.fid = 1 THEN d.mjd END) AS first_mjd_g,\n        -- First detection time in r-band\n        MIN(CASE WHEN d.fid = 2 THEN d.mjd END) AS first_mjd_r\n    FROM detection d\n    GROUP BY d.oid\n),\ninitial_rise AS (\n    SELECT \n        o.oid,\n        -- Calculate initial rise time in g-band (time from first detection to first detection in g)\n        (frg.first_mjd_g - o.firstmjd) AS t_rise_g,\n        -- Calculate initial rise time in r-band\n        (frr.first_mjd_r - o.firstmjd) AS t_rise_r,\n        -- Magnitude at first detection in g-band\n        (",
+            "sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "-- Corrected SQL query with proper syntax, schema references, and comments\nWITH date_range AS (\n    SELECT \n        2458484.5 AS start_mjd, -- Julian date for 2019-01-01\n        2459945.5 AS end_mjd  -- Julian date for 2022-12-31\n),\nclassified_objects AS (\n    SELECT o.oid\n    FROM object o\n    JOIN probability p ON o.oid = p.oid\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII' -- Class name for Type II Supernovae\n      AND p.ranking = 1\n      AND p.probability > 0.6\n      AND o.ndet > 50\n      AND o.firstmjd <= (SELECT end_mjd FROM date_range)\n      AND o.lastmjd >= (SELECT start_mjd FROM date_range)\n),\ndetections AS (\n    SELECT d.oid, d.mjd, d.magpsf, d.sigmapsf, d.fid\n    FROM detection d\n    WHERE d.oid IN (SELECT oid FROM classified_objects)\n),\nrise_rates AS (\n    SELECT \n        d.oid,\n        -- Max detection time in g-band (fid=1)\n        MAX(CASE WHEN d.fid = 1 THEN d.mjd END) AS max_mjd_g,\n        -- Max detection time in r-band (fid=2)\n        MAX(CASE WHEN d.fid = 2 THEN d.mjd END) AS max_mjd_r,\n        -- First detection time in g-band\n        MIN(CASE WHEN d.fid = 1 THEN d.mjd END) AS first_mjd_g,\n        -- First detection time in r-band\n        MIN(CASE WHEN d.fid = 2 THEN d.mjd END) AS first_mjd_r\n    FROM detection d\n    GROUP BY d.oid\n),\ninitial_rise AS (\n    SELECT \n        o.oid,\n        -- Calculate initial rise time in g-band (time from first detection to first detection in g)\n        (frg.first_mjd_g - o.firstmjd) AS t_rise_g,\n        -- Calculate initial rise time in r-band\n        (frr.first_mjd_r - o.firstmjd) AS t_rise_r,\n        -- Magnitude at first detection in g-band\n        ("
+                    }
+                },
+                "in_toks": 5744,
+                "out_toks": 512,
+                "id": "chatcmpl-BcUENW9D4y6HQyxP24SDCJyhauF5O",
+                "created": 1748512371,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "advanced: advanced"
+                    }
+                },
+                "in_toks": 4429,
+                "out_toks": 3,
+                "id": "chatcmpl-BcTi0BFzinkCIpxZE6xGbxCv4TfH3",
+                "created": 1748510364,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To decompose the user request into a systematic plan for generating the appropriate PostgreSQL query, I will outline each step, specifying the necessary subqueries, conditions, and joins, while emphasizing the use of nested queries, filtering criteria, and spatial considerations as per the database schema and context.\n\n1. **Identify the target objects based on classification and probability:**\n   - Create a subquery on the 'probability' table filtering for:\n     - 'classifier_name' = 'lc_classifier'\n     - 'class_name' = 'SNIa' (or the appropriate class for SN II, which is 'SNII' based on the schema)\n     - 'ranking' = 1 (most probable class)\n     - 'probability' > 0.6\n   - Join this subquery with the 'object' table on 'oid' to retrieve object identifiers and other relevant object-level data.\n\n2. **Filter objects based on classification time frame:**\n   - Use the 'object' table's 'firstmjd' and 'lastmjd' columns to select objects with detection periods overlapping the years 2019-2022.\n   - Convert the years to Julian date ranges:\n     - 2019-01-01 to 2022-12-31, and filter objects where:\n       - 'firstmjd' \u2264 end of 2022\n       - 'lastmjd' \u2265 start of 2019\n   - This ensures only objects observed during the specified period are included.\n\n3. **Apply the detection count criterion:**\n   - Filter objects with 'ndet' > 50 in the 'object' table, indicating more than 50 detections.\n\n4. **Identify objects classified as SN II:**\n   - Confirm the class label in the probability subquery is 'SNII' (or the exact class name as per the schema).\n   - Ensure the probability ranking is 1, and probability > 0.6.\n\n5. **Retrieve light curve data for the selected objects:**\n   - Use the 'detection' table to gather time-series data:\n     - 'mjd' for time of detection\n     - 'magpsf' for magnitude\n     - 'sigmapsf' for magnitude error\n     - 'fid' for band identifier\n     - 'oid' to link to the object\n   - Filter detections to include only those associated with the selected objects.\n\n6. **Calculate the initial rise estimate for each object in g and r bands:**\n",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To decompose the user request into a systematic plan for generating the appropriate PostgreSQL query, I will outline each step, specifying the necessary subqueries, conditions, and joins, while emphasizing the use of nested queries, filtering criteria, and spatial considerations as per the database schema and context.\n\n1. **Identify the target objects based on classification and probability:**\n   - Create a subquery on the 'probability' table filtering for:\n     - 'classifier_name' = 'lc_classifier'\n     - 'class_name' = 'SNIa' (or the appropriate class for SN II, which is 'SNII' based on the schema)\n     - 'ranking' = 1 (most probable class)\n     - 'probability' > 0.6\n   - Join this subquery with the 'object' table on 'oid' to retrieve object identifiers and other relevant object-level data.\n\n2. **Filter objects based on classification time frame:**\n   - Use the 'object' table's 'firstmjd' and 'lastmjd' columns to select objects with detection periods overlapping the years 2019-2022.\n   - Convert the years to Julian date ranges:\n     - 2019-01-01 to 2022-12-31, and filter objects where:\n       - 'firstmjd' \u2264 end of 2022\n       - 'lastmjd' \u2265 start of 2019\n   - This ensures only objects observed during the specified period are included.\n\n3. **Apply the detection count criterion:**\n   - Filter objects with 'ndet' > 50 in the 'object' table, indicating more than 50 detections.\n\n4. **Identify objects classified as SN II:**\n   - Confirm the class label in the probability subquery is 'SNII' (or the exact class name as per the schema).\n   - Ensure the probability ranking is 1, and probability > 0.6.\n\n5. **Retrieve light curve data for the selected objects:**\n   - Use the 'detection' table to gather time-series data:\n     - 'mjd' for time of detection\n     - 'magpsf' for magnitude\n     - 'sigmapsf' for magnitude error\n     - 'fid' for band identifier\n     - 'oid' to link to the object\n   - Filter detections to include only those associated with the selected objects.\n\n6. **Calculate the initial rise estimate for each object in g and r bands:**\n"
+                    }
+                },
+                "in_toks": 6231,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjOSF9745zIKqd1GRCP27sGDxQG",
+                "created": 1748510450,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Define the date range for 2019-2022 in Julian Date\nWITH date_range AS (\n    SELECT \n        -- Julian date for 2019-01-01\n        2458484.5 AS start_mjd,\n        -- Julian date for 2022-12-31\n        2459945.5 AS end_mjd\n),\n-- Select objects classified as SN II with probability > 0.6, ranking 1, and detection count > 50 within the date range\nclassified_objects AS (\n    SELECT o.oid\n    FROM object o\n    JOIN probability p ON o.oid = p.oid\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII'\n      AND p.ranking = 1\n      AND p.probability > 0.6\n      AND o.ndet > 50\n      AND o.firstmjd <= (SELECT end_mjd FROM date_range)\n      AND o.lastmjd >= (SELECT start_mjd FROM date_range)\n),\n-- Select detections for the classified objects\ndetections AS (\n    SELECT d.oid, d.mjd, d.magpsf, d.sigmapsf, d.fid\n    FROM detection d\n    WHERE d.oid IN (SELECT oid FROM classified_objects)\n),\n-- Calculate initial rise rate for each object in g and r bands\nrise_rates AS (\n    SELECT \n        d.oid,\n        -- Filter detections for g-band (fid = 1) and r-band (fid = 2)\n        MAX(CASE WHEN d.fid = 1 THEN d.mjd END) AS max_mjd_g,\n        MAX(CASE WHEN d.fid = 2 THEN d.mjd END) AS max_mjd_r,\n        -- Calculate initial rise in g-band\n        (MIN(CASE WHEN d.fid = 1 THEN d.mjd END) - (SELECT firstmjd FROM object o WHERE o.oid = d.oid)) AS t_rise_g,\n        -- Calculate initial rise in r-band\n        (MIN(CASE WHEN d.fid = 2 THEN d.mjd END) - (SELECT firstmjd FROM object o WHERE o.oid = d.oid)) AS t_rise_r,\n        -- Magnitudes at first detection in g and r\n        (SELECT magpsf FROM detection d2 WHERE d2",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Define the date range for 2019-2022 in Julian Date\nWITH date_range AS (\n    SELECT \n        -- Julian date for 2019-01-01\n        2458484.5 AS start_mjd,\n        -- Julian date for 2022-12-31\n        2459945.5 AS end_mjd\n),\n-- Select objects classified as SN II with probability > 0.6, ranking 1, and detection count > 50 within the date range\nclassified_objects AS (\n    SELECT o.oid\n    FROM object o\n    JOIN probability p ON o.oid = p.oid\n    JOIN taxonomy t ON p.classifier_name = t.classifier_name AND p.classifier_version = t.classifier_version\n    WHERE p.class_name = 'SNII'\n      AND p.ranking = 1\n      AND p.probability > 0.6\n      AND o.ndet > 50\n      AND o.firstmjd <= (SELECT end_mjd FROM date_range)\n      AND o.lastmjd >= (SELECT start_mjd FROM date_range)\n),\n-- Select detections for the classified objects\ndetections AS (\n    SELECT d.oid, d.mjd, d.magpsf, d.sigmapsf, d.fid\n    FROM detection d\n    WHERE d.oid IN (SELECT oid FROM classified_objects)\n),\n-- Calculate initial rise rate for each object in g and r bands\nrise_rates AS (\n    SELECT \n        d.oid,\n        -- Filter detections for g-band (fid = 1) and r-band (fid = 2)\n        MAX(CASE WHEN d.fid = 1 THEN d.mjd END) AS max_mjd_g,\n        MAX(CASE WHEN d.fid = 2 THEN d.mjd END) AS max_mjd_r,\n        -- Calculate initial rise in g-band\n        (MIN(CASE WHEN d.fid = 1 THEN d.mjd END) - (SELECT firstmjd FROM object o WHERE o.oid = d.oid)) AS t_rise_g,\n        -- Calculate initial rise in r-band\n        (MIN(CASE WHEN d.fid = 2 THEN d.mjd END) - (SELECT firstmjd FROM object o WHERE o.oid = d.oid)) AS t_rise_r,\n        -- Magnitudes at first detection in g and r\n        (SELECT magpsf FROM detection d2 WHERE d2"
+                    }
+                },
+                "in_toks": 1647,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTtCU9G69iBbnZu3y4eMxFM1Hhb6",
+                "created": 1748511058,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": true
+        }
+    },
+    "46": {
+        "0": {
+            "req_id": 46,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['detection']"
+                    },
+                    "1": {
+                        "response": "['detection']"
+                    }
+                },
+                "in_toks": 592,
+                "out_toks": 8,
+                "id": "chatcmpl-BcTi0X78mlnvkcvWJRHyIUyvGDcF2",
+                "created": 1748510364,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "simple: simple"
+                    }
+                },
+                "in_toks": 855,
+                "out_toks": 3,
+                "id": "chatcmpl-BcTi1Z1rcwD7ybK4enYHkT462Sj5h",
+                "created": 1748510365,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;\n```"
+                    }
+                },
+                "in_toks": 2393,
+                "out_toks": 26,
+                "id": "chatcmpl-BcTjTiv0YFBPTrWBkptigfjyJn9nv",
+                "created": 1748510455,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 46,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['detection']"
+                    },
+                    "1": {
+                        "response": "['detection']"
+                    }
+                },
+                "in_toks": 592,
+                "out_toks": 8,
+                "id": "chatcmpl-BcTi0X78mlnvkcvWJRHyIUyvGDcF2",
+                "created": 1748510364,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "simple: simple"
+                    }
+                },
+                "in_toks": 855,
+                "out_toks": 3,
+                "id": "chatcmpl-BcTi1fXCpjSg4aW0TAuhwBHBEvBGk",
+                "created": 1748510365,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": null,
+            "sql_query_plan_response": null,
+            "original_sql_query": "```sql\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;\n```"
+                    }
+                },
+                "in_toks": 2393,
+                "out_toks": 26,
+                "id": "chatcmpl-BcTjUhKLK0pv7ALQTQmaugfNEUQZE",
+                "created": 1748510456,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    },
+    "60": {
+        "0": {
+            "req_id": 60,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'magstat']"
+                    },
+                    "1": {
+                        "response": "['object', 'magstat']"
+                    }
+                },
+                "in_toks": 637,
+                "out_toks": 14,
+                "id": "chatcmpl-BcTi3WPzswaHxZyzZ3He6oO2DVxsH",
+                "created": 1748510367,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "medium"
+                    }
+                },
+                "in_toks": 1306,
+                "out_toks": 1,
+                "id": "chatcmpl-BcTi6dKLl9RwOhT3eL7Uz7bYXJOON",
+                "created": 1748510370,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To generate the desired query, the following steps should be systematically followed:\n\n1. **Identify the relevant objects**:\n   - Create a temporary inline table (using a WITH clause) that contains the list of ZTF identifiers: 'ZTF20adadshh', 'ZTF21aaabvit', and 'ZTF21aaabvjk'.\n   - This table will serve as the source for filtering the main query.\n\n2. **Join the object identifiers with the magstat table**:\n   - Use the object identifier (oid) to perform an inner join between the inline table and the 'magstat' table.\n   - Ensure that the join condition matches the oid from the inline table with the oid in 'magstat'.\n\n3. **Filter for the g band**:\n   - Restrict the results to only those rows in 'magstat' where the 'fid' (filter/band identifier) equals 1, which corresponds to the g band.\n\n4. **Apply the condition for zero dubious corrections**:\n   - Filter the joined results to include only rows where 'ndubious' equals zero, indicating no dubious corrections in the g band.\n\n5. **Select the required columns**:\n   - From the filtered results, select:\n     - The ZTF identifier (which is the oid),\n     - The number of detections ('ndet'),\n     - The initial rise estimate ('dmdt_first'),\n     - The first difference magnitude ('dm_first').\n\n6. **Ensure the query returns all matching rows**:\n   - No additional grouping or aggregation is necessary unless specified.\n   - The query should return one row per object per filter, matching the specified criteria.\n\n7. **Order or format the output**:\n   - The output should include the ZTF identifier, number of detections, initial rise estimate, and first difference magnitude for each object that meets the criteria.\n\nBy following these steps, the query will accurately retrieve all relevant data for the specified objects, filtered by the g band and zero dubious corrections, and will include all necessary columns as specified.",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To generate the desired query, the following steps should be systematically followed:\n\n1. **Identify the relevant objects**:\n   - Create a temporary inline table (using a WITH clause) that contains the list of ZTF identifiers: 'ZTF20adadshh', 'ZTF21aaabvit', and 'ZTF21aaabvjk'.\n   - This table will serve as the source for filtering the main query.\n\n2. **Join the object identifiers with the magstat table**:\n   - Use the object identifier (oid) to perform an inner join between the inline table and the 'magstat' table.\n   - Ensure that the join condition matches the oid from the inline table with the oid in 'magstat'.\n\n3. **Filter for the g band**:\n   - Restrict the results to only those rows in 'magstat' where the 'fid' (filter/band identifier) equals 1, which corresponds to the g band.\n\n4. **Apply the condition for zero dubious corrections**:\n   - Filter the joined results to include only rows where 'ndubious' equals zero, indicating no dubious corrections in the g band.\n\n5. **Select the required columns**:\n   - From the filtered results, select:\n     - The ZTF identifier (which is the oid),\n     - The number of detections ('ndet'),\n     - The initial rise estimate ('dmdt_first'),\n     - The first difference magnitude ('dm_first').\n\n6. **Ensure the query returns all matching rows**:\n   - No additional grouping or aggregation is necessary unless specified.\n   - The query should return one row per object per filter, matching the specified criteria.\n\n7. **Order or format the output**:\n   - The output should include the ZTF identifier, number of detections, initial rise estimate, and first difference magnitude for each object that meets the criteria.\n\nBy following these steps, the query will accurately retrieve all relevant data for the specified objects, filtered by the g band and zero dubious corrections, and will include all necessary columns as specified."
+                    }
+                },
+                "in_toks": 2839,
+                "out_toks": 421,
+                "id": "chatcmpl-BcTjSoZlo8apWZr2HyPgbWu3WE1YP",
+                "created": 1748510454,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "WITH object_ids AS (\n    SELECT unnest(ARRAY['ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk']) AS oid\n)\nSELECT\n    m.oid,\n    m.ndet,\n    m.dmdt_first,\n    m.dm_first\nFROM\n    object_ids o\nJOIN\n    magstat m ON o.oid = m.oid\nWHERE\n    m.fid = 1 -- g band\n    AND m.ndubious = 0; -- zero dubious corrections",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "WITH object_ids AS (\n    SELECT unnest(ARRAY['ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk']) AS oid\n)\nSELECT\n    m.oid,\n    m.ndet,\n    m.dmdt_first,\n    m.dm_first\nFROM\n    object_ids o\nJOIN\n    magstat m ON o.oid = m.oid\nWHERE\n    m.fid = 1 -- g band\n    AND m.ndubious = 0; -- zero dubious corrections"
+                    }
+                },
+                "in_toks": 1551,
+                "out_toks": 114,
+                "id": "chatcmpl-BcTtFnw5P7h4YZ411uZ6dYZ9ro6aH",
+                "created": 1748511061,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 60,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'magstat']"
+                    },
+                    "1": {
+                        "response": "['object', 'magstat']"
+                    }
+                },
+                "in_toks": 637,
+                "out_toks": 14,
+                "id": "chatcmpl-BcTi3WPzswaHxZyzZ3He6oO2DVxsH",
+                "created": 1748510367,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "medium"
+                    }
+                },
+                "in_toks": 1306,
+                "out_toks": 1,
+                "id": "chatcmpl-BcTi6IyLDLHGDk5gwwJ2Ci2pfo8XF",
+                "created": 1748510370,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To generate the desired query, the following steps should be systematically followed:\n\n1. **Identify the relevant objects**:\n   - Create a temporary inline table (using a WITH clause) that contains the list of ZTF identifiers: 'ZTF20adadshh', 'ZTF21aaabvit', and 'ZTF21aaabvjk'.\n   - This table will serve as the source for filtering the main query.\n\n2. **Join the object identifiers with the magstat table**:\n   - Use an INNER JOIN between the inline table of ZTF identifiers and the 'magstat' table on the 'oid' column.\n   - This ensures that only rows corresponding to the specified objects are considered.\n\n3. **Filter for the g band**:\n   - Add a condition to select only rows where the 'fid' (filter identifier) equals 1, which corresponds to the g band.\n   \n4. **Apply the condition for zero dubious corrections**:\n   - Include a filter where 'ndubious' equals 0, indicating no dubious corrections in the g band for those objects.\n\n5. **Select the required columns**:\n   - Retrieve the ZTF identifier ('oid') from the inline table or the 'magstat' table.\n   - Extract the 'ndet' column for the number of detections.\n   - Extract the 'dm_first' column for the initial rise estimate.\n   - Extract the 'magfirst' column for the first difference magnitude.\n\n6. **Ensure the output includes all specified columns**:\n   - The ZTF identifier (from the inline table or 'magstat' table).\n   - The number of detections ('ndet').\n   - The initial rise estimate ('dm_first').\n   - The first difference magnitude ('magfirst').\n\n7. **Order or group the results if necessary**:\n   - Since the query involves specific objects, ordering is optional unless specified.\n   - No grouping is necessary unless multiple rows per object exist; if so, consider whether to aggregate or list all rows.\n\n8. **Finalize the query structure**:\n   - Use a subquery or CTE for the inline list of identifiers.\n   - Perform the join and filtering in the main query.\n   - Select the columns as specified.\n\nBy following these steps, the query will efficiently retrieve all relevant rows from 'magstat' for the specified objects, filtered by the g band and zero dubious corrections, and will include all the requested information.",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To generate the desired query, the following steps should be systematically followed:\n\n1. **Identify the relevant objects**:\n   - Create a temporary inline table (using a WITH clause) that contains the list of ZTF identifiers: 'ZTF20adadshh', 'ZTF21aaabvit', and 'ZTF21aaabvjk'.\n   - This table will serve as the source for filtering the main query.\n\n2. **Join the object identifiers with the magstat table**:\n   - Use an INNER JOIN between the inline table of ZTF identifiers and the 'magstat' table on the 'oid' column.\n   - This ensures that only rows corresponding to the specified objects are considered.\n\n3. **Filter for the g band**:\n   - Add a condition to select only rows where the 'fid' (filter identifier) equals 1, which corresponds to the g band.\n   \n4. **Apply the condition for zero dubious corrections**:\n   - Include a filter where 'ndubious' equals 0, indicating no dubious corrections in the g band for those objects.\n\n5. **Select the required columns**:\n   - Retrieve the ZTF identifier ('oid') from the inline table or the 'magstat' table.\n   - Extract the 'ndet' column for the number of detections.\n   - Extract the 'dm_first' column for the initial rise estimate.\n   - Extract the 'magfirst' column for the first difference magnitude.\n\n6. **Ensure the output includes all specified columns**:\n   - The ZTF identifier (from the inline table or 'magstat' table).\n   - The number of detections ('ndet').\n   - The initial rise estimate ('dm_first').\n   - The first difference magnitude ('magfirst').\n\n7. **Order or group the results if necessary**:\n   - Since the query involves specific objects, ordering is optional unless specified.\n   - No grouping is necessary unless multiple rows per object exist; if so, consider whether to aggregate or list all rows.\n\n8. **Finalize the query structure**:\n   - Use a subquery or CTE for the inline list of identifiers.\n   - Perform the join and filtering in the main query.\n   - Select the columns as specified.\n\nBy following these steps, the query will efficiently retrieve all relevant rows from 'magstat' for the specified objects, filtered by the g band and zero dubious corrections, and will include all the requested information."
+                    }
+                },
+                "in_toks": 2839,
+                "out_toks": 500,
+                "id": "chatcmpl-BcTjJFku5TbmfLDlg1mmlnEG8Zjhf",
+                "created": 1748510445,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "WITH ztf_ids AS (\n    SELECT unnest(ARRAY['ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk']) AS oid\n)\nSELECT\n    ztf_ids.oid,\n    m.ndet,\n    m.dm_first,\n    m.magfirst\nFROM\n    ztf_ids\nJOIN\n    magstat m ON ztf_ids.oid = m.oid\nWHERE\n    m.fid = 1 -- g band\n    AND m.ndubious = 0; -- zero dubious corrections",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "WITH ztf_ids AS (\n    SELECT unnest(ARRAY['ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk']) AS oid\n)\nSELECT\n    ztf_ids.oid,\n    m.ndet,\n    m.dm_first,\n    m.magfirst\nFROM\n    ztf_ids\nJOIN\n    magstat m ON ztf_ids.oid = m.oid\nWHERE\n    m.fid = 1 -- g band\n    AND m.ndubious = 0; -- zero dubious corrections"
+                    }
+                },
+                "in_toks": 1630,
+                "out_toks": 117,
+                "id": "chatcmpl-BcTtHoxRLj7ot1mJeDqUfJbv26DOk",
+                "created": 1748511063,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    },
+    "97": {
+        "0": {
+            "req_id": 97,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'probability', 'taxonomy']"
+                    },
+                    "1": {
+                        "response": "['object', 'probability', 'taxonomy']"
+                    }
+                },
+                "in_toks": 667,
+                "out_toks": 20,
+                "id": "chatcmpl-BcTi75kgnjpy3wwprFxIPdF3maCMj",
+                "created": 1748510371,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "medium"
+                    }
+                },
+                "in_toks": 942,
+                "out_toks": 1,
+                "id": "chatcmpl-BcTi8NaywrS4yO4R3X2z064HDufbw",
+                "created": 1748510372,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To decompose the user request into a systematic plan for generating the PostgreSQL query, the following steps should be taken:\n\n1. **Identify the main tables involved:**\n   - The `object` table, which contains the ZTF object identifiers and associated metadata.\n   - The `probability` table, which stores the classification probabilities, class names, classifier names, and versions.\n\n2. **Filter the probability table for the relevant classifiers and classes:**\n   - Select entries where `classifier_name` is `'stamp_classifier_1.0.4'` and `class_name` is `'AGN'`.\n   - Select entries where `classifier_name` is `'lc_classifier'` and `class_name` is `'LPV'`.\n   - For both, ensure `probability` exceeds the specified thresholds: > 0.6 for AGN in the stamp classifier, and > 0.7 for LPV in the light curve classifier.\n\n3. **Ensure selection of only the most probable class per object:**\n   - Use the `ranking` column to filter for `ranking=1` in the `probability` table for each classifier, ensuring the probabilities correspond to the most likely class.\n\n4. **Retrieve the object identifiers and probabilities:**\n   - From the filtered `probability` entries, extract the `oid` (object identifier), the probability for AGN (label as `prob_stamp_agn`), and the probability for LPV (label as `prob_lc_lpv`).\n\n5. **Join the probability data with the object table:**\n   - Use the `oid` as the key to join the filtered probability entries with the `object` table to get the ZTF object identifier.\n\n6. **Apply the conditions to filter objects:**\n   - Only include objects where:\n     - The AGN probability in the stamp classifier exceeds 0.6.\n     - The LPV probability in the light curve classifier exceeds 0.7.\n\n7. **Limit the number of results:**\n   - Restrict the output to at most 50 objects using a `LIMIT` clause.\n\n8. **Select the required columns:**\n   - The ZTF object identifier (from the `object` table).\n   - The AGN probability from the stamp classifier, labeled as `prob_stamp_agn`.\n   - The LPV probability from the light curve classifier, labeled as `prob_lc_lpv`.\n\n9. **Order the results if necessary:**\n   - Optionally, order by the",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To decompose the user request into a systematic plan for generating the PostgreSQL query, the following steps should be taken:\n\n1. **Identify the main tables involved:**\n   - The `object` table, which contains the ZTF object identifiers and associated metadata.\n   - The `probability` table, which stores the classification probabilities, class names, classifier names, and versions.\n\n2. **Filter the probability table for the relevant classifiers and classes:**\n   - Select entries where `classifier_name` is `'stamp_classifier_1.0.4'` and `class_name` is `'AGN'`.\n   - Select entries where `classifier_name` is `'lc_classifier'` and `class_name` is `'LPV'`.\n   - For both, ensure `probability` exceeds the specified thresholds: > 0.6 for AGN in the stamp classifier, and > 0.7 for LPV in the light curve classifier.\n\n3. **Ensure selection of only the most probable class per object:**\n   - Use the `ranking` column to filter for `ranking=1` in the `probability` table for each classifier, ensuring the probabilities correspond to the most likely class.\n\n4. **Retrieve the object identifiers and probabilities:**\n   - From the filtered `probability` entries, extract the `oid` (object identifier), the probability for AGN (label as `prob_stamp_agn`), and the probability for LPV (label as `prob_lc_lpv`).\n\n5. **Join the probability data with the object table:**\n   - Use the `oid` as the key to join the filtered probability entries with the `object` table to get the ZTF object identifier.\n\n6. **Apply the conditions to filter objects:**\n   - Only include objects where:\n     - The AGN probability in the stamp classifier exceeds 0.6.\n     - The LPV probability in the light curve classifier exceeds 0.7.\n\n7. **Limit the number of results:**\n   - Restrict the output to at most 50 objects using a `LIMIT` clause.\n\n8. **Select the required columns:**\n   - The ZTF object identifier (from the `object` table).\n   - The AGN probability from the stamp classifier, labeled as `prob_stamp_agn`.\n   - The LPV probability from the light curve classifier, labeled as `prob_lc_lpv`.\n\n9. **Order the results if necessary:**\n   - Optionally, order by the"
+                    }
+                },
+                "in_toks": 2474,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjM9gosxN9D4UfZQ3z7vPhPZMQW",
+                "created": 1748510448,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\n-- Select objects with specified probabilities for AGN and LPV classes\nSELECT \n    o.oid AS ztf_identifier,\n    p_agn.probability AS prob_stamp_agn,\n    p_lpv.probability AS prob_lc_lpv\nFROM \n    object o\nJOIN \n    -- Subquery for AGN probability in stamp classifier\n    (\n        SELECT \n            oid, probability\n        FROM \n            probability\n        WHERE \n            classifier_name = 'stamp_classifier_1.0.4'\n            AND class_name = 'AGN'\n            AND ranking = 1\n            AND probability > 0.6\n    ) p_agn ON o.oid = p_agn.oid\nJOIN \n    -- Subquery for LPV probability in light curve classifier\n    (\n        SELECT \n            oid, probability\n        FROM \n            probability\n        WHERE \n            classifier_name = 'lc_classifier'\n            AND class_name = 'LPV'\n            AND ranking = 1\n            AND probability > 0.7\n    ) p_lpv ON o.oid = p_lpv.oid\nLIMIT 50;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\n-- Select objects with specified probabilities for AGN and LPV classes\nSELECT \n    o.oid AS ztf_identifier,\n    p_agn.probability AS prob_stamp_agn,\n    p_lpv.probability AS prob_lc_lpv\nFROM \n    object o\nJOIN \n    -- Subquery for AGN probability in stamp classifier\n    (\n        SELECT \n            oid, probability\n        FROM \n            probability\n        WHERE \n            classifier_name = 'stamp_classifier_1.0.4'\n            AND class_name = 'AGN'\n            AND ranking = 1\n            AND probability > 0.6\n    ) p_agn ON o.oid = p_agn.oid\nJOIN \n    -- Subquery for LPV probability in light curve classifier\n    (\n        SELECT \n            oid, probability\n        FROM \n            probability\n        WHERE \n            classifier_name = 'lc_classifier'\n            AND class_name = 'LPV'\n            AND ranking = 1\n            AND probability > 0.7\n    ) p_lpv ON o.oid = p_lpv.oid\nLIMIT 50;\n```"
+                    }
+                },
+                "in_toks": 1673,
+                "out_toks": 236,
+                "id": "chatcmpl-BcTtI1wseyOHrSR035xJwdKYqeGmF",
+                "created": 1748511064,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        },
+        "1": {
+            "req_id": 97,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": {
+                        "response": "['object', 'probability', 'taxonomy']"
+                    },
+                    "1": {
+                        "response": "['object', 'probability', 'taxonomy']"
+                    }
+                },
+                "in_toks": 667,
+                "out_toks": 20,
+                "id": "chatcmpl-BcTi75kgnjpy3wwprFxIPdF3maCMj",
+                "created": 1748510371,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query": null,
+            "sql_response": null,
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": {
+                        "response": "medium"
+                    }
+                },
+                "in_toks": 942,
+                "out_toks": 1,
+                "id": "chatcmpl-BcTi9MYuVqMA8GW61FvStsk0AFUlR",
+                "created": 1748510373,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "sql_query_plan": "To decompose the user request into a systematic plan for generating the PostgreSQL query, the following steps should be taken:\n\n1. **Identify the main tables involved:**\n   - The `object` table, which contains the ZTF object identifiers and associated metadata.\n   - The `probability` table, which stores the classification probabilities, class names, classifier names, and versions.\n\n2. **Filter the probability table for the relevant classifiers and classes:**\n   - Select entries where `classifier_name` is `'stamp_classifier_1.0.4'` and `class_name` is `'AGN'`.\n   - Select entries where `classifier_name` is `'lc_classifier'` and `class_name` is `'LPV'`.\n   - For both, ensure `probability` exceeds the specified thresholds: > 0.6 for AGN in the stamp classifier, and > 0.7 for LPV in the light curve classifier.\n\n3. **Ensure only the most probable class per object is considered:**\n   - Use the `ranking` column to filter for `ranking=1` in the probability table, as it indicates the most likely class for each object and classifier.\n\n4. **Retrieve the object identifiers and probabilities:**\n   - From the filtered probability entries, extract the `oid` (object identifier), the probability for AGN (`prob_stamp_agn`), and the probability for LPV (`prob_lc_lpv`).\n\n5. **Join the probability data with the object table:**\n   - Use the `oid` as the key to join the filtered probability entries with the `object` table to get the ZTF object identifier.\n\n6. **Limit the results to at most 50 objects:**\n   - Apply a `LIMIT 50` clause to restrict the output to the top 50 objects satisfying the conditions.\n\n7. **Select the required columns:**\n   - The ZTF object identifier (from the `object` table).\n   - The probability of being an AGN in the stamp classifier, labeled as `prob_stamp_agn`.\n   - The probability of being an LPV in the light curve classifier, labeled as `prob_lc_lpv`.\n\n8. **Order the results if necessary:**\n   - Optionally, order by the probability of AGN or LPV to prioritize the most confident classifications, although this is not explicitly specified.\n\n9. **Construct the final query structure:**\n   - Use nested subqueries or CTEs (Common Table Expressions) to organize",
+            "sql_query_plan_response": {
+                "responses": {
+                    "0": {
+                        "response": "To decompose the user request into a systematic plan for generating the PostgreSQL query, the following steps should be taken:\n\n1. **Identify the main tables involved:**\n   - The `object` table, which contains the ZTF object identifiers and associated metadata.\n   - The `probability` table, which stores the classification probabilities, class names, classifier names, and versions.\n\n2. **Filter the probability table for the relevant classifiers and classes:**\n   - Select entries where `classifier_name` is `'stamp_classifier_1.0.4'` and `class_name` is `'AGN'`.\n   - Select entries where `classifier_name` is `'lc_classifier'` and `class_name` is `'LPV'`.\n   - For both, ensure `probability` exceeds the specified thresholds: > 0.6 for AGN in the stamp classifier, and > 0.7 for LPV in the light curve classifier.\n\n3. **Ensure only the most probable class per object is considered:**\n   - Use the `ranking` column to filter for `ranking=1` in the probability table, as it indicates the most likely class for each object and classifier.\n\n4. **Retrieve the object identifiers and probabilities:**\n   - From the filtered probability entries, extract the `oid` (object identifier), the probability for AGN (`prob_stamp_agn`), and the probability for LPV (`prob_lc_lpv`).\n\n5. **Join the probability data with the object table:**\n   - Use the `oid` as the key to join the filtered probability entries with the `object` table to get the ZTF object identifier.\n\n6. **Limit the results to at most 50 objects:**\n   - Apply a `LIMIT 50` clause to restrict the output to the top 50 objects satisfying the conditions.\n\n7. **Select the required columns:**\n   - The ZTF object identifier (from the `object` table).\n   - The probability of being an AGN in the stamp classifier, labeled as `prob_stamp_agn`.\n   - The probability of being an LPV in the light curve classifier, labeled as `prob_lc_lpv`.\n\n8. **Order the results if necessary:**\n   - Optionally, order by the probability of AGN or LPV to prioritize the most confident classifications, although this is not explicitly specified.\n\n9. **Construct the final query structure:**\n   - Use nested subqueries or CTEs (Common Table Expressions) to organize"
+                    }
+                },
+                "in_toks": 2474,
+                "out_toks": 512,
+                "id": "chatcmpl-BcTjP07ePEwUuLxVsW3nUvWbvj77M",
+                "created": 1748510451,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "original_sql_query": "```sql\nWITH filtered_probs AS (\n    SELECT\n        p1.oid,\n        p1.probability AS prob_stamp_agn,\n        p2.probability AS prob_lc_lpv\n    FROM\n        probability p1\n    JOIN\n        probability p2 ON p1.oid = p2.oid\n    WHERE\n        p1.classifier_name = 'stamp_classifier_1.0.4'\n        AND p1.class_name = 'AGN'\n        AND p1.ranking = 1\n        AND p1.probability > 0.6\n        AND p2.classifier_name = 'lc_classifier'\n        AND p2.class_name = 'LPV'\n        AND p2.ranking = 1\n        AND p2.probability > 0.7\n)\nSELECT\n    o.oid AS ztf_identifier,\n    fp.prob_stamp_agn,\n    fp.prob_lc_lpv\nFROM\n    filtered_probs fp\nJOIN\n    object o ON fp.oid = o.oid\nLIMIT 50;\n```",
+            "original_sql_response": {
+                "responses": {
+                    "0": {
+                        "response": "```sql\nWITH filtered_probs AS (\n    SELECT\n        p1.oid,\n        p1.probability AS prob_stamp_agn,\n        p2.probability AS prob_lc_lpv\n    FROM\n        probability p1\n    JOIN\n        probability p2 ON p1.oid = p2.oid\n    WHERE\n        p1.classifier_name = 'stamp_classifier_1.0.4'\n        AND p1.class_name = 'AGN'\n        AND p1.ranking = 1\n        AND p1.probability > 0.6\n        AND p2.classifier_name = 'lc_classifier'\n        AND p2.class_name = 'LPV'\n        AND p2.ranking = 1\n        AND p2.probability > 0.7\n)\nSELECT\n    o.oid AS ztf_identifier,\n    fp.prob_stamp_agn,\n    fp.prob_lc_lpv\nFROM\n    filtered_probs fp\nJOIN\n    object o ON fp.oid = o.oid\nLIMIT 50;\n```"
+                    }
+                },
+                "in_toks": 1673,
+                "out_toks": 222,
+                "id": "chatcmpl-BcTt1XaIw9624J22Y0VU7QYCEYbAQ",
+                "created": 1748511047,
+                "model": "gpt-4.1-nano-2025-04-14"
+            },
+            "correction_applied": false
+        }
+    }
+}

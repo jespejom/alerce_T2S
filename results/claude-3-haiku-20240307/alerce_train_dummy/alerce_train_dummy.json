@@ -1,0 +1,792 @@
+{
+    "86": {
+        "0": {
+            "req_id": 86,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']",
+                    "1": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 1828,
+                "out_toks": 30,
+                "id": {
+                    "0": "msg_016rvMHUwK5CrKX5YAwkd6yP",
+                    "1": "msg_01QiEe58A5nK581t6425m5Nq"
+                },
+                "created": {
+                    "0": "msg_016rvMHUwK5CrKX5YAwkd6yP",
+                    "1": "msg_01QiEe58A5nK581t6425m5Nq"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query finds ZTF objects that:\n1. Have a probability greater than 0.6 of being Cepheid, Delta Scuti, or RR Lyra in the 'lc_classifier' version '1.1.0'\n2. Have a closest PS1 object with a star/galaxy score greater than 0.8\n3. Returns all columns from the 'probability' and 'ps1_ztf' tables, limiting to 100 rows\n*/\nSELECT p.*, ps1.*\nFROM probability p\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE p.classifier_name = 'lc_classifier' \n  AND p.classifier_version = '1.1.0'\n  AND p.probability > 0.6\n  AND p.class_name IN ('CEP', 'DSCT', 'RRL')\n  AND ps1.sgscore1 > 0.8\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query finds ZTF objects that:\n1. Have a probability greater than 0.6 of being Cepheid, Delta Scuti, or RR Lyra in the 'lc_classifier' version '1.1.0'\n2. Have a closest PS1 object with a star/galaxy score greater than 0.8\n3. Returns all columns from the 'probability' and 'ps1_ztf' tables, limiting to 100 rows\n*/\nSELECT p.*, ps1.*\nFROM probability p\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE p.classifier_name = 'lc_classifier' \n  AND p.classifier_version = '1.1.0'\n  AND p.probability > 0.6\n  AND p.class_name IN ('CEP', 'DSCT', 'RRL')\n  AND ps1.sgscore1 > 0.8\nLIMIT 100;"
+                },
+                "in_toks": 126,
+                "out_toks": 239,
+                "id": "msg_01XsXQs5MVGC88hRR7zAmaCo",
+                "created": "msg_01XsXQs5MVGC88hRR7zAmaCo",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 86,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']",
+                    "1": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 1828,
+                "out_toks": 30,
+                "id": {
+                    "0": "msg_016rvMHUwK5CrKX5YAwkd6yP",
+                    "1": "msg_01QiEe58A5nK581t6425m5Nq"
+                },
+                "created": {
+                    "0": "msg_016rvMHUwK5CrKX5YAwkd6yP",
+                    "1": "msg_01QiEe58A5nK581t6425m5Nq"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query finds ZTF objects that:\n1. Have a probability greater than 0.6 of being Cepheid, Delta Scuti, or RR Lyra in the 'lc_classifier' version '1.1.0'\n2. Have a closest PS1 object with a star/galaxy score greater than 0.8\n3. Returns all columns from the 'probability' and 'ps1_ztf' tables, limiting to 100 rows\n*/\nSELECT p.*, ps1.*\nFROM probability p\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE p.classifier_name = 'lc_classifier' \n  AND p.classifier_version = '1.1.0'\n  AND p.probability > 0.6\n  AND p.class_name IN ('CEP', 'DSCT', 'RRL')\n  AND ps1.sgscore1 > 0.8\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query finds ZTF objects that:\n1. Have a probability greater than 0.6 of being Cepheid, Delta Scuti, or RR Lyra in the 'lc_classifier' version '1.1.0'\n2. Have a closest PS1 object with a star/galaxy score greater than 0.8\n3. Returns all columns from the 'probability' and 'ps1_ztf' tables, limiting to 100 rows\n*/\nSELECT p.*, ps1.*\nFROM probability p\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE p.classifier_name = 'lc_classifier' \n  AND p.classifier_version = '1.1.0'\n  AND p.probability > 0.6\n  AND p.class_name IN ('CEP', 'DSCT', 'RRL')\n  AND ps1.sgscore1 > 0.8\nLIMIT 100;"
+                },
+                "in_toks": 126,
+                "out_toks": 239,
+                "id": "msg_01BWovjXQNuFr88ijDkrqobh",
+                "created": "msg_01BWovjXQNuFr88ijDkrqobh",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "53": {
+        "0": {
+            "req_id": 53,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "non_detection",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection', 'object']",
+                    "1": "['non_detection', 'object']"
+                },
+                "in_toks": 1690,
+                "out_toks": 24,
+                "id": {
+                    "0": "msg_01ETJZLzW9J6JCYAQ6Fprfs2",
+                    "1": "msg_01DoJ2Euimvt6RZGPRb3nGQ4"
+                },
+                "created": {
+                    "0": "msg_01ETJZLzW9J6JCYAQ6Fprfs2",
+                    "1": "msg_01DoJ2Euimvt6RZGPRb3nGQ4"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the date, filter identifier, ZTF identifier, and 5-sigma magnitude limit for all non-detections of the ZTF object 'ZTF18adqxemz'.\nThe key steps are:\n1. Select the relevant columns from the non_detection table for the given object identifier 'ZTF18adqxemz'.\n2. The object identifier 'oid' is used to filter the non-detections for the specific object.\n*/\n\nSELECT \n    mjd, \n    fid, \n    oid, \n    diffmaglim\nFROM non_detection\nWHERE oid = 'ZTF18adqxemz';",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the date, filter identifier, ZTF identifier, and 5-sigma magnitude limit for all non-detections of the ZTF object 'ZTF18adqxemz'.\nThe key steps are:\n1. Select the relevant columns from the non_detection table for the given object identifier 'ZTF18adqxemz'.\n2. The object identifier 'oid' is used to filter the non-detections for the specific object.\n*/\n\nSELECT \n    mjd, \n    fid, \n    oid, \n    diffmaglim\nFROM non_detection\nWHERE oid = 'ZTF18adqxemz';"
+                },
+                "in_toks": 57,
+                "out_toks": 163,
+                "id": "msg_015UsiQsEreterNjYRWED18q",
+                "created": "msg_015UsiQsEreterNjYRWED18q",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 53,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "non_detection",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection', 'object']",
+                    "1": "['non_detection', 'object']"
+                },
+                "in_toks": 1690,
+                "out_toks": 24,
+                "id": {
+                    "0": "msg_01ETJZLzW9J6JCYAQ6Fprfs2",
+                    "1": "msg_01DoJ2Euimvt6RZGPRb3nGQ4"
+                },
+                "created": {
+                    "0": "msg_01ETJZLzW9J6JCYAQ6Fprfs2",
+                    "1": "msg_01DoJ2Euimvt6RZGPRb3nGQ4"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the date, filter identifier, ZTF identifier, and 5-sigma magnitude limit for all non-detections of the ZTF object 'ZTF18adqxemz'.\nThe key steps are:\n1. Select the relevant columns from the non_detection table.\n2. Filter the results to only include the object with the ZTF identifier 'ZTF18adqxemz'.\n*/\n\nSELECT \n    mjd, \n    fid, \n    oid, \n    diffmaglim\nFROM non_detection\nWHERE oid = 'ZTF18adqxemz';",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the date, filter identifier, ZTF identifier, and 5-sigma magnitude limit for all non-detections of the ZTF object 'ZTF18adqxemz'.\nThe key steps are:\n1. Select the relevant columns from the non_detection table.\n2. Filter the results to only include the object with the ZTF identifier 'ZTF18adqxemz'.\n*/\n\nSELECT \n    mjd, \n    fid, \n    oid, \n    diffmaglim\nFROM non_detection\nWHERE oid = 'ZTF18adqxemz';"
+                },
+                "in_toks": 57,
+                "out_toks": 151,
+                "id": "msg_017mXqSYhtpNATCf7qizJ1Qx",
+                "created": "msg_017mXqSYhtpNATCf7qizJ1Qx",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "36": {
+        "0": {
+            "req_id": 36,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 1674,
+                "out_toks": 20,
+                "id": {
+                    "0": "msg_01DyMgDvseUsCLrYa6QksZ4c",
+                    "1": "msg_01Aj15KLX12ZGDdadCa5siig"
+                },
+                "created": {
+                    "0": "msg_01DyMgDvseUsCLrYa6QksZ4c",
+                    "1": "msg_01Aj15KLX12ZGDdadCa5siig"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the feature names and values for the light curves of the object with the oid 'ZTF20aaelulu'. It also includes the oid column in the output.\n*/\nSELECT o.oid, f.name, f.value\nFROM object o\nJOIN feature f ON o.oid = f.oid\nWHERE o.oid = 'ZTF20aaelulu';",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the feature names and values for the light curves of the object with the oid 'ZTF20aaelulu'. It also includes the oid column in the output.\n*/\nSELECT o.oid, f.name, f.value\nFROM object o\nJOIN feature f ON o.oid = f.oid\nWHERE o.oid = 'ZTF20aaelulu';"
+                },
+                "in_toks": 49,
+                "out_toks": 99,
+                "id": "msg_01XV78wYNMCSFAejb7W6nqji",
+                "created": "msg_01XV78wYNMCSFAejb7W6nqji",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 36,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 1674,
+                "out_toks": 20,
+                "id": {
+                    "0": "msg_01DyMgDvseUsCLrYa6QksZ4c",
+                    "1": "msg_01Aj15KLX12ZGDdadCa5siig"
+                },
+                "created": {
+                    "0": "msg_01DyMgDvseUsCLrYa6QksZ4c",
+                    "1": "msg_01Aj15KLX12ZGDdadCa5siig"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the feature names and values for the light curves of the object with the oid 'ZTF20aaelulu'. It also includes the oid column in the output.\n*/\nSELECT o.oid, f.name, f.value\nFROM object o\nJOIN feature f ON o.oid = f.oid\nWHERE o.oid = 'ZTF20aaelulu';",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the feature names and values for the light curves of the object with the oid 'ZTF20aaelulu'. It also includes the oid column in the output.\n*/\nSELECT o.oid, f.name, f.value\nFROM object o\nJOIN feature f ON o.oid = f.oid\nWHERE o.oid = 'ZTF20aaelulu';"
+                },
+                "in_toks": 49,
+                "out_toks": 99,
+                "id": "msg_01JaPSx9uR4GoMR6osFPHqjH",
+                "created": "msg_01JaPSx9uR4GoMR6osFPHqjH",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "91": {
+        "0": {
+            "req_id": 91,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "allwise",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise', 'feature', 'feature_version']",
+                    "1": "['object', 'allwise', 'feature', 'feature_version']"
+                },
+                "in_toks": 1778,
+                "out_toks": 42,
+                "id": {
+                    "0": "msg_01Xdovq6hHMFEEtLnRtWFhfT",
+                    "1": "msg_014KVFAmYAyV9ErdhjPy5rTo"
+                },
+                "created": {
+                    "0": "msg_01Xdovq6hHMFEEtLnRtWFhfT",
+                    "1": "msg_014KVFAmYAyV9ErdhjPy5rTo"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query finds ZTF objects that have a 'W1-W2' color lower than 1, and returns the following columns:\n- ZTF identifier (oid)\n- Number of detections (ndet)\n- Difference between minimum g- and r-band difference magnitudes (g_r_max)\n- 'W1-W2' feature value (renamed to w1_w2)\n- Feature version (version)\n\nThe query uses a subquery to efficiently retrieve the OIDs, and then joins with the relevant tables to get the requested columns. The result is limited to 100 rows.\n*/\n\nSELECT \n    o.oid,\n    o.ndet,\n    o.g_r_max,\n    f.value AS w1_w2,\n    f.version\nFROM (\n    SELECT oid\n    FROM feature\n    WHERE name = 'W1-W2' AND value < 1\n    LIMIT 100\n) AS subquery\nJOIN object o ON subquery.oid = o.oid\nJOIN feature f ON o.oid = f.oid AND f.name = 'W1-W2'\nORDER BY o.ndet DESC\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query finds ZTF objects that have a 'W1-W2' color lower than 1, and returns the following columns:\n- ZTF identifier (oid)\n- Number of detections (ndet)\n- Difference between minimum g- and r-band difference magnitudes (g_r_max)\n- 'W1-W2' feature value (renamed to w1_w2)\n- Feature version (version)\n\nThe query uses a subquery to efficiently retrieve the OIDs, and then joins with the relevant tables to get the requested columns. The result is limited to 100 rows.\n*/\n\nSELECT \n    o.oid,\n    o.ndet,\n    o.g_r_max,\n    f.value AS w1_w2,\n    f.version\nFROM (\n    SELECT oid\n    FROM feature\n    WHERE name = 'W1-W2' AND value < 1\n    LIMIT 100\n) AS subquery\nJOIN object o ON subquery.oid = o.oid\nJOIN feature f ON o.oid = f.oid AND f.name = 'W1-W2'\nORDER BY o.ndet DESC\nLIMIT 100;"
+                },
+                "in_toks": 101,
+                "out_toks": 286,
+                "id": "msg_01J67fiqCoF3xdpwszWTgfNF",
+                "created": "msg_01J67fiqCoF3xdpwszWTgfNF",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 91,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "allwise",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise', 'feature', 'feature_version']",
+                    "1": "['object', 'allwise', 'feature', 'feature_version']"
+                },
+                "in_toks": 1778,
+                "out_toks": 42,
+                "id": {
+                    "0": "msg_01Xdovq6hHMFEEtLnRtWFhfT",
+                    "1": "msg_014KVFAmYAyV9ErdhjPy5rTo"
+                },
+                "created": {
+                    "0": "msg_01Xdovq6hHMFEEtLnRtWFhfT",
+                    "1": "msg_014KVFAmYAyV9ErdhjPy5rTo"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query finds ZTF objects that have a 'W1-W2' color lower than 1, and returns the following columns:\n- ZTF identifier (oid)\n- Number of detections (ndet)\n- Difference between minimum g- and r-band difference magnitudes (g_r_max)\n- 'W1-W2' feature value (renamed to w1_w2)\n- Feature version (version)\n\nThe query uses a subquery to efficiently retrieve the OIDs, and then joins with the relevant tables to get the requested columns. The result is limited to 100 rows.\n*/\n\nSELECT \n    o.oid,\n    o.ndet,\n    o.g_r_max,\n    f.value AS w1_w2,\n    f.version\nFROM (\n    SELECT oid\n    FROM feature\n    WHERE name = 'W1-W2' AND value < 1\n    LIMIT 100\n) AS subquery\nJOIN object o ON subquery.oid = o.oid\nJOIN feature f ON o.oid = f.oid AND f.name = 'W1-W2'\nORDER BY o.ndet DESC\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query finds ZTF objects that have a 'W1-W2' color lower than 1, and returns the following columns:\n- ZTF identifier (oid)\n- Number of detections (ndet)\n- Difference between minimum g- and r-band difference magnitudes (g_r_max)\n- 'W1-W2' feature value (renamed to w1_w2)\n- Feature version (version)\n\nThe query uses a subquery to efficiently retrieve the OIDs, and then joins with the relevant tables to get the requested columns. The result is limited to 100 rows.\n*/\n\nSELECT \n    o.oid,\n    o.ndet,\n    o.g_r_max,\n    f.value AS w1_w2,\n    f.version\nFROM (\n    SELECT oid\n    FROM feature\n    WHERE name = 'W1-W2' AND value < 1\n    LIMIT 100\n) AS subquery\nJOIN object o ON subquery.oid = o.oid\nJOIN feature f ON o.oid = f.oid AND f.name = 'W1-W2'\nORDER BY o.ndet DESC\nLIMIT 100;"
+                },
+                "in_toks": 101,
+                "out_toks": 286,
+                "id": "msg_011WuryBDWtBwn62izkLGEvp",
+                "created": "msg_011WuryBDWtBwn62izkLGEvp",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "0": {
+        "0": {
+            "req_id": 0,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'feature_version']",
+                    "1": "['object', 'probability', 'feature', 'feature_version']"
+                },
+                "in_toks": 1788,
+                "out_toks": 40,
+                "id": {
+                    "0": "msg_01XyjYwtG8Bt3SCv4KZgdHaG",
+                    "1": "msg_013SP7TE4bLaW725qS5nfdTJ"
+                },
+                "created": {
+                    "0": "msg_01XyjYwtG8Bt3SCv4KZgdHaG",
+                    "1": "msg_013SP7TE4bLaW725qS5nfdTJ"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves objects that are likely to be Young Stellar Objects (YSOs) with some periodicity. The criteria are:\n- Probability of being a YSO is greater than 0.7\n- Photometric period is between 3 and 10 days\n- Variation amplitude is greater than 0.5 mag\nThe results are sorted by the YSO probability in descending order, and the returned columns are:\n- Object identifier (oid)\n- YSO probability\n- Feature value\n- Feature name\n- Filter ID (fid)\n- Feature version\n*/\n\nSELECT \n    o.oid,\n    p.probability AS yso_probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM object o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE \n    p.class_name = 'YSO' \n    AND p.probability > 0.7\n    AND f.name IN ('Period_band', 'delta_mag_fid')\n    AND f.value BETWEEN 3 AND 10 \n    AND f.value > 0.5\nORDER BY p.probability DESC;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves objects that are likely to be Young Stellar Objects (YSOs) with some periodicity. The criteria are:\n- Probability of being a YSO is greater than 0.7\n- Photometric period is between 3 and 10 days\n- Variation amplitude is greater than 0.5 mag\nThe results are sorted by the YSO probability in descending order, and the returned columns are:\n- Object identifier (oid)\n- YSO probability\n- Feature value\n- Feature name\n- Filter ID (fid)\n- Feature version\n*/\n\nSELECT \n    o.oid,\n    p.probability AS yso_probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM object o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE \n    p.class_name = 'YSO' \n    AND p.probability > 0.7\n    AND f.name IN ('Period_band', 'delta_mag_fid')\n    AND f.value BETWEEN 3 AND 10 \n    AND f.value > 0.5\nORDER BY p.probability DESC;"
+                },
+                "in_toks": 106,
+                "out_toks": 299,
+                "id": "msg_01BcFt6puE2pGp974tXPBJBJ",
+                "created": "msg_01BcFt6puE2pGp974tXPBJBJ",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 0,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'feature_version']",
+                    "1": "['object', 'probability', 'feature', 'feature_version']"
+                },
+                "in_toks": 1788,
+                "out_toks": 40,
+                "id": {
+                    "0": "msg_01XyjYwtG8Bt3SCv4KZgdHaG",
+                    "1": "msg_013SP7TE4bLaW725qS5nfdTJ"
+                },
+                "created": {
+                    "0": "msg_01XyjYwtG8Bt3SCv4KZgdHaG",
+                    "1": "msg_013SP7TE4bLaW725qS5nfdTJ"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves objects that are likely to be Young Stellar Objects (YSOs) with some periodicities. The criteria are:\n- Probability of being a YSO is greater than 0.7\n- Photometric period is between 3 and 10 days\n- Variation amplitude is greater than 0.5 mag\nThe results are sorted by the YSO probability in descending order, and the returned columns are:\n- Object identifier (oid)\n- YSO probability\n- Feature value\n- Feature name\n- Filter ID (fid)\n- Feature version\n*/\n\nSELECT \n    o.oid,\n    p.probability AS yso_probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM object o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE \n    p.class_name = 'YSO' \n    AND p.probability > 0.7\n    AND f.name IN ('Period_band', 'delta_mag_fid')\n    AND f.value BETWEEN 3 AND 10 -- Period between 3 and 10 days\n    AND f.value > 0.5 -- Variation amplitude greater than 0.5 mag\nORDER BY p.probability DESC;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves objects that are likely to be Young Stellar Objects (YSOs) with some periodicities. The criteria are:\n- Probability of being a YSO is greater than 0.7\n- Photometric period is between 3 and 10 days\n- Variation amplitude is greater than 0.5 mag\nThe results are sorted by the YSO probability in descending order, and the returned columns are:\n- Object identifier (oid)\n- YSO probability\n- Feature value\n- Feature name\n- Filter ID (fid)\n- Feature version\n*/\n\nSELECT \n    o.oid,\n    p.probability AS yso_probability,\n    f.value,\n    f.name,\n    f.fid,\n    f.version\nFROM object o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE \n    p.class_name = 'YSO' \n    AND p.probability > 0.7\n    AND f.name IN ('Period_band', 'delta_mag_fid')\n    AND f.value BETWEEN 3 AND 10 -- Period between 3 and 10 days\n    AND f.value > 0.5 -- Variation amplitude greater than 0.5 mag\nORDER BY p.probability DESC;"
+                },
+                "in_toks": 106,
+                "out_toks": 324,
+                "id": "msg_013sETvWwrDhFGhJtvquW9hD",
+                "created": "msg_013sETvWwrDhFGhJtvquW9hD",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "70": {
+        "0": {
+            "req_id": 70,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']",
+                    "1": "['object', 'reference']"
+                },
+                "in_toks": 1668,
+                "out_toks": 20,
+                "id": {
+                    "0": "msg_012tSo5tHhGAkB6cehHmhmuZ",
+                    "1": "msg_01LxpoDk1vcUhGYR1TdtuRpX"
+                },
+                "created": {
+                    "0": "msg_012tSo5tHhGAkB6cehHmhmuZ",
+                    "1": "msg_01LxpoDk1vcUhGYR1TdtuRpX"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves all the information available for the ZTF object 'ZTF22aayjqah' from the 'reference' table.\n*/\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves all the information available for the ZTF object 'ZTF22aayjqah' from the 'reference' table.\n*/\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';"
+                },
+                "in_toks": 46,
+                "out_toks": 64,
+                "id": "msg_01EikzcNXFWgrm1iLx356dpb",
+                "created": "msg_01EikzcNXFWgrm1iLx356dpb",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 70,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']",
+                    "1": "['object', 'reference']"
+                },
+                "in_toks": 1668,
+                "out_toks": 20,
+                "id": {
+                    "0": "msg_012tSo5tHhGAkB6cehHmhmuZ",
+                    "1": "msg_01LxpoDk1vcUhGYR1TdtuRpX"
+                },
+                "created": {
+                    "0": "msg_012tSo5tHhGAkB6cehHmhmuZ",
+                    "1": "msg_01LxpoDk1vcUhGYR1TdtuRpX"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves all the information available for the ZTF object 'ZTF22aayjqah' from the 'reference' table.\n*/\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves all the information available for the ZTF object 'ZTF22aayjqah' from the 'reference' table.\n*/\nSELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';"
+                },
+                "in_toks": 46,
+                "out_toks": 64,
+                "id": "msg_01APM7TG9LofmCXsBY8hGQuN",
+                "created": "msg_01APM7TG9LofmCXsBY8hGQuN",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "4": {
+        "0": {
+            "req_id": 4,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'magstat']",
+                    "1": "['object', 'probability', 'detection', 'magstat']"
+                },
+                "in_toks": 1780,
+                "out_toks": 38,
+                "id": {
+                    "0": "msg_014kk9vn4fpod16tAjrm9VDF",
+                    "1": "msg_01Smbiq7pzcoLgamDZ2TwrZM"
+                },
+                "created": {
+                    "0": "msg_014kk9vn4fpod16tAjrm9VDF",
+                    "1": "msg_01Smbiq7pzcoLgamDZ2TwrZM"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the requested information for objects classified as SN II with probability greater than 0.6, initial rise rate greater than 0.5 mag/day in ZTF g and r-band, and number of detections greater than 50, for the time period 2019-2022.\n\nThe key steps are:\n1. Join the object, probability, detection, and magstat tables to get the required information.\n2. Filter the objects classified as SN II with probability > 0.6 and number of detections > 50.\n3. Calculate the initial rise rate (dmdt_first) in g and r-band and filter for those greater than 0.5 mag/day.\n4. Select the desired columns: oid, candid, magpsf, sigmapsf, dmdt_first, fid.\n*/\n\nSELECT \n    o.oid,\n    d.candid,\n    d.magpsf,\n    d.sigmapsf,\n    m.dmdt_first,\n    m.fid\nFROM object o\nJOIN probability p ON o.oid = p.oid\nJOIN detection d ON o.oid = d.oid\nJOIN magstat m ON o.oid = m.oid AND d.fid = m.fid\nWHERE \n    p.class_name = 'SNII' \n    AND p.probability > 0.6\n    AND o.ndet > 50\n    AND m.dmdt_first > 0.5\n    AND m.fid IN (1, 2) -- g (1) and r (2) bands\n    AND d.mjd BETWEEN '2019-01-01'::DOUBLE PRECISION AND '2022-12-31'::DOUBLE PRECISION\nORDER BY o.oid, d.mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the requested information for objects classified as SN II with probability greater than 0.6, initial rise rate greater than 0.5 mag/day in ZTF g and r-band, and number of detections greater than 50, for the time period 2019-2022.\n\nThe key steps are:\n1. Join the object, probability, detection, and magstat tables to get the required information.\n2. Filter the objects classified as SN II with probability > 0.6 and number of detections > 50.\n3. Calculate the initial rise rate (dmdt_first) in g and r-band and filter for those greater than 0.5 mag/day.\n4. Select the desired columns: oid, candid, magpsf, sigmapsf, dmdt_first, fid.\n*/\n\nSELECT \n    o.oid,\n    d.candid,\n    d.magpsf,\n    d.sigmapsf,\n    m.dmdt_first,\n    m.fid\nFROM object o\nJOIN probability p ON o.oid = p.oid\nJOIN detection d ON o.oid = d.oid\nJOIN magstat m ON o.oid = m.oid AND d.fid = m.fid\nWHERE \n    p.class_name = 'SNII' \n    AND p.probability > 0.6\n    AND o.ndet > 50\n    AND m.dmdt_first > 0.5\n    AND m.fid IN (1, 2) -- g (1) and r (2) bands\n    AND d.mjd BETWEEN '2019-01-01'::DOUBLE PRECISION AND '2022-12-31'::DOUBLE PRECISION\nORDER BY o.oid, d.mjd;"
+                },
+                "in_toks": 102,
+                "out_toks": 426,
+                "id": "msg_01TLFGcFPzZhYQdNQgeiLV1H",
+                "created": "msg_01TLFGcFPzZhYQdNQgeiLV1H",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 4,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'magstat']",
+                    "1": "['object', 'probability', 'detection', 'magstat']"
+                },
+                "in_toks": 1780,
+                "out_toks": 38,
+                "id": {
+                    "0": "msg_014kk9vn4fpod16tAjrm9VDF",
+                    "1": "msg_01Smbiq7pzcoLgamDZ2TwrZM"
+                },
+                "created": {
+                    "0": "msg_014kk9vn4fpod16tAjrm9VDF",
+                    "1": "msg_01Smbiq7pzcoLgamDZ2TwrZM"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nRetrieve the requested information for objects classified as SN II with probability greater than 0.6, initial rise rate greater than 0.5 mag/day in ZTF g and r-band, and number of detections greater than 50, for the time period 2019-2022.\n*/\nSELECT \n    o.oid,\n    d.candid,\n    d.magpsf,\n    d.sigmapsf,\n    m.dmdt_first,\n    d.fid\nFROM object o\nJOIN detection d ON o.oid = d.oid\nJOIN magstat m ON o.oid = m.oid AND d.fid = m.fid\nJOIN probability p ON o.oid = p.oid\nWHERE \n    p.class_name = 'SNII' \n    AND p.probability > 0.6\n    AND m.dmdt_first > 0.5\n    AND m.ndet > 50\n    AND d.mjd BETWEEN '2019-01-01'::DOUBLE PRECISION AND '2022-12-31'::DOUBLE PRECISION\n    AND (d.fid = 1 OR d.fid = 2)\nORDER BY o.oid, d.mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nRetrieve the requested information for objects classified as SN II with probability greater than 0.6, initial rise rate greater than 0.5 mag/day in ZTF g and r-band, and number of detections greater than 50, for the time period 2019-2022.\n*/\nSELECT \n    o.oid,\n    d.candid,\n    d.magpsf,\n    d.sigmapsf,\n    m.dmdt_first,\n    d.fid\nFROM object o\nJOIN detection d ON o.oid = d.oid\nJOIN magstat m ON o.oid = m.oid AND d.fid = m.fid\nJOIN probability p ON o.oid = p.oid\nWHERE \n    p.class_name = 'SNII' \n    AND p.probability > 0.6\n    AND m.dmdt_first > 0.5\n    AND m.ndet > 50\n    AND d.mjd BETWEEN '2019-01-01'::DOUBLE PRECISION AND '2022-12-31'::DOUBLE PRECISION\n    AND (d.fid = 1 OR d.fid = 2)\nORDER BY o.oid, d.mjd;"
+                },
+                "in_toks": 102,
+                "out_toks": 300,
+                "id": "msg_0173Sur5xNhVEyvMoUs49YDA",
+                "created": "msg_0173Sur5xNhVEyvMoUs49YDA",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "46": {
+        "0": {
+            "req_id": 46,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 1676,
+                "out_toks": 12,
+                "id": {
+                    "0": "msg_014QUMJKGyCWvzigh4PG19Z3",
+                    "1": "msg_01ShNCc1Vy4jFfHrdzZ5C149"
+                },
+                "created": {
+                    "0": "msg_014QUMJKGyCWvzigh4PG19Z3",
+                    "1": "msg_01ShNCc1Vy4jFfHrdzZ5C149"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves all the information from the 'detection' table for the ZTF object 'ZTF23aaqmddq', sorted by the detection date (mjd).\n*/\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves all the information from the 'detection' table for the ZTF object 'ZTF23aaqmddq', sorted by the detection date (mjd).\n*/\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;"
+                },
+                "in_toks": 50,
+                "out_toks": 77,
+                "id": "msg_01CUY2zuPqBLKywr8Pti2Zfy",
+                "created": "msg_01CUY2zuPqBLKywr8Pti2Zfy",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 46,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 1676,
+                "out_toks": 12,
+                "id": {
+                    "0": "msg_014QUMJKGyCWvzigh4PG19Z3",
+                    "1": "msg_01ShNCc1Vy4jFfHrdzZ5C149"
+                },
+                "created": {
+                    "0": "msg_014QUMJKGyCWvzigh4PG19Z3",
+                    "1": "msg_01ShNCc1Vy4jFfHrdzZ5C149"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves all the information from the 'detection' table for the ZTF object 'ZTF23aaqmddq', sorted by the detection date (mjd).\n*/\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves all the information from the 'detection' table for the ZTF object 'ZTF23aaqmddq', sorted by the detection date (mjd).\n*/\nSELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;"
+                },
+                "in_toks": 50,
+                "out_toks": 77,
+                "id": "msg_015R9T2mDe2kLRT9RfZt1AMF",
+                "created": "msg_015R9T2mDe2kLRT9RfZt1AMF",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "60": {
+        "0": {
+            "req_id": 60,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']",
+                    "1": "['object', 'magstat']"
+                },
+                "in_toks": 1788,
+                "out_toks": 22,
+                "id": {
+                    "0": "msg_01GRqDhHSsikuhEHZMJrNHV4",
+                    "1": "msg_011X38LpYVqgzBjSqB2hFJaQ"
+                },
+                "created": {
+                    "0": "msg_01GRqDhHSsikuhEHZMJrNHV4",
+                    "1": "msg_011X38LpYVqgzBjSqB2hFJaQ"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the requested information for the specified ZTF objects with zero dubious corrections in the g band.\n*/\nSELECT \n    o.oid AS ztf_id,\n    m.ndet AS num_detections,\n    m.dmdt_first AS initial_rise_estimate,\n    m.dm_first AS first_diff_mag\nFROM object o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk')\n  AND m.fid = 1 -- g band\n  AND m.ndubious = 0\nORDER BY o.oid;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the requested information for the specified ZTF objects with zero dubious corrections in the g band.\n*/\nSELECT \n    o.oid AS ztf_id,\n    m.ndet AS num_detections,\n    m.dmdt_first AS initial_rise_estimate,\n    m.dm_first AS first_diff_mag\nFROM object o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk')\n  AND m.fid = 1 -- g band\n  AND m.ndubious = 0\nORDER BY o.oid;"
+                },
+                "in_toks": 106,
+                "out_toks": 181,
+                "id": "msg_011RZKJVwDeNhL6rzPNK3KQT",
+                "created": "msg_011RZKJVwDeNhL6rzPNK3KQT",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 60,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']",
+                    "1": "['object', 'magstat']"
+                },
+                "in_toks": 1788,
+                "out_toks": 22,
+                "id": {
+                    "0": "msg_01GRqDhHSsikuhEHZMJrNHV4",
+                    "1": "msg_011X38LpYVqgzBjSqB2hFJaQ"
+                },
+                "created": {
+                    "0": "msg_01GRqDhHSsikuhEHZMJrNHV4",
+                    "1": "msg_011X38LpYVqgzBjSqB2hFJaQ"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nThis query retrieves the requested information for the specified ZTF objects with zero dubious corrections in the g band.\n*/\nSELECT \n    o.oid AS ztf_id,\n    m.ndet AS num_detections,\n    m.dmdt_first AS initial_rise_estimate,\n    m.dm_first AS first_diff_mag\nFROM object o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk')\n  AND m.fid = 1 -- g band\n  AND m.ndubious = 0\nORDER BY o.oid;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nThis query retrieves the requested information for the specified ZTF objects with zero dubious corrections in the g band.\n*/\nSELECT \n    o.oid AS ztf_id,\n    m.ndet AS num_detections,\n    m.dmdt_first AS initial_rise_estimate,\n    m.dm_first AS first_diff_mag\nFROM object o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh', 'ZTF21aaabvit', 'ZTF21aaabvjk')\n  AND m.fid = 1 -- g band\n  AND m.ndubious = 0\nORDER BY o.oid;"
+                },
+                "in_toks": 106,
+                "out_toks": 181,
+                "id": "msg_01CnDvTgVD2StVFoQFJgP7Kn",
+                "created": "msg_01CnDvTgVD2StVFoQFJgP7Kn",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "97": {
+        "0": {
+            "req_id": 97,
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 1846,
+                "out_toks": 20,
+                "id": {
+                    "0": "msg_01Rw8qHuaLsHirVLxQhuPMeD",
+                    "1": "msg_01D19cWHYwXUiGnnZ91cdmFz"
+                },
+                "created": {
+                    "0": "msg_01Rw8qHuaLsHirVLxQhuPMeD",
+                    "1": "msg_01D19cWHYwXUiGnnZ91cdmFz"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nGet at most 50 ZTF objects that satisfy the following conditions:\n- Have a probability larger than 0.6 of being an AGN in the stamp classifier version 'stamp_classifier_1.0.4'\n- Have a probability larger than 0.7 of being an LPV in the light curve classifier\nReturn the following columns:\n- ZTF identifier\n- Probability in the stamp classifier (named 'prob_stamp_agn')\n- Probability in the light curve classifier (named 'prob_lc_lpv')\n*/\nSELECT \n    o.oid AS oid,\n    p1.probability AS prob_stamp_agn,\n    p2.probability AS prob_lc_lpv\nFROM object o\nJOIN probability p1 ON o.oid = p1.oid\nJOIN probability p2 ON o.oid = p2.oid\nWHERE \n    p1.classifier_name = 'stamp_classifier' \n    AND p1.classifier_version = 'stamp_classifier_1.0.4'\n    AND p1.class_name = 'AGN'\n    AND p1.probability > 0.6\n    AND p2.classifier_name = 'lc_classifier'\n    AND p2.class_name = 'LPV'\n    AND p2.probability > 0.7\nLIMIT 50;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nGet at most 50 ZTF objects that satisfy the following conditions:\n- Have a probability larger than 0.6 of being an AGN in the stamp classifier version 'stamp_classifier_1.0.4'\n- Have a probability larger than 0.7 of being an LPV in the light curve classifier\nReturn the following columns:\n- ZTF identifier\n- Probability in the stamp classifier (named 'prob_stamp_agn')\n- Probability in the light curve classifier (named 'prob_lc_lpv')\n*/\nSELECT \n    o.oid AS oid,\n    p1.probability AS prob_stamp_agn,\n    p2.probability AS prob_lc_lpv\nFROM object o\nJOIN probability p1 ON o.oid = p1.oid\nJOIN probability p2 ON o.oid = p2.oid\nWHERE \n    p1.classifier_name = 'stamp_classifier' \n    AND p1.classifier_version = 'stamp_classifier_1.0.4'\n    AND p1.class_name = 'AGN'\n    AND p1.probability > 0.6\n    AND p2.classifier_name = 'lc_classifier'\n    AND p2.class_name = 'LPV'\n    AND p2.probability > 0.7\nLIMIT 50;"
+                },
+                "in_toks": 135,
+                "out_toks": 330,
+                "id": "msg_01FeNCnKU27tKueoSrqnMyvG",
+                "created": "msg_01FeNCnKU27tKueoSrqnMyvG",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        },
+        "1": {
+            "req_id": 97,
+            "experiment_id": "run_1",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 1846,
+                "out_toks": 20,
+                "id": {
+                    "0": "msg_01Rw8qHuaLsHirVLxQhuPMeD",
+                    "1": "msg_01D19cWHYwXUiGnnZ91cdmFz"
+                },
+                "created": {
+                    "0": "msg_01Rw8qHuaLsHirVLxQhuPMeD",
+                    "1": "msg_01D19cWHYwXUiGnnZ91cdmFz"
+                },
+                "model": "claude-3-haiku-20240307"
+            },
+            "sql_query": "/*\nGet at most 50 ZTF objects that satisfy the following conditions:\n- Have a probability larger than 0.6 of being an AGN in the stamp classifier version 'stamp_classifier_1.0.4'\n- Have a probability larger than 0.7 of being an LPV in the light curve classifier\nReturn the following columns:\n- ZTF identifier\n- Probability in the stamp classifier (named 'prob_stamp_agn')\n- Probability in the light curve classifier (named 'prob_lc_lpv')\n*/\nSELECT \n    o.oid AS oid,\n    p1.probability AS prob_stamp_agn,\n    p2.probability AS prob_lc_lpv\nFROM object o\nJOIN probability p1 ON o.oid = p1.oid\nJOIN probability p2 ON o.oid = p2.oid\nWHERE \n    p1.classifier_name = 'stamp_classifier' \n    AND p1.classifier_version = 'stamp_classifier_1.0.4'\n    AND p1.class_name = 'AGN'\n    AND p1.probability > 0.6\n    AND p2.classifier_name = 'lc_classifier'\n    AND p2.class_name = 'LPV'\n    AND p2.probability > 0.7\nLIMIT 50;",
+            "sql_response": {
+                "responses": {
+                    "0": "/*\nGet at most 50 ZTF objects that satisfy the following conditions:\n- Have a probability larger than 0.6 of being an AGN in the stamp classifier version 'stamp_classifier_1.0.4'\n- Have a probability larger than 0.7 of being an LPV in the light curve classifier\nReturn the following columns:\n- ZTF identifier\n- Probability in the stamp classifier (named 'prob_stamp_agn')\n- Probability in the light curve classifier (named 'prob_lc_lpv')\n*/\nSELECT \n    o.oid AS oid,\n    p1.probability AS prob_stamp_agn,\n    p2.probability AS prob_lc_lpv\nFROM object o\nJOIN probability p1 ON o.oid = p1.oid\nJOIN probability p2 ON o.oid = p2.oid\nWHERE \n    p1.classifier_name = 'stamp_classifier' \n    AND p1.classifier_version = 'stamp_classifier_1.0.4'\n    AND p1.class_name = 'AGN'\n    AND p1.probability > 0.6\n    AND p2.classifier_name = 'lc_classifier'\n    AND p2.class_name = 'LPV'\n    AND p2.probability > 0.7\nLIMIT 50;"
+                },
+                "in_toks": 135,
+                "out_toks": 330,
+                "id": "msg_01T3raB8UxgmhGZmB9Yjeu9G",
+                "created": "msg_01T3raB8UxgmhGZmB9Yjeu9G",
+                "model": "claude-3-haiku-20240307"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    }
+}

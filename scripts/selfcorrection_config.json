@@ -1,0 +1,17 @@
+{
+    "model_name": "gpt-4.1-nano-2025-04-14",
+    "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+    "data_format": "csv",
+    "exp_name": "alerce_train_direct_v9",
+    "save_path": "./results",
+    "sql_gen_method": "direct",
+    "eval": true,
+    "batch": false,
+    "model_name_decomp": "gpt-4.1-nano-2025-04-14",
+    "max_new_tokens": 4000,
+    "max_new_tokens_decomp": 4000,
+    "t": 0.0,
+    "promptV_sc": "sc_v3",
+    "parallel": true,
+    "alias_handling": true
+}

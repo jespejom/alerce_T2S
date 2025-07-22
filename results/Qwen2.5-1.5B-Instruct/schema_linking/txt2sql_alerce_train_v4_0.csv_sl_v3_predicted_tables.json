@@ -1,0 +1,5639 @@
+{
+    "schema_linking_model": {
+        "model": {
+            "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+            "temperature": 0.01,
+            "max_tokens": 4000,
+            "top_p": 1.0
+        },
+        "prompt_version": "sl_v3",
+        "db_schema": "\nTABLE \"object\": contains basic filter and time\u2013aggregated statistics such as location, number of observations, and the times of first and last detection.\nTABLE \"probability\": classification probabilities associated to a given object, classifier, and class. Contain the object classification probabilities, including those from the stamp and light curve classifiers, and from different versions of these classifiers.\nTABLE \"feature\": contains the object light curve statistics and other features used for ML classification and which are stored as json files in our database.\nTABLE \"magstat\": contains time\u2013aggregated statistics separated by filter, such as the average magnitude, the initial magnitude change rate, number of detections, etc.\nTABLE \"non_detection\": contains the limiting magnitudes of previous non\u2013detections separated by filter.\nTABLE \"detection\": contains the object light curves including their difference and corrected magnitudes and associated errors separated by filter.\nTABLE \"step\": contains the different pipeline steps and their versions.\nTABLE \"taxonomy\": contains details about the different taxonomies used in our stamp and light curve classifiers, which can evolve with time.\nTABLE \"feature_version\": contains the version of the feature extraction and preprocessing steps used to generate the features.\nTABLE \"xmatch\": contains the object cross\u2013matches and associated cross\u2013match catalogs.\nTABLE \"allwise\": contains the AllWISE catalog information for the objects.\nTABLE \"dataquality\": detailed object information regarding the quality of the data\nTABLE \"gaia_ztf\": GAIA objects near detected ZTF objects\nTABLE \"ss_ztf\": known solar system objects near detected objects\nTABLE \"ps1_ztf\": PanSTARRS objects near detected ZTF objects\nTABLE \"reference\": properties of the reference images used to build templates\nTABLE \"pipeline\": information about the different pipeline steps and their versions\nTABLE \"information_schema.tables\": information about the database tables and columns\nTABLE \"forced_photometry\": contains the forced photometry measurements for each object, including the object position, magnitude, and associated errors, and the photometry of the reference image.\n",
+        "schema_linking_format": "\n# Given the user request, select the tables needed to generate a SQL query\n# The Database has the following tables:\n{db_schema}\n\n{final_instructions}\n",
+        "sl_final_instructions": "\n# Information about the database\n## Table object is the main table, so any request that ask for information about the object, will need this table.\n## Table probability is the only table that has information of the classifications, so any request that ask for probabilities, any classifier, or somespecific object type (for example Supernovaes (SNe), 'SNIa', 'SNIbc', 'SNII', 'SLSN', 'QSO', 'AGN', 'Blazar', 'CV/Nova', 'YSO', 'LPV', 'E', 'DSCT', 'RRL', 'CEP', 'Periodic-Other'), will need this table.\n## Table feature is the only table that has information of the features used for the classification, so any request that ask for features, will need this table.\n\n# Give ONLY the TABLES that are needed to generate the SQL query.\n# Give the answer in the following format: ['table1', 'table2', 'table3', ...]. For example, if the TABLES needed for the user request are TABLE object and TABLE taxonomy, then you should type: ['object', 'taxonomy']\n# Just give the tables and ignore any other task given in the request given as \"request\".\n# Remember to use the exact name of the TABLES, as they are written in the DATABASE SCHEMA. Do NOT create table names.\n",
+        "tables_list": null
+    },
+    "13": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 8,
+                "id": "chatcmpl-e504fd79843b4a09b2e42cb33891bc77",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 8,
+                "id": "chatcmpl-e504fd79843b4a09b2e42cb33891bc77",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-95ecfff1f2ee4b05bac803bd50cad0a4",
+                "created": 1751990506,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-98e0c67ea5be4cdfa98200df787ec56e",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-83575a0dbe0f425a853cb913d5268c91",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-296aa3f2a7be43bb9badd9ebab7c52bc",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "10": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 8,
+                "id": "chatcmpl-131e3533a8cf40eeae43bcf611d39952",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 8,
+                "id": "chatcmpl-131e3533a8cf40eeae43bcf611d39952",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-cb5202eb32ac4d2d911b3c58ce482b60",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-3e46f1858536449d806fd6609a14a1b5",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-67b2a42299d842b08d9251c4c11385c8",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-2fd9b70e05124ca5b2fee50ce411de91",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "15": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 22,
+                "id": "chatcmpl-6984a6d938c74580a40d29c42b215d32",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 22,
+                "id": "chatcmpl-6984a6d938c74580a40d29c42b215d32",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-c5250837dfa747bf908631fc2cdf0eee",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-cbff9c3440ac4b56b2a06a5f51f786ef",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-4979c7733a1a480c898f3d52f7f2bb23",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-c0f33bd147d04f69a8cba6ebbb42c31b",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "4": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 14,
+                "id": "chatcmpl-d02c94d5a43b44a4a353017044da7af6",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 14,
+                "id": "chatcmpl-d02c94d5a43b44a4a353017044da7af6",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 7,
+                "id": "chatcmpl-b0468120c3e34ba19a8510dace48ccd5",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 7,
+                "id": "chatcmpl-c292700951154ebfb10e6336c89f2627",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 7,
+                "id": "chatcmpl-8b71e45ce93f4cc4851026f278816e6d",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 820,
+                "out_toks": 7,
+                "id": "chatcmpl-2c78dab8b27f4e65b975e7d7015b6ed4",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "25": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 867,
+                "out_toks": 8,
+                "id": "chatcmpl-9c944df1e9e042f89ba8ef06a5f57f08",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 867,
+                "out_toks": 8,
+                "id": "chatcmpl-9c944df1e9e042f89ba8ef06a5f57f08",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 867,
+                "out_toks": 4,
+                "id": "chatcmpl-8fd10e37821e4ab1a0e9679fa3f103af",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 867,
+                "out_toks": 4,
+                "id": "chatcmpl-30d9d72f208246dcb7a17b9ad5adc965",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 867,
+                "out_toks": 4,
+                "id": "chatcmpl-33c7acc545e14eb8b9e54ace992198bf",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 867,
+                "out_toks": 4,
+                "id": "chatcmpl-c2f30261d433412c8a2c45d2707215f7",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "7": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 774,
+                "out_toks": 14,
+                "id": "chatcmpl-0e4ceccfa3074881a4c0b3ac9cc6c5c8",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 774,
+                "out_toks": 14,
+                "id": "chatcmpl-0e4ceccfa3074881a4c0b3ac9cc6c5c8",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 774,
+                "out_toks": 7,
+                "id": "chatcmpl-e5c0206a99ed46ea9e51ed4f365f99ad",
+                "created": 1751990507,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 774,
+                "out_toks": 7,
+                "id": "chatcmpl-7bfa56a510454a37a42eb86a5b869afd",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 774,
+                "out_toks": 7,
+                "id": "chatcmpl-1abf362eb0cb4d2aa26d490857035c78",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 774,
+                "out_toks": 7,
+                "id": "chatcmpl-95c00e3b50c74071acd34798371db8ea",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "2": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 759,
+                "out_toks": 14,
+                "id": "chatcmpl-5f3690bec48e4287b7202de99903764d",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 759,
+                "out_toks": 14,
+                "id": "chatcmpl-5f3690bec48e4287b7202de99903764d",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 759,
+                "out_toks": 4,
+                "id": "chatcmpl-c3f59ff671084f4e89680b707977454a",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 759,
+                "out_toks": 4,
+                "id": "chatcmpl-cbad39215a3545cdb32689aa33a51bc2",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 759,
+                "out_toks": 4,
+                "id": "chatcmpl-9dca5e3e2e8546f2b9b68620d10cf04d",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 759,
+                "out_toks": 4,
+                "id": "chatcmpl-ae6a5237553c425ab830721504c52c56",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "3": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 763,
+                "out_toks": 14,
+                "id": "chatcmpl-cf2ad9960a2540679be64d443dd99000",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 763,
+                "out_toks": 14,
+                "id": "chatcmpl-cf2ad9960a2540679be64d443dd99000",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 763,
+                "out_toks": 7,
+                "id": "chatcmpl-ec307b1114514b35b3c9f26e9e33a5a4",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 763,
+                "out_toks": 7,
+                "id": "chatcmpl-00f09f09566548bba52ff0c8c8cf9c0a",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 763,
+                "out_toks": 7,
+                "id": "chatcmpl-d86d89172f934542973f6e7277d3049b",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 763,
+                "out_toks": 7,
+                "id": "chatcmpl-e804fdda66314436baeb4e72fd372cba",
+                "created": 1752089143,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "23": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 786,
+                "out_toks": 8,
+                "id": "chatcmpl-fa75758024ab4966882f326f80e5d073",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 786,
+                "out_toks": 8,
+                "id": "chatcmpl-fa75758024ab4966882f326f80e5d073",
+                "created": 1750110907,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 786,
+                "out_toks": 4,
+                "id": "chatcmpl-d70b8e05961f4bad81eb3e0ce8bc0e79",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 786,
+                "out_toks": 4,
+                "id": "chatcmpl-74afe97afbda47e0a8a2ffb45f572494",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 786,
+                "out_toks": 4,
+                "id": "chatcmpl-3fac7147b7774b2da370846664a5ef40",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 786,
+                "out_toks": 4,
+                "id": "chatcmpl-28320dbb33ba4cc79bd9788667d9bc1d",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "32": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 773,
+                "out_toks": 12,
+                "id": "chatcmpl-3c1dc697229c4ec39cd67c55b5585389",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 773,
+                "out_toks": 12,
+                "id": "chatcmpl-3c1dc697229c4ec39cd67c55b5585389",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 773,
+                "out_toks": 6,
+                "id": "chatcmpl-61f580b086fd4fedb2300439934c83b7",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 773,
+                "out_toks": 6,
+                "id": "chatcmpl-4d17333264cd44a094eccbbaa496b7db",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 773,
+                "out_toks": 6,
+                "id": "chatcmpl-ef1f1aeab4ea48b1a365ab5d930a6c59",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 773,
+                "out_toks": 6,
+                "id": "chatcmpl-b748f0cff0724bafb5ab7551e7b27626",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "20": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object']",
+                    "1": "['probability', 'object']"
+                },
+                "in_toks": 779,
+                "out_toks": 14,
+                "id": "chatcmpl-3d979fd13ddf41a7921051f574df1741",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object']",
+                    "1": "['probability', 'object']"
+                },
+                "in_toks": 779,
+                "out_toks": 14,
+                "id": "chatcmpl-3d979fd13ddf41a7921051f574df1741",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object']"
+                },
+                "in_toks": 779,
+                "out_toks": 7,
+                "id": "chatcmpl-c6dc4c385f6e4fc4bfc8d858e9b5901a",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object']"
+                },
+                "in_toks": 779,
+                "out_toks": 7,
+                "id": "chatcmpl-9cad8a58daf5418294d02d6b4c1c2fd8",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object']"
+                },
+                "in_toks": 779,
+                "out_toks": 7,
+                "id": "chatcmpl-583ef9e7b79145b481e58cd6b540f627",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object']"
+                },
+                "in_toks": 779,
+                "out_toks": 7,
+                "id": "chatcmpl-95b219bd8bc741db930959de2bac7648",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "18": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 912,
+                "out_toks": 8,
+                "id": "chatcmpl-5645de4d9c9440df80ac9ae5015697d8",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 912,
+                "out_toks": 8,
+                "id": "chatcmpl-5645de4d9c9440df80ac9ae5015697d8",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 912,
+                "out_toks": 4,
+                "id": "chatcmpl-5178de2076874880b403ecdf8e0dec57",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 912,
+                "out_toks": 4,
+                "id": "chatcmpl-b23b1806b5344190aeff484e2630815a",
+                "created": 1751990508,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 912,
+                "out_toks": 4,
+                "id": "chatcmpl-07df22b7b499462ebd0fcf0001434e17",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 912,
+                "out_toks": 4,
+                "id": "chatcmpl-c35db4be3c4246d1be93e1d021e56c73",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "35": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 752,
+                "out_toks": 8,
+                "id": "chatcmpl-6b07654a57504d3f80a6e66c6ff4d6d9",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 752,
+                "out_toks": 8,
+                "id": "chatcmpl-6b07654a57504d3f80a6e66c6ff4d6d9",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 752,
+                "out_toks": 4,
+                "id": "chatcmpl-236f2ca95f1d417f8fe6b354fdb955f4",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 752,
+                "out_toks": 4,
+                "id": "chatcmpl-674a30e2c9a545f1ab8d94b95720f0ad",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 752,
+                "out_toks": 4,
+                "id": "chatcmpl-7506f7b3570f44e39b2f8a9ae5fd4b0c",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 752,
+                "out_toks": 4,
+                "id": "chatcmpl-f21334e43101422cb88d3c9c6c16e6a7",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "11": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 792,
+                "out_toks": 8,
+                "id": "chatcmpl-a07953abd4994b84915376a93f51fe4d",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 792,
+                "out_toks": 8,
+                "id": "chatcmpl-a07953abd4994b84915376a93f51fe4d",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-01615aea0c4b414da76ca13eed8403f0",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-754a7a6e2eec4d439211bed804da8f6a",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-f9ead94914794134bc87fed6f8f9c61a",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-cb8f16e8fa4a4226978c121098b33b3e",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "9": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 872,
+                "out_toks": 14,
+                "id": "chatcmpl-b29e91c07db9441d9a531012cfb6017e",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 872,
+                "out_toks": 14,
+                "id": "chatcmpl-b29e91c07db9441d9a531012cfb6017e",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 872,
+                "out_toks": 7,
+                "id": "chatcmpl-2bd7e541af274143bb7a7df97f5e08eb",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 872,
+                "out_toks": 7,
+                "id": "chatcmpl-70c81d3792c04fc99d2842bd004fe9e0",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 872,
+                "out_toks": 7,
+                "id": "chatcmpl-9135ceca1d0d41fdbb3f2d3bfedc5b36",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 872,
+                "out_toks": 7,
+                "id": "chatcmpl-3b76bc8eaa174aa6ad316157085947f1",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "5": {
+        "0": {
+            "pred_tables": [
+                "detection",
+                "feature",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'feature', 'object']",
+                    "1": "['detection', 'probability']"
+                },
+                "in_toks": 829,
+                "out_toks": 19,
+                "id": "chatcmpl-f289a6e34c684748846ef6693e57af8e",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'feature', 'object']",
+                    "1": "['detection', 'probability']"
+                },
+                "in_toks": 829,
+                "out_toks": 19,
+                "id": "chatcmpl-f289a6e34c684748846ef6693e57af8e",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'probability']"
+                },
+                "in_toks": 829,
+                "out_toks": 8,
+                "id": "chatcmpl-0a0832e584e844339e252538637bb93d",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'probability']"
+                },
+                "in_toks": 829,
+                "out_toks": 8,
+                "id": "chatcmpl-c53df9f3b0104c50b557727d39397037",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "detection",
+                "feature",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'feature', 'object']"
+                },
+                "in_toks": 829,
+                "out_toks": 11,
+                "id": "chatcmpl-b7dfee7737bd4d23b543d023f5186421",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'probability']"
+                },
+                "in_toks": 829,
+                "out_toks": 8,
+                "id": "chatcmpl-5a7732be406a4f01ba6d66fcf4e86777",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "0": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 14,
+                "id": "chatcmpl-3b33a109a83a48d7b9cce292f2ee1686",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']",
+                    "1": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 14,
+                "id": "chatcmpl-3b33a109a83a48d7b9cce292f2ee1686",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 7,
+                "id": "chatcmpl-8a08801ebb5e408bac1bc03fd5e5f923",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 7,
+                "id": "chatcmpl-b26afcc7294a4fbabd1bdc63d54c0959",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 7,
+                "id": "chatcmpl-885b5e5602e0484db854d6a3bd96d058",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']"
+                },
+                "in_toks": 823,
+                "out_toks": 7,
+                "id": "chatcmpl-336a5ae75cca4a779d780251374fe9fe",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "28": {
+        "0": {
+            "pred_tables": [
+                "information_schema.tables"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['information_schema.tables']",
+                    "1": "['information_schema.tables']"
+                },
+                "in_toks": 756,
+                "out_toks": 12,
+                "id": "chatcmpl-b3db991103514a868487046e034f9ae6",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "information_schema.tables"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['information_schema.tables']",
+                    "1": "['information_schema.tables']"
+                },
+                "in_toks": 756,
+                "out_toks": 12,
+                "id": "chatcmpl-b3db991103514a868487046e034f9ae6",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "information_schema.tables"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['information_schema.tables']"
+                },
+                "in_toks": 756,
+                "out_toks": 6,
+                "id": "chatcmpl-ab2ce60288ac455781912747f3dd61d5",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "information_schema.tables"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['information_schema.tables']"
+                },
+                "in_toks": 756,
+                "out_toks": 6,
+                "id": "chatcmpl-216563b882bd4397bad09ace3728c47b",
+                "created": 1751990509,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "information_schema.tables"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['information_schema.tables']"
+                },
+                "in_toks": 756,
+                "out_toks": 6,
+                "id": "chatcmpl-6f2751d9c50e426ba948eca8aa2a79dc",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "information_schema.tables"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['information_schema.tables']"
+                },
+                "in_toks": 756,
+                "out_toks": 6,
+                "id": "chatcmpl-b5e297657da247079280f4b8f3c91bfd",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "36": {
+        "0": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 8,
+                "id": "chatcmpl-0ea65b0298cf4f3fb2d4deec582f0272",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 8,
+                "id": "chatcmpl-0ea65b0298cf4f3fb2d4deec582f0272",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 4,
+                "id": "chatcmpl-77f86fb140d9402082783a255d2f46c1",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 4,
+                "id": "chatcmpl-b2c928b5ae474d0186a47b36c2cf95ca",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 4,
+                "id": "chatcmpl-a6711dda70e240118a1a52d04f8fe00d",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 766,
+                "out_toks": 4,
+                "id": "chatcmpl-9520db34b1ca42e88fea7a0b5e715c2c",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "38": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 809,
+                "out_toks": 8,
+                "id": "chatcmpl-cd21556e18ae4b1e96499999e03b140f",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 809,
+                "out_toks": 8,
+                "id": "chatcmpl-cd21556e18ae4b1e96499999e03b140f",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 809,
+                "out_toks": 4,
+                "id": "chatcmpl-bef3227fa3d541a2bcc8e2051d03e8a0",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 809,
+                "out_toks": 4,
+                "id": "chatcmpl-de3ca0e8a2d34bec964201218a8d30bd",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 809,
+                "out_toks": 4,
+                "id": "chatcmpl-bb0c724d3651427da8a26454cf02d675",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 809,
+                "out_toks": 4,
+                "id": "chatcmpl-828a0e1c85fd43b598aa7a77ee96bac6",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "24": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 852,
+                "out_toks": 8,
+                "id": "chatcmpl-d051c45ba79c46b7a642a833cde17fbe",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 852,
+                "out_toks": 8,
+                "id": "chatcmpl-d051c45ba79c46b7a642a833cde17fbe",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 852,
+                "out_toks": 4,
+                "id": "chatcmpl-f51d9ca05d0845379130dacc59157207",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 852,
+                "out_toks": 4,
+                "id": "chatcmpl-b0f65f8d22ee4086aa44fc990b226233",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 852,
+                "out_toks": 4,
+                "id": "chatcmpl-8437e7ceab1d4b6fb6bc001801fa79f5",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 852,
+                "out_toks": 4,
+                "id": "chatcmpl-749a7812eca94de2acdcde4c90472ab4",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "31": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "feature",
+                "classification"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature', 'classification']",
+                    "1": "['object', 'feature', 'classification']"
+                },
+                "in_toks": 784,
+                "out_toks": 20,
+                "id": "chatcmpl-a1a2243483de44d09284b1c193de93c7",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "feature",
+                "classification"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature', 'classification']",
+                    "1": "['object', 'feature', 'classification']"
+                },
+                "in_toks": 784,
+                "out_toks": 20,
+                "id": "chatcmpl-a1a2243483de44d09284b1c193de93c7",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "feature",
+                "classification"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature', 'classification']"
+                },
+                "in_toks": 784,
+                "out_toks": 10,
+                "id": "chatcmpl-22c7728b0f1e4bf59ca1266238ccd235",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "feature",
+                "classification"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature', 'classification']"
+                },
+                "in_toks": 784,
+                "out_toks": 10,
+                "id": "chatcmpl-e2d148a828e3437eb60adcf208bf9b39",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "feature",
+                "classification"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature', 'classification']"
+                },
+                "in_toks": 784,
+                "out_toks": 10,
+                "id": "chatcmpl-c7e1b6607eaa4cd4baee1abc8e4ba155",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "feature",
+                "classification"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature', 'classification']"
+                },
+                "in_toks": 784,
+                "out_toks": 10,
+                "id": "chatcmpl-4089c2dd6b104e66bd5a1270bd227a3b",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "33": {
+        "0": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 874,
+                "out_toks": 10,
+                "id": "chatcmpl-a2e900d53bed4e8b92c848e0d0a0cf66",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 874,
+                "out_toks": 10,
+                "id": "chatcmpl-a2e900d53bed4e8b92c848e0d0a0cf66",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 874,
+                "out_toks": 5,
+                "id": "chatcmpl-031bcf70e9e84c39b81f604e1255330b",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 874,
+                "out_toks": 5,
+                "id": "chatcmpl-09b1bbfd0b6c4c2d99374ca7f3f49075",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 874,
+                "out_toks": 5,
+                "id": "chatcmpl-a5b266d7db9545b5a0da69a734c1927d",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 874,
+                "out_toks": 5,
+                "id": "chatcmpl-0bd06d5e49e84491bcde14842099df07",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "6": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 842,
+                "out_toks": 22,
+                "id": "chatcmpl-bd5909eb291d4e1e9598650430e48e4b",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']",
+                    "1": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 842,
+                "out_toks": 22,
+                "id": "chatcmpl-bd5909eb291d4e1e9598650430e48e4b",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 842,
+                "out_toks": 11,
+                "id": "chatcmpl-937ac5e04516442bab5709b3ecbe677e",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 842,
+                "out_toks": 11,
+                "id": "chatcmpl-ea231c4b09e941d8a7df656d35a592a3",
+                "created": 1751990510,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 842,
+                "out_toks": 11,
+                "id": "chatcmpl-f37c4a053e5e4a9091e95e21c79b0327",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 842,
+                "out_toks": 11,
+                "id": "chatcmpl-cea37a91fdf84b07a871b701ece5fd97",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "21": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 813,
+                "out_toks": 8,
+                "id": "chatcmpl-713e12965b4248b1a626eff6d370038b",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 813,
+                "out_toks": 8,
+                "id": "chatcmpl-713e12965b4248b1a626eff6d370038b",
+                "created": 1750110908,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 813,
+                "out_toks": 4,
+                "id": "chatcmpl-76b18039535a4a098730954929165c93",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 813,
+                "out_toks": 4,
+                "id": "chatcmpl-1d9bd143dd56489c8ebce59b4a2f90d8",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 813,
+                "out_toks": 4,
+                "id": "chatcmpl-fdccd8d05d5a416fa22785778b9bc4e8",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 813,
+                "out_toks": 4,
+                "id": "chatcmpl-f715f46afb724a30ae771d933c11d2ba",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "26": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 8,
+                "id": "chatcmpl-67ef802a63fc46238eb0fe70e2653657",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 8,
+                "id": "chatcmpl-67ef802a63fc46238eb0fe70e2653657",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-f237a205b07345efac2944b763f029ee",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-613372db76f24269beee5a66b69d232b",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-cc196ae382be4700b1c9c8da5d9e69b9",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 783,
+                "out_toks": 4,
+                "id": "chatcmpl-7c0aa5e83e834a75aff32c2e591e14b2",
+                "created": 1752089144,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "29": {
+        "0": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']",
+                    "1": "['ps1_ztf']"
+                },
+                "in_toks": 844,
+                "out_toks": 14,
+                "id": "chatcmpl-012e445dc0604fe7a543882ccc0e206f",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']",
+                    "1": "['ps1_ztf']"
+                },
+                "in_toks": 844,
+                "out_toks": 14,
+                "id": "chatcmpl-012e445dc0604fe7a543882ccc0e206f",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']"
+                },
+                "in_toks": 844,
+                "out_toks": 7,
+                "id": "chatcmpl-fc2e497f5b144d28b699fbced1a996bf",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']"
+                },
+                "in_toks": 844,
+                "out_toks": 7,
+                "id": "chatcmpl-d86e98fd30ae4679a8a44a2b7e4472d9",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']"
+                },
+                "in_toks": 844,
+                "out_toks": 7,
+                "id": "chatcmpl-cda0f88124af40dd9d83b7fa355c5751",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']"
+                },
+                "in_toks": 844,
+                "out_toks": 7,
+                "id": "chatcmpl-c0bde3e67e00470d8d24f43305800ca9",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "52": {
+        "0": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']",
+                    "1": "['forced_photometry']"
+                },
+                "in_toks": 790,
+                "out_toks": 14,
+                "id": "chatcmpl-37c3b952507548b08f65b9676c34aab7",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']",
+                    "1": "['forced_photometry']"
+                },
+                "in_toks": 790,
+                "out_toks": 14,
+                "id": "chatcmpl-37c3b952507548b08f65b9676c34aab7",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']"
+                },
+                "in_toks": 790,
+                "out_toks": 7,
+                "id": "chatcmpl-220b3ec49b3140bcaa19417ab783059d",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']"
+                },
+                "in_toks": 790,
+                "out_toks": 7,
+                "id": "chatcmpl-89f5a56521504bfbab4e01cd82e3f1a2",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']"
+                },
+                "in_toks": 790,
+                "out_toks": 7,
+                "id": "chatcmpl-27744f325f69481e85d4b27a19746210",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']"
+                },
+                "in_toks": 790,
+                "out_toks": 7,
+                "id": "chatcmpl-02d48c22690641868890914c18488102",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "109": {
+        "0": {
+            "pred_tables": [
+                "feature",
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'detection', 'probability']",
+                    "1": "['feature', 'detection', 'probability']"
+                },
+                "in_toks": 827,
+                "out_toks": 22,
+                "id": "chatcmpl-d7753fa953ef4dda8d51153c75f68c44",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "feature",
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'detection', 'probability']",
+                    "1": "['feature', 'detection', 'probability']"
+                },
+                "in_toks": 827,
+                "out_toks": 22,
+                "id": "chatcmpl-d7753fa953ef4dda8d51153c75f68c44",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "feature",
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'detection', 'probability']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-7c94959a06884ae4ba89810f5e43b0c7",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "feature",
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'detection', 'probability']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-0852c44db7034c23bcca1ca7a4b2af74",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "feature",
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'detection', 'probability']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-a5bde0f2068b4b7a8620559c9f812298",
+                "created": 1751990511,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "feature",
+                "detection",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'detection', 'probability']"
+                },
+                "in_toks": 827,
+                "out_toks": 11,
+                "id": "chatcmpl-74043ea00ea347708cca07e6c99452ee",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "49": {
+        "0": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 779,
+                "out_toks": 8,
+                "id": "chatcmpl-b24397c686974ccab766547c82e64d87",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 779,
+                "out_toks": 8,
+                "id": "chatcmpl-b24397c686974ccab766547c82e64d87",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 779,
+                "out_toks": 4,
+                "id": "chatcmpl-a6699d2559624e1883e6297bf4d59e99",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 779,
+                "out_toks": 4,
+                "id": "chatcmpl-d8d058a7efdc427aa77c19e1c55703bb",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 779,
+                "out_toks": 4,
+                "id": "chatcmpl-64798efed747484ebfc5d4d1e9765977",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 779,
+                "out_toks": 4,
+                "id": "chatcmpl-3cd19de1ab174e1498c70c93ec89a11e",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "46": {
+        "0": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 10,
+                "id": "chatcmpl-d2788600a4f24d1c9d19d45459625ae2",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']",
+                    "1": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 10,
+                "id": "chatcmpl-d2788600a4f24d1c9d19d45459625ae2",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 5,
+                "id": "chatcmpl-9b28f741aa0c4cb5b050d332bbfd7876",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 5,
+                "id": "chatcmpl-593a67abfa6b41ff981bfee1373ad853",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 5,
+                "id": "chatcmpl-bd3dab0dcd6f47249bbfd5b97ccd58e3",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 767,
+                "out_toks": 5,
+                "id": "chatcmpl-5ca802f0e5544722950b9b4b5c84c7ac",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "93": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat']",
+                    "1": "['probability', 'magstat']"
+                },
+                "in_toks": 806,
+                "out_toks": 16,
+                "id": "chatcmpl-57550630c39a4fa5a522fcbedda6469b",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat']",
+                    "1": "['probability', 'magstat']"
+                },
+                "in_toks": 806,
+                "out_toks": 16,
+                "id": "chatcmpl-57550630c39a4fa5a522fcbedda6469b",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat']"
+                },
+                "in_toks": 806,
+                "out_toks": 8,
+                "id": "chatcmpl-c8e1d01b650144cc902baf8a44745bb5",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat']"
+                },
+                "in_toks": 806,
+                "out_toks": 8,
+                "id": "chatcmpl-19ebc818e2144e9fb293e3af46a61c92",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat']"
+                },
+                "in_toks": 806,
+                "out_toks": 8,
+                "id": "chatcmpl-ae7f144e494343f5882008a173d17969",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat']"
+                },
+                "in_toks": 806,
+                "out_toks": 8,
+                "id": "chatcmpl-69b7e2ab9593481889121cd9be2e3482",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "62": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 792,
+                "out_toks": 8,
+                "id": "chatcmpl-4a1e81bc1bb34d0bb4ac6c15e0426117",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 792,
+                "out_toks": 8,
+                "id": "chatcmpl-4a1e81bc1bb34d0bb4ac6c15e0426117",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-6b1806e3ad414bab9ab6ea57375427b5",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-274d5f34d5ee4808be0c2033dfdd9bad",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-cc379e7b3a8b436589eebee1399a9a35",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 792,
+                "out_toks": 4,
+                "id": "chatcmpl-8fd85a58865b467788d0e49d005d3a87",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "95": {
+        "0": {
+            "pred_tables": [
+                "xmatch",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'feature']",
+                    "1": "['xmatch', 'feature']"
+                },
+                "in_toks": 853,
+                "out_toks": 16,
+                "id": "chatcmpl-e6e886a478b9442c9523a76651c2ac1b",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'feature']",
+                    "1": "['xmatch', 'feature']"
+                },
+                "in_toks": 853,
+                "out_toks": 16,
+                "id": "chatcmpl-e6e886a478b9442c9523a76651c2ac1b",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "xmatch",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'feature']"
+                },
+                "in_toks": 853,
+                "out_toks": 8,
+                "id": "chatcmpl-b78e63fc96c546758e2f62fc11ba856c",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "xmatch",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'feature']"
+                },
+                "in_toks": 853,
+                "out_toks": 8,
+                "id": "chatcmpl-33ce3c1e45d54e91a695bc5d31334f74",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "xmatch",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'feature']"
+                },
+                "in_toks": 853,
+                "out_toks": 8,
+                "id": "chatcmpl-64b0d9710cf14c19ac76c3902a3c6ee3",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "xmatch",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'feature']"
+                },
+                "in_toks": 853,
+                "out_toks": 8,
+                "id": "chatcmpl-6abac993e7bf4761b338d3411ae117c4",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "85": {
+        "0": {
+            "pred_tables": [
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'dataquality']",
+                    "1": "['detection', 'dataquality']"
+                },
+                "in_toks": 794,
+                "out_toks": 18,
+                "id": "chatcmpl-9f45e5f3f5c04d2dacb41a65282f6be4",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'dataquality']",
+                    "1": "['detection', 'dataquality']"
+                },
+                "in_toks": 794,
+                "out_toks": 18,
+                "id": "chatcmpl-9f45e5f3f5c04d2dacb41a65282f6be4",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'dataquality']"
+                },
+                "in_toks": 794,
+                "out_toks": 9,
+                "id": "chatcmpl-d7a42558953549fc89cdc88c943440c0",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'dataquality']"
+                },
+                "in_toks": 794,
+                "out_toks": 9,
+                "id": "chatcmpl-c623d34ed1364efd8d545853eee56726",
+                "created": 1751990512,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'dataquality']"
+                },
+                "in_toks": 794,
+                "out_toks": 9,
+                "id": "chatcmpl-3eb2ba2b61974b2da1082a56a6d28377",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'dataquality']"
+                },
+                "in_toks": 794,
+                "out_toks": 9,
+                "id": "chatcmpl-34a107d5955c4b5792ef4a30f7b6e25c",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "98": {
+        "0": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']",
+                    "1": "['xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 18,
+                "id": "chatcmpl-aa0ce85638b0496fb8501e67511a0f32",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']",
+                    "1": "['xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 18,
+                "id": "chatcmpl-aa0ce85638b0496fb8501e67511a0f32",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 9,
+                "id": "chatcmpl-43ba53ce69034315a042d4641dd87101",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 9,
+                "id": "chatcmpl-875e8bc07c6d40f0af7eb1af36c70cb5",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 9,
+                "id": "chatcmpl-612cc5ad52354e9eb554111a14a0799f",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']"
+                },
+                "in_toks": 786,
+                "out_toks": 9,
+                "id": "chatcmpl-b11a9a70948149c4b9ea526582cc2145",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "82": {
+        "0": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']",
+                    "1": "['xmatch']"
+                },
+                "in_toks": 803,
+                "out_toks": 10,
+                "id": "chatcmpl-ec9d55cc396343fa954c789550244499",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']",
+                    "1": "['xmatch']"
+                },
+                "in_toks": 803,
+                "out_toks": 10,
+                "id": "chatcmpl-ec9d55cc396343fa954c789550244499",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']"
+                },
+                "in_toks": 803,
+                "out_toks": 5,
+                "id": "chatcmpl-6bf444e1dcb346f2b441c6d5128cf32e",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']"
+                },
+                "in_toks": 803,
+                "out_toks": 5,
+                "id": "chatcmpl-5abdb0e66ead4b1bb29ba6119ddd102a",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']"
+                },
+                "in_toks": 803,
+                "out_toks": 5,
+                "id": "chatcmpl-844b75bdde914f1991310b40e555aad5",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']"
+                },
+                "in_toks": 803,
+                "out_toks": 5,
+                "id": "chatcmpl-f698ef5f6065478a85d34380c68f2182",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "64": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 799,
+                "out_toks": 8,
+                "id": "chatcmpl-9b5ff4e5443c4319ba26b6bd0290382e",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 799,
+                "out_toks": 8,
+                "id": "chatcmpl-9b5ff4e5443c4319ba26b6bd0290382e",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 799,
+                "out_toks": 4,
+                "id": "chatcmpl-b299d5f8636f4e1abc7c0078cd7fd7b0",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 799,
+                "out_toks": 4,
+                "id": "chatcmpl-096ab85e16a74f7caa49fb39738f113d",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 799,
+                "out_toks": 4,
+                "id": "chatcmpl-e11a912b2d154e1cab5de1d5e3eaf8cd",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 799,
+                "out_toks": 4,
+                "id": "chatcmpl-a07478f47a9840d68da56ddbbb5b9b75",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "87": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'gaia_ztf']",
+                    "1": "['probability', 'gaia_ztf']"
+                },
+                "in_toks": 825,
+                "out_toks": 20,
+                "id": "chatcmpl-0a8ec72cfea943a9b5765ba8f785d814",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'gaia_ztf']",
+                    "1": "['probability', 'gaia_ztf']"
+                },
+                "in_toks": 825,
+                "out_toks": 20,
+                "id": "chatcmpl-0a8ec72cfea943a9b5765ba8f785d814",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'gaia_ztf']"
+                },
+                "in_toks": 825,
+                "out_toks": 10,
+                "id": "chatcmpl-50f1d2faf9514d099db88185102bc0a0",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'gaia_ztf']"
+                },
+                "in_toks": 825,
+                "out_toks": 10,
+                "id": "chatcmpl-3c64718073d64abe93d5394db4f657cb",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'gaia_ztf']"
+                },
+                "in_toks": 825,
+                "out_toks": 10,
+                "id": "chatcmpl-f857b0616def4dcbb76827df94258f2e",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability",
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'gaia_ztf']"
+                },
+                "in_toks": 825,
+                "out_toks": 10,
+                "id": "chatcmpl-ba15ee3ca3d044eaa1e6bfc5a019c89a",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "108": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 815,
+                "out_toks": 8,
+                "id": "chatcmpl-9b6e40ed67c84982b3ac4edc4a48a19e",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']",
+                    "1": "['object']"
+                },
+                "in_toks": 815,
+                "out_toks": 8,
+                "id": "chatcmpl-9b6e40ed67c84982b3ac4edc4a48a19e",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-99004c4e95b845c69239c19f22583e19",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-90e46e8e4f3544cf8c3d0fa2a729996b",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-a748d4baeb7847d5bbd792b059af9bde",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 815,
+                "out_toks": 4,
+                "id": "chatcmpl-0f14d1bc57ce4f849a9c00806f4f9a09",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "65": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 802,
+                "out_toks": 8,
+                "id": "chatcmpl-cc5c8b19d7f94a2f9f1dfd3cafd69a74",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 802,
+                "out_toks": 8,
+                "id": "chatcmpl-cc5c8b19d7f94a2f9f1dfd3cafd69a74",
+                "created": 1750110909,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 802,
+                "out_toks": 4,
+                "id": "chatcmpl-57d08cba1ae94b7682a627a8786eae75",
+                "created": 1751990513,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 802,
+                "out_toks": 4,
+                "id": "chatcmpl-b1d0550f4cce4afb8e4b21914b35087e",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 802,
+                "out_toks": 4,
+                "id": "chatcmpl-6f12bc62009849ac9bd76d22da5ac5a4",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 802,
+                "out_toks": 4,
+                "id": "chatcmpl-14e63b5eb3d24a31b96a763296341800",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "101": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'xmatch', 'allwise']",
+                    "1": "['probability', 'xmatch', 'allwise']"
+                },
+                "in_toks": 812,
+                "out_toks": 24,
+                "id": "chatcmpl-6fb260002c7b4bbb89728f0946a7f2c0",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'xmatch', 'allwise']",
+                    "1": "['probability', 'xmatch', 'allwise']"
+                },
+                "in_toks": 812,
+                "out_toks": 24,
+                "id": "chatcmpl-6fb260002c7b4bbb89728f0946a7f2c0",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'xmatch', 'allwise']"
+                },
+                "in_toks": 812,
+                "out_toks": 12,
+                "id": "chatcmpl-de1bceaaba284d768009714b25e5e2e3",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'xmatch', 'allwise']"
+                },
+                "in_toks": 812,
+                "out_toks": 12,
+                "id": "chatcmpl-179f3534664e429ba2f557c5a926f804",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'xmatch', 'allwise']"
+                },
+                "in_toks": 812,
+                "out_toks": 12,
+                "id": "chatcmpl-a111c83a84d7425eb70d5b053b6da89a",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability",
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'xmatch', 'allwise']"
+                },
+                "in_toks": 812,
+                "out_toks": 12,
+                "id": "chatcmpl-296f70894c084e0c84e7650b454f94e1",
+                "created": 1752089145,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "88": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 803,
+                "out_toks": 14,
+                "id": "chatcmpl-42762ab715e54d198a45b937c29c3488",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 803,
+                "out_toks": 14,
+                "id": "chatcmpl-42762ab715e54d198a45b937c29c3488",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 803,
+                "out_toks": 7,
+                "id": "chatcmpl-400043232cb74936a50593e04d3948b2",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 803,
+                "out_toks": 7,
+                "id": "chatcmpl-d392cac57aee4184a8364b95c4cfb736",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 803,
+                "out_toks": 7,
+                "id": "chatcmpl-8e61c2e065814bddbf14c9d8a7cefa7c",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 803,
+                "out_toks": 7,
+                "id": "chatcmpl-e8208e048ade4e35b6d2ccefac686b6f",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "70": {
+        "0": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']",
+                    "1": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 8,
+                "id": "chatcmpl-d2f2d33978004c67bb064fcc54b0462d",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']",
+                    "1": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 8,
+                "id": "chatcmpl-d2f2d33978004c67bb064fcc54b0462d",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 4,
+                "id": "chatcmpl-745de5be713f43ceb03a7aa950d69b00",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 4,
+                "id": "chatcmpl-2f596936b92f40e1bd539dcb9d2eafd1",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 4,
+                "id": "chatcmpl-8ab28a77366844efa780b9a48f6d857b",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']"
+                },
+                "in_toks": 762,
+                "out_toks": 4,
+                "id": "chatcmpl-77d949296b8a458eb485def74d0cc8fc",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "53": {
+        "0": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']",
+                    "1": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 10,
+                "id": "chatcmpl-c2c4dbc0e38145808eeca5a3d0152fb5",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']",
+                    "1": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 10,
+                "id": "chatcmpl-c2c4dbc0e38145808eeca5a3d0152fb5",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 5,
+                "id": "chatcmpl-fed2d78b5e1b4fb4859a064917961f84",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 5,
+                "id": "chatcmpl-893885e0b1e9425dbb4dea746e30a214",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 5,
+                "id": "chatcmpl-607b113888a54f7cb367884a4e75e1f7",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']"
+                },
+                "in_toks": 772,
+                "out_toks": 5,
+                "id": "chatcmpl-c26ac3727b404702a74e6a997c4bd282",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "77": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 795,
+                "out_toks": 12,
+                "id": "chatcmpl-eae4ef3391a3478cbdf3b0a733ceec93",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 795,
+                "out_toks": 12,
+                "id": "chatcmpl-eae4ef3391a3478cbdf3b0a733ceec93",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 795,
+                "out_toks": 6,
+                "id": "chatcmpl-7d46f2a9888645ff812aeaf77b90e2a7",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 795,
+                "out_toks": 6,
+                "id": "chatcmpl-a6ce718cde034c08a2f16e204b16fb8a",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 795,
+                "out_toks": 6,
+                "id": "chatcmpl-8ea43f68ff784d299642b78eb8e3becb",
+                "created": 1751990514,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 795,
+                "out_toks": 6,
+                "id": "chatcmpl-b3694cbaf48c434a96a868c858c9263b",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "105": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 886,
+                "out_toks": 14,
+                "id": "chatcmpl-06fcc0a49aaf4cb5a507fd2e49826f09",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']",
+                    "1": "['object', 'probability']"
+                },
+                "in_toks": 886,
+                "out_toks": 14,
+                "id": "chatcmpl-06fcc0a49aaf4cb5a507fd2e49826f09",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 886,
+                "out_toks": 7,
+                "id": "chatcmpl-2d2c0eb1183e4919b48b0374ccb5a4bf",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 886,
+                "out_toks": 7,
+                "id": "chatcmpl-bb9ff7683a2e46f7a2e6475d0a29125d",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 886,
+                "out_toks": 7,
+                "id": "chatcmpl-96fe3ba60d6040f4bfbee3eff76b87ea",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 886,
+                "out_toks": 7,
+                "id": "chatcmpl-e689db641f2842558d8edd716bfbac0e",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "86": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']",
+                    "1": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 20,
+                "id": "chatcmpl-db24ce1b090c412b97d3da468e3ad13e",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']",
+                    "1": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 20,
+                "id": "chatcmpl-db24ce1b090c412b97d3da468e3ad13e",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 10,
+                "id": "chatcmpl-36d8a085e73642e3a44bf9b192f4cd3d",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 10,
+                "id": "chatcmpl-f957aa205a034fef9b37f9d8b3eb6694",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 10,
+                "id": "chatcmpl-fef3aebd5fc74bdd80e65c8b45279bcf",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ps1_ztf']"
+                },
+                "in_toks": 835,
+                "out_toks": 10,
+                "id": "chatcmpl-59655a6ec1f74531a5f93502b88fccba",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "41": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise']",
+                    "1": "['allwise', 'object']"
+                },
+                "in_toks": 901,
+                "out_toks": 16,
+                "id": "chatcmpl-4e0d113de8474317951b62dafbef2916",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "allwise",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise']",
+                    "1": "['allwise', 'object']"
+                },
+                "in_toks": 901,
+                "out_toks": 16,
+                "id": "chatcmpl-4e0d113de8474317951b62dafbef2916",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "object",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise']"
+                },
+                "in_toks": 901,
+                "out_toks": 8,
+                "id": "chatcmpl-7047eae57fe04b65b234f8a77e47e303",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "allwise",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise', 'object']"
+                },
+                "in_toks": 901,
+                "out_toks": 8,
+                "id": "chatcmpl-baa264d8bd4e4aa5936641f420726497",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "allwise",
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise', 'object']"
+                },
+                "in_toks": 901,
+                "out_toks": 8,
+                "id": "chatcmpl-08bf3bee906d469382bbc74fc6233c44",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "object",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise']"
+                },
+                "in_toks": 901,
+                "out_toks": 8,
+                "id": "chatcmpl-baea47a7bb71458e9c5c6f787938cb54",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "74": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 820,
+                "out_toks": 12,
+                "id": "chatcmpl-dfdcbd3b379a41e0ba2af0dedcaba7db",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 820,
+                "out_toks": 12,
+                "id": "chatcmpl-dfdcbd3b379a41e0ba2af0dedcaba7db",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 820,
+                "out_toks": 6,
+                "id": "chatcmpl-c95cc27bcabf457baeb437e27daa3fad",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 820,
+                "out_toks": 6,
+                "id": "chatcmpl-6eeef1d52c0e4fe69963c4b8303a1747",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 820,
+                "out_toks": 6,
+                "id": "chatcmpl-e431c74de4784f7ca4f8304b6a0f790c",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 820,
+                "out_toks": 6,
+                "id": "chatcmpl-b53ffe6537de45ffb8df9e48687aaf24",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "97": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 8,
+                "id": "chatcmpl-26f65f685a4f44abb939bbcf893ff7d4",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']",
+                    "1": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 8,
+                "id": "chatcmpl-26f65f685a4f44abb939bbcf893ff7d4",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 4,
+                "id": "chatcmpl-715aae8f67434c9d902c5f5ac8033f8f",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 4,
+                "id": "chatcmpl-1f010d9be3c948a4b6ef2342e82850d2",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 4,
+                "id": "chatcmpl-b7170d456ec54446bc8556aadd8d1350",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 841,
+                "out_toks": 4,
+                "id": "chatcmpl-f36baa6e6fe245e38cd1945904a61c58",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "66": {
+        "0": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']",
+                    "1": "['gaia_ztf']"
+                },
+                "in_toks": 772,
+                "out_toks": 14,
+                "id": "chatcmpl-89cfd525bf3b4184a53a78a7a425dee7",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']",
+                    "1": "['gaia_ztf']"
+                },
+                "in_toks": 772,
+                "out_toks": 14,
+                "id": "chatcmpl-89cfd525bf3b4184a53a78a7a425dee7",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']"
+                },
+                "in_toks": 772,
+                "out_toks": 7,
+                "id": "chatcmpl-a7af6a846a9349cc8d47ca780e3614db",
+                "created": 1751990515,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']"
+                },
+                "in_toks": 772,
+                "out_toks": 7,
+                "id": "chatcmpl-ea962befe3fc4d4b9b7372eca3932b40",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']"
+                },
+                "in_toks": 772,
+                "out_toks": 7,
+                "id": "chatcmpl-98815268bcec4f2084c3ea32b1d1c27c",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']"
+                },
+                "in_toks": 772,
+                "out_toks": 7,
+                "id": "chatcmpl-a88c841eee4447f8ae2b53a8f7504008",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "50": {
+        "0": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 811,
+                "out_toks": 8,
+                "id": "chatcmpl-a39ffa1865a3410f9141d406d54cde4d",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']",
+                    "1": "['feature']"
+                },
+                "in_toks": 811,
+                "out_toks": 8,
+                "id": "chatcmpl-a39ffa1865a3410f9141d406d54cde4d",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 811,
+                "out_toks": 4,
+                "id": "chatcmpl-af3be3688b394941bd3ab7cab4e60094",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 811,
+                "out_toks": 4,
+                "id": "chatcmpl-76c20113ae47471bb4272ea3ef594a9f",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 811,
+                "out_toks": 4,
+                "id": "chatcmpl-34ea7c9e7a58474eadca9c21b264d395",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 811,
+                "out_toks": 4,
+                "id": "chatcmpl-dd53812b1bfe4f56aca43d412e3a923b",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "91": {
+        "0": {
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']",
+                    "1": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 22,
+                "id": "chatcmpl-7a761feaddfa4720bda5cbebbaad1b97",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']",
+                    "1": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 22,
+                "id": "chatcmpl-7a761feaddfa4720bda5cbebbaad1b97",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 11,
+                "id": "chatcmpl-3ca00a3582e84bc5b53913ea14cd648d",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "gaia_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 11,
+                "id": "chatcmpl-b4e0cc92964c4b7abcc70783769b1d45",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 11,
+                "id": "chatcmpl-1b7dcb5df6fd40e989fc544b858921b5",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ps1_ztf",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'feature_version']"
+                },
+                "in_toks": 813,
+                "out_toks": 11,
+                "id": "chatcmpl-8af696ac9d7e4fac8d2c0327025aad87",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "68": {
+        "0": {
+            "pred_tables": [
+                "ps1_ztf",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'forced_photometry']",
+                    "1": "['ps1_ztf', 'forced_photometry']"
+                },
+                "in_toks": 784,
+                "out_toks": 26,
+                "id": "chatcmpl-ca418420d3604c47a7c54c7d1b043b6b",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ps1_ztf",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'forced_photometry']",
+                    "1": "['ps1_ztf', 'forced_photometry']"
+                },
+                "in_toks": 784,
+                "out_toks": 26,
+                "id": "chatcmpl-ca418420d3604c47a7c54c7d1b043b6b",
+                "created": 1750110910,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ps1_ztf",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'forced_photometry']"
+                },
+                "in_toks": 784,
+                "out_toks": 13,
+                "id": "chatcmpl-df0e3a45fb35476f89a1f9f45ecfaaf1",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "ps1_ztf",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'forced_photometry']"
+                },
+                "in_toks": 784,
+                "out_toks": 13,
+                "id": "chatcmpl-cfb9f711918c4b27ac955ef492e6075e",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ps1_ztf",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'forced_photometry']"
+                },
+                "in_toks": 784,
+                "out_toks": 13,
+                "id": "chatcmpl-2b38d66e138a47f4a2e602da6b6c5af8",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ps1_ztf",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf', 'forced_photometry']"
+                },
+                "in_toks": 784,
+                "out_toks": 13,
+                "id": "chatcmpl-250ae1c87d694ef381377d25a5ebf852",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "60": {
+        "0": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']",
+                    "1": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 10,
+                "id": "chatcmpl-9e084f5c4909465bbe693b707472528c",
+                "created": 1750110911,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']",
+                    "1": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 10,
+                "id": "chatcmpl-9e084f5c4909465bbe693b707472528c",
+                "created": 1750110911,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 5,
+                "id": "chatcmpl-62cb19cb9c9047b08dbfe16a57bad8e5",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 5,
+                "id": "chatcmpl-8e89a404923847e28ac92761791e0df7",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 5,
+                "id": "chatcmpl-71a65315b1e046db8e81bcadd470c05b",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']"
+                },
+                "in_toks": 813,
+                "out_toks": 5,
+                "id": "chatcmpl-e10970eccf46458ebf72631e910def66",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "76": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 799,
+                "out_toks": 12,
+                "id": "chatcmpl-97ae0c55921e46139892be812a7fc9af",
+                "created": 1750110911,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']",
+                    "1": "['ss_ztf']"
+                },
+                "in_toks": 799,
+                "out_toks": 12,
+                "id": "chatcmpl-97ae0c55921e46139892be812a7fc9af",
+                "created": 1750110911,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 799,
+                "out_toks": 6,
+                "id": "chatcmpl-a5f57e5dd5c44c4dad731bcf09681ffb",
+                "created": 1751990516,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 799,
+                "out_toks": 6,
+                "id": "chatcmpl-5e2103ea65d64a0f812938f2c1ec974d",
+                "created": 1751990517,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 799,
+                "out_toks": 6,
+                "id": "chatcmpl-537b0d89a6d44fce9dee22096004cc46",
+                "created": 1751990517,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 799,
+                "out_toks": 6,
+                "id": "chatcmpl-d91b03a98a3540049dd1782ed51473c3",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    },
+    "44": {
+        "0": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']",
+                    "1": "['dataquality']"
+                },
+                "in_toks": 807,
+                "out_toks": 10,
+                "id": "chatcmpl-60d06b794cb747029c6a94fe8f383cbc",
+                "created": 1750110911,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']",
+                    "1": "['dataquality']"
+                },
+                "in_toks": 807,
+                "out_toks": 10,
+                "id": "chatcmpl-60d06b794cb747029c6a94fe8f383cbc",
+                "created": 1750110911,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "2": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 807,
+                "out_toks": 5,
+                "id": "chatcmpl-2da6350f17554681988d79a274339bbd",
+                "created": 1751990517,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "3": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 807,
+                "out_toks": 5,
+                "id": "chatcmpl-d9712c8aeeb44ec58e950df70dbbe11c",
+                "created": 1751990517,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "4": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 807,
+                "out_toks": 5,
+                "id": "chatcmpl-e56c0403db3c43a49aa3d963dd47cd7a",
+                "created": 1751990517,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        },
+        "5": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 807,
+                "out_toks": 5,
+                "id": "chatcmpl-f5010c2c82904c918775d6c3f66f62ee",
+                "created": 1752089146,
+                "model": "Qwen/Qwen2.5-1.5B-Instruct"
+            }
+        }
+    }
+}
