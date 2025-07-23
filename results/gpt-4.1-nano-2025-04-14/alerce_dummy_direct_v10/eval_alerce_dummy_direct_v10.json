@@ -5,15 +5,15 @@
       "n_exp": "0",
       "comparison": {
         "oids": {
-          "precision": 0.05555555555555555,
+          "precision": 0.3333333333333333,
           "recall": 1.0,
-          "f1_score": 0.10526315789473684,
+          "f1_score": 0.5,
           "perfect_match": 0,
           "true_positives": 1,
-          "false_positives": 17,
+          "false_positives": 2,
           "false_negatives": 0,
           "size_gold": 100,
-          "size_pred": 1224093,
+          "size_pred": 100,
           "comparison_type": "oids",
           "gold_id_col": "classifier_name",
           "pred_id_col": "classifier_name"
@@ -184,9 +184,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "SELECT\n    *\nFROM\n    probability INNER JOIN\n    ps1_ztf\n    ON probability.oid = ps1_ztf.oid\nWHERE\n    classifier_name = 'lc_classifier'\n    AND classifier_version = 'hierarchical_rf_1.1.0'\n    AND class_name IN ('CEP','DSCT','RRL')\n    AND probability > 0.6\n    AND sgscore1 > 0.8\nLIMIT 100",
-        "sql_pred": "-- Select objects with high probability (>0.6) of being Cepheid, Delta Scuti, or RR Lyrae\nWITH selected_objects AS\n  (SELECT p.oid\n   FROM probability p\n   WHERE p.class_name IN ('CEP',\n                          'DSCT',\n                          'RRL')\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6\n     AND p.ranking = 1 -- most probable class\n\n   LIMIT 100) -- Retrieve all columns from probability and ps1_ztf for these objects\n\nSELECT p.*,\n       ps.*\nFROM probability p\nJOIN ps1_ztf ps ON p.oid = ps.oid\nWHERE p.oid IN\n    (SELECT oid\n     FROM selected_objects)\n  AND ps.sgscore1 > 0.8;",
-        "execution_time_gold": 0.5088963508605957,
-        "execution_time_pred": 44.01874399185181,
+        "sql_pred": "-- Subquery to select object OIDs with probability > 0.6 for classes 'CEP', 'DSCT', or 'RRL' in 'lc_classifier' with specified version\nWITH selected_objects AS\n  (SELECT DISTINCT p.oid\n   FROM probability p\n   WHERE p.class_name IN ('CEP',\n                          'DSCT',\n                          'RRL')\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6), -- Subquery to select OIDs with closest PS1 object having star/galaxy score > 0.8\nps1_filtered AS\n  (SELECT oid\n   FROM ps1_ztf\n   WHERE sgscore1 > 0.8) -- Main query to join the above conditions and retrieve all columns from 'probability' and 'ps1_ztf'\n\nSELECT p.*,\n       ps1.*\nFROM probability p\nJOIN selected_objects so ON p.oid = so.oid\nJOIN ps1_ztf ps1 ON p.oid = ps1.oid\nWHERE ps1.sgscore1 > 0.8\nLIMIT 100;",
+        "execution_time_gold": 1.9351882934570312,
+        "execution_time_pred": 52.18561100959778,
         "error_gold": null,
         "error_pred": null
       },
@@ -199,15 +199,15 @@
       "n_exp": "1",
       "comparison": {
         "oids": {
-          "precision": 0.05555555555555555,
+          "precision": 0.3333333333333333,
           "recall": 1.0,
-          "f1_score": 0.10526315789473684,
+          "f1_score": 0.5,
           "perfect_match": 0,
           "true_positives": 1,
-          "false_positives": 17,
+          "false_positives": 2,
           "false_negatives": 0,
           "size_gold": 100,
-          "size_pred": 1224093,
+          "size_pred": 100,
           "comparison_type": "oids",
           "gold_id_col": "classifier_name",
           "pred_id_col": "classifier_name"
@@ -378,9 +378,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "SELECT\n    *\nFROM\n    probability INNER JOIN\n    ps1_ztf\n    ON probability.oid = ps1_ztf.oid\nWHERE\n    classifier_name = 'lc_classifier'\n    AND classifier_version = 'hierarchical_rf_1.1.0'\n    AND class_name IN ('CEP','DSCT','RRL')\n    AND probability > 0.6\n    AND sgscore1 > 0.8\nLIMIT 100",
-        "sql_pred": "-- Select objects with high probability (>0.6) of being Cepheid, Delta Scuti, or RR Lyrae\nWITH selected_objects AS\n  (SELECT p.oid\n   FROM probability p\n   WHERE p.class_name IN ('CEP',\n                          'DSCT',\n                          'RRL')\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version = 'hierarchical_rf_1.1.0'\n     AND p.probability > 0.6\n     AND p.ranking = 1 -- most probable class\n\n   LIMIT 100) -- Retrieve all columns from probability and ps1_ztf for these objects\n\nSELECT p.*,\n       ps.*\nFROM probability p\nJOIN ps1_ztf ps ON p.oid = ps.oid\nWHERE p.oid IN\n    (SELECT oid\n     FROM selected_objects)\n  AND ps.sgscore1 > 0.8;",
-        "execution_time_gold": 0.5088963508605957,
-        "execution_time_pred": 44.01874399185181,
+        "sql_pred": "-- Select all columns from probability and ps1_ztf tables for objects meeting the specified conditions\n\nSELECT p.*,\n       ps.*\nFROM\n  (-- Subquery to get object OIDs with probability > 0.6 for Cepheid, Delta Scuti, or RR Lyrae in the specified classifier\n SELECT DISTINCT probability.oid\n   FROM probability\n   WHERE probability.class_name IN ('CEP',\n                                    'DSCT',\n                                    'RRL')\n     AND probability.classifier_name = 'lc_classifier'\n     AND probability.classifier_version = 'hierarchical_rf_1.1.0'\n     AND probability.probability > 0.6\n     AND probability.ranking = 1 -- Most probable class\n) AS filtered_oids\nJOIN probability p ON filtered_oids.oid = p.oid\nJOIN ps1_ztf ps ON filtered_oids.oid = ps.oid\nWHERE ps.sgscore1 > 0.8\nLIMIT 100;",
+        "execution_time_gold": 1.9351882934570312,
+        "execution_time_pred": 0.5250833034515381,
         "error_gold": null,
         "error_pred": null
       },
@@ -461,9 +461,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "SELECT\n    oid, mjd, fid, diffmaglim\nFROM\n    non_detection\nWHERE\n    oid = 'ZTF18adqxemz'\n",
-        "sql_pred": "SELECT nd.mjd AS date,\n       nd.fid AS filter_id,\n       nd.oid AS ztf_id,\n       nd.diffmaglim AS mag_limit\nFROM non_detection nd\nWHERE nd.oid = 'ZTF18adqxemz';",
-        "execution_time_gold": 0.2677001953125,
-        "execution_time_pred": 0.26500892639160156,
+        "sql_pred": "-- Retrieve date, filter ID, object ID, and 5-sigma magnitude limit for non-detections of the specified object\n\nSELECT nd.mjd AS date,\n       nd.fid AS filter_id,\n       nd.oid AS ztf_id,\n       nd.diffmaglim AS mag_limit\nFROM non_detection nd\nWHERE nd.oid = 'ZTF18adqxemz';",
+        "execution_time_gold": 0.2708613872528076,
+        "execution_time_pred": 0.2653472423553467,
         "error_gold": null,
         "error_pred": null
       },
@@ -545,8 +545,8 @@
         },
         "sql_gold": "SELECT\n    oid, mjd, fid, diffmaglim\nFROM\n    non_detection\nWHERE\n    oid = 'ZTF18adqxemz'\n",
         "sql_pred": "SELECT nd.mjd AS date,\n       nd.fid AS filter_id,\n       nd.oid AS ztf_id,\n       nd.diffmaglim AS mag_limit\nFROM non_detection nd\nWHERE nd.oid = 'ZTF18adqxemz';",
-        "execution_time_gold": 0.2677001953125,
-        "execution_time_pred": 0.26500892639160156,
+        "execution_time_gold": 0.2708613872528076,
+        "execution_time_pred": 0.2654454708099365,
         "error_gold": null,
         "error_pred": null
       },
@@ -618,9 +618,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "select oid, name, value from feature where oid = 'ZTF20aaelulu';",
-        "sql_pred": "SELECT f.oid,\n       f.name,\n       f.value\nFROM feature f\nWHERE f.oid = 'ZTF20aaelulu';",
-        "execution_time_gold": 0.2852330207824707,
-        "execution_time_pred": 0.2782926559448242,
+        "sql_pred": "-- Select the oid, feature name, and feature value for the specified object\n\nSELECT f.oid,\n       f.name,\n       f.value\nFROM feature f\nWHERE f.oid = 'ZTF20aaelulu';",
+        "execution_time_gold": 0.28726959228515625,
+        "execution_time_pred": 0.2794935703277588,
         "error_gold": null,
         "error_pred": null
       },
@@ -693,8 +693,8 @@
         },
         "sql_gold": "select oid, name, value from feature where oid = 'ZTF20aaelulu';",
         "sql_pred": "-- Select the oid, feature name, and feature value for the specified object\n\nSELECT f.oid,\n       f.name,\n       f.value\nFROM feature f\nWHERE f.oid = 'ZTF20aaelulu';",
-        "execution_time_gold": 0.2852330207824707,
-        "execution_time_pred": 0.27813053131103516,
+        "execution_time_gold": 0.28726959228515625,
+        "execution_time_pred": 0.2794935703277588,
         "error_gold": null,
         "error_pred": null
       },
@@ -743,11 +743,11 @@
           "comparison_type": "error"
         },
         "sql_gold": "SELECT\n    object.oid, ndet, g_r_max, value as w1_w2, version\nFROM\n    object INNER JOIN\n    feature\n    ON object.oid = feature.oid\nWHERE\n    name = 'W1-W2'\n    AND value < 1\nLIMIT 100",
-        "sql_pred": "-- Select objects with W1-W2 color less than 1, including specified columns\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magmin - f_r.magmin) AS mag_diff_g_minus_r,\n       f_w1_w2.value AS w1_w2,\n       f_w1_w2.version AS feature_version\nFROM OBJECT o -- Join feature table for g-band (fid=1)\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'g-W2'\nAND f_g.fid = 1 -- Join feature table for r-band (fid=2)\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'g-W2'\nAND f_r.fid = 2 -- Join feature table for W1-W2 color\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nAND f_w1_w2.name = 'W1-W2'\nWHERE f_w1_w2.value < 1 -- Limit to 100 results\nLIMIT 100;",
-        "execution_time_gold": 0.35753822326660156,
+        "sql_pred": "-- Select objects with W1-W2 color less than 1, including specified columns\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magsigma - f_r.magsigma) AS mag_diff_g_r, -- difference between min g- and r-band difference magnitudes\n f_w1_w2.value AS w1_w2,\n f_w1_w2.version AS feature_version\nFROM OBJECT o\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'magmin'\nAND f_g.fid = 1\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'magmin'\nAND f_r.fid = 2\nWHERE f_w1_w2.name = 'W1-W2'\n  AND f_w1_w2.value < 1\n  AND -- Retrieve the feature version for W1-W2\n f_w1_w2.version IS NOT NULL\nLIMIT 100;",
+        "execution_time_gold": 0.44405412673950195,
         "execution_time_pred": null,
         "error_gold": null,
-        "error_pred": "(psycopg2.errors.UndefinedColumn) column f_g.magmin does not exist\nLINE 5:        (f_g.magmin - f_r.magmin) AS mag_diff_g_minus_r,\n                ^\n\n[SQL: -- Select objects with W1-W2 color less than 1, including specified columns\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magmin - f_r.magmin) AS mag_diff_g_minus_r,\n       f_w1_w2.value AS w1_w2,\n       f_w1_w2.version AS feature_version\nFROM OBJECT o -- Join feature table for g-band (fid=1)\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'g-W2'\nAND f_g.fid = 1 -- Join feature table for r-band (fid=2)\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'g-W2'\nAND f_r.fid = 2 -- Join feature table for W1-W2 color\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nAND f_w1_w2.name = 'W1-W2'\nWHERE f_w1_w2.value < 1 -- Limit to 100 results\nLIMIT 100;]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
+        "error_pred": "(psycopg2.errors.UndefinedColumn) column f_g.magsigma does not exist\nLINE 5:        (f_g.magsigma - f_r.magsigma) AS mag_diff_g_r, -- dif...\n                ^\n\n[SQL: -- Select objects with W1-W2 color less than 1, including specified columns\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magsigma - f_r.magsigma) AS mag_diff_g_r, -- difference between min g- and r-band difference magnitudes\n f_w1_w2.value AS w1_w2,\n f_w1_w2.version AS feature_version\nFROM OBJECT o\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'magmin'\nAND f_g.fid = 1\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'magmin'\nAND f_r.fid = 2\nWHERE f_w1_w2.name = 'W1-W2'\n  AND f_w1_w2.value < 1\n  AND -- Retrieve the feature version for W1-W2\n f_w1_w2.version IS NOT NULL\nLIMIT 100;]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
       },
       "difficulty": "medium",
       "gold_tables": "['object', 'feature']",
@@ -794,11 +794,11 @@
           "comparison_type": "error"
         },
         "sql_gold": "SELECT\n    object.oid, ndet, g_r_max, value as w1_w2, version\nFROM\n    object INNER JOIN\n    feature\n    ON object.oid = feature.oid\nWHERE\n    name = 'W1-W2'\n    AND value < 1\nLIMIT 100",
-        "sql_pred": "-- Select specific columns for objects with W1-W2 color less than 1\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magdif_min - f_r.magdif_min) AS mag_diff_g_r,\n       f_w1_w2.value AS w1_w2,\n       f_w1_w2.version AS feature_version\nFROM OBJECT o\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'g-r_max' -- assuming magdif_min is stored under 'g-r_max'\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'g-r_max' -- same as above, for r-band\n\nWHERE f_w1_w2.name = 'W1-W2'\n  AND f_w1_w2.value < 1\n  AND f_g.name = 'g-r_max'\n  AND f_r.name = 'g-r_max'\nLIMIT 100;",
-        "execution_time_gold": 0.35753822326660156,
+        "sql_pred": "-- Select objects with W1-W2 color less than 1, including specified columns and limit to 100 results\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magsigma - f_r.magsigma) AS mag_diff_g_r,\n       f_w1_w2.value AS w1_w2,\n       f_w1_w2.version AS feature_version\nFROM OBJECT o\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nAND f_w1_w2.name = 'W1-W2'\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'magdiff_g'\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'magdiff_r'\nWHERE f_w1_w2.value < 1\n  AND f_g.name = 'magdiff_g'\n  AND f_r.name = 'magdiff_r'\n  AND f_g.fid = 1 -- g-band\n\n  AND f_r.fid = 2 -- r-band\n\n  AND f_w1_w2.version =\n    (SELECT VERSION\n     FROM feature_version\n     ORDER BY VERSION DESC\n     LIMIT 1)\nLIMIT 100;",
+        "execution_time_gold": 0.44405412673950195,
         "execution_time_pred": null,
         "error_gold": null,
-        "error_pred": "(psycopg2.errors.UndefinedColumn) column f_g.magdif_min does not exist\nLINE 5:        (f_g.magdif_min - f_r.magdif_min) AS mag_diff_g_r,\n                ^\n\n[SQL: -- Select specific columns for objects with W1-W2 color less than 1\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magdif_min - f_r.magdif_min) AS mag_diff_g_r,\n       f_w1_w2.value AS w1_w2,\n       f_w1_w2.version AS feature_version\nFROM OBJECT o\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'g-r_max' -- assuming magdif_min is stored under 'g-r_max'\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'g-r_max' -- same as above, for r-band\n\nWHERE f_w1_w2.name = 'W1-W2'\n  AND f_w1_w2.value < 1\n  AND f_g.name = 'g-r_max'\n  AND f_r.name = 'g-r_max'\nLIMIT 100;]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
+        "error_pred": "(psycopg2.errors.UndefinedColumn) column f_g.magsigma does not exist\nLINE 5:        (f_g.magsigma - f_r.magsigma) AS mag_diff_g_r,\n                ^\n\n[SQL: -- Select objects with W1-W2 color less than 1, including specified columns and limit to 100 results\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       (f_g.magsigma - f_r.magsigma) AS mag_diff_g_r,\n       f_w1_w2.value AS w1_w2,\n       f_w1_w2.version AS feature_version\nFROM OBJECT o\nJOIN feature f_w1_w2 ON o.oid = f_w1_w2.oid\nAND f_w1_w2.name = 'W1-W2'\nJOIN feature f_g ON o.oid = f_g.oid\nAND f_g.name = 'magdiff_g'\nJOIN feature f_r ON o.oid = f_r.oid\nAND f_r.name = 'magdiff_r'\nWHERE f_w1_w2.value < 1\n  AND f_g.name = 'magdiff_g'\n  AND f_r.name = 'magdiff_r'\n  AND f_g.fid = 1 -- g-band\n\n  AND f_r.fid = 2 -- r-band\n\n  AND f_w1_w2.version =\n    (SELECT VERSION\n     FROM feature_version\n     ORDER BY VERSION DESC\n     LIMIT 1)\nLIMIT 100;]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
       },
       "difficulty": "medium",
       "gold_tables": "['object', 'feature']",
@@ -809,47 +809,89 @@
       "n_exp": "0",
       "comparison": {
         "oids": {
-          "precision": 0,
-          "recall": 0,
-          "f1_score": 0,
+          "precision": 0.24882629107981222,
+          "recall": 0.11064718162839249,
+          "f1_score": 0.1531791907514451,
           "perfect_match": 0,
-          "true_positives": 0,
-          "false_positives": 0,
-          "false_negatives": 0,
+          "true_positives": 53,
+          "false_positives": 160,
+          "false_negatives": 426,
           "size_gold": 8405,
-          "size_pred": 0,
-          "comparison_type": "error"
+          "size_pred": 2403,
+          "comparison_type": "oids",
+          "gold_id_col": "oid",
+          "pred_id_col": "oid"
         },
         "columns": {
-          "precision": 0,
-          "recall": 0,
-          "f1_score": 0,
+          "precision": 0.16666666666666666,
+          "recall": 0.16666666666666666,
+          "f1_score": 0.16666666666666666,
           "perfect_match": 0,
-          "true_positives": 0,
-          "false_positives": 0,
-          "false_negatives": 0,
-          "size_gold": 8405,
-          "size_pred": 0,
-          "comparison_type": "error"
+          "true_positives": 1,
+          "false_positives": 5,
+          "false_negatives": 5,
+          "gold_columns": [
+            "oid",
+            "probability",
+            "value",
+            "name",
+            "fid",
+            "version"
+          ],
+          "pred_columns": [
+            "oid",
+            "yso_probability",
+            "feature_value",
+            "feature_name",
+            "filter_id",
+            "feature_version"
+          ],
+          "size_gold": 6,
+          "size_pred": 6,
+          "comparison_type": "columns"
         },
         "columns_formatted": {
-          "precision": 0,
-          "recall": 0,
-          "f1_score": 0,
-          "perfect_match": 0,
-          "true_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "perfect_match": 1,
+          "true_positives": 6,
           "false_positives": 0,
           "false_negatives": 0,
-          "size_gold": 8405,
-          "size_pred": 0,
-          "comparison_type": "error"
+          "gold_columns": [
+            "oid",
+            "probability",
+            "value",
+            "name",
+            "fid",
+            "version"
+          ],
+          "pred_columns": [
+            "oid",
+            "yso_probability",
+            "feature_value",
+            "feature_name",
+            "filter_id",
+            "feature_version"
+          ],
+          "pred_columns_formatted": [
+            "oid",
+            "probability",
+            "value",
+            "name",
+            "fid",
+            "version"
+          ],
+          "size_gold": 6,
+          "size_pred": 6,
+          "comparison_type": "columns"
         },
         "sql_gold": "\nSELECT\n  oid, probability, value, name, fid, version\nFROM\n  (\nSELECT *\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Multiband_period'\n  AND feature.value > 3\n  AND feature.value < 10\n) as sq1\nUNION\nSELECT *\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Amplitude'\n  AND feature.value > 0.5\n) as sq2\nORDER BY oid\n) AS sq4\nWHERE\n  sq4.oid in (\nSELECT oid\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Multiband_period'\n  AND feature.value > 3\n  AND feature.value < 10\n) as sq1\nINTERSECT\nSELECT oid\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Amplitude'\n  AND feature.value > 0.5\n) as sq2\nORDER BY oid\n)\nORDER BY probability DESC\n",
-        "sql_pred": "-- Select objects with high probability of being YSOs and exhibiting periodicity\n\nSELECT o.oid,\n       p.probability AS possibility,\n       f.value AS feature_value,\n       f.name AS feature_name,\n       f.fid AS filter_id,\n       f.version AS feature_version\nFROM OBJECT o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE p.class_name = 'YSO'\n  AND p.classifier_name IN ('lc_classifier',\n                            'lc_classifier_top',\n                            'lc_classifier_transient',\n                            'lc_classifier_stochastic',\n                            'lc_classifier_periodic',\n                            'stamp_classifier')\n  AND p.probability > 0.7\n  AND f.name = 'Period_band'\n  AND f.value BETWEEN 3 AND 10\n  AND EXISTS\n    (SELECT 1\n     FROM feature f2\n     WHERE o.oid = f2.oid\n       AND f2.name = 'Amplitude'\n       AND f2.value > 0.5)\nORDER BY p.probability DESC;",
-        "execution_time_gold": 36.77487659454346,
-        "execution_time_pred": null,
+        "sql_pred": "-- Select objects with high probability of being YSOs and exhibiting periodicity\n\nSELECT o.oid,\n       p.probability AS yso_probability,\n       f.value AS feature_value,\n       f.name AS feature_name,\n       f.fid AS filter_id,\n       f.version AS feature_version\nFROM OBJECT o -- Subquery to get the probability of YSO classification with ranking=1 (most likely)\nJOIN\n  (SELECT p1.oid,\n          p1.probability\n   FROM probability p1\n   WHERE p1.class_name = 'YSO'\n     AND p1.classifier_name = 'lc_classifier'\n     AND p1.ranking = 1\n     AND p1.probability > 0.7) p ON o.oid = p.oid -- Subquery to get features related to period and amplitude\nJOIN\n  (SELECT f1.oid,\n          f1.value,\n          f1.name,\n          f1.fid,\n          f1.version\n   FROM feature f1\n   WHERE (f1.name = 'Multiband_period'\n          AND f1.value BETWEEN 3 AND 10)\n     OR (f1.name = 'Amplitude'\n         AND f1.value > 0.5)) f ON o.oid = f.oid -- Join to magstat to filter for objects with some periodicity (e.g., 'Periodic' class in top classifier)\nJOIN\n  (SELECT p2.oid\n   FROM probability p2\n   WHERE p2.class_name = 'Periodic'\n     AND p2.classifier_name = 'lc_classifier_top'\n     AND p2.ranking = 1) p_periodic ON o.oid = p_periodic.oid\nORDER BY p.probability DESC;",
+        "execution_time_gold": 58.97878408432007,
+        "execution_time_pred": 16.47790265083313,
         "error_gold": null,
-        "error_pred": "(psycopg2.errors.QueryCanceled) canceling statement due to statement timeout\n\n[SQL: -- Select objects with high probability of being YSOs and exhibiting periodicity\n\nSELECT o.oid,\n       p.probability AS possibility,\n       f.value AS feature_value,\n       f.name AS feature_name,\n       f.fid AS filter_id,\n       f.version AS feature_version\nFROM OBJECT o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE p.class_name = 'YSO'\n  AND p.classifier_name IN ('lc_classifier',\n                            'lc_classifier_top',\n                            'lc_classifier_transient',\n                            'lc_classifier_stochastic',\n                            'lc_classifier_periodic',\n                            'stamp_classifier')\n  AND p.probability > 0.7\n  AND f.name = 'Period_band'\n  AND f.value BETWEEN 3 AND 10\n  AND EXISTS\n    (SELECT 1\n     FROM feature f2\n     WHERE o.oid = f2.oid\n       AND f2.name = 'Amplitude'\n       AND f2.value > 0.5)\nORDER BY p.probability DESC;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+        "error_pred": null
       },
       "difficulty": "advanced",
       "gold_tables": "['probability', 'feature']",
@@ -860,47 +902,89 @@
       "n_exp": "1",
       "comparison": {
         "oids": {
-          "precision": 0,
-          "recall": 0,
-          "f1_score": 0,
+          "precision": 0.16937765205091937,
+          "recall": 1.0,
+          "f1_score": 0.2896885394617478,
           "perfect_match": 0,
-          "true_positives": 0,
-          "false_positives": 0,
+          "true_positives": 479,
+          "false_positives": 2349,
           "false_negatives": 0,
           "size_gold": 8405,
-          "size_pred": 0,
-          "comparison_type": "error"
+          "size_pred": 32803,
+          "comparison_type": "oids",
+          "gold_id_col": "oid",
+          "pred_id_col": "oid"
         },
         "columns": {
-          "precision": 0,
-          "recall": 0,
-          "f1_score": 0,
+          "precision": 0.16666666666666666,
+          "recall": 0.16666666666666666,
+          "f1_score": 0.16666666666666666,
           "perfect_match": 0,
-          "true_positives": 0,
-          "false_positives": 0,
-          "false_negatives": 0,
-          "size_gold": 8405,
-          "size_pred": 0,
-          "comparison_type": "error"
+          "true_positives": 1,
+          "false_positives": 5,
+          "false_negatives": 5,
+          "gold_columns": [
+            "oid",
+            "probability",
+            "value",
+            "name",
+            "fid",
+            "version"
+          ],
+          "pred_columns": [
+            "oid",
+            "possibility",
+            "feature_value",
+            "feature_name",
+            "filter_id",
+            "feature_version"
+          ],
+          "size_gold": 6,
+          "size_pred": 6,
+          "comparison_type": "columns"
         },
         "columns_formatted": {
-          "precision": 0,
-          "recall": 0,
-          "f1_score": 0,
-          "perfect_match": 0,
-          "true_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "perfect_match": 1,
+          "true_positives": 6,
           "false_positives": 0,
           "false_negatives": 0,
-          "size_gold": 8405,
-          "size_pred": 0,
-          "comparison_type": "error"
+          "gold_columns": [
+            "oid",
+            "probability",
+            "value",
+            "name",
+            "fid",
+            "version"
+          ],
+          "pred_columns": [
+            "oid",
+            "possibility",
+            "feature_value",
+            "feature_name",
+            "filter_id",
+            "feature_version"
+          ],
+          "pred_columns_formatted": [
+            "oid",
+            "probability",
+            "value",
+            "name",
+            "fid",
+            "version"
+          ],
+          "size_gold": 6,
+          "size_pred": 6,
+          "comparison_type": "columns"
         },
         "sql_gold": "\nSELECT\n  oid, probability, value, name, fid, version\nFROM\n  (\nSELECT *\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Multiband_period'\n  AND feature.value > 3\n  AND feature.value < 10\n) as sq1\nUNION\nSELECT *\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Amplitude'\n  AND feature.value > 0.5\n) as sq2\nORDER BY oid\n) AS sq4\nWHERE\n  sq4.oid in (\nSELECT oid\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Multiband_period'\n  AND feature.value > 3\n  AND feature.value < 10\n) as sq1\nINTERSECT\nSELECT oid\nFROM (\nSELECT\n  feature.oid, prob_oids.probability, feature.value, feature.name, feature.fid, feature.version\nFROM\n  (SELECT * FROM probability\n    WHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='YSO'\n    AND probability.ranking=1\n    AND probability.probability > 0.7\n    ) as prob_oids\n    INNER JOIN\n    feature ON feature.oid = prob_oids.oid\nWHERE\n  feature.name = 'Amplitude'\n  AND feature.value > 0.5\n) as sq2\nORDER BY oid\n)\nORDER BY probability DESC\n",
-        "sql_pred": "-- Select objects with high probability of being YSO and exhibiting periodicity\n\nSELECT o.oid,\n       p.probability AS yso_probability,\n       f.value AS feature_value,\n       f.name AS feature_name,\n       f.fid AS filter_id,\n       f.version AS feature_version\nFROM OBJECT o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE p.class_name = 'YSO'\n  AND p.classifier_name IN ('lc_classifier',\n                            'lc_classifier_top',\n                            'lc_classifier_transient',\n                            'lc_classifier_stochastic',\n                            'lc_classifier_periodic',\n                            'stamp_classifier')\n  AND p.probability > 0.7\n  AND f.name = 'Period_band'\n  AND f.value BETWEEN 3 AND 10\n  AND EXISTS\n    (SELECT 1\n     FROM feature f2\n     WHERE o.oid = f2.oid\n       AND f2.name = 'Amplitude'\n       AND f2.value > 0.5\n       AND f2.fid = f.fid\n       AND f2.version = f.version)\nORDER BY p.probability DESC;",
-        "execution_time_gold": 36.77487659454346,
-        "execution_time_pred": null,
+        "sql_pred": "-- Select objects with high probability of being YSOs and exhibiting periodicity\n\nSELECT o.oid,\n       p.probability AS possibility,\n       f.value AS feature_value,\n       f.name AS feature_name,\n       f.fid AS filter_id,\n       f.version AS feature_version\nFROM OBJECT o -- Subquery to get the probability of YSO classification with ranking=1 (most likely)\nJOIN\n  (SELECT p1.oid,\n          p1.probability\n   FROM probability p1\n   WHERE p1.class_name = 'YSO'\n     AND p1.classifier_name = 'lc_classifier'\n     AND p1.ranking = 1\n     AND p1.probability > 0.7) p ON o.oid = p.oid -- Subquery to get features related to period and amplitude\nJOIN\n  (SELECT f1.oid,\n          f1.value,\n          f1.name,\n          f1.fid,\n          f1.version\n   FROM feature f1\n   WHERE (f1.name = 'Multiband_period'\n          AND f1.value BETWEEN 3 AND 10)\n     OR (f1.name = 'Amplitude'\n         AND f1.value > 0.5)) f ON o.oid = f.oid -- Filter objects that have both period and amplitude features satisfying the conditions\n\nWHERE -- Ensure object has both features\n EXISTS\n    (SELECT 1\n     FROM feature f2\n     WHERE f2.oid = o.oid\n       AND ((f2.name = 'Multiband_period'\n             AND f2.value BETWEEN 3 AND 10)\n            OR (f2.name = 'Amplitude'\n                AND f2.value > 0.5)))\nORDER BY p.probability DESC;",
+        "execution_time_gold": 58.97878408432007,
+        "execution_time_pred": 102.17979860305786,
         "error_gold": null,
-        "error_pred": "(psycopg2.errors.QueryCanceled) canceling statement due to statement timeout\n\n[SQL: -- Select objects with high probability of being YSO and exhibiting periodicity\n\nSELECT o.oid,\n       p.probability AS yso_probability,\n       f.value AS feature_value,\n       f.name AS feature_name,\n       f.fid AS filter_id,\n       f.version AS feature_version\nFROM OBJECT o\nJOIN probability p ON o.oid = p.oid\nJOIN feature f ON o.oid = f.oid\nWHERE p.class_name = 'YSO'\n  AND p.classifier_name IN ('lc_classifier',\n                            'lc_classifier_top',\n                            'lc_classifier_transient',\n                            'lc_classifier_stochastic',\n                            'lc_classifier_periodic',\n                            'stamp_classifier')\n  AND p.probability > 0.7\n  AND f.name = 'Period_band'\n  AND f.value BETWEEN 3 AND 10\n  AND EXISTS\n    (SELECT 1\n     FROM feature f2\n     WHERE o.oid = f2.oid\n       AND f2.name = 'Amplitude'\n       AND f2.value > 0.5\n       AND f2.fid = f.fid\n       AND f2.version = f.version)\nORDER BY p.probability DESC;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+        "error_pred": null
       },
       "difficulty": "advanced",
       "gold_tables": "['probability', 'feature']",
@@ -1019,8 +1103,8 @@
         },
         "sql_gold": "SELECT\n    *\nFROM\n    reference\nWHERE\n    oid = 'ZTF22aayjqah'",
         "sql_pred": "SELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';",
-        "execution_time_gold": 0.27559447288513184,
-        "execution_time_pred": 0.26548123359680176,
+        "execution_time_gold": 0.26956939697265625,
+        "execution_time_pred": 0.2645571231842041,
         "error_gold": null,
         "error_pred": null
       },
@@ -1141,8 +1225,8 @@
         },
         "sql_gold": "SELECT\n    *\nFROM\n    reference\nWHERE\n    oid = 'ZTF22aayjqah'",
         "sql_pred": "SELECT *\nFROM reference\nWHERE oid = 'ZTF22aayjqah';",
-        "execution_time_gold": 0.27559447288513184,
-        "execution_time_pred": 0.26548123359680176,
+        "execution_time_gold": 0.26956939697265625,
+        "execution_time_pred": 0.2645571231842041,
         "error_gold": null,
         "error_pred": null
       },
@@ -1191,11 +1275,11 @@
           "comparison_type": "error"
         },
         "sql_gold": "\nSELECT\n  sq.oid, sq.fid, sq.dmdt_first,\n  detection.candid, detection.fid as f_id,detection.magpsf, detection.sigmapsf_corr, detection.sigmapsf_corr_ext\nFROM\n  (\nSELECT\n  magstat.oid, magstat.fid, magstat.dmdt_first\nFROM\n  (\nSELECT\n    object.oid\nFROM\n    object INNER JOIN\n    probability\n    ON object.oid = probability.oid\nWHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='SNII'\n    AND probability.probability > 0.6\n    AND object.ndet > 50\n) as obj_oids\n    INNER JOIN\n    magstat ON magstat.oid = obj_oids.oid\nWHERE\n  magstat.dmdt_first < -0.5\n  AND (magstat.fid = 1 OR magstat.fid = 2)\n) AS sq\n  INNER JOIN detection\n  ON sq.oid = detection.oid\nWHERE\n  detection.mjd > 58484.0\n  AND detection.mjd < 59944.0\nORDER BY oid\n",
-        "sql_pred": "```SQL -- Select relevant information for objects classified as SN II with specified conditions\nWITH sn_ii_objects AS\n  (SELECT o.oid\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNIII'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.probability > 0.6\n     AND p.ranking = 1\n     AND o.firstmjd BETWEEN '2019-01-01' AND '2022-12-31'\n     AND o.ndet > 50\n     AND EXISTS\n       (SELECT 1\n        FROM magstat m\n        WHERE m.oid = o.oid\n          AND m.fid IN (1,\n                        2)-- g and r bands\n\n          AND m.magmax_corr - m.magmin_corr > 0.5 -- initial rise estimate > 0.5 mag\n))\nSELECT d.oid,\n       d.candid,\n       d.mjd,\n       d.magpsf,\n       d.sigmapsf,\n       f.name AS band_name, -- Calculate initial rise rate for g and r bands\n CASE\n     WHEN f.fid = 1 THEN -- For g band\n (MIN(d2.mjd) FILTER (\n                      WHERE d2.mjd > d.mjd) - d.mjd) AS time_to_first_detection,\n (d2.magpsf - d.magpsf) / (d2.mjd - d.mjd) AS rise_rate\n     WHEN f.fid = 2 THEN -- For r band\n (MIN(d2.mjd) FILTER (\n                      WHERE d2.mjd > d.mjd) - d.mjd) AS time_to_first_detection,\n (d2.magpsf - d.magpsf) / (d2.mjd - d.mjd) AS rise_rate\n     ELSE NULL\n END\nFROM detection d\nJOIN OBJECT o ON d.oid = o.oid\nJOIN magstat m ON o.oid = m.oid\nAND m.fid = d.fid\nJOIN feature f ON o.oid = f.oid\nAND f.fid = d.fid\nLEFT JOIN detection d2 ON d.oid = d2.oid\nAND d2.mjd > d.mjd\nAND d2.fid = d.fid\nWHERE o.oid IN\n    (SELECT oid\n     FROM sn_ii_objects)",
-        "execution_time_gold": 22.12741231918335,
+        "sql_pred": "-- Select relevant object and detection information for objects classified as SN II with specified conditions\nWITH sn_ii_objects AS\n  (SELECT o.oid\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version =\n       (SELECT MAX(classifier_version)\n        FROM probability\n        WHERE classifier_name='lc_classifier')\n     AND p.probability > 0.6),\n     candidate_ids AS\n  (SELECT DISTINCT d.candid,\n                   d.oid,\n                   d.mjd,\n                   d.ra,\n                   d.dec,\n                   d.magpsf,\n                   d.sigmapsf,\n                   d.fid\n   FROM detection d\n   JOIN sn_ii_objects s ON d.oid = s.oid\n   WHERE d.mjd BETWEEN '2019-01-01' AND '2022-12-31'),\n     mag_stats AS\n  (SELECT m.oid,\n          m.fid,\n          m.magmean,\n          m.magmean_corr\n   FROM magstat m\n   WHERE m.oid IN\n       (SELECT oid\n        FROM sn_ii_objects)),\n     rise_rates AS\n  (SELECT d1.oid,\n          d1.candid,\n          d1.mjd,\n          d1.magpsf,\n          d1.sigmapsf,\n          d1.fid, -- Calculate initial rise rate as change in magnitude over time between first two detections\n (d2.magpsf - d1.magpsf) / (d2.mjd - d1.mjd) AS initial_rise_rate\n   FROM detection d1\n   JOIN detection d2 ON d1.oid = d2.oid\n   AND d2.mjd > d1.mjd\n   WHERE d1.mjd =\n       (SELECT MIN(mjd)\n        FROM detection\n        WHERE oid = d1.oid)\n   LIMIT 1),\n     filtered_objects AS\n  (SELECT s.oid\n   FROM sn_ii_objects s\n   JOIN rise_rates r ON s.oid = r.oid\n   WHERE r.initial_rise_rate > 0.5\n     AND (r.fid IN (1,\n                    2))-- g and r bands\n),\n     detection_time_series AS\n  (SELECT d.candid,\n          d.oid,\n          d.mjd,\n          d.magpsf,\n          d.sigmapsf,\n          d.fid\n   FROM detection d\n   WHERE d.oid IN\n       (SELECT oid\n        FROM filtered_objects)\n     AND d.mjd IS NOT NULL),\n     final_result AS\n  (SELECT d.candid,\n          d.oid,\n          d.mjd,\n          d.magpsf,\n          d.sigmapsf,\n          d.fid\n   FROM detection_time_series d\n   JOIN candidate_ids c ON d.candid = c.candid\n   AND d.oid = c.oid)\nSELECT c.oid,\n       c.candid,\n       c.mjd,\n       c.magpsf,\n       c.sigmapsf,\n       c.fid\nFROM final_result c\nORDER BY c.oid,\n         c.mjd;",
+        "execution_time_gold": 18.778796911239624,
         "execution_time_pred": null,
         "error_gold": null,
-        "error_pred": "(psycopg2.errors.SyntaxError) syntax error at or near \"```\"\nLINE 1: ```SQL -- Select relevant information for objects classified...\n        ^\n\n[SQL: ```SQL -- Select relevant information for objects classified as SN II with specified conditions\nWITH sn_ii_objects AS\n  (SELECT o.oid\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNIII'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.probability > 0.6\n     AND p.ranking = 1\n     AND o.firstmjd BETWEEN '2019-01-01' AND '2022-12-31'\n     AND o.ndet > 50\n     AND EXISTS\n       (SELECT 1\n        FROM magstat m\n        WHERE m.oid = o.oid\n          AND m.fid IN (1,\n                        2)-- g and r bands\n\n          AND m.magmax_corr - m.magmin_corr > 0.5 -- initial rise estimate > 0.5 mag\n))\nSELECT d.oid,\n       d.candid,\n       d.mjd,\n       d.magpsf,\n       d.sigmapsf,\n       f.name AS band_name, -- Calculate initial rise rate for g and r bands\n CASE\n     WHEN f.fid = 1 THEN -- For g band\n (MIN(d2.mjd) FILTER (\n                      WHERE d2.mjd > d.mjd) - d.mjd) AS time_to_first_detection,\n (d2.magpsf - d.magpsf) / (d2.mjd - d.mjd) AS rise_rate\n     WHEN f.fid = 2 THEN -- For r band\n (MIN(d2.mjd) FILTER (\n                      WHERE d2.mjd > d.mjd) - d.mjd) AS time_to_first_detection,\n (d2.magpsf - d.magpsf) / (d2.mjd - d.mjd) AS rise_rate\n     ELSE NULL\n END\nFROM detection d\nJOIN OBJECT o ON d.oid = o.oid\nJOIN magstat m ON o.oid = m.oid\nAND m.fid = d.fid\nJOIN feature f ON o.oid = f.oid\nAND f.fid = d.fid\nLEFT JOIN detection d2 ON d.oid = d2.oid\nAND d2.mjd > d.mjd\nAND d2.fid = d.fid\nWHERE o.oid IN\n    (SELECT oid\n     FROM sn_ii_objects)]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
+        "error_pred": "(psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type double precision: \"2019-01-01\"\nLINE 24:    WHERE d.mjd BETWEEN '2019-01-01' AND '2022-12-31'),\n                                ^\n\n[SQL: -- Select relevant object and detection information for objects classified as SN II with specified conditions\nWITH sn_ii_objects AS\n  (SELECT o.oid\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version =\n       (SELECT MAX(classifier_version)\n        FROM probability\n        WHERE classifier_name='lc_classifier')\n     AND p.probability > 0.6),\n     candidate_ids AS\n  (SELECT DISTINCT d.candid,\n                   d.oid,\n                   d.mjd,\n                   d.ra,\n                   d.dec,\n                   d.magpsf,\n                   d.sigmapsf,\n                   d.fid\n   FROM detection d\n   JOIN sn_ii_objects s ON d.oid = s.oid\n   WHERE d.mjd BETWEEN '2019-01-01' AND '2022-12-31'),\n     mag_stats AS\n  (SELECT m.oid,\n          m.fid,\n          m.magmean,\n          m.magmean_corr\n   FROM magstat m\n   WHERE m.oid IN\n       (SELECT oid\n        FROM sn_ii_objects)),\n     rise_rates AS\n  (SELECT d1.oid,\n          d1.candid,\n          d1.mjd,\n          d1.magpsf,\n          d1.sigmapsf,\n          d1.fid, -- Calculate initial rise rate as change in magnitude over time between first two detections\n (d2.magpsf - d1.magpsf) / (d2.mjd - d1.mjd) AS initial_rise_rate\n   FROM detection d1\n   JOIN detection d2 ON d1.oid = d2.oid\n   AND d2.mjd > d1.mjd\n   WHERE d1.mjd =\n       (SELECT MIN(mjd)\n        FROM detection\n        WHERE oid = d1.oid)\n   LIMIT 1),\n     filtered_objects AS\n  (SELECT s.oid\n   FROM sn_ii_objects s\n   JOIN rise_rates r ON s.oid = r.oid\n   WHERE r.initial_rise_rate > 0.5\n     AND (r.fid IN (1,\n                    2))-- g and r bands\n),\n     detection_time_series AS\n  (SELECT d.candid,\n          d.oid,\n          d.mjd,\n          d.magpsf,\n          d.sigmapsf,\n          d.fid\n   FROM detection d\n   WHERE d.oid IN\n       (SELECT oid\n        FROM filtered_objects)\n     AND d.mjd IS NOT NULL),\n     final_result AS\n  (SELECT d.candid,\n          d.oid,\n          d.mjd,\n          d.magpsf,\n          d.sigmapsf,\n          d.fid\n   FROM detection_time_series d\n   JOIN candidate_ids c ON d.candid = c.candid\n   AND d.oid = c.oid)\nSELECT c.oid,\n       c.candid,\n       c.mjd,\n       c.magpsf,\n       c.sigmapsf,\n       c.fid\nFROM final_result c\nORDER BY c.oid,\n         c.mjd;]\n(Background on this error at: https://sqlalche.me/e/20/9h9h)"
       },
       "difficulty": "advanced",
       "gold_tables": "['object', 'probability', 'magstat', 'detection']",
@@ -1242,11 +1326,11 @@
           "comparison_type": "error"
         },
         "sql_gold": "\nSELECT\n  sq.oid, sq.fid, sq.dmdt_first,\n  detection.candid, detection.fid as f_id,detection.magpsf, detection.sigmapsf_corr, detection.sigmapsf_corr_ext\nFROM\n  (\nSELECT\n  magstat.oid, magstat.fid, magstat.dmdt_first\nFROM\n  (\nSELECT\n    object.oid\nFROM\n    object INNER JOIN\n    probability\n    ON object.oid = probability.oid\nWHERE\n    probability.classifier_name='lc_classifier'\n    AND probability.class_name='SNII'\n    AND probability.probability > 0.6\n    AND object.ndet > 50\n) as obj_oids\n    INNER JOIN\n    magstat ON magstat.oid = obj_oids.oid\nWHERE\n  magstat.dmdt_first < -0.5\n  AND (magstat.fid = 1 OR magstat.fid = 2)\n) AS sq\n  INNER JOIN detection\n  ON sq.oid = detection.oid\nWHERE\n  detection.mjd > 58484.0\n  AND detection.mjd < 59944.0\nORDER BY oid\n",
-        "sql_pred": "-- Select relevant information for objects classified as SN II with specified conditions\nWITH sn_ii_objects AS\n  (SELECT o.oid\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNIII'\n     AND p.classifier_name IN ('lc_classifier',\n                               'lc_classifier_top',\n                               'lc_classifier_transient',\n                               'lc_classifier_stochastic',\n                               'lc_classifier_periodic',\n                               'stamp_classifier')\n     AND p.probability > 0.6\n     AND p.ranking = 1\n     AND o.ndet > 50\n     AND o.firstmjd BETWEEN '2019-01-01' AND '2022-12-31')\nSELECT d.candid AS candidate_id,\n       d.mjd AS TIME,\n       d.magpsf AS magnitude,\n       d.sigmapsf AS mag_error, -- Calculate initial rise estimate as the difference in magnitude over the time difference\n (d.magpsf - lag(d.magpsf) OVER (PARTITION BY d.oid\n                                 ORDER BY d.mjd)) / NULLIF((d.mjd - lag(d.mjd) OVER (PARTITION BY d.oid\n                                                                                     ORDER BY d.mjd)), 1e-9) AS initial_rise_rate,\n d.fid AS band_id\nFROM detection d\nJOIN sn_ii_objects s ON d.oid = s.oid\nWHERE d.oid IN\n    (SELECT oid\n     FROM sn_ii_objects)\n  AND d.mjd >=\n    (SELECT firstmjd\n     FROM OBJECT\n     WHERE oid = d.oid)\n  AND d.mjd <=\n    (SELECT mjdendhist\n     FROM OBJECT\n     WHERE oid = d.oid)\n  AND d.fid IN (1,\n                2)-- g and r bands\nORDER BY d.oid,\n         d.mjd;",
-        "execution_time_gold": 22.12741231918335,
+        "sql_pred": "-- Select relevant columns from detection and magstat tables for objects classified as SN II\nWITH sn_ii_objects AS\n  (SELECT o.oid,\n          p.class_name,\n          p.probability\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version =\n       (SELECT MAX(classifier_version)\n        FROM probability\n        WHERE classifier_name='lc_classifier'\n          AND class_name='SNII')\n     AND p.ranking = 1\n     AND p.probability > 0.6\n     AND o.firstmjd BETWEEN 58484 AND 58873 -- Corresponds to 2019-01-01 to 2022-12-31\n)\nSELECT d.oid,\n       d.candid,\n       m.magmean,\n       m.magmean_corr, -- Estimate initial rise rate as the difference in magnitude over the time difference\n (d.mjd -\n    (SELECT MIN(mjd)\n     FROM detection\n     WHERE oid=d.oid\n       AND mjd <= d.mjd\n       AND fid IN (1,\n                   2))) AS initial_rise_estimate,\n d.fid AS band_id,\n d.mjd\nFROM detection d\nJOIN magstat m ON d.oid = m.oid\nAND d.fid = m.fid\nWHERE d.oid IN\n    (SELECT oid\n     FROM sn_ii_objects)\n  AND d.mjd BETWEEN 58484 AND 58873\n  AND d.n_pos > 50\n  AND ((d.fid = 1\n        AND (d.mjd -\n               (SELECT MIN(mjd)\n                FROM detection\n                WHERE oid=d.oid\n                  AND mjd <= d.mjd\n                  AND fid=1))) > 0.5\n       OR (d.fid = 2\n           AND (d.mjd -\n                  (SELECT MIN(mjd)\n                   FROM detection\n                   WHERE oid=d.oid\n                     AND mjd <= d.mjd\n                     AND fid=2))) > 0.5)\nORDER BY d.oid,\n         d.mjd;",
+        "execution_time_gold": 18.778796911239624,
         "execution_time_pred": null,
         "error_gold": null,
-        "error_pred": "(psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type double precision: \"2019-01-01\"\nLINE 16:      AND o.firstmjd BETWEEN '2019-01-01' AND '2022-12-31')\n                                     ^\n\n[SQL: -- Select relevant information for objects classified as SN II with specified conditions\nWITH sn_ii_objects AS\n  (SELECT o.oid\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNIII'\n     AND p.classifier_name IN ('lc_classifier',\n                               'lc_classifier_top',\n                               'lc_classifier_transient',\n                               'lc_classifier_stochastic',\n                               'lc_classifier_periodic',\n                               'stamp_classifier')\n     AND p.probability > 0.6\n     AND p.ranking = 1\n     AND o.ndet > 50\n     AND o.firstmjd BETWEEN '2019-01-01' AND '2022-12-31')\nSELECT d.candid AS candidate_id,\n       d.mjd AS TIME,\n       d.magpsf AS magnitude,\n       d.sigmapsf AS mag_error, -- Calculate initial rise estimate as the difference in magnitude over the time difference\n (d.magpsf - lag(d.magpsf) OVER (PARTITION BY d.oid\n                                 ORDER BY d.mjd)) / NULLIF((d.mjd - lag(d.mjd) OVER (PARTITION BY d.oid\n                                                                                     ORDER BY d.mjd)), 1e-9) AS initial_rise_rate,\n d.fid AS band_id\nFROM detection d\nJOIN sn_ii_objects s ON d.oid = s.oid\nWHERE d.oid IN\n    (SELECT oid\n     FROM sn_ii_objects)\n  AND d.mjd >=\n    (SELECT firstmjd\n     FROM OBJECT\n     WHERE oid = d.oid)\n  AND d.mjd <=\n    (SELECT mjdendhist\n     FROM OBJECT\n     WHERE oid = d.oid)\n  AND d.fid IN (1,\n                2)-- g and r bands\nORDER BY d.oid,\n         d.mjd;]\n(Background on this error at: https://sqlalche.me/e/20/9h9h)"
+        "error_pred": "(psycopg2.errors.UndefinedColumn) column d.n_pos does not exist\nLINE 39:   AND d.n_pos > 50\n               ^\n\n[SQL: -- Select relevant columns from detection and magstat tables for objects classified as SN II\nWITH sn_ii_objects AS\n  (SELECT o.oid,\n          p.class_name,\n          p.probability\n   FROM OBJECT o\n   JOIN probability p ON o.oid = p.oid\n   WHERE p.class_name = 'SNII'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.classifier_version =\n       (SELECT MAX(classifier_version)\n        FROM probability\n        WHERE classifier_name='lc_classifier'\n          AND class_name='SNII')\n     AND p.ranking = 1\n     AND p.probability > 0.6\n     AND o.firstmjd BETWEEN 58484 AND 58873 -- Corresponds to 2019-01-01 to 2022-12-31\n)\nSELECT d.oid,\n       d.candid,\n       m.magmean,\n       m.magmean_corr, -- Estimate initial rise rate as the difference in magnitude over the time difference\n (d.mjd -\n    (SELECT MIN(mjd)\n     FROM detection\n     WHERE oid=d.oid\n       AND mjd <= d.mjd\n       AND fid IN (1,\n                   2))) AS initial_rise_estimate,\n d.fid AS band_id,\n d.mjd\nFROM detection d\nJOIN magstat m ON d.oid = m.oid\nAND d.fid = m.fid\nWHERE d.oid IN\n    (SELECT oid\n     FROM sn_ii_objects)\n  AND d.mjd BETWEEN 58484 AND 58873\n  AND d.n_pos > 50\n  AND ((d.fid = 1\n        AND (d.mjd -\n               (SELECT MIN(mjd)\n                FROM detection\n                WHERE oid=d.oid\n                  AND mjd <= d.mjd\n                  AND fid=1))) > 0.5\n       OR (d.fid = 2\n           AND (d.mjd -\n                  (SELECT MIN(mjd)\n                   FROM detection\n                   WHERE oid=d.oid\n                     AND mjd <= d.mjd\n                     AND fid=2))) > 0.5)\nORDER BY d.oid,\n         d.mjd;]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
       },
       "difficulty": "advanced",
       "gold_tables": "['object', 'probability', 'magstat', 'detection']",
@@ -1425,8 +1509,8 @@
         },
         "sql_gold": "SELECT\n    *\nFROM\n    detection\nWHERE\n    oid = 'ZTF23aaqmddq'\nORDER BY mjd",
         "sql_pred": "SELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;",
-        "execution_time_gold": 0.274198055267334,
-        "execution_time_pred": 0.26723337173461914,
+        "execution_time_gold": 0.27409911155700684,
+        "execution_time_pred": 0.26732563972473145,
         "error_gold": null,
         "error_pred": null
       },
@@ -1607,8 +1691,8 @@
         },
         "sql_gold": "SELECT\n    *\nFROM\n    detection\nWHERE\n    oid = 'ZTF23aaqmddq'\nORDER BY mjd",
         "sql_pred": "SELECT *\nFROM detection\nWHERE oid = 'ZTF23aaqmddq'\nORDER BY mjd;",
-        "execution_time_gold": 0.274198055267334,
-        "execution_time_pred": 0.26723337173461914,
+        "execution_time_gold": 0.27409911155700684,
+        "execution_time_pred": 0.26732563972473145,
         "error_gold": null,
         "error_pred": null
       },
@@ -1689,9 +1773,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "SELECT\n    oid, ndet, dmdt_first, magfirst\nFROM\n    magstat\nWHERE\n    oid IN ('ZTF20adadshh','ZTF21aaabvit','ZTF21aaabvjk')\n    AND fid = 1\n    AND ndubious = 0",
-        "sql_pred": "-- Select specified columns for objects with given ZTF identifiers and zero dubious corrections in g band\n\nSELECT o.oid AS \"ZTF identifier\",\n       m.ndet AS \"number of detections\",\n       m.dmdt_first AS \"initial rise estimate\",\n       m.dm_first AS \"first difference magnitude\"\nFROM OBJECT o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh',\n                'ZTF21aaabvit',\n                'ZTF21aaabvjk')\n  AND m.fid = 1 -- g band\n\n  AND m.ndubious = 0;",
-        "execution_time_gold": 0.2684791088104248,
-        "execution_time_pred": 0.26805567741394043,
+        "sql_pred": "-- Select specified columns for objects with given ZTF identifiers, filtering for 'g' band (fid=1) and zero dubious points\n\nSELECT o.oid AS \"ZTF identifier\",\n       m.ndet AS \"number of detections\",\n       m.dmdt_first AS \"initial rise estimate\",\n       m.dm_first AS \"first difference magnitude\"\nFROM OBJECT o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh',\n                'ZTF21aaabvit',\n                'ZTF21aaabvjk')\n  AND m.fid = 1\n  AND m.ndubious = 0;",
+        "execution_time_gold": 0.2679018974304199,
+        "execution_time_pred": 0.2681577205657959,
         "error_gold": null,
         "error_pred": null
       },
@@ -1772,9 +1856,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "SELECT\n    oid, ndet, dmdt_first, magfirst\nFROM\n    magstat\nWHERE\n    oid IN ('ZTF20adadshh','ZTF21aaabvit','ZTF21aaabvjk')\n    AND fid = 1\n    AND ndubious = 0",
-        "sql_pred": "-- Select specified columns for objects with given ZTF identifiers and zero dubious corrections in g band\n\nSELECT o.oid AS \"ZTF identifier\",\n       m.ndet AS \"number of detections\",\n       m.dmdt_first AS \"initial rise estimate\",\n       m.dm_first AS \"first difference magnitude\"\nFROM OBJECT o\nJOIN magstat m ON o.oid = m.oid\nWHERE o.oid IN ('ZTF20adadshh',\n                'ZTF21aaabvit',\n                'ZTF21aaabvjk')\n  AND m.fid = 1 -- g band\n\n  AND m.ndubious = 0;",
-        "execution_time_gold": 0.2684791088104248,
-        "execution_time_pred": 0.26805567741394043,
+        "sql_pred": "-- Select specified columns for objects with given ZTF identifiers, filtering for 'ndubious' = 0 and 'fid' corresponding to g band (assumed to be 1)\n\nSELECT o.oid AS \"ZTF identifier\",\n       m.ndet AS \"number of detections\",\n       m.dmdt_first AS \"initial rise estimate\",\n       m.dm_first AS \"first difference magnitude\"\nFROM magstat m\nJOIN OBJECT o ON m.oid = o.oid\nWHERE o.oid IN ('ZTF20adadshh',\n                'ZTF21aaabvit',\n                'ZTF21aaabvjk')\n  AND m.fid = 1\n  AND m.ndubious = 0;",
+        "execution_time_gold": 0.2679018974304199,
+        "execution_time_pred": 0.2655186653137207,
         "error_gold": null,
         "error_pred": null
       },
@@ -1796,65 +1880,38 @@
           "false_negatives": 0,
           "size_gold": 50,
           "size_pred": 0,
-          "comparison_type": "oids",
-          "gold_id_col": null,
-          "pred_id_col": null
+          "comparison_type": "error"
         },
         "columns": {
-          "precision": 0.6666666666666666,
-          "recall": 0.6666666666666666,
-          "f1_score": 0.6666666666666666,
+          "precision": 0,
+          "recall": 0,
+          "f1_score": 0,
           "perfect_match": 0,
-          "true_positives": 2,
-          "false_positives": 1,
-          "false_negatives": 1,
-          "gold_columns": [
-            "oid",
-            "prob_stamp_agn",
-            "prob_lc_lpv"
-          ],
-          "pred_columns": [
-            "ztf_id",
-            "prob_stamp_agn",
-            "prob_lc_lpv"
-          ],
-          "size_gold": 3,
-          "size_pred": 3,
-          "comparison_type": "columns"
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "size_gold": 50,
+          "size_pred": 0,
+          "comparison_type": "error"
         },
         "columns_formatted": {
-          "precision": 0.5,
-          "recall": 0.3333333333333333,
-          "f1_score": 0.4,
+          "precision": 0,
+          "recall": 0,
+          "f1_score": 0,
           "perfect_match": 0,
-          "true_positives": 1,
-          "false_positives": 1,
-          "false_negatives": 2,
-          "gold_columns": [
-            "oid",
-            "prob_stamp_agn",
-            "prob_lc_lpv"
-          ],
-          "pred_columns": [
-            "ztf_id",
-            "prob_stamp_agn",
-            "prob_lc_lpv"
-          ],
-          "pred_columns_formatted": [
-            "oid",
-            "probability",
-            "probability"
-          ],
-          "size_gold": 3,
-          "size_pred": 3,
-          "comparison_type": "columns"
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "size_gold": 50,
+          "size_pred": 0,
+          "comparison_type": "error"
         },
         "sql_gold": "SELECT\n    sq1.oid,\n    sq1.probability as prob_stamp_agn,\n    sq2.probability as prob_lc_lpv\nFROM\n(\nSELECT\n    *\nFROM\n    probability\nWHERE\n    classifier_name = 'stamp_classifier'\n    AND class_name = 'AGN'\n    AND probability > 0.6\n    AND classifier_version = 'stamp_classifier_1.0.4'\n) AS sq1\nINNER JOIN\n(\nSELECT\n    *\nFROM\n    probability\nWHERE\n    classifier_name = 'lc_classifier'\n    AND class_name = 'LPV'\n    AND probability > 0.7\n) AS sq2\nON sq1.oid = sq2.oid\nLIMIT 50",
-        "sql_pred": "-- Select up to 50 objects with specified probability thresholds for AGN and LPV classifications\n\nSELECT o.oid AS ztf_id,\n       sp.probability AS prob_stamp_agn,\n       lp.probability AS prob_lc_lpv\nFROM OBJECT o -- Subquery to get the highest probability of being AGN in the stamp classifier version 'stamp_classifier_1.0.4'\nJOIN\n  (SELECT p.oid,\n          p.probability\n   FROM probability p\n   WHERE p.class_name = 'AGN'\n     AND p.classifier_name = 'stamp_classifier_1.0.4'\n     AND p.ranking = 1\n     AND p.probability > 0.6) sp ON o.oid = sp.oid -- Subquery to get the highest probability of being LPV in the light curve classifier\nJOIN\n  (SELECT p.oid,\n          p.probability\n   FROM probability p\n   WHERE p.class_name = 'LPV'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.ranking = 1\n     AND p.probability > 0.7) lp ON o.oid = lp.oid -- Limit the result to 50 objects\nLIMIT 50;",
-        "execution_time_gold": 65.93300604820251,
-        "execution_time_pred": 0.2664024829864502,
+        "sql_pred": "WITH selected_objects AS\n  (SELECT o.oid,\n          p_stamp.probability AS prob_stamp_agn,\n          p_lc.probability AS prob_lc_lpv\n   FROM OBJECT o\n   WHERE -- Retrieve object OID\n -- Filter for objects with probability > 0.6 of being AGN in stamp_classifier_1.0.4\n\n       (SELECT probability\n        FROM probability p\n        WHERE p.oid = o.oid\n          AND p.class_name = 'AGN'\n          AND p.classifier_name = 'stamp_classifier'\n          AND p.classifier_version = 'stamp_classifier_1.0.4') > 0.6\n     AND -- Filter for objects with probability > 0.7 of being LPV in the light curve classifier\n\n       (SELECT probability\n        FROM probability p\n        WHERE p.oid = o.oid\n          AND p.class_name = 'LPV'\n          AND p.classifier_name = 'lc_classifier'\n          AND p.classifier_version = 'latest') > 0.7\n   LIMIT 50),\n     probabilities AS\n  (SELECT o.oid, -- Get the probability of AGN from stamp_classifier_1.0.4\n\n     (SELECT probability\n      FROM probability p\n      WHERE p.oid = o.oid\n        AND p.class_name = 'AGN'\n        AND p.classifier_name = 'stamp_classifier'\n        AND p.classifier_version = 'stamp_classifier_1.0.4') AS prob_stamp_agn, -- Get the probability of LPV from the light curve classifier\n\n     (SELECT probability\n      FROM probability p\n      WHERE p.oid = o.oid\n        AND p.class_name = 'LPV'\n        AND p.classifier_name = 'lc_classifier'\n        AND p.classifier_version = 'latest') AS prob_lc_lpv\n   FROM OBJECT o\n   WHERE o.oid IN\n       (SELECT oid\n        FROM selected_objects))\nSELECT oid AS \"ZTF identifier\",\n       prob_stamp_agn,\n       prob_lc_lpv\nFROM probabilities;",
+        "execution_time_gold": 75.42246127128601,
+        "execution_time_pred": null,
         "error_gold": null,
-        "error_pred": null
+        "error_pred": "(psycopg2.errors.UndefinedTable) missing FROM-clause entry for table \"p_stamp\"\nLINE 3:           p_stamp.probability AS prob_stamp_agn,\n                  ^\n\n[SQL: WITH selected_objects AS\n  (SELECT o.oid,\n          p_stamp.probability AS prob_stamp_agn,\n          p_lc.probability AS prob_lc_lpv\n   FROM OBJECT o\n   WHERE -- Retrieve object OID\n -- Filter for objects with probability > 0.6 of being AGN in stamp_classifier_1.0.4\n\n       (SELECT probability\n        FROM probability p\n        WHERE p.oid = o.oid\n          AND p.class_name = 'AGN'\n          AND p.classifier_name = 'stamp_classifier'\n          AND p.classifier_version = 'stamp_classifier_1.0.4') > 0.6\n     AND -- Filter for objects with probability > 0.7 of being LPV in the light curve classifier\n\n       (SELECT probability\n        FROM probability p\n        WHERE p.oid = o.oid\n          AND p.class_name = 'LPV'\n          AND p.classifier_name = 'lc_classifier'\n          AND p.classifier_version = 'latest') > 0.7\n   LIMIT 50),\n     probabilities AS\n  (SELECT o.oid, -- Get the probability of AGN from stamp_classifier_1.0.4\n\n     (SELECT probability\n      FROM probability p\n      WHERE p.oid = o.oid\n        AND p.class_name = 'AGN'\n        AND p.classifier_name = 'stamp_classifier'\n        AND p.classifier_version = 'stamp_classifier_1.0.4') AS prob_stamp_agn, -- Get the probability of LPV from the light curve classifier\n\n     (SELECT probability\n      FROM probability p\n      WHERE p.oid = o.oid\n        AND p.class_name = 'LPV'\n        AND p.classifier_name = 'lc_classifier'\n        AND p.classifier_version = 'latest') AS prob_lc_lpv\n   FROM OBJECT o\n   WHERE o.oid IN\n       (SELECT oid\n        FROM selected_objects))\nSELECT oid AS \"ZTF identifier\",\n       prob_stamp_agn,\n       prob_lc_lpv\nFROM probabilities;]\n(Background on this error at: https://sqlalche.me/e/20/f405)"
       },
       "difficulty": "medium",
       "gold_tables": "['probability']",
@@ -1928,9 +1985,9 @@
           "comparison_type": "columns"
         },
         "sql_gold": "SELECT\n    sq1.oid,\n    sq1.probability as prob_stamp_agn,\n    sq2.probability as prob_lc_lpv\nFROM\n(\nSELECT\n    *\nFROM\n    probability\nWHERE\n    classifier_name = 'stamp_classifier'\n    AND class_name = 'AGN'\n    AND probability > 0.6\n    AND classifier_version = 'stamp_classifier_1.0.4'\n) AS sq1\nINNER JOIN\n(\nSELECT\n    *\nFROM\n    probability\nWHERE\n    classifier_name = 'lc_classifier'\n    AND class_name = 'LPV'\n    AND probability > 0.7\n) AS sq2\nON sq1.oid = sq2.oid\nLIMIT 50",
-        "sql_pred": "-- Select up to 50 objects with specified probability thresholds for AGN and LPV classifications\n\nSELECT o.oid AS ztf_id,\n       sp.probability AS prob_stamp_agn,\n       lp.probability AS prob_lc_lpv\nFROM OBJECT o -- Subquery to get the highest probability of AGN in stamp_classifier_1.0.4\nJOIN\n  (SELECT p.oid,\n          p.probability\n   FROM probability p\n   WHERE p.class_name = 'AGN'\n     AND p.classifier_name = 'stamp_classifier_1.0.4'\n     AND p.ranking = 1\n     AND p.probability > 0.6) sp ON o.oid = sp.oid -- Subquery to get the highest probability of LPV in lc_classifier\nJOIN\n  (SELECT p.oid,\n          p.probability\n   FROM probability p\n   WHERE p.class_name = 'LPV'\n     AND p.classifier_name = 'lc_classifier'\n     AND p.ranking = 1\n     AND p.probability > 0.7) lp ON o.oid = lp.oid -- Limit the result to 50 objects\nLIMIT 50;",
-        "execution_time_gold": 65.93300604820251,
-        "execution_time_pred": 0.2662043571472168,
+        "sql_pred": "-- Select up to 50 objects with specified classification probabilities\n\nSELECT o.oid AS ztf_id,\n       p_stamp.probability AS prob_stamp_agn,\n       p_lc.probability AS prob_lc_lpv\nFROM OBJECT o -- Subquery to get the highest probability of being AGN in the stamp classifier version 'stamp_classifier_1.0.4'\nJOIN\n  (SELECT oid,\n          probability\n   FROM probability\n   WHERE classifier_name = 'stamp_classifier_1.0.4'\n     AND class_name = 'AGN'\n     AND ranking = 1\n     AND probability > 0.6) p_stamp ON o.oid = p_stamp.oid -- Subquery to get the highest probability of being LPV in the light curve classifier\nJOIN\n  (SELECT oid,\n          probability\n   FROM probability\n   WHERE classifier_name = 'lc_classifier'\n     AND class_name = 'LPV'\n     AND ranking = 1\n     AND probability > 0.7) p_lc ON o.oid = p_lc.oid -- Limit the result to 50 objects\nLIMIT 50;",
+        "execution_time_gold": 75.42246127128601,
+        "execution_time_pred": 0.26657533645629883,
         "error_gold": null,
         "error_pred": null
       },
@@ -1941,12 +1998,12 @@
   ],
   "aggregate_metrics": {
     "oids": {
-      "precision": 0.5055555555555555,
-      "precision_std": 0.5075454060291419,
-      "recall": 0.6,
-      "recall_std": 0.5026246899500346,
-      "f1_score": 0.5105263157894736,
-      "f1_score_std": 0.5031175588556487,
+      "precision": 0.55424353048987,
+      "precision_std": 0.46843006064330583,
+      "recall": 0.6555323590814196,
+      "recall_std": 0.48219832798643086,
+      "f1_score": 0.5721433865106597,
+      "f1_score_std": 0.462283930741648,
       "perfect_match_rate": 0.5,
       "perfect_match_rate_std": 0.512989176042577,
       "perfect_match_count": 10,
@@ -1954,12 +2011,12 @@
       "total_count": 20
     },
     "columns": {
-      "precision": 0.4666666666666666,
-      "precision_std": 0.4884633980433644,
-      "recall": 0.4666666666666666,
-      "recall_std": 0.4884633980433644,
-      "f1_score": 0.4666666666666666,
-      "f1_score_std": 0.4884633980433644,
+      "precision": 0.45,
+      "precision_std": 0.4839530207734936,
+      "recall": 0.45,
+      "recall_std": 0.4839530207734936,
+      "f1_score": 0.45,
+      "f1_score_std": 0.4839530207734936,
       "perfect_match_rate": 0.4,
       "perfect_match_rate_std": 0.5026246899500346,
       "perfect_match_count": 8,
@@ -1967,40 +2024,40 @@
       "total_count": 20
     },
     "columns_formatted": {
-      "precision": 0.625,
-      "precision_std": 0.4479485402776106,
-      "recall": 0.6083333333333334,
-      "recall_std": 0.4557142071479572,
-      "f1_score": 0.615,
-      "f1_score_std": 0.4519257041873843,
-      "perfect_match_rate": 0.5,
-      "perfect_match_rate_std": 0.512989176042577,
-      "perfect_match_count": 10,
+      "precision": 0.7,
+      "precision_std": 0.43377170808714816,
+      "recall": 0.6916666666666667,
+      "recall_std": 0.4393808775488022,
+      "f1_score": 0.6950000000000001,
+      "f1_score_std": 0.43676441921788556,
+      "perfect_match_rate": 0.6,
+      "perfect_match_rate_std": 0.5026246899500346,
+      "perfect_match_count": 12,
       "success_count": 20,
       "total_count": 20
     },
     "execution_times": {
-      "avg_gold": 12.707293438911439,
-      "avg_gold_std": 21.94535124943426,
-      "avg_pred": 6.518434030669076,
-      "avg_pred_std": 15.887354642033205,
+      "avg_gold": 15.692898607254028,
+      "avg_gold_std": 27.26349936928255,
+      "avg_pred": 11.621479511260986,
+      "avg_pred_std": 28.549153000488396,
       "count_gold_executions": 20,
-      "count_pred_executions": 14
+      "count_pred_executions": 15
     },
     "errors": {
       "gold_errors": 0,
-      "pred_errors": 6,
+      "pred_errors": 5,
       "total_processed_after_gold_errors": 20
     },
     "by_n_run": {
       "0": {
         "oids": {
-          "precision": 0.5055555555555555,
-          "precision_std": 0.5214533346781028,
-          "recall": 0.6,
-          "recall_std": 0.5163977794943222,
-          "f1_score": 0.5105263157894736,
-          "f1_score_std": 0.5169041541582216,
+          "precision": 0.5582159624413146,
+          "precision_std": 0.4780719410066526,
+          "recall": 0.6110647181628392,
+          "recall_std": 0.5031282033403066,
+          "f1_score": 0.5653179190751445,
+          "f1_score_std": 0.48046509506758733,
           "perfect_match_rate": 0.5,
           "perfect_match_rate_std": 0.5270462766947299,
           "perfect_match_count": 5,
@@ -2008,12 +2065,12 @@
           "group_total_items": 10
         },
         "columns": {
-          "precision": 0.4666666666666667,
-          "precision_std": 0.5018484351393873,
-          "recall": 0.4666666666666667,
-          "recall_std": 0.5018484351393873,
-          "f1_score": 0.4666666666666667,
-          "f1_score_std": 0.5018484351393873,
+          "precision": 0.4166666666666667,
+          "precision_std": 0.5046083923495819,
+          "recall": 0.4166666666666667,
+          "recall_std": 0.5046083923495819,
+          "f1_score": 0.4166666666666667,
+          "f1_score_std": 0.5046083923495819,
           "perfect_match_rate": 0.4,
           "perfect_match_rate_std": 0.5163977794943223,
           "perfect_match_count": 4,
@@ -2021,23 +2078,23 @@
           "group_total_items": 10
         },
         "columns_formatted": {
-          "precision": 0.625,
-          "precision_std": 0.46022337571613586,
-          "recall": 0.6083333333333333,
-          "recall_std": 0.46820183998246206,
-          "f1_score": 0.615,
-          "f1_score_std": 0.4643095231990545,
-          "perfect_match_rate": 0.5,
-          "perfect_match_rate_std": 0.5270462766947299,
-          "perfect_match_count": 5,
+          "precision": 0.675,
+          "precision_std": 0.4721405158071765,
+          "recall": 0.675,
+          "recall_std": 0.4721405158071765,
+          "f1_score": 0.675,
+          "f1_score_std": 0.4721405158071765,
+          "perfect_match_rate": 0.6,
+          "perfect_match_rate_std": 0.5163977794943222,
+          "perfect_match_count": 6,
           "success_count": 10,
           "group_total_items": 10
         },
         "execution_times": {
-          "avg_gold": 12.707293438911439,
-          "avg_gold_std": 22.546705090347547,
-          "avg_pred": 6.518459762845721,
-          "avg_pred_std": 16.53607164899529,
+          "avg_gold": 15.692898607254028,
+          "avg_gold_std": 28.010582880323533,
+          "avg_pred": 10.001199279512678,
+          "avg_pred_std": 19.55783411177719,
           "count_gold_executions": 10,
           "count_pred_executions": 7
         },
@@ -2049,12 +2106,12 @@
       },
       "1": {
         "oids": {
-          "precision": 0.5055555555555555,
-          "precision_std": 0.5214533346781028,
-          "recall": 0.6,
-          "recall_std": 0.5163977794943222,
-          "f1_score": 0.5105263157894736,
-          "f1_score_std": 0.5169041541582216,
+          "precision": 0.5502710985384253,
+          "precision_std": 0.48440307839862046,
+          "recall": 0.7,
+          "recall_std": 0.48304589153964794,
+          "f1_score": 0.5789688539461748,
+          "f1_score_std": 0.46926302876579307,
           "perfect_match_rate": 0.5,
           "perfect_match_rate_std": 0.5270462766947299,
           "perfect_match_count": 5,
@@ -2062,12 +2119,12 @@
           "group_total_items": 10
         },
         "columns": {
-          "precision": 0.4666666666666667,
-          "precision_std": 0.5018484351393873,
-          "recall": 0.4666666666666667,
-          "recall_std": 0.5018484351393873,
-          "f1_score": 0.4666666666666667,
-          "f1_score_std": 0.5018484351393873,
+          "precision": 0.4833333333333334,
+          "precision_std": 0.4871813615198612,
+          "recall": 0.4833333333333334,
+          "recall_std": 0.4871813615198612,
+          "f1_score": 0.4833333333333334,
+          "f1_score_std": 0.4871813615198612,
           "perfect_match_rate": 0.4,
           "perfect_match_rate_std": 0.5163977794943223,
           "perfect_match_count": 4,
@@ -2075,29 +2132,29 @@
           "group_total_items": 10
         },
         "columns_formatted": {
-          "precision": 0.625,
-          "precision_std": 0.46022337571613586,
-          "recall": 0.6083333333333333,
-          "recall_std": 0.46820183998246206,
-          "f1_score": 0.615,
-          "f1_score_std": 0.4643095231990545,
-          "perfect_match_rate": 0.5,
-          "perfect_match_rate_std": 0.5270462766947299,
-          "perfect_match_count": 5,
+          "precision": 0.725,
+          "precision_std": 0.415832498329155,
+          "recall": 0.7083333333333333,
+          "recall_std": 0.4289845892077917,
+          "f1_score": 0.7150000000000001,
+          "f1_score_std": 0.4229854213405785,
+          "perfect_match_rate": 0.6,
+          "perfect_match_rate_std": 0.5163977794943222,
+          "perfect_match_count": 6,
           "success_count": 10,
           "group_total_items": 10
         },
         "execution_times": {
-          "avg_gold": 12.707293438911439,
-          "avg_gold_std": 22.546705090347547,
-          "avg_pred": 6.518408298492432,
-          "avg_pred_std": 16.536094330731174,
+          "avg_gold": 15.692898607254028,
+          "avg_gold_std": 28.010582880323533,
+          "avg_pred": 13.039224714040756,
+          "avg_pred_std": 36.01834354064917,
           "count_gold_executions": 10,
-          "count_pred_executions": 7
+          "count_pred_executions": 8
         },
         "errors": {
           "gold": 0,
-          "pred": 3
+          "pred": 2
         },
         "group_total_items": 10
       }
@@ -2105,11 +2162,11 @@
     "by_req_id": {
       "86": {
         "oids": {
-          "precision": 0.05555555555555555,
+          "precision": 0.3333333333333333,
           "precision_std": 0.0,
           "recall": 1.0,
           "recall_std": 0.0,
-          "f1_score": 0.10526315789473684,
+          "f1_score": 0.5,
           "f1_score_std": 0.0,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
@@ -2144,10 +2201,10 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.5088963508605957,
+          "avg_gold": 1.9351882934570312,
           "avg_gold_std": 0.0,
-          "avg_pred": 44.01874399185181,
-          "avg_pred_std": 0.0,
+          "avg_pred": 26.355347156524658,
+          "avg_pred_std": 36.52950946069152,
           "count_gold_executions": 2,
           "count_pred_executions": 2
         },
@@ -2198,10 +2255,10 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.2677001953125,
+          "avg_gold": 0.2708613872528076,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.26500892639160156,
-          "avg_pred_std": 0.0,
+          "avg_pred": 0.2653963565826416,
+          "avg_pred_std": 6.945800634595337e-05,
           "count_gold_executions": 2,
           "count_pred_executions": 2
         },
@@ -2252,10 +2309,10 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.2852330207824707,
+          "avg_gold": 0.28726959228515625,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.2782115936279297,
-          "avg_pred_std": 0.00011463942794963177,
+          "avg_pred": 0.2794935703277588,
+          "avg_pred_std": 0.0,
           "count_gold_executions": 2,
           "count_pred_executions": 2
         },
@@ -2306,7 +2363,7 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.35753822326660156,
+          "avg_gold": 0.44405412673950195,
           "avg_gold_std": 0.0,
           "avg_pred": 0.0,
           "avg_pred_std": 0.0,
@@ -2321,12 +2378,12 @@
       },
       "0": {
         "oids": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
+          "precision": 0.2091019715653658,
+          "precision_std": 0.056178671413372336,
+          "recall": 0.5553235908141962,
+          "recall_std": 0.6288674087379317,
+          "f1_score": 0.22143386510659643,
+          "f1_score_std": 0.09652668616841412,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
           "perfect_match_count": 0,
@@ -2334,11 +2391,11 @@
           "group_total_items": 2
         },
         "columns": {
-          "precision": 0.0,
+          "precision": 0.16666666666666666,
           "precision_std": 0.0,
-          "recall": 0.0,
+          "recall": 0.16666666666666666,
           "recall_std": 0.0,
-          "f1_score": 0.0,
+          "f1_score": 0.16666666666666666,
           "f1_score_std": 0.0,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
@@ -2347,29 +2404,29 @@
           "group_total_items": 2
         },
         "columns_formatted": {
-          "precision": 0.0,
+          "precision": 1.0,
           "precision_std": 0.0,
-          "recall": 0.0,
+          "recall": 1.0,
           "recall_std": 0.0,
-          "f1_score": 0.0,
+          "f1_score": 1.0,
           "f1_score_std": 0.0,
-          "perfect_match_rate": 0.0,
+          "perfect_match_rate": 1.0,
           "perfect_match_rate_std": 0.0,
-          "perfect_match_count": 0,
+          "perfect_match_count": 2,
           "success_count": 2,
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 36.77487659454346,
+          "avg_gold": 58.97878408432007,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.0,
-          "avg_pred_std": 0.0,
+          "avg_pred": 59.328850626945496,
+          "avg_pred_std": 60.60039178836204,
           "count_gold_executions": 2,
-          "count_pred_executions": 0
+          "count_pred_executions": 2
         },
         "errors": {
           "gold": 0,
-          "pred": 2
+          "pred": 0
         },
         "group_total_items": 2
       },
@@ -2414,9 +2471,9 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.27559447288513184,
+          "avg_gold": 0.26956939697265625,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.26548123359680176,
+          "avg_pred": 0.2645571231842041,
           "avg_pred_std": 0.0,
           "count_gold_executions": 2,
           "count_pred_executions": 2
@@ -2468,7 +2525,7 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 22.12741231918335,
+          "avg_gold": 18.778796911239624,
           "avg_gold_std": 0.0,
           "avg_pred": 0.0,
           "avg_pred_std": 0.0,
@@ -2522,9 +2579,9 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.274198055267334,
+          "avg_gold": 0.27409911155700684,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.26723337173461914,
+          "avg_pred": 0.26732563972473145,
           "avg_pred_std": 0.0,
           "count_gold_executions": 2,
           "count_pred_executions": 2
@@ -2576,10 +2633,10 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 0.2684791088104248,
+          "avg_gold": 0.2679018974304199,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.26805567741394043,
-          "avg_pred_std": 0.0,
+          "avg_pred": 0.2668381929397583,
+          "avg_pred_std": 0.0018660938646683442,
           "count_gold_executions": 2,
           "count_pred_executions": 2
         },
@@ -2604,12 +2661,12 @@
           "group_total_items": 2
         },
         "columns": {
-          "precision": 0.6666666666666666,
-          "precision_std": 0.0,
-          "recall": 0.6666666666666666,
-          "recall_std": 0.0,
-          "f1_score": 0.6666666666666666,
-          "f1_score_std": 0.0,
+          "precision": 0.3333333333333333,
+          "precision_std": 0.4714045207910317,
+          "recall": 0.3333333333333333,
+          "recall_std": 0.4714045207910317,
+          "f1_score": 0.3333333333333333,
+          "f1_score_std": 0.4714045207910317,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
           "perfect_match_count": 0,
@@ -2617,12 +2674,12 @@
           "group_total_items": 2
         },
         "columns_formatted": {
-          "precision": 0.5,
-          "precision_std": 0.0,
-          "recall": 0.3333333333333333,
-          "recall_std": 0.0,
-          "f1_score": 0.4,
-          "f1_score_std": 0.0,
+          "precision": 0.25,
+          "precision_std": 0.3535533905932738,
+          "recall": 0.16666666666666666,
+          "recall_std": 0.23570226039551584,
+          "f1_score": 0.2,
+          "f1_score_std": 0.28284271247461906,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
           "perfect_match_count": 0,
@@ -2630,16 +2687,16 @@
           "group_total_items": 2
         },
         "execution_times": {
-          "avg_gold": 65.93300604820251,
+          "avg_gold": 75.42246127128601,
           "avg_gold_std": 0.0,
-          "avg_pred": 0.2663034200668335,
-          "avg_pred_std": 0.00014009612445021175,
+          "avg_pred": 0.26657533645629883,
+          "avg_pred_std": 0.0,
           "count_gold_executions": 2,
-          "count_pred_executions": 2
+          "count_pred_executions": 1
         },
         "errors": {
           "gold": 0,
-          "pred": 0
+          "pred": 1
         },
         "group_total_items": 2
       }
@@ -2647,12 +2704,12 @@
     "by_difficulty": {
       "medium": {
         "oids": {
-          "precision": 0.018518518518518517,
-          "precision_std": 0.028688765527462346,
+          "precision": 0.1111111111111111,
+          "precision_std": 0.17213259316477408,
           "recall": 0.3333333333333333,
           "recall_std": 0.5163977794943223,
-          "f1_score": 0.03508771929824561,
-          "f1_score_std": 0.05435766099940235,
+          "f1_score": 0.16666666666666666,
+          "f1_score_std": 0.25819888974716115,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
           "perfect_match_count": 0,
@@ -2660,12 +2717,12 @@
           "group_total_items": 6
         },
         "columns": {
-          "precision": 0.5555555555555555,
-          "precision_std": 0.45542003404264886,
-          "recall": 0.5555555555555555,
-          "recall_std": 0.45542003404264886,
-          "f1_score": 0.5555555555555555,
-          "f1_score_std": 0.45542003404264886,
+          "precision": 0.4444444444444444,
+          "precision_std": 0.5018484351393874,
+          "recall": 0.4444444444444444,
+          "recall_std": 0.5018484351393874,
+          "f1_score": 0.4444444444444444,
+          "f1_score_std": 0.5018484351393874,
           "perfect_match_rate": 0.3333333333333333,
           "perfect_match_rate_std": 0.5163977794943223,
           "perfect_match_count": 2,
@@ -2673,12 +2730,12 @@
           "group_total_items": 6
         },
         "columns_formatted": {
-          "precision": 0.5,
-          "precision_std": 0.4472135954999579,
-          "recall": 0.4444444444444445,
-          "recall_std": 0.45542003404264886,
-          "f1_score": 0.4666666666666666,
-          "f1_score_std": 0.45018514709691027,
+          "precision": 0.4166666666666667,
+          "precision_std": 0.4915960401250875,
+          "recall": 0.3888888888888889,
+          "recall_std": 0.4906533814626582,
+          "f1_score": 0.39999999999999997,
+          "f1_score_std": 0.4898979485566356,
           "perfect_match_rate": 0.3333333333333333,
           "perfect_match_rate_std": 0.5163977794943223,
           "perfect_match_count": 2,
@@ -2686,16 +2743,16 @@
           "group_total_items": 6
         },
         "execution_times": {
-          "avg_gold": 22.266480207443237,
-          "avg_gold_std": 33.824013204490925,
-          "avg_pred": 22.14252370595932,
-          "avg_pred_std": 25.260483341952654,
+          "avg_gold": 25.933901230494182,
+          "avg_gold_std": 38.33947366836516,
+          "avg_pred": 17.659089883168537,
+          "avg_pred_std": 29.901123765045583,
           "count_gold_executions": 6,
-          "count_pred_executions": 4
+          "count_pred_executions": 3
         },
         "errors": {
           "gold": 0,
-          "pred": 2
+          "pred": 3
         },
         "group_total_items": 6
       },
@@ -2740,10 +2797,10 @@
           "group_total_items": 10
         },
         "execution_times": {
-          "avg_gold": 0.27424097061157227,
-          "avg_gold_std": 0.006643957488982444,
-          "avg_pred": 0.2687981605529785,
-          "avg_pred_std": 0.005098571446460524,
+          "avg_gold": 0.2739402770996094,
+          "avg_gold_std": 0.007344568007910798,
+          "avg_pred": 0.26872217655181885,
+          "avg_pred_std": 0.005805647568856037,
           "count_gold_executions": 10,
           "count_pred_executions": 10
         },
@@ -2755,12 +2812,12 @@
       },
       "advanced": {
         "oids": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
+          "precision": 0.1045509857826829,
+          "precision_std": 0.12500623669014105,
+          "recall": 0.2776617954070981,
+          "recall_std": 0.48437537381922213,
+          "f1_score": 0.11071693255329822,
+          "f1_score_std": 0.13946368435152076,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
           "perfect_match_count": 0,
@@ -2768,12 +2825,12 @@
           "group_total_items": 4
         },
         "columns": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
+          "precision": 0.08333333333333333,
+          "precision_std": 0.09622504486493763,
+          "recall": 0.08333333333333333,
+          "recall_std": 0.09622504486493763,
+          "f1_score": 0.08333333333333333,
+          "f1_score_std": 0.09622504486493763,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0,
           "perfect_match_count": 0,
@@ -2781,29 +2838,29 @@
           "group_total_items": 4
         },
         "columns_formatted": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
-          "perfect_match_rate": 0.0,
-          "perfect_match_rate_std": 0.0,
-          "perfect_match_count": 0,
+          "precision": 0.5,
+          "precision_std": 0.5773502691896257,
+          "recall": 0.5,
+          "recall_std": 0.5773502691896257,
+          "f1_score": 0.5,
+          "f1_score_std": 0.5773502691896257,
+          "perfect_match_rate": 0.5,
+          "perfect_match_rate_std": 0.5773502691896257,
+          "perfect_match_count": 2,
           "success_count": 4,
           "group_total_items": 4
         },
         "execution_times": {
-          "avg_gold": 29.451144456863403,
-          "avg_gold_std": 8.456717442324585,
-          "avg_pred": 0.0,
-          "avg_pred_std": 0.0,
+          "avg_gold": 38.878790497779846,
+          "avg_gold_std": 23.209473415797497,
+          "avg_pred": 59.328850626945496,
+          "avg_pred_std": 60.60039178836204,
           "count_gold_executions": 4,
-          "count_pred_executions": 0
+          "count_pred_executions": 2
         },
         "errors": {
           "gold": 0,
-          "pred": 4
+          "pred": 2
         },
         "group_total_items": 4
       }
@@ -2811,44 +2868,44 @@
     "by_difficulty_runs": {
       "medium": {
         "oids": {
-          "precision": 0.018518518518518517,
+          "precision": 0.1111111111111111,
           "precision_std": 0.0,
           "recall": 0.3333333333333333,
           "recall_std": 0.0,
-          "f1_score": 0.03508771929824561,
+          "f1_score": 0.16666666666666666,
           "f1_score_std": 0.0,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0
         },
         "columns": {
-          "precision": 0.5555555555555555,
-          "precision_std": 0.0,
-          "recall": 0.5555555555555555,
-          "recall_std": 0.0,
-          "f1_score": 0.5555555555555555,
-          "f1_score_std": 0.0,
+          "precision": 0.4444444444444444,
+          "precision_std": 0.1571348402636772,
+          "recall": 0.4444444444444444,
+          "recall_std": 0.1571348402636772,
+          "f1_score": 0.4444444444444444,
+          "f1_score_std": 0.1571348402636772,
           "perfect_match_rate": 0.3333333333333333,
           "perfect_match_rate_std": 0.0
         },
         "columns_formatted": {
-          "precision": 0.5,
-          "precision_std": 0.0,
-          "recall": 0.4444444444444444,
-          "recall_std": 0.0,
-          "f1_score": 0.4666666666666666,
-          "f1_score_std": 0.0,
+          "precision": 0.41666666666666663,
+          "precision_std": 0.11785113019775793,
+          "recall": 0.38888888888888884,
+          "recall_std": 0.07856742013183861,
+          "f1_score": 0.39999999999999997,
+          "f1_score_std": 0.09428090415820632,
           "perfect_match_rate": 0.3333333333333333,
           "perfect_match_rate_std": 0.0
         },
         "runs_metrics": {
           "0": {
             "oids": {
-              "precision": 0.018518518518518517,
-              "precision_std": 0.032075014954979206,
+              "precision": 0.1111111111111111,
+              "precision_std": 0.19245008972987526,
               "recall": 0.3333333333333333,
               "recall_std": 0.5773502691896258,
-              "f1_score": 0.03508771929824561,
-              "f1_score_std": 0.0607737125462764,
+              "f1_score": 0.16666666666666666,
+              "f1_score_std": 0.2886751345948129,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -2856,12 +2913,12 @@
               "group_total_items": 3
             },
             "columns": {
-              "precision": 0.5555555555555555,
-              "precision_std": 0.5091750772173156,
-              "recall": 0.5555555555555555,
-              "recall_std": 0.5091750772173156,
-              "f1_score": 0.5555555555555555,
-              "f1_score_std": 0.5091750772173156,
+              "precision": 0.3333333333333333,
+              "precision_std": 0.5773502691896258,
+              "recall": 0.3333333333333333,
+              "recall_std": 0.5773502691896258,
+              "f1_score": 0.3333333333333333,
+              "f1_score_std": 0.5773502691896258,
               "perfect_match_rate": 0.3333333333333333,
               "perfect_match_rate_std": 0.5773502691896258,
               "perfect_match_count": 1,
@@ -2869,12 +2926,12 @@
               "group_total_items": 3
             },
             "columns_formatted": {
-              "precision": 0.5,
-              "precision_std": 0.5,
-              "recall": 0.4444444444444444,
-              "recall_std": 0.5091750772173156,
-              "f1_score": 0.4666666666666666,
-              "f1_score_std": 0.5033222956847168,
+              "precision": 0.3333333333333333,
+              "precision_std": 0.5773502691896258,
+              "recall": 0.3333333333333333,
+              "recall_std": 0.5773502691896258,
+              "f1_score": 0.3333333333333333,
+              "f1_score_std": 0.5773502691896258,
               "perfect_match_rate": 0.3333333333333333,
               "perfect_match_rate_std": 0.5773502691896258,
               "perfect_match_count": 1,
@@ -2882,27 +2939,27 @@
               "group_total_items": 3
             },
             "execution_times": {
-              "avg_gold": 22.266480207443237,
-              "avg_gold_std": 37.8163963985461,
-              "avg_pred": 22.14257323741913,
-              "avg_pred_std": 30.937577373708354,
+              "avg_gold": 25.933901230494182,
+              "avg_gold_std": 42.864834672013856,
+              "avg_pred": 52.18561100959778,
+              "avg_pred_std": 0.0,
               "count_gold_executions": 3,
-              "count_pred_executions": 2
+              "count_pred_executions": 1
             },
             "errors": {
               "gold": 0,
-              "pred": 1
+              "pred": 2
             },
             "group_total_items": 3
           },
           "1": {
             "oids": {
-              "precision": 0.018518518518518517,
-              "precision_std": 0.032075014954979206,
+              "precision": 0.1111111111111111,
+              "precision_std": 0.19245008972987526,
               "recall": 0.3333333333333333,
               "recall_std": 0.5773502691896258,
-              "f1_score": 0.03508771929824561,
-              "f1_score_std": 0.0607737125462764,
+              "f1_score": 0.16666666666666666,
+              "f1_score_std": 0.2886751345948129,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -2936,10 +2993,10 @@
               "group_total_items": 3
             },
             "execution_times": {
-              "avg_gold": 22.266480207443237,
-              "avg_gold_std": 37.8163963985461,
-              "avg_pred": 22.14247417449951,
-              "avg_pred_std": 30.937717469832805,
+              "avg_gold": 25.933901230494182,
+              "avg_gold_std": 42.864834672013856,
+              "avg_pred": 0.39582931995391846,
+              "avg_pred_std": 0.1827927364530819,
               "count_gold_executions": 3,
               "count_pred_executions": 2
             },
@@ -3024,10 +3081,10 @@
               "group_total_items": 5
             },
             "execution_times": {
-              "avg_gold": 0.27424097061157227,
-              "avg_gold_std": 0.007046981091561949,
-              "avg_pred": 0.2688143730163574,
-              "avg_pred_std": 0.0054429834132144785,
+              "avg_gold": 0.2739402770996094,
+              "avg_gold_std": 0.007790090764919246,
+              "avg_pred": 0.26897625923156737,
+              "avg_pred_std": 0.0060561313949331836,
               "count_gold_executions": 5,
               "count_pred_executions": 5
             },
@@ -3078,10 +3135,10 @@
               "group_total_items": 5
             },
             "execution_times": {
-              "avg_gold": 0.27424097061157227,
-              "avg_gold_std": 0.007046981091561949,
-              "avg_pred": 0.2687819480895996,
-              "avg_pred_std": 0.0053724290355053345,
+              "avg_gold": 0.2739402770996094,
+              "avg_gold_std": 0.007790090764919246,
+              "avg_pred": 0.2684680938720703,
+              "avg_pred_std": 0.006244946022016778,
               "count_gold_executions": 5,
               "count_pred_executions": 5
             },
@@ -3095,44 +3152,44 @@
       },
       "advanced": {
         "oids": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
+          "precision": 0.1045509857826829,
+          "precision_std": 0.028089335706686168,
+          "recall": 0.2776617954070981,
+          "recall_std": 0.31443370436896584,
+          "f1_score": 0.11071693255329822,
+          "f1_score_std": 0.04826334308420706,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0
         },
         "columns": {
-          "precision": 0.0,
+          "precision": 0.08333333333333333,
           "precision_std": 0.0,
-          "recall": 0.0,
+          "recall": 0.08333333333333333,
           "recall_std": 0.0,
-          "f1_score": 0.0,
+          "f1_score": 0.08333333333333333,
           "f1_score_std": 0.0,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0
         },
         "columns_formatted": {
-          "precision": 0.0,
+          "precision": 0.5,
           "precision_std": 0.0,
-          "recall": 0.0,
+          "recall": 0.5,
           "recall_std": 0.0,
-          "f1_score": 0.0,
+          "f1_score": 0.5,
           "f1_score_std": 0.0,
-          "perfect_match_rate": 0.0,
+          "perfect_match_rate": 0.5,
           "perfect_match_rate_std": 0.0
         },
         "runs_metrics": {
           "0": {
             "oids": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
+              "precision": 0.12441314553990611,
+              "precision_std": 0.17594675776003296,
+              "recall": 0.055323590814196244,
+              "recall_std": 0.07823937244861591,
+              "f1_score": 0.07658959537572255,
+              "f1_score_std": 0.10831404451701451,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3140,12 +3197,12 @@
               "group_total_items": 2
             },
             "columns": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
+              "precision": 0.08333333333333333,
+              "precision_std": 0.11785113019775792,
+              "recall": 0.08333333333333333,
+              "recall_std": 0.11785113019775792,
+              "f1_score": 0.08333333333333333,
+              "f1_score_std": 0.11785113019775792,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3153,40 +3210,40 @@
               "group_total_items": 2
             },
             "columns_formatted": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
-              "perfect_match_rate": 0.0,
-              "perfect_match_rate_std": 0.0,
-              "perfect_match_count": 0,
+              "precision": 0.5,
+              "precision_std": 0.7071067811865476,
+              "recall": 0.5,
+              "recall_std": 0.7071067811865476,
+              "f1_score": 0.5,
+              "f1_score_std": 0.7071067811865476,
+              "perfect_match_rate": 0.5,
+              "perfect_match_rate_std": 0.7071067811865476,
+              "perfect_match_count": 1,
               "success_count": 2,
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 29.451144456863403,
-              "avg_gold_std": 10.357321316294831,
-              "avg_pred": 0.0,
+              "avg_gold": 38.878790497779846,
+              "avg_gold_std": 28.42568353369741,
+              "avg_pred": 16.47790265083313,
               "avg_pred_std": 0.0,
               "count_gold_executions": 2,
-              "count_pred_executions": 0
+              "count_pred_executions": 1
             },
             "errors": {
               "gold": 0,
-              "pred": 2
+              "pred": 1
             },
             "group_total_items": 2
           },
           "1": {
             "oids": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
+              "precision": 0.08468882602545968,
+              "precision_std": 0.11976808634666063,
+              "recall": 0.5,
+              "recall_std": 0.7071067811865476,
+              "f1_score": 0.1448442697308739,
+              "f1_score_std": 0.20484073068542863,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3194,12 +3251,12 @@
               "group_total_items": 2
             },
             "columns": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
+              "precision": 0.08333333333333333,
+              "precision_std": 0.11785113019775792,
+              "recall": 0.08333333333333333,
+              "recall_std": 0.11785113019775792,
+              "f1_score": 0.08333333333333333,
+              "f1_score_std": 0.11785113019775792,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3207,29 +3264,29 @@
               "group_total_items": 2
             },
             "columns_formatted": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
-              "perfect_match_rate": 0.0,
-              "perfect_match_rate_std": 0.0,
-              "perfect_match_count": 0,
+              "precision": 0.5,
+              "precision_std": 0.7071067811865476,
+              "recall": 0.5,
+              "recall_std": 0.7071067811865476,
+              "f1_score": 0.5,
+              "f1_score_std": 0.7071067811865476,
+              "perfect_match_rate": 0.5,
+              "perfect_match_rate_std": 0.7071067811865476,
+              "perfect_match_count": 1,
               "success_count": 2,
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 29.451144456863403,
-              "avg_gold_std": 10.357321316294831,
-              "avg_pred": 0.0,
+              "avg_gold": 38.878790497779846,
+              "avg_gold_std": 28.42568353369741,
+              "avg_pred": 102.17979860305786,
               "avg_pred_std": 0.0,
               "count_gold_executions": 2,
-              "count_pred_executions": 0
+              "count_pred_executions": 1
             },
             "errors": {
               "gold": 0,
-              "pred": 2
+              "pred": 1
             },
             "group_total_items": 2
           }
@@ -3239,43 +3296,43 @@
     "by_difficulty_req_id": {
       "medium": {
         "oids": {
-          "precision": 0.018518518518518517,
-          "precision_std": 0.032075014954979206,
+          "precision": 0.1111111111111111,
+          "precision_std": 0.19245008972987526,
           "recall": 0.3333333333333333,
           "recall_std": 0.5773502691896258,
-          "f1_score": 0.03508771929824561,
-          "f1_score_std": 0.0607737125462764,
+          "f1_score": 0.16666666666666666,
+          "f1_score_std": 0.2886751345948129,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0
         },
         "columns": {
-          "precision": 0.5555555555555555,
+          "precision": 0.4444444444444444,
           "precision_std": 0.5091750772173156,
-          "recall": 0.5555555555555555,
+          "recall": 0.4444444444444444,
           "recall_std": 0.5091750772173156,
-          "f1_score": 0.5555555555555555,
+          "f1_score": 0.4444444444444444,
           "f1_score_std": 0.5091750772173156,
           "perfect_match_rate": 0.3333333333333333,
           "perfect_match_rate_std": 0.5773502691896258
         },
         "columns_formatted": {
-          "precision": 0.5,
-          "precision_std": 0.5,
-          "recall": 0.4444444444444444,
-          "recall_std": 0.5091750772173156,
-          "f1_score": 0.4666666666666666,
-          "f1_score_std": 0.5033222956847168,
+          "precision": 0.4166666666666667,
+          "precision_std": 0.5204164998665332,
+          "recall": 0.3888888888888889,
+          "recall_std": 0.5357583756107198,
+          "f1_score": 0.39999999999999997,
+          "f1_score_std": 0.5291502622129182,
           "perfect_match_rate": 0.3333333333333333,
           "perfect_match_rate_std": 0.5773502691896258
         },
         "req_id_metrics": {
           "86": {
             "oids": {
-              "precision": 0.05555555555555555,
+              "precision": 0.3333333333333333,
               "precision_std": 0.0,
               "recall": 1.0,
               "recall_std": 0.0,
-              "f1_score": 0.10526315789473684,
+              "f1_score": 0.5,
               "f1_score_std": 0.0,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
@@ -3310,10 +3367,10 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.5088963508605957,
+              "avg_gold": 1.9351882934570312,
               "avg_gold_std": 0.0,
-              "avg_pred": 44.01874399185181,
-              "avg_pred_std": 0.0,
+              "avg_pred": 26.355347156524658,
+              "avg_pred_std": 36.52950946069152,
               "count_gold_executions": 2,
               "count_pred_executions": 2
             },
@@ -3364,7 +3421,7 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.35753822326660156,
+              "avg_gold": 0.44405412673950195,
               "avg_gold_std": 0.0,
               "avg_pred": 0.0,
               "avg_pred_std": 0.0,
@@ -3392,12 +3449,12 @@
               "group_total_items": 2
             },
             "columns": {
-              "precision": 0.6666666666666666,
-              "precision_std": 0.0,
-              "recall": 0.6666666666666666,
-              "recall_std": 0.0,
-              "f1_score": 0.6666666666666666,
-              "f1_score_std": 0.0,
+              "precision": 0.3333333333333333,
+              "precision_std": 0.4714045207910317,
+              "recall": 0.3333333333333333,
+              "recall_std": 0.4714045207910317,
+              "f1_score": 0.3333333333333333,
+              "f1_score_std": 0.4714045207910317,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3405,12 +3462,12 @@
               "group_total_items": 2
             },
             "columns_formatted": {
-              "precision": 0.5,
-              "precision_std": 0.0,
-              "recall": 0.3333333333333333,
-              "recall_std": 0.0,
-              "f1_score": 0.4,
-              "f1_score_std": 0.0,
+              "precision": 0.25,
+              "precision_std": 0.3535533905932738,
+              "recall": 0.16666666666666666,
+              "recall_std": 0.23570226039551584,
+              "f1_score": 0.2,
+              "f1_score_std": 0.28284271247461906,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3418,16 +3475,16 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 65.93300604820251,
+              "avg_gold": 75.42246127128601,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.2663034200668335,
-              "avg_pred_std": 0.00014009612445021175,
+              "avg_pred": 0.26657533645629883,
+              "avg_pred_std": 0.0,
               "count_gold_executions": 2,
-              "count_pred_executions": 2
+              "count_pred_executions": 1
             },
             "errors": {
               "gold": 0,
-              "pred": 0
+              "pred": 1
             },
             "group_total_items": 2
           }
@@ -3506,10 +3563,10 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.2677001953125,
+              "avg_gold": 0.2708613872528076,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.26500892639160156,
-              "avg_pred_std": 0.0,
+              "avg_pred": 0.2653963565826416,
+              "avg_pred_std": 6.945800634595337e-05,
               "count_gold_executions": 2,
               "count_pred_executions": 2
             },
@@ -3560,10 +3617,10 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.2852330207824707,
+              "avg_gold": 0.28726959228515625,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.2782115936279297,
-              "avg_pred_std": 0.00011463942794963177,
+              "avg_pred": 0.2794935703277588,
+              "avg_pred_std": 0.0,
               "count_gold_executions": 2,
               "count_pred_executions": 2
             },
@@ -3614,9 +3671,9 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.27559447288513184,
+              "avg_gold": 0.26956939697265625,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.26548123359680176,
+              "avg_pred": 0.2645571231842041,
               "avg_pred_std": 0.0,
               "count_gold_executions": 2,
               "count_pred_executions": 2
@@ -3668,9 +3725,9 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.274198055267334,
+              "avg_gold": 0.27409911155700684,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.26723337173461914,
+              "avg_pred": 0.26732563972473145,
               "avg_pred_std": 0.0,
               "count_gold_executions": 2,
               "count_pred_executions": 2
@@ -3722,10 +3779,10 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 0.2684791088104248,
+              "avg_gold": 0.2679018974304199,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.26805567741394043,
-              "avg_pred_std": 0.0,
+              "avg_pred": 0.2668381929397583,
+              "avg_pred_std": 0.0018660938646683442,
               "count_gold_executions": 2,
               "count_pred_executions": 2
             },
@@ -3739,44 +3796,44 @@
       },
       "advanced": {
         "oids": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
+          "precision": 0.1045509857826829,
+          "precision_std": 0.1478574220533468,
+          "recall": 0.2776617954070981,
+          "recall_std": 0.3926730768175817,
+          "f1_score": 0.11071693255329822,
+          "f1_score_std": 0.15657738760122156,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0
         },
         "columns": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
+          "precision": 0.08333333333333333,
+          "precision_std": 0.11785113019775792,
+          "recall": 0.08333333333333333,
+          "recall_std": 0.11785113019775792,
+          "f1_score": 0.08333333333333333,
+          "f1_score_std": 0.11785113019775792,
           "perfect_match_rate": 0.0,
           "perfect_match_rate_std": 0.0
         },
         "columns_formatted": {
-          "precision": 0.0,
-          "precision_std": 0.0,
-          "recall": 0.0,
-          "recall_std": 0.0,
-          "f1_score": 0.0,
-          "f1_score_std": 0.0,
-          "perfect_match_rate": 0.0,
-          "perfect_match_rate_std": 0.0
+          "precision": 0.5,
+          "precision_std": 0.7071067811865476,
+          "recall": 0.5,
+          "recall_std": 0.7071067811865476,
+          "f1_score": 0.5,
+          "f1_score_std": 0.7071067811865476,
+          "perfect_match_rate": 0.5,
+          "perfect_match_rate_std": 0.7071067811865476
         },
         "req_id_metrics": {
           "0": {
             "oids": {
-              "precision": 0.0,
-              "precision_std": 0.0,
-              "recall": 0.0,
-              "recall_std": 0.0,
-              "f1_score": 0.0,
-              "f1_score_std": 0.0,
+              "precision": 0.2091019715653658,
+              "precision_std": 0.056178671413372336,
+              "recall": 0.5553235908141962,
+              "recall_std": 0.6288674087379317,
+              "f1_score": 0.22143386510659643,
+              "f1_score_std": 0.09652668616841412,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
               "perfect_match_count": 0,
@@ -3784,11 +3841,11 @@
               "group_total_items": 2
             },
             "columns": {
-              "precision": 0.0,
+              "precision": 0.16666666666666666,
               "precision_std": 0.0,
-              "recall": 0.0,
+              "recall": 0.16666666666666666,
               "recall_std": 0.0,
-              "f1_score": 0.0,
+              "f1_score": 0.16666666666666666,
               "f1_score_std": 0.0,
               "perfect_match_rate": 0.0,
               "perfect_match_rate_std": 0.0,
@@ -3797,29 +3854,29 @@
               "group_total_items": 2
             },
             "columns_formatted": {
-              "precision": 0.0,
+              "precision": 1.0,
               "precision_std": 0.0,
-              "recall": 0.0,
+              "recall": 1.0,
               "recall_std": 0.0,
-              "f1_score": 0.0,
+              "f1_score": 1.0,
               "f1_score_std": 0.0,
-              "perfect_match_rate": 0.0,
+              "perfect_match_rate": 1.0,
               "perfect_match_rate_std": 0.0,
-              "perfect_match_count": 0,
+              "perfect_match_count": 2,
               "success_count": 2,
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 36.77487659454346,
+              "avg_gold": 58.97878408432007,
               "avg_gold_std": 0.0,
-              "avg_pred": 0.0,
-              "avg_pred_std": 0.0,
+              "avg_pred": 59.328850626945496,
+              "avg_pred_std": 60.60039178836204,
               "count_gold_executions": 2,
-              "count_pred_executions": 0
+              "count_pred_executions": 2
             },
             "errors": {
               "gold": 0,
-              "pred": 2
+              "pred": 0
             },
             "group_total_items": 2
           },
@@ -3864,7 +3921,7 @@
               "group_total_items": 2
             },
             "execution_times": {
-              "avg_gold": 22.12741231918335,
+              "avg_gold": 18.778796911239624,
               "avg_gold_std": 0.0,
               "avg_pred": 0.0,
               "avg_pred_std": 0.0,
@@ -3885,11 +3942,12 @@
     "total_queries": 20,
     "evaluated_queries": 20,
     "skipped_queries": 0,
-    "evaluation_time": 716.9929659366608,
+    "evaluation_time": 237.29660749435425,
+    "parallel_processes": 2,
     "access_time": 2,
-    "n_tries": 2,
+    "n_tries": 5,
     "alias_handling": true,
-    "execution_method": "sequential",
-    "total_execution_time": 716.9933135509491
+    "execution_method": "parallel",
+    "total_execution_time": 237.29743242263794
   }
 }

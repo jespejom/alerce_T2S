@@ -1,0 +1,1715 @@
+{
+    "8": {
+        "0": {
+            "req_id": "8",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 623,
+                "out_toks": 11,
+                "id": "chatcmpl-BwWyUni5ukSNt45RRyX7mo4ZJE4Vv",
+                "created": 1753289478,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve all objects first classified as SN by the stamp classifier between August 17 and August 21,\n-- with a probability greater than 0.5 or at least having two detections.\n\nSELECT *\nFROM OBJECT\nWHERE oid IN\n    (-- Subquery to get OIDs of objects classified as SN by the stamp classifier\n SELECT oid\n     FROM probability\n     WHERE class_name = 'SN'\n       AND classifier_name = 'stamp_classifier'\n       AND probability > 0.5\n       AND oid IN\n         (-- Subquery to filter objects based on first detection date between August 17 and August 21\n SELECT oid\n          FROM OBJECT\n          WHERE firstmjd BETWEEN 60173.0 AND 60177.0))\n  OR ndet >= 2; -- Include objects with at least two detections",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve all objects first classified as SN by the stamp classifier between August 17 and August 21,\n-- with a probability greater than 0.5 or at least having two detections.\n\nSELECT *\nFROM OBJECT\nWHERE oid IN\n    (-- Subquery to get OIDs of objects classified as SN by the stamp classifier\n SELECT oid\n     FROM probability\n     WHERE class_name = 'SN'\n       AND classifier_name = 'stamp_classifier'\n       AND probability > 0.5\n       AND oid IN\n         (-- Subquery to filter objects based on first detection date between August 17 and August 21\n SELECT oid\n          FROM OBJECT\n          WHERE firstmjd BETWEEN 60173.0 AND 60177.0))\n  OR ndet >= 2; -- Include objects with at least two detections"
+                },
+                "in_toks": 3133,
+                "out_toks": 180,
+                "id": "chatcmpl-BwWz04F6mRsTQf42m3MpBRUmoJQLE",
+                "created": 1753289510,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "27": {
+        "0": {
+            "req_id": "27",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']"
+                },
+                "in_toks": 662,
+                "out_toks": 10,
+                "id": "chatcmpl-BwWyVakxj3QBRO7mfTklI6mCCDdIH",
+                "created": 1753289479,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Retrieve the required columns for objects classified by the lc_classifier as 'CEP' with specific conditions\n\nSELECT o.oid,\n       o.meanra,\n       o.meandec,\n       o.ndet,\n       o.firstmjd,\n       o.deltajd,\n       o.g_r_max,\n       p.classifier_name,\n       p.class_name,\n       p.ranking,\n       p.probability\nFROM OBJECT o\nWHERE o.ndet >= 100 -- Objects with 100 or more detections\n\n  AND o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.classifier_name = 'lc_classifier' -- Filter for lc_classifier\n\n       AND p.class_name = 'CEP' -- Most likely to be Cepheid\n\n       AND p.ranking = 1 -- Most probable class\n\n       AND p.probability > 0.76 -- Probability larger than 0.76\n);",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Retrieve the required columns for objects classified by the lc_classifier as 'CEP' with specific conditions\n\nSELECT o.oid,\n       o.meanra,\n       o.meandec,\n       o.ndet,\n       o.firstmjd,\n       o.deltajd,\n       o.g_r_max,\n       p.classifier_name,\n       p.class_name,\n       p.ranking,\n       p.probability\nFROM OBJECT o\nWHERE o.ndet >= 100 -- Objects with 100 or more detections\n\n  AND o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.classifier_name = 'lc_classifier' -- Filter for lc_classifier\n\n       AND p.class_name = 'CEP' -- Most likely to be Cepheid\n\n       AND p.ranking = 1 -- Most probable class\n\n       AND p.probability > 0.76 -- Probability larger than 0.76\n);"
+                },
+                "in_toks": 2641,
+                "out_toks": 212,
+                "id": "chatcmpl-BwWz5w4LQ1G5Zao0KSIuLFT8jB3Kw",
+                "created": 1753289515,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "17": {
+        "0": {
+            "req_id": "17",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'feature']"
+                },
+                "in_toks": 630,
+                "out_toks": 14,
+                "id": "chatcmpl-BwWyWhCKCRugahbebYi02nsMlmyjq",
+                "created": 1753289480,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to return objects classified as AGN that show variability in the r band,\n-- but have no detections or show no variability in the g band.\n-- Features are ordered by their value in ascending order, and the final query is ordered by oid.\n WITH agn_objects AS\n  (-- Subquery to get objects classified as AGN with the highest probability ranking\n SELECT oid\n   FROM probability\n   WHERE class_name = 'AGN'\n     AND classifier_name = 'lc_classifier'\n     AND ranking = 1),\n      r_band_variable_objects AS\n  (-- Subquery to get objects showing variability in the r band\n SELECT DISTINCT oid\n   FROM feature\n   WHERE name = 'ExcessVar'\n     AND fid = 2 -- r band\n\n     AND value IS NOT NULL\n     AND value > 0 -- Variability is indicated by a positive ExcessVar\n),\n      g_band_non_variable_objects AS\n  (-- Subquery to get objects with no detections or no variability in the g band\n SELECT DISTINCT oid\n   FROM feature\n   WHERE (name = 'n_det'\n          AND fid = 1\n          AND value = 0)-- No detections in g band\n\n     OR (name = 'ExcessVar'\n         AND fid = 1\n         AND (value IS NULL\n              OR value = 0))-- No variability in g band\n) -- Main query to combine the results and order as requested\n\nSELECT f.oid,\n       f.name,\n       f.value\nFROM feature f\nWHERE f.oid IN\n    (SELECT oid\n     FROM agn_objects INTERSECT SELECT oid\n     FROM r_band_variable_objects INTERSECT SELECT oid\n     FROM g_band_non_variable_objects)\nORDER BY f.oid,\n         f.value ASC;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to return objects classified as AGN that show variability in the r band,\n-- but have no detections or show no variability in the g band.\n-- Features are ordered by their value in ascending order, and the final query is ordered by oid.\n WITH agn_objects AS\n  (-- Subquery to get objects classified as AGN with the highest probability ranking\n SELECT oid\n   FROM probability\n   WHERE class_name = 'AGN'\n     AND classifier_name = 'lc_classifier'\n     AND ranking = 1),\n      r_band_variable_objects AS\n  (-- Subquery to get objects showing variability in the r band\n SELECT DISTINCT oid\n   FROM feature\n   WHERE name = 'ExcessVar'\n     AND fid = 2 -- r band\n\n     AND value IS NOT NULL\n     AND value > 0 -- Variability is indicated by a positive ExcessVar\n),\n      g_band_non_variable_objects AS\n  (-- Subquery to get objects with no detections or no variability in the g band\n SELECT DISTINCT oid\n   FROM feature\n   WHERE (name = 'n_det'\n          AND fid = 1\n          AND value = 0)-- No detections in g band\n\n     OR (name = 'ExcessVar'\n         AND fid = 1\n         AND (value IS NULL\n              OR value = 0))-- No variability in g band\n) -- Main query to combine the results and order as requested\n\nSELECT f.oid,\n       f.name,\n       f.value\nFROM feature f\nWHERE f.oid IN\n    (SELECT oid\n     FROM agn_objects INTERSECT SELECT oid\n     FROM r_band_variable_objects INTERSECT SELECT oid\n     FROM g_band_non_variable_objects)\nORDER BY f.oid,\n         f.value ASC;"
+                },
+                "in_toks": 5544,
+                "out_toks": 371,
+                "id": "chatcmpl-BwWz82kjdKUvIaB8W4VYo9SfwthDD",
+                "created": 1753289518,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "37": {
+        "0": {
+            "req_id": "37",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']"
+                },
+                "in_toks": 616,
+                "out_toks": 10,
+                "id": "chatcmpl-BwWyXBx0o2LAVDPZogInPN2NyRhBn",
+                "created": 1753289481,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve the top 200 objects classified as SNIa according to the light curve classifier\n-- Results are ordered by probability in descending order\n\nSELECT *\nFROM OBJECT\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE class_name = 'SNIa'\n       AND classifier_name = 'lc_classifier'\n       AND ranking = 1 -- Ensures we are selecting the most probable class\n\n     ORDER BY probability DESC\n     LIMIT 200);",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve the top 200 objects classified as SNIa according to the light curve classifier\n-- Results are ordered by probability in descending order\n\nSELECT *\nFROM OBJECT\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE class_name = 'SNIa'\n       AND classifier_name = 'lc_classifier'\n       AND ranking = 1 -- Ensures we are selecting the most probable class\n\n     ORDER BY probability DESC\n     LIMIT 200);"
+                },
+                "in_toks": 2596,
+                "out_toks": 103,
+                "id": "chatcmpl-BwWzImWG6MjW4mOQmapLPE0xBPBCy",
+                "created": 1753289528,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "34": {
+        "0": {
+            "req_id": "34",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature']"
+                },
+                "in_toks": 705,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWyXKAMNib0usTqkyvFiNo9vMgk4",
+                "created": 1753289481,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- PostgreSQL query to retrieve the information of the features 'Amplitude' or 'Multiband_period'\n-- associated with the given list of oids.\n\nSELECT *\nFROM feature\nWHERE oid IN ('ZTF17aaadpsi',\n              'ZTF19aaduncs',\n              'ZTF18abnvehl',\n              'ZTF19abrqsxy',\n              'ZTF19aaduodl',\n              'ZTF19aadovdv',\n              'ZTF18aammkke',\n              'ZTF18abtriul',\n              'ZTF17aabwtky',\n              'ZTF18abwjpfy')\n  AND name IN ('Amplitude',\n               'Multiband_period');",
+            "sql_response": {
+                "responses": {
+                    "0": "-- PostgreSQL query to retrieve the information of the features 'Amplitude' or 'Multiband_period'\n-- associated with the given list of oids.\n\nSELECT *\nFROM feature\nWHERE oid IN ('ZTF17aaadpsi',\n              'ZTF19aaduncs',\n              'ZTF18abnvehl',\n              'ZTF19abrqsxy',\n              'ZTF19aaduodl',\n              'ZTF19aadovdv',\n              'ZTF18aammkke',\n              'ZTF18abtriul',\n              'ZTF17aabwtky',\n              'ZTF18abwjpfy')\n  AND name IN ('Amplitude',\n               'Multiband_period');"
+                },
+                "in_toks": 4405,
+                "out_toks": 142,
+                "id": "chatcmpl-BwWzLjnhv0fy0jSsfJriC5BIUCYFZ",
+                "created": 1753289531,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "1": {
+        "0": {
+            "req_id": "1",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'feature']"
+                },
+                "in_toks": 738,
+                "out_toks": 14,
+                "id": "chatcmpl-BwWyY0h0Fq9qZtxu8Zk6Sd7MUMCah",
+                "created": 1753289482,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Get all objects classified as AGN with a probability larger than 0.6,\n-- with light curves covering at least one year, at least 20 detections in one band,\n-- and variations larger than 1 magnitude in the g band and larger than 0.5 in the r band.\n-- Return the required columns with appropriate aliases.\n\nSELECT o.oid,\n       f.value,\n       f.name,\n       f.version,\n       f.fid AS feature_fid, -- Alias for filter id from the feature table\n o.meanra,\n o.meandec,\n o.ndet,\n MIN(CASE\n         WHEN f.fid = 1 THEN f.value\n     END) AS min_mag_g, -- Minimum magnitude in g band\n MAX(CASE\n         WHEN f.fid = 1 THEN f.value\n     END) AS max_mag_g, -- Maximum magnitude in g band\n MAX(CASE\n         WHEN f.fid = 1 THEN f.value\n     END) - MIN(CASE\n                    WHEN f.fid = 1 THEN f.value\n                END) AS delta_mag_g, -- Variation in g band\n MIN(CASE\n         WHEN f.fid = 2 THEN f.value\n     END) AS min_mag_r, -- Minimum magnitude in r band\n MAX(CASE\n         WHEN f.fid = 2 THEN f.value\n     END) AS max_mag_r, -- Maximum magnitude in r band\n MAX(CASE\n         WHEN f.fid = 2 THEN f.value\n     END) - MIN(CASE\n                    WHEN f.fid = 2 THEN f.value\n                END) AS delta_mag_r -- Variation in r band\nFROM OBJECT o\nWHERE o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'AGN'\n       AND p.probability > 0.6\n       AND p.classifier_name = 'lc_classifier' -- Default classifier if not specified\n\n       AND p.ranking = 1 -- Most probable class\n)\n  AND o.deltajd >= 365 -- Light curve covering at least one year\n\n  AND o.ndet >= 20 -- At least 20 detections\n\n  AND\n    (SELECT MAX(f.value) - MIN(f.value)\n     FROM feature f\n     WHERE f.oid = o.oid\n       AND f.fid = 1 -- g band\n) > 1 -- Variation larger than 1 magnitude in g band\n\n  AND\n    (SELECT MAX(f.value) - MIN(f.value)\n     FROM feature f\n     WHERE f.oid = o.oid\n       AND f.fid = 2 -- r band\n) > 0.5 -- Variation larger than 0.5 magnitude in r band\nGROUP BY o.oid,\n         f.value,\n         f.name,\n         f.version,\n         f.fid,\n         o.meanra,\n         o.meandec,\n         o.ndet;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Get all objects classified as AGN with a probability larger than 0.6,\n-- with light curves covering at least one year, at least 20 detections in one band,\n-- and variations larger than 1 magnitude in the g band and larger than 0.5 in the r band.\n-- Return the required columns with appropriate aliases.\n\nSELECT o.oid,\n       f.value,\n       f.name,\n       f.version,\n       f.fid AS feature_fid, -- Alias for filter id from the feature table\n o.meanra,\n o.meandec,\n o.ndet,\n MIN(CASE\n         WHEN f.fid = 1 THEN f.value\n     END) AS min_mag_g, -- Minimum magnitude in g band\n MAX(CASE\n         WHEN f.fid = 1 THEN f.value\n     END) AS max_mag_g, -- Maximum magnitude in g band\n MAX(CASE\n         WHEN f.fid = 1 THEN f.value\n     END) - MIN(CASE\n                    WHEN f.fid = 1 THEN f.value\n                END) AS delta_mag_g, -- Variation in g band\n MIN(CASE\n         WHEN f.fid = 2 THEN f.value\n     END) AS min_mag_r, -- Minimum magnitude in r band\n MAX(CASE\n         WHEN f.fid = 2 THEN f.value\n     END) AS max_mag_r, -- Maximum magnitude in r band\n MAX(CASE\n         WHEN f.fid = 2 THEN f.value\n     END) - MIN(CASE\n                    WHEN f.fid = 2 THEN f.value\n                END) AS delta_mag_r -- Variation in r band\nFROM OBJECT o\nWHERE o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'AGN'\n       AND p.probability > 0.6\n       AND p.classifier_name = 'lc_classifier' -- Default classifier if not specified\n\n       AND p.ranking = 1 -- Most probable class\n)\n  AND o.deltajd >= 365 -- Light curve covering at least one year\n\n  AND o.ndet >= 20 -- At least 20 detections\n\n  AND\n    (SELECT MAX(f.value) - MIN(f.value)\n     FROM feature f\n     WHERE f.oid = o.oid\n       AND f.fid = 1 -- g band\n) > 1 -- Variation larger than 1 magnitude in g band\n\n  AND\n    (SELECT MAX(f.value) - MIN(f.value)\n     FROM feature f\n     WHERE f.oid = o.oid\n       AND f.fid = 2 -- r band\n) > 0.5 -- Variation larger than 0.5 magnitude in r band\nGROUP BY o.oid,\n         f.value,\n         f.name,\n         f.version,\n         f.fid,\n         o.meanra,\n         o.meandec,\n         o.ndet;"
+                },
+                "in_toks": 5652,
+                "out_toks": 596,
+                "id": "chatcmpl-BwWzPXNtEHR7oaGGLagRGztnvPK7H",
+                "created": 1753289535,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "16": {
+        "0": {
+            "req_id": "16",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "non_detection",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'non_detection', 'detection', 'magstat']"
+                },
+                "in_toks": 693,
+                "out_toks": 19,
+                "id": "chatcmpl-BwWyZxVYz5rzAyQBVZ4DSKpnGUY5T",
+                "created": 1753289483,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a WITH clause to optimize the query and define intermediate results\nWITH -- Subquery to get the highest probability for class 'SN' in the stamp classifier\nhighest_prob_sn AS\n  (SELECT oid,\n          MAX(probability) AS max_probability\n   FROM probability\n   WHERE classifier_name = 'stamp_classifier'\n     AND class_name = 'SN'\n   GROUP BY oid), -- Subquery to filter objects with their first detection in the first 2 days of September\nfirst_detection_september AS\n  (SELECT oid,\n          firstmjd\n   FROM OBJECT\n   WHERE firstmjd BETWEEN 60188.0 AND 60189.0), -- Subquery to identify fast risers\nfast_risers AS\n  (SELECT nd.oid,\n          nd.fid AS non_detection_fid,\n          nd.mjd AS last_non_detection_mjd,\n          nd.diffmaglim AS last_non_detection_diffmaglim,\n          det.fid AS detection_fid,\n          det.mjd AS first_detection_mjd,\n          det.magpsf AS first_detection_magpsf,\n          (nd.diffmaglim - det.magpsf) / (det.mjd - nd.mjd) AS initial_rise_rate\n   FROM non_detection nd\n   JOIN detection det ON nd.oid = det.oid\n   AND nd.fid = det.fid\n   WHERE (det.magpsf - nd.diffmaglim) / (det.mjd - nd.mjd) >= 0.25), -- Subquery to combine all conditions\nfiltered_objects AS\n  (SELECT fp.oid,\n          fp.max_probability,\n          fr.non_detection_fid,\n          fr.last_non_detection_mjd,\n          fr.last_non_detection_diffmaglim,\n          fr.detection_fid,\n          fr.first_detection_mjd,\n          fr.first_detection_magpsf,\n          fr.initial_rise_rate\n   FROM highest_prob_sn fp\n   JOIN first_detection_september fd ON fp.oid = fd.oid\n   JOIN fast_risers fr ON fp.oid = fr.oid) -- Final query to retrieve the required information\n\nSELECT fo.oid,\n       fo.max_probability,\n       fo.non_detection_fid,\n       fo.last_non_detection_diffmaglim,\n       fo.detection_fid,\n       fo.first_detection_magpsf,\n       fo.initial_rise_rate,\n       ms.fid AS magstat_fid\nFROM filtered_objects fo\nLEFT JOIN magstat ms ON fo.oid = ms.oid\nORDER BY fo.oid\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a WITH clause to optimize the query and define intermediate results\nWITH -- Subquery to get the highest probability for class 'SN' in the stamp classifier\nhighest_prob_sn AS\n  (SELECT oid,\n          MAX(probability) AS max_probability\n   FROM probability\n   WHERE classifier_name = 'stamp_classifier'\n     AND class_name = 'SN'\n   GROUP BY oid), -- Subquery to filter objects with their first detection in the first 2 days of September\nfirst_detection_september AS\n  (SELECT oid,\n          firstmjd\n   FROM OBJECT\n   WHERE firstmjd BETWEEN 60188.0 AND 60189.0), -- Subquery to identify fast risers\nfast_risers AS\n  (SELECT nd.oid,\n          nd.fid AS non_detection_fid,\n          nd.mjd AS last_non_detection_mjd,\n          nd.diffmaglim AS last_non_detection_diffmaglim,\n          det.fid AS detection_fid,\n          det.mjd AS first_detection_mjd,\n          det.magpsf AS first_detection_magpsf,\n          (nd.diffmaglim - det.magpsf) / (det.mjd - nd.mjd) AS initial_rise_rate\n   FROM non_detection nd\n   JOIN detection det ON nd.oid = det.oid\n   AND nd.fid = det.fid\n   WHERE (det.magpsf - nd.diffmaglim) / (det.mjd - nd.mjd) >= 0.25), -- Subquery to combine all conditions\nfiltered_objects AS\n  (SELECT fp.oid,\n          fp.max_probability,\n          fr.non_detection_fid,\n          fr.last_non_detection_mjd,\n          fr.last_non_detection_diffmaglim,\n          fr.detection_fid,\n          fr.first_detection_mjd,\n          fr.first_detection_magpsf,\n          fr.initial_rise_rate\n   FROM highest_prob_sn fp\n   JOIN first_detection_september fd ON fp.oid = fd.oid\n   JOIN fast_risers fr ON fp.oid = fr.oid) -- Final query to retrieve the required information\n\nSELECT fo.oid,\n       fo.max_probability,\n       fo.non_detection_fid,\n       fo.last_non_detection_diffmaglim,\n       fo.detection_fid,\n       fo.first_detection_magpsf,\n       fo.initial_rise_rate,\n       ms.fid AS magstat_fid\nFROM filtered_objects fo\nLEFT JOIN magstat ms ON fo.oid = ms.oid\nORDER BY fo.oid\nLIMIT 100;"
+                },
+                "in_toks": 4090,
+                "out_toks": 599,
+                "id": "chatcmpl-BwWzbLJd2cZ7PgAecZe0AjUW4VNly",
+                "created": 1753289547,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "19": {
+        "0": {
+            "req_id": "19",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 665,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWyakjjKvVoV9ApKi0N8zjvoEKP1",
+                "created": 1753289484,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve objects that appeared between March 1st and April 1st, 2021,\n-- have at most one detection, and are classified as asteroids by the stamp classifier\n-- with a probability greater than 0.7.\n\nSELECT o.oid, -- Object identifier\n o.meanra, -- Mean right ascension\n o.meandec, -- Mean declination\n o.ndet, -- Number of detections\n o.firstmjd, -- Time of first detection\n p.class_name, -- Class name\n p.probability -- Probability of the classification\nFROM OBJECT o\nWHERE o.ndet <= 1 -- Objects with at most one detection\n\n  AND o.firstmjd BETWEEN 59274.0 AND 59305.0 -- Objects detected between March 1st and April 1st, 2021\n\n  AND o.oid IN\n    (-- Subquery to filter objects classified as asteroids\n SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'asteroid' -- Classified as asteroid\n\n       AND p.classifier_name = 'stamp_classifier' -- Using the stamp classifier\n\n       AND p.probability > 0.7 -- Probability greater than 0.7\n);",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve objects that appeared between March 1st and April 1st, 2021,\n-- have at most one detection, and are classified as asteroids by the stamp classifier\n-- with a probability greater than 0.7.\n\nSELECT o.oid, -- Object identifier\n o.meanra, -- Mean right ascension\n o.meandec, -- Mean declination\n o.ndet, -- Number of detections\n o.firstmjd, -- Time of first detection\n p.class_name, -- Class name\n p.probability -- Probability of the classification\nFROM OBJECT o\nWHERE o.ndet <= 1 -- Objects with at most one detection\n\n  AND o.firstmjd BETWEEN 59274.0 AND 59305.0 -- Objects detected between March 1st and April 1st, 2021\n\n  AND o.oid IN\n    (-- Subquery to filter objects classified as asteroids\n SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'asteroid' -- Classified as asteroid\n\n       AND p.classifier_name = 'stamp_classifier' -- Using the stamp classifier\n\n       AND p.probability > 0.7 -- Probability greater than 0.7\n);"
+                },
+                "in_toks": 2649,
+                "out_toks": 290,
+                "id": "chatcmpl-BwWzitJQTF05llHdY9gZjbeoo8gHW",
+                "created": 1753289554,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "14": {
+        "0": {
+            "req_id": "14",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "detection",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'ps1_ztf']"
+                },
+                "in_toks": 784,
+                "out_toks": 11,
+                "id": "chatcmpl-BwWyad2AScsDU4v7gJJZpYnJzHB3d",
+                "created": 1753289484,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve the required information for the specified oids\nWITH selected_oids AS (-- Define the list of oids as a temporary table\n\n                       VALUES ('ZTF23aavzgjg'), ('ZTF23aaynzyk'), ('ZTF23aavqxos'), ('ZTF23aaknyni'), ('ZTF23aavsdtc'), ('ZTF18aandkua'), ('ZTF23aaxfewt'), ('ZTF23aavshwi'), ('ZTF22aawasao'), ('ZTF23aaxgvnt'))\nSELECT d.oid, -- Unique object identifier\n d.candid, -- Candidate identifier\n d.fid, -- Filter identifier\n d.mjd, -- Modified Julian Date\n d.magpsf AS magnitude, -- Magnitude\n d.sigmapsf AS magnitude_error, -- Magnitude error\n d.has_stamp, -- Whether the object has stamps\n d.drb, -- Deep learning real bogus score\n p.sgscore1, -- Star galaxy score of the nearest object\n p.distpsnr1 -- Distance to the nearest source in Pan-STARRS\nFROM detection d\nJOIN ps1_ztf p ON d.oid = p.oid -- Join detection and ps1_ztf tables on oid\n\nWHERE d.oid IN\n    (SELECT column1\n     FROM selected_oids)-- Filter for the specified oids\n\n  AND d.drb > 0.5 -- Deep learning real bogus score greater than 0.5\n\n  AND (p.sgscore1 < 0.5\n       OR p.distpsnr1 < 1); -- Either star galaxy score < 0.5 or distance to nearest source < 1 arcsec",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve the required information for the specified oids\nWITH selected_oids AS (-- Define the list of oids as a temporary table\n\n                       VALUES ('ZTF23aavzgjg'), ('ZTF23aaynzyk'), ('ZTF23aavqxos'), ('ZTF23aaknyni'), ('ZTF23aavsdtc'), ('ZTF18aandkua'), ('ZTF23aaxfewt'), ('ZTF23aavshwi'), ('ZTF22aawasao'), ('ZTF23aaxgvnt'))\nSELECT d.oid, -- Unique object identifier\n d.candid, -- Candidate identifier\n d.fid, -- Filter identifier\n d.mjd, -- Modified Julian Date\n d.magpsf AS magnitude, -- Magnitude\n d.sigmapsf AS magnitude_error, -- Magnitude error\n d.has_stamp, -- Whether the object has stamps\n d.drb, -- Deep learning real bogus score\n p.sgscore1, -- Star galaxy score of the nearest object\n p.distpsnr1 -- Distance to the nearest source in Pan-STARRS\nFROM detection d\nJOIN ps1_ztf p ON d.oid = p.oid -- Join detection and ps1_ztf tables on oid\n\nWHERE d.oid IN\n    (SELECT column1\n     FROM selected_oids)-- Filter for the specified oids\n\n  AND d.drb > 0.5 -- Deep learning real bogus score greater than 0.5\n\n  AND (p.sgscore1 < 0.5\n       OR p.distpsnr1 < 1); -- Either star galaxy score < 0.5 or distance to nearest source < 1 arcsec"
+                },
+                "in_toks": 3354,
+                "out_toks": 386,
+                "id": "chatcmpl-BwWzmRokJd6Pmg6uUIC4VFxFnFgRM",
+                "created": 1753289558,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "30": {
+        "0": {
+            "req_id": "30",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']"
+                },
+                "in_toks": 623,
+                "out_toks": 10,
+                "id": "chatcmpl-BwWyb36OcEvZiLAa5dlZ96jM0lzv3",
+                "created": 1753289485,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to get the predicted class for each object according to the light curve classifier\n-- The query returns the oid, class_name, and probability of the class for each object\n\nSELECT oid,\n       class_name,\n       probability\nFROM probability\nWHERE classifier_name = 'lc_classifier' -- Filter for the light curve classifier\n\n  AND ranking = 1; -- Only select the most probable class (ranking = 1)",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to get the predicted class for each object according to the light curve classifier\n-- The query returns the oid, class_name, and probability of the class for each object\n\nSELECT oid,\n       class_name,\n       probability\nFROM probability\nWHERE classifier_name = 'lc_classifier' -- Filter for the light curve classifier\n\n  AND ranking = 1; -- Only select the most probable class (ranking = 1)"
+                },
+                "in_toks": 2602,
+                "out_toks": 97,
+                "id": "chatcmpl-BwWzrosBSsYX2BcM34qx8Tu538rLW",
+                "created": 1753289563,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "22": {
+        "0": {
+            "req_id": "22",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 608,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWybp0EiylCiZCyPr4Rzr5NVBmj3",
+                "created": 1753289485,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find objects detected between June 1st and July 1st of 2018 by the light curve classifier\n\nSELECT *\nFROM OBJECT\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE classifier_name = 'lc_classifier')\n  AND firstmjd >= 58239.0 -- MJD for June 1st, 2018\nAND firstmjd <= 58270.0; -- MJD for July 1st, 2018",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find objects detected between June 1st and July 1st of 2018 by the light curve classifier\n\nSELECT *\nFROM OBJECT\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE classifier_name = 'lc_classifier')\n  AND firstmjd >= 58239.0 -- MJD for June 1st, 2018\nAND firstmjd <= 58270.0; -- MJD for July 1st, 2018"
+                },
+                "in_toks": 2579,
+                "out_toks": 105,
+                "id": "chatcmpl-BwWztQzTnsO0RTBQBhDb19OdySxil",
+                "created": 1753289565,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "12": {
+        "0": {
+            "req_id": "12",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 654,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWycc9Eeml51XWbfenQuPVAeBUUJ",
+                "created": 1753289486,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve all SNe that first occurred between February 13 and September 10\n-- and are within the specified polygon. The query returns the oids, mean right ascension (meanra), and mean declination (meandec).\n\nSELECT o.oid,\n       o.meanra,\n       o.meandec\nFROM OBJECT o\nWHERE o.firstmjd BETWEEN 59988.0 AND 60197.0 -- Filter for objects first detected between February 13 and September 10\n\n  AND q3c_poly_query(o.meanra, o.meandec, '((-20, -20), (-2, -20), (20, 1), (10, 10))'::POLYGON) -- Filter for objects within the specified polygon\n\n  AND EXISTS\n    (SELECT 1\n     FROM probability p\n     WHERE p.oid = o.oid\n       AND p.classifier_name = 'lc_classifier' -- Use the Light Curve Classifier\n\n       AND p.class IN ('SNIa',\n                       'SNIbc',\n                       'SNII',\n                       'SLSN')-- Filter for SuperNova classes\n\n       AND p.ranking = 1 -- Ensure the most probable class\n);",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve all SNe that first occurred between February 13 and September 10\n-- and are within the specified polygon. The query returns the oids, mean right ascension (meanra), and mean declination (meandec).\n\nSELECT o.oid,\n       o.meanra,\n       o.meandec\nFROM OBJECT o\nWHERE o.firstmjd BETWEEN 59988.0 AND 60197.0 -- Filter for objects first detected between February 13 and September 10\n\n  AND q3c_poly_query(o.meanra, o.meandec, '((-20, -20), (-2, -20), (20, 1), (10, 10))'::POLYGON) -- Filter for objects within the specified polygon\n\n  AND EXISTS\n    (SELECT 1\n     FROM probability p\n     WHERE p.oid = o.oid\n       AND p.classifier_name = 'lc_classifier' -- Use the Light Curve Classifier\n\n       AND p.class IN ('SNIa',\n                       'SNIbc',\n                       'SNII',\n                       'SLSN')-- Filter for SuperNova classes\n\n       AND p.ranking = 1 -- Ensure the most probable class\n);"
+                },
+                "in_toks": 2440,
+                "out_toks": 250,
+                "id": "chatcmpl-BwWzvPhZBfL8rc1DfgzZ3CIg8scwM",
+                "created": 1753289567,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "57": {
+        "0": {
+            "req_id": "57",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 728,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWydMIOsJGm3DnxaqEORQ7tc6nVg",
+                "created": 1753289487,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Define the input objects with their identifiers, coordinates, and search radii\nWITH CATALOG (identifier,\n              ra, dec, search_radius) AS (\n                                          VALUES ('id_1',\n                                                  354.67,\n                                                  15.954,\n                                                  30.0 / 3600.0), -- Convert arcseconds to degrees\n ('id_2',\n  20.7993,\n  1.00331,\n  20.0 / 3600.0)-- Convert arcseconds to degrees\n) -- Query to find ZTF objects within the specified search radii\n\nSELECT c.identifier AS input_identifier, -- Identifier of the input object\n c.ra AS input_ra, -- RA of the input object\n c.dec AS input_dec, -- Dec of the input object\n c.search_radius AS input_search_radius, -- Search radius used for the input object\n o.oid AS ztf_identifier, -- ZTF object identifier\n o.ndet AS ztf_number_of_detections, -- Number of detections for the ZTF object\n o.meanra AS ztf_mean_ra, -- Mean RA of the ZTF object\n o.meandec AS ztf_mean_dec, -- Mean Dec of the ZTF object\n o.firstmjd AS ztf_first_detection_date, -- First detection date of the ZTF object\n o.lastmjd AS ztf_last_detection_date -- Last detection date of the ZTF object\nFROM CATALOG c\nJOIN OBJECT o ON q3c_radial_query(o.meanra, o.meandec, c.ra, c.dec, c.search_radius) -- Perform spatial query using Q3C\nORDER BY o.lastmjd DESC; -- Sort by last detection date in descending order",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Define the input objects with their identifiers, coordinates, and search radii\nWITH CATALOG (identifier,\n              ra, dec, search_radius) AS (\n                                          VALUES ('id_1',\n                                                  354.67,\n                                                  15.954,\n                                                  30.0 / 3600.0), -- Convert arcseconds to degrees\n ('id_2',\n  20.7993,\n  1.00331,\n  20.0 / 3600.0)-- Convert arcseconds to degrees\n) -- Query to find ZTF objects within the specified search radii\n\nSELECT c.identifier AS input_identifier, -- Identifier of the input object\n c.ra AS input_ra, -- RA of the input object\n c.dec AS input_dec, -- Dec of the input object\n c.search_radius AS input_search_radius, -- Search radius used for the input object\n o.oid AS ztf_identifier, -- ZTF object identifier\n o.ndet AS ztf_number_of_detections, -- Number of detections for the ZTF object\n o.meanra AS ztf_mean_ra, -- Mean RA of the ZTF object\n o.meandec AS ztf_mean_dec, -- Mean Dec of the ZTF object\n o.firstmjd AS ztf_first_detection_date, -- First detection date of the ZTF object\n o.lastmjd AS ztf_last_detection_date -- Last detection date of the ZTF object\nFROM CATALOG c\nJOIN OBJECT o ON q3c_radial_query(o.meanra, o.meandec, c.ra, c.dec, c.search_radius) -- Perform spatial query using Q3C\nORDER BY o.lastmjd DESC; -- Sort by last detection date in descending order"
+                },
+                "in_toks": 2479,
+                "out_toks": 374,
+                "id": "chatcmpl-BwWzzzS1GvttJTvcYx8YVIaSEzIeb",
+                "created": 1753289571,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "75": {
+        "0": {
+            "req_id": "75",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 609,
+                "out_toks": 6,
+                "id": "chatcmpl-BwWydV4zlaqQvQhDbOdPldeVx6Vci",
+                "created": 1753289487,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Retrieve at most 100 rows from the 'ss_ztf' table where the nearest Solar System object is known (non-null 'ssnamenr')\n\nSELECT *\nFROM ss_ztf\nWHERE ssnamenr IS NOT NULL\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Retrieve at most 100 rows from the 'ss_ztf' table where the nearest Solar System object is known (non-null 'ssnamenr')\n\nSELECT *\nFROM ss_ztf\nWHERE ssnamenr IS NOT NULL\nLIMIT 100;"
+                },
+                "in_toks": 2040,
+                "out_toks": 57,
+                "id": "chatcmpl-BwX05xOSgpBYoGWhR6QABXZx6C9WJ",
+                "created": 1753289577,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "43": {
+        "0": {
+            "req_id": "43",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 646,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWydfs6XNiAqKGHBAn0osUT7tvqf",
+                "created": 1753289487,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find all r-band epochs for objects with ZTF identifiers 'ZTF20acwrybw' and 'ZTF22abugigx'\n-- in the 'dataquality' table, returning the specified columns.\n\nSELECT oid AS ztf_identifier, -- ZTF identifier\n candid AS candidate_identifier, -- Candidate identifier\n xpos AS x_image_position, -- X-image position\n ypos AS y_image_position, -- Y-image position\n scorr AS peak_pixel_sn -- Peak-pixel signal-to-noise ratio\nFROM dataquality\nWHERE oid IN ('ZTF20acwrybw',\n              'ZTF22abugigx')-- Filter for the specified ZTF identifiers\n\n  AND fid = 2; -- Filter for r-band (fid = 2)",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find all r-band epochs for objects with ZTF identifiers 'ZTF20acwrybw' and 'ZTF22abugigx'\n-- in the 'dataquality' table, returning the specified columns.\n\nSELECT oid AS ztf_identifier, -- ZTF identifier\n candid AS candidate_identifier, -- Candidate identifier\n xpos AS x_image_position, -- X-image position\n ypos AS y_image_position, -- Y-image position\n scorr AS peak_pixel_sn -- Peak-pixel signal-to-noise ratio\nFROM dataquality\nWHERE oid IN ('ZTF20acwrybw',\n              'ZTF22abugigx')-- Filter for the specified ZTF identifiers\n\n  AND fid = 2; -- Filter for r-band (fid = 2)"
+                },
+                "in_toks": 2712,
+                "out_toks": 179,
+                "id": "chatcmpl-BwX066hBt37FvB6lsyt0xvdbpjFwx",
+                "created": 1753289578,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "89": {
+        "0": {
+            "req_id": "89",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'dataquality']"
+                },
+                "in_toks": 625,
+                "out_toks": 8,
+                "id": "chatcmpl-BwWyexKSbxlgPqukeEvtKUgoXWoDj",
+                "created": 1753289488,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Find at most 50 ZTF objects that have a probability larger than 0.7 of being supernovae (class_name='SN') in the stamp classifier\n-- Return all columns from the 'dataquality' table for such objects\n\nSELECT *\nFROM dataquality\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE classifier_name = 'stamp_classifier' -- Filter for the stamp classifier\n\n       AND class_name = 'SN' -- Filter for supernovae\n\n       AND probability > 0.7 -- Probability larger than 0.7\n)\nLIMIT 50; -- Limit the result to at most 50 objects",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Find at most 50 ZTF objects that have a probability larger than 0.7 of being supernovae (class_name='SN') in the stamp classifier\n-- Return all columns from the 'dataquality' table for such objects\n\nSELECT *\nFROM dataquality\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE classifier_name = 'stamp_classifier' -- Filter for the stamp classifier\n\n       AND class_name = 'SN' -- Filter for supernovae\n\n       AND probability > 0.7 -- Probability larger than 0.7\n)\nLIMIT 50; -- Limit the result to at most 50 objects"
+                },
+                "in_toks": 2875,
+                "out_toks": 136,
+                "id": "chatcmpl-BwX09QVyrI5lIgAPpocObXONSG2Ee",
+                "created": 1753289581,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "72": {
+        "0": {
+            "req_id": "72",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']"
+                },
+                "in_toks": 614,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWyfHjxWuIR8gH77v9E0YSoCgXnP",
+                "created": 1753289489,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve all columns from the 'reference' table for the specified ZTF object and reference identifier\n\nSELECT *\nFROM reference\nWHERE oid = 'ZTF20actnuls'\n  AND rfid = 712120223;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve all columns from the 'reference' table for the specified ZTF object and reference identifier\n\nSELECT *\nFROM reference\nWHERE oid = 'ZTF20actnuls'\n  AND rfid = 712120223;"
+                },
+                "in_toks": 2249,
+                "out_toks": 51,
+                "id": "chatcmpl-BwX0BJjQVQ28HGqQwdLNGtTarl6zj",
+                "created": 1753289583,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "103": {
+        "0": {
+            "req_id": "103",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ps1_ztf']"
+                },
+                "in_toks": 676,
+                "out_toks": 14,
+                "id": "chatcmpl-BwWyfSVVaXYYC2W4l5zYEP4ztQ6cE",
+                "created": 1753289489,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a nested query to optimize the main query and avoid JOIN clauses as per the guidelines.\n-- This query retrieves at most 200 ZTF objects that meet the specified conditions.\n\nSELECT *\nFROM OBJECT o\nWHERE o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.classifier_name = 'lc_classifier' -- Light Curve Classifier\n\n       AND p.class_name NOT IN ('SNIa',\n                                'SNIbc',\n                                'SNII',\n                                'SLSN')-- Exclude supernova classes\n\n       AND p.probability > 0.7 -- Probability condition\n\n       AND p.oid IN\n         (SELECT ps.oid\n          FROM ps1_ztf ps\n          WHERE ps.distpsnr1 > 5 -- Distance to nearest PS1 source larger than 5 arcsec\n))\nORDER BY\n  (SELECT ps.distpsnr1\n   FROM ps1_ztf ps\n   WHERE ps.oid = o.oid)\nLIMIT 200;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a nested query to optimize the main query and avoid JOIN clauses as per the guidelines.\n-- This query retrieves at most 200 ZTF objects that meet the specified conditions.\n\nSELECT *\nFROM OBJECT o\nWHERE o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.classifier_name = 'lc_classifier' -- Light Curve Classifier\n\n       AND p.class_name NOT IN ('SNIa',\n                                'SNIbc',\n                                'SNII',\n                                'SLSN')-- Exclude supernova classes\n\n       AND p.probability > 0.7 -- Probability condition\n\n       AND p.oid IN\n         (SELECT ps.oid\n          FROM ps1_ztf ps\n          WHERE ps.distpsnr1 > 5 -- Distance to nearest PS1 source larger than 5 arcsec\n))\nORDER BY\n  (SELECT ps.distpsnr1\n   FROM ps1_ztf ps\n   WHERE ps.oid = o.oid)\nLIMIT 200;"
+                },
+                "in_toks": 3364,
+                "out_toks": 213,
+                "id": "chatcmpl-BwX0CJcA3MhcDLg2ZboxxdF5a0IIp",
+                "created": 1753289584,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "54": {
+        "0": {
+            "req_id": "54",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']"
+                },
+                "in_toks": 641,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWygBNy1qPnmI9jkAB58MGry9vBq",
+                "created": 1753289490,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a WITH clause to define the ZTF identifiers for the query\nWITH CATALOG (oid) AS (\n                       VALUES ('ZTF23abtcveg'), ('ZTF23abudlls')) -- Querying the non_detection table for the specified conditions\n\nSELECT *\nFROM non_detection\nWHERE oid IN\n    (SELECT oid\n     FROM CATALOG)-- Match the specified ZTF identifiers\n\n  AND diffmaglim > 19.5; -- 5-sigma magnitude limit fainter than 19.5",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a WITH clause to define the ZTF identifiers for the query\nWITH CATALOG (oid) AS (\n                       VALUES ('ZTF23abtcveg'), ('ZTF23abudlls')) -- Querying the non_detection table for the specified conditions\n\nSELECT *\nFROM non_detection\nWHERE oid IN\n    (SELECT oid\n     FROM CATALOG)-- Match the specified ZTF identifiers\n\n  AND diffmaglim > 19.5; -- 5-sigma magnitude limit fainter than 19.5"
+                },
+                "in_toks": 2040,
+                "out_toks": 110,
+                "id": "chatcmpl-BwX0I36x5UbkL68I8FzfDXXpFaCb3",
+                "created": 1753289590,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "99": {
+        "0": {
+            "req_id": "99",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'forced_photometry']"
+                },
+                "in_toks": 646,
+                "out_toks": 13,
+                "id": "chatcmpl-BwWygLBOypGzqN40mCvhIGPRmBzJ6",
+                "created": 1753289490,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Find at most 10 ZTF objects with a first detection date later than mjd=60310 days\n-- and a probability of 1 of being an asteroid in the stamp classifier.\n-- Return all columns from the 'forced_photometry' table for such objects.\n\nSELECT *\nFROM forced_photometry\nWHERE oid IN\n    (SELECT oid\n     FROM OBJECT\n     WHERE firstmjd > 60310\n       AND oid IN\n         (SELECT oid\n          FROM probability\n          WHERE class_name = 'asteroid'\n            AND classifier_name = 'stamp_classifier'\n            AND probability = 1))\nORDER BY mjd -- Order by the detection date in the 'forced_photometry' table\nLIMIT 10; -- Limit the result to at most 10 objects",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Find at most 10 ZTF objects with a first detection date later than mjd=60310 days\n-- and a probability of 1 of being an asteroid in the stamp classifier.\n-- Return all columns from the 'forced_photometry' table for such objects.\n\nSELECT *\nFROM forced_photometry\nWHERE oid IN\n    (SELECT oid\n     FROM OBJECT\n     WHERE firstmjd > 60310\n       AND oid IN\n         (SELECT oid\n          FROM probability\n          WHERE class_name = 'asteroid'\n            AND classifier_name = 'stamp_classifier'\n            AND probability = 1))\nORDER BY mjd -- Order by the detection date in the 'forced_photometry' table\nLIMIT 10; -- Limit the result to at most 10 objects"
+                },
+                "in_toks": 3274,
+                "out_toks": 169,
+                "id": "chatcmpl-BwX0KdrcwqwL2nKphyM1CXdFcyZvg",
+                "created": 1753289592,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "40": {
+        "0": {
+            "req_id": "40",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']"
+                },
+                "in_toks": 657,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyhaMX9h9OJUHrRgMU4xe0gJt5f",
+                "created": 1753289491,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve ALLWISE objects within a 1 arcsec radius from the specified coordinates\n-- and select the required data: identifier, RA, Dec, magnitudes, and their uncertainties.\n\nSELECT oid_catalog, -- Identifier in the ALLWISE catalog\n ra, -- Right Ascension\n dec, -- Declination\n w1mpro, -- WISE W1 magnitude\n w1sigmpro, -- WISE W1 magnitude uncertainty\n w2mpro, -- WISE W2 magnitude\n w2sigmpro, -- WISE W2 magnitude uncertainty\n j_m_2mass, -- 2MASS J magnitude\n j_msig_2mass -- 2MASS J magnitude uncertainty\nFROM allwise\nWHERE q3c_radial_query(ra, dec, 23.6488, 30.7314, 1/3600.0); -- 1 arcsec radius converted to degrees",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve ALLWISE objects within a 1 arcsec radius from the specified coordinates\n-- and select the required data: identifier, RA, Dec, magnitudes, and their uncertainties.\n\nSELECT oid_catalog, -- Identifier in the ALLWISE catalog\n ra, -- Right Ascension\n dec, -- Declination\n w1mpro, -- WISE W1 magnitude\n w1sigmpro, -- WISE W1 magnitude uncertainty\n w2mpro, -- WISE W2 magnitude\n w2sigmpro, -- WISE W2 magnitude uncertainty\n j_m_2mass, -- 2MASS J magnitude\n j_msig_2mass -- 2MASS J magnitude uncertainty\nFROM allwise\nWHERE q3c_radial_query(ra, dec, 23.6488, 30.7314, 1/3600.0); -- 1 arcsec radius converted to degrees"
+                },
+                "in_toks": 2625,
+                "out_toks": 209,
+                "id": "chatcmpl-BwX0OV0NGS803MXJziEBxrgYdH15P",
+                "created": 1753289596,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "80": {
+        "0": {
+            "req_id": "80",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']"
+                },
+                "in_toks": 645,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyh4gCxtUPZs6AXmtBwldQjwRAv",
+                "created": 1753289491,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a WITH clause to define the ZTF identifiers for the query\nWITH ztf_objects (oid) AS (\n                           VALUES ('ZTF22abcmmkz'), ('ZTF18abbufof')) -- Main query to retrieve all columns from the xmatch table\n\nSELECT *\nFROM xmatch\nWHERE oid IN\n    (SELECT oid\n     FROM ztf_objects)-- Filter for the specified ZTF identifiers\n\n  AND dist < 0.5; -- Condition for distance less than 0.5 arcsec",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a WITH clause to define the ZTF identifiers for the query\nWITH ztf_objects (oid) AS (\n                           VALUES ('ZTF22abcmmkz'), ('ZTF18abbufof')) -- Main query to retrieve all columns from the xmatch table\n\nSELECT *\nFROM xmatch\nWHERE oid IN\n    (SELECT oid\n     FROM ztf_objects)-- Filter for the specified ZTF identifiers\n\n  AND dist < 0.5; -- Condition for distance less than 0.5 arcsec"
+                },
+                "in_toks": 2027,
+                "out_toks": 113,
+                "id": "chatcmpl-BwX0T2Pk4zwtlJ3HzCTikRyuyI9gb",
+                "created": 1753289601,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "45": {
+        "0": {
+            "req_id": "45",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 628,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyiZSHXNKmHEdWIODFPQy5RPDtH",
+                "created": 1753289492,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to count the number of rows in the 'dataquality' table\n-- for objects with ZTF identifiers 'ZTF23abjikaf' and 'ZTF20achlced'\n-- where the minimum reduced chi-square value (chipsf) is 5.\n\nSELECT COUNT(*) AS ROW_COUNT\nFROM dataquality\nWHERE oid IN ('ZTF23abjikaf',\n              'ZTF20achlced')-- Filter for the specified ZTF identifiers\n\n  AND chipsf >= 5; -- Minimum reduced chi-square value of 5",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to count the number of rows in the 'dataquality' table\n-- for objects with ZTF identifiers 'ZTF23abjikaf' and 'ZTF20achlced'\n-- where the minimum reduced chi-square value (chipsf) is 5.\n\nSELECT COUNT(*) AS ROW_COUNT\nFROM dataquality\nWHERE oid IN ('ZTF23abjikaf',\n              'ZTF20achlced')-- Filter for the specified ZTF identifiers\n\n  AND chipsf >= 5; -- Minimum reduced chi-square value of 5"
+                },
+                "in_toks": 2694,
+                "out_toks": 117,
+                "id": "chatcmpl-BwX0ZHk0F6yfgyE44Mi4qZLXFpWoq",
+                "created": 1753289607,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "63": {
+        "0": {
+            "req_id": "63",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']"
+                },
+                "in_toks": 640,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyi9IOR7uZEpAzMGZwfFNA7DRZj",
+                "created": 1753289492,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a subquery to filter the OIDs and the required conditions\n\nSELECT *\nFROM probability\nWHERE oid IN ('ZTF21aaobkmg',\n              'ZTF21aaomuka')-- Filter for the specified ZTF identifiers\n\n  AND classifier_name = 'lc_classifier' -- Filter for the light curve classifier\n\n  AND ranking IN (1,\n                  2)-- Filter for ranking 1 or 2\nORDER BY ranking; -- Sort the results by ranking",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a subquery to filter the OIDs and the required conditions\n\nSELECT *\nFROM probability\nWHERE oid IN ('ZTF21aaobkmg',\n              'ZTF21aaomuka')-- Filter for the specified ZTF identifiers\n\n  AND classifier_name = 'lc_classifier' -- Filter for the light curve classifier\n\n  AND ranking IN (1,\n                  2)-- Filter for ranking 1 or 2\nORDER BY ranking; -- Sort the results by ranking"
+                },
+                "in_toks": 2093,
+                "out_toks": 102,
+                "id": "chatcmpl-BwX0bxu13PN6MHe5r8qoD5DIe4Gst",
+                "created": 1753289609,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "73": {
+        "0": {
+            "req_id": "73",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']"
+                },
+                "in_toks": 627,
+                "out_toks": 6,
+                "id": "chatcmpl-BwWyiAls2auHhru6gadOSa6XwPu11",
+                "created": 1753289492,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find the MPC name and MPC magnitude of the nearest known Solar System object for the ZTF object 'ZTF21acitntz'\n\nSELECT oid, -- ZTF object identifier\n ssnamenr, -- MPC name of the nearest known Solar System object\n ssmagnr -- MPC magnitude of the nearest known Solar System object\nFROM ss_ztf\nWHERE oid = 'ZTF21acitntz'; -- Filtering for the specific ZTF object identifier",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find the MPC name and MPC magnitude of the nearest known Solar System object for the ZTF object 'ZTF21acitntz'\n\nSELECT oid, -- ZTF object identifier\n ssnamenr, -- MPC name of the nearest known Solar System object\n ssmagnr -- MPC magnitude of the nearest known Solar System object\nFROM ss_ztf\nWHERE oid = 'ZTF21acitntz'; -- Filtering for the specific ZTF object identifier"
+                },
+                "in_toks": 2057,
+                "out_toks": 111,
+                "id": "chatcmpl-BwX0dKSXZb15qRrcUGNQYzJSyJdkx",
+                "created": 1753289611,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "92": {
+        "0": {
+            "req_id": "92",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "detection",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'probability', 'taxonomy']"
+                },
+                "in_toks": 654,
+                "out_toks": 14,
+                "id": "chatcmpl-BwWyjkZtrXfsrSq12tbrNSmbeXdAJ",
+                "created": 1753289493,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a subquery to filter objects with at least 10 detections in the g band (fid=1) and no dubious corrections\n-- Then joining with the probability table to get the required columns, ensuring ranking=1 and classifier_name='lc_classifier'\n\nSELECT p.oid AS \"ZTF identifier\",\n       p.classifier_version,\n       p.class_name,\n       p.probability\nFROM\n  (SELECT DISTINCT d.oid\n   FROM detection d\n   WHERE d.fid = 1 -- g band filter\n\n     AND d.dubious = FALSE -- no dubious corrections\n\n   GROUP BY d.oid\n   HAVING COUNT(d.oid) >= 10 -- at least 10 detections\n) AS filtered_objects\nJOIN probability p ON filtered_objects.oid = p.oid\nWHERE p.ranking = 1 -- only probabilities with ranking 1\n\n  AND p.classifier_name = 'lc_classifier' -- light curve classifier\nORDER BY p.oid\nLIMIT 500; -- limit to at most 500 objects",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a subquery to filter objects with at least 10 detections in the g band (fid=1) and no dubious corrections\n-- Then joining with the probability table to get the required columns, ensuring ranking=1 and classifier_name='lc_classifier'\n\nSELECT p.oid AS \"ZTF identifier\",\n       p.classifier_version,\n       p.class_name,\n       p.probability\nFROM\n  (SELECT DISTINCT d.oid\n   FROM detection d\n   WHERE d.fid = 1 -- g band filter\n\n     AND d.dubious = FALSE -- no dubious corrections\n\n   GROUP BY d.oid\n   HAVING COUNT(d.oid) >= 10 -- at least 10 detections\n) AS filtered_objects\nJOIN probability p ON filtered_objects.oid = p.oid\nWHERE p.ranking = 1 -- only probabilities with ranking 1\n\n  AND p.classifier_name = 'lc_classifier' -- light curve classifier\nORDER BY p.oid\nLIMIT 500; -- limit to at most 500 objects"
+                },
+                "in_toks": 3182,
+                "out_toks": 224,
+                "id": "chatcmpl-BwX0ei8TRvW0wICUovaRQxbYoTV7E",
+                "created": 1753289612,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "102": {
+        "0": {
+            "req_id": "102",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "allwise",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'allwise', 'magstat']"
+                },
+                "in_toks": 645,
+                "out_toks": 12,
+                "id": "chatcmpl-BwWyktFkgnAUT89mV4qT93yHGKoUR",
+                "created": 1753289494,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Find at most 50 ZTF objects that have a probability > 0.6 of being an AGN in the light curve classifier\n-- and a WISE W1 magnitude between 12 and 13. Return all columns from the 'magstat' table for such objects.\n\nSELECT *\nFROM magstat\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE classifier_name = 'lc_classifier'\n       AND class_name = 'AGN'\n       AND probability > 0.6\n       AND ranking = 1 -- Ensures we are considering the most probable class\n)\n  AND oid IN\n    (SELECT oid_catalog\n     FROM allwise\n     WHERE w1mpro BETWEEN 12 AND 13)\nLIMIT 50;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Find at most 50 ZTF objects that have a probability > 0.6 of being an AGN in the light curve classifier\n-- and a WISE W1 magnitude between 12 and 13. Return all columns from the 'magstat' table for such objects.\n\nSELECT *\nFROM magstat\nWHERE oid IN\n    (SELECT oid\n     FROM probability\n     WHERE classifier_name = 'lc_classifier'\n       AND class_name = 'AGN'\n       AND probability > 0.6\n       AND ranking = 1 -- Ensures we are considering the most probable class\n)\n  AND oid IN\n    (SELECT oid_catalog\n     FROM allwise\n     WHERE w1mpro BETWEEN 12 AND 13)\nLIMIT 50;"
+                },
+                "in_toks": 3514,
+                "out_toks": 160,
+                "id": "chatcmpl-BwX0lyiuuTxe3zEBWorrGIgN6S4U0",
+                "created": 1753289619,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "81": {
+        "0": {
+            "req_id": "81",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']"
+                },
+                "in_toks": 634,
+                "out_toks": 8,
+                "id": "chatcmpl-BwWyk6ZNQb6sff56xDw0gEMYuajCk",
+                "created": 1753289494,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve the ZTF object identifier and distance from its catalog counterpart\n-- for the ZTF object(s) with identifier 'J163603.54-065228.7' in the ALLWISE catalog.\n\nSELECT x.oid AS ztf_object_id, -- ZTF object identifier\n x.dist AS distance_to_catalog_counterpart -- Distance to the closest ZTF object [arcsec]\nFROM xmatch x\nWHERE x.oid_catalog = 'J163603.54-065228.7'; -- Identifier in the ALLWISE catalog",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve the ZTF object identifier and distance from its catalog counterpart\n-- for the ZTF object(s) with identifier 'J163603.54-065228.7' in the ALLWISE catalog.\n\nSELECT x.oid AS ztf_object_id, -- ZTF object identifier\n x.dist AS distance_to_catalog_counterpart -- Distance to the closest ZTF object [arcsec]\nFROM xmatch x\nWHERE x.oid_catalog = 'J163603.54-065228.7'; -- Identifier in the ALLWISE catalog"
+                },
+                "in_toks": 2715,
+                "out_toks": 122,
+                "id": "chatcmpl-BwX0nqS0IAbSMpLAjdJaangXaUvnF",
+                "created": 1753289621,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "69": {
+        "0": {
+            "req_id": "69",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']"
+                },
+                "in_toks": 650,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWykxWhn43mulo52if3IMlNQ9DF9",
+                "created": 1753289494,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find all rows in the 'ps1_ztf' table for objects with ZTF identifiers\n-- 'ZTF21abstkhj', 'ZTF22aacqjeb', and 'ZTF21aamwpdf' where the star/galaxy score\n-- of the nearest source (sgscore1) is lower than 0.2.\n\nSELECT *\nFROM ps1_ztf\nWHERE oid IN ('ZTF21abstkhj',\n              'ZTF22aacqjeb',\n              'ZTF21aamwpdf')\n  AND sgscore1 < 0.2;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find all rows in the 'ps1_ztf' table for objects with ZTF identifiers\n-- 'ZTF21abstkhj', 'ZTF22aacqjeb', and 'ZTF21aamwpdf' where the star/galaxy score\n-- of the nearest source (sgscore1) is lower than 0.2.\n\nSELECT *\nFROM ps1_ztf\nWHERE oid IN ('ZTF21abstkhj',\n              'ZTF22aacqjeb',\n              'ZTF21aamwpdf')\n  AND sgscore1 < 0.2;"
+                },
+                "in_toks": 2673,
+                "out_toks": 130,
+                "id": "chatcmpl-BwX0rT1PrLJcG8oB41zETC7EygnZq",
+                "created": 1753289625,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "61": {
+        "0": {
+            "req_id": "61",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']"
+                },
+                "in_toks": 635,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWylx5RIwrgBJlicRRH3Fl6GCrv0",
+                "created": 1753289495,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find at most 30 rows in the 'magstat' table with the specified conditions\n\nSELECT *\nFROM magstat\nWHERE ndet >= 10 -- Minimum number of detections is 10\n\n  AND magmedian > 19 -- Median difference magnitude fainter than 19\n\n  AND maglast < 17 -- Last difference magnitude brighter than 17\nORDER BY oid -- Order the results by the object identifier\nLIMIT 30; -- Limit the results to at most 30 rows",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find at most 30 rows in the 'magstat' table with the specified conditions\n\nSELECT *\nFROM magstat\nWHERE ndet >= 10 -- Minimum number of detections is 10\n\n  AND magmedian > 19 -- Median difference magnitude fainter than 19\n\n  AND maglast < 17 -- Last difference magnitude brighter than 17\nORDER BY oid -- Order the results by the object identifier\nLIMIT 30; -- Limit the results to at most 30 rows"
+                },
+                "in_toks": 2632,
+                "out_toks": 107,
+                "id": "chatcmpl-BwX0vuNzlODoDL9XzWidPPSQZs3ig",
+                "created": 1753289629,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "104": {
+        "0": {
+            "req_id": "104",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'ss_ztf', 'detection']"
+                },
+                "in_toks": 683,
+                "out_toks": 14,
+                "id": "chatcmpl-BwWymKf9ODtpybei3emclMyScbwKl",
+                "created": 1753289496,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Find at most 30 ZTF objects with a probability > 0.9 of being an asteroid in the stamp classifier version 'stamp_classifier_1.0.4'\n-- Return the specified columns from the ss_ztf and detection tables\n\nSELECT ss.oid AS ztf_identifier, -- Identifier of the ZTF object\n ss.candid AS candidate_identifier, -- Candidate identifier\n ss.ssdistnr AS distance_to_nearest_solar_system_object, -- Distance from the nearest Solar System object\n ss.ssmagnr AS mpc_archive_magnitude, -- MPC archive magnitude\n ss.ssnamenr AS solar_system_object_name, -- Name of the nearest Solar System object\n d.fid AS filter_identifier, -- Filter identifier\n d.rb AS fwhm_from_sextractor, -- FWHM from SExtractor (using rb as a proxy since FWHM is not explicitly in the schema)\n d.nid AS number_of_ps1_calibrators_used, -- Number of PS1 calibrators used (using nid as a proxy since this is not explicitly in the schema)\n d.pid AS exposure_time -- Exposure time (using pid as a proxy since this is not explicitly in the schema)\nFROM ss_ztf ss\nWHERE ss.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'asteroid' -- Class name is 'asteroid'\n\n       AND p.classifier_name = 'stamp_classifier' -- Classifier is 'stamp_classifier'\n\n       AND p.classifier_version = 'stamp_classifier_1.0.4' -- Classifier version is 'stamp_classifier_1.0.4'\n\n       AND p.probability > 0.9 -- Probability is greater than 0.9\n)\nLIMIT 30; -- Limit the result to at most 30 objects",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Find at most 30 ZTF objects with a probability > 0.9 of being an asteroid in the stamp classifier version 'stamp_classifier_1.0.4'\n-- Return the specified columns from the ss_ztf and detection tables\n\nSELECT ss.oid AS ztf_identifier, -- Identifier of the ZTF object\n ss.candid AS candidate_identifier, -- Candidate identifier\n ss.ssdistnr AS distance_to_nearest_solar_system_object, -- Distance from the nearest Solar System object\n ss.ssmagnr AS mpc_archive_magnitude, -- MPC archive magnitude\n ss.ssnamenr AS solar_system_object_name, -- Name of the nearest Solar System object\n d.fid AS filter_identifier, -- Filter identifier\n d.rb AS fwhm_from_sextractor, -- FWHM from SExtractor (using rb as a proxy since FWHM is not explicitly in the schema)\n d.nid AS number_of_ps1_calibrators_used, -- Number of PS1 calibrators used (using nid as a proxy since this is not explicitly in the schema)\n d.pid AS exposure_time -- Exposure time (using pid as a proxy since this is not explicitly in the schema)\nFROM ss_ztf ss\nWHERE ss.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'asteroid' -- Class name is 'asteroid'\n\n       AND p.classifier_name = 'stamp_classifier' -- Classifier is 'stamp_classifier'\n\n       AND p.classifier_version = 'stamp_classifier_1.0.4' -- Classifier version is 'stamp_classifier_1.0.4'\n\n       AND p.probability > 0.9 -- Probability is greater than 0.9\n)\nLIMIT 30; -- Limit the result to at most 30 objects"
+                },
+                "in_toks": 2846,
+                "out_toks": 396,
+                "id": "chatcmpl-BwX0wpmBEBTGq6Csy6IZb5JeLMpqN",
+                "created": 1753289630,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "71": {
+        "0": {
+            "req_id": "71",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']"
+                },
+                "in_toks": 666,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWynWbiBZRJCFDBFlXyFMhg7qtIi",
+                "created": 1753289497,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find rows in the 'reference' table for specific ZTF identifiers in the g band (fid=1)\n-- Returns the reference identifier (rfid), ZTF identifier (oid), candidate identifier (candid),\n-- magnitude of the nearest reference object (magnr), and its uncertainty (sigmagnr), sorted by ZTF identifier (oid).\n\nSELECT rfid,\n       oid,\n       candid,\n       magnr,\n       sigmagnr\nFROM reference\nWHERE oid IN ('ZTF20aczxeud',\n              'ZTF21aappfdu',\n              'ZTF22aacqjeb')-- Filter for specific ZTF identifiers\n\n  AND fid = 1 -- Filter for g band (fid=1)\nORDER BY oid; -- Sort by ZTF identifier",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find rows in the 'reference' table for specific ZTF identifiers in the g band (fid=1)\n-- Returns the reference identifier (rfid), ZTF identifier (oid), candidate identifier (candid),\n-- magnitude of the nearest reference object (magnr), and its uncertainty (sigmagnr), sorted by ZTF identifier (oid).\n\nSELECT rfid,\n       oid,\n       candid,\n       magnr,\n       sigmagnr\nFROM reference\nWHERE oid IN ('ZTF20aczxeud',\n              'ZTF21aappfdu',\n              'ZTF22aacqjeb')-- Filter for specific ZTF identifiers\n\n  AND fid = 1 -- Filter for g band (fid=1)\nORDER BY oid; -- Sort by ZTF identifier"
+                },
+                "in_toks": 2301,
+                "out_toks": 158,
+                "id": "chatcmpl-BwX1101r0jGLC0LHtJYQvU3TG4xDn",
+                "created": 1753289635,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "42": {
+        "0": {
+            "req_id": "42",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']"
+                },
+                "in_toks": 663,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyoZDRWbA45cxZxC2RY8YYerWiI",
+                "created": 1753289498,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "SELECT oid AS OBJECT,\n       candid AS candidate,\n       fid AS filter_identifier,\n       chipsf AS reduced_chi_square,\n       fwhm AS fwhm_sextractor,\n       classtar AS star_galaxy_score,\n       nbad AS number_of_bad_pixels,\n       magzpsci AS zp_magnitude,\n       magzpsciunc AS zp_magnitude_uncertainty,\n       exptime AS exposure_time\nFROM dataquality\nWHERE oid = 'ZTF21aapnixl'\nORDER BY reduced_chi_square ASC;",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT oid AS OBJECT,\n       candid AS candidate,\n       fid AS filter_identifier,\n       chipsf AS reduced_chi_square,\n       fwhm AS fwhm_sextractor,\n       classtar AS star_galaxy_score,\n       nbad AS number_of_bad_pixels,\n       magzpsci AS zp_magnitude,\n       magzpsciunc AS zp_magnitude_uncertainty,\n       exptime AS exposure_time\nFROM dataquality\nWHERE oid = 'ZTF21aapnixl'\nORDER BY reduced_chi_square ASC;"
+                },
+                "in_toks": 2729,
+                "out_toks": 133,
+                "id": "chatcmpl-BwX14L8k54qMIX3TzfHLkM9PUPnzV",
+                "created": 1753289638,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "107": {
+        "0": {
+            "req_id": "107",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf', 'detection']"
+                },
+                "in_toks": 700,
+                "out_toks": 17,
+                "id": "chatcmpl-BwWyptCLrNOSF9wDPs6SagGvVfciS",
+                "created": 1753289499,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find at most 10 ZTF objects satisfying the given conditions\n\nSELECT o.oid AS ztf_identifier, -- ZTF object identifier\n o.ndet AS number_of_detections, -- Number of detections\n o.firstmjd AS first_detection_date, -- First detection date\n o.lastmjd AS last_detection_date, -- Last detection date\n p.probability, -- Probability of being an asteroid\n s.candid AS candidate_identifier, -- Candidate identifier\n s.ssdistnr AS distance_to_mpc_object, -- Distance to the nearest Solar System object\n s.ssnamenr AS mpc_name, -- Name of the nearest Solar System object\n d.mjd AS detection_date, -- Detection date\n d.fid AS filter_identifier -- Filter identifier\nFROM OBJECT o -- Subquery to filter objects based on probability and classifier\n\nWHERE o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'asteroid'\n       AND p.classifier_name = 'stamp_classifier'\n       AND p.classifier_version = 'stamp_classifier_1.0.4'\n       AND p.probability > 0.5 )-- Subquery to filter objects based on distance to nearest Solar System object\nAND o.oid IN\n    (SELECT s.oid\n     FROM ss_ztf s\n     WHERE s.ssdistnr < 2 )-- Filter objects with more than 500 detections\nAND o.ndet > 500 -- Join with detection table to retrieve detection date and filter identifier\nJOIN detection d ON o.oid = d.oid -- Join with ss_ztf table to retrieve Solar System object information\nJOIN ss_ztf s ON o.oid = s.oid -- Join with probability table to retrieve probability information\nJOIN probability p ON o.oid = p.oid\n  AND p.class_name = 'asteroid'\n  AND p.classifier_name = 'stamp_classifier'\n  AND p.classifier_version = 'stamp_classifier_1.0.4'\n  AND p.probability > 0.5\nORDER BY o.firstmjd -- Order by first detection date\nLIMIT 10; -- Limit the results to at most 10 objects",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find at most 10 ZTF objects satisfying the given conditions\n\nSELECT o.oid AS ztf_identifier, -- ZTF object identifier\n o.ndet AS number_of_detections, -- Number of detections\n o.firstmjd AS first_detection_date, -- First detection date\n o.lastmjd AS last_detection_date, -- Last detection date\n p.probability, -- Probability of being an asteroid\n s.candid AS candidate_identifier, -- Candidate identifier\n s.ssdistnr AS distance_to_mpc_object, -- Distance to the nearest Solar System object\n s.ssnamenr AS mpc_name, -- Name of the nearest Solar System object\n d.mjd AS detection_date, -- Detection date\n d.fid AS filter_identifier -- Filter identifier\nFROM OBJECT o -- Subquery to filter objects based on probability and classifier\n\nWHERE o.oid IN\n    (SELECT p.oid\n     FROM probability p\n     WHERE p.class_name = 'asteroid'\n       AND p.classifier_name = 'stamp_classifier'\n       AND p.classifier_version = 'stamp_classifier_1.0.4'\n       AND p.probability > 0.5 )-- Subquery to filter objects based on distance to nearest Solar System object\nAND o.oid IN\n    (SELECT s.oid\n     FROM ss_ztf s\n     WHERE s.ssdistnr < 2 )-- Filter objects with more than 500 detections\nAND o.ndet > 500 -- Join with detection table to retrieve detection date and filter identifier\nJOIN detection d ON o.oid = d.oid -- Join with ss_ztf table to retrieve Solar System object information\nJOIN ss_ztf s ON o.oid = s.oid -- Join with probability table to retrieve probability information\nJOIN probability p ON o.oid = p.oid\n  AND p.class_name = 'asteroid'\n  AND p.classifier_name = 'stamp_classifier'\n  AND p.classifier_version = 'stamp_classifier_1.0.4'\n  AND p.probability > 0.5\nORDER BY o.firstmjd -- Order by first detection date\nLIMIT 10; -- Limit the results to at most 10 objects"
+                },
+                "in_toks": 3344,
+                "out_toks": 483,
+                "id": "chatcmpl-BwX16klx9KbYxOfmWapsB0HAwLiRH",
+                "created": 1753289640,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "83": {
+        "0": {
+            "req_id": "83",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']"
+                },
+                "in_toks": 609,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWypjDJrAr8TwNrdaHQCaNu7jlel",
+                "created": 1753289499,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Retrieve all columns from the 'allwise' table for the ZTF object 'ZTF21aazqwxv'\n\nSELECT *\nFROM allwise\nWHERE oid_catalog = 'ZTF21aazqwxv';",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Retrieve all columns from the 'allwise' table for the ZTF object 'ZTF21aazqwxv'\n\nSELECT *\nFROM allwise\nWHERE oid_catalog = 'ZTF21aazqwxv';"
+                },
+                "in_toks": 2576,
+                "out_toks": 50,
+                "id": "chatcmpl-BwX1FIBnzsWIHcF6YTVGkGT0tIDSF",
+                "created": 1753289649,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "84": {
+        "0": {
+            "req_id": "84",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']"
+                },
+                "in_toks": 633,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyqjx9RyBksXoi577wdwuU6ZMTN",
+                "created": 1753289500,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a WITH clause to define the ZTF object and its coordinates\nWITH ztf_object AS\n  (SELECT o.oid AS ztf_oid, -- ZTF object identifier\n o.ra AS ztf_ra, -- ZTF object's right ascension\n o.dec AS ztf_dec -- ZTF object's declination\n\n   FROM OBJECT o\n   WHERE o.oid = 'ZTF19aascdol' -- Filtering for the specific ZTF object\n) -- Main query to find ALLWISE matches and calculate the distance\n\nSELECT ztf.ztf_oid AS ztf_identifier, -- ZTF object identifier\n a.oid_catalog AS allwise_identifier, -- ALLWISE catalog identifier\n q3c_dist(ztf.ztf_ra, ztf.ztf_dec, a.ra, a.dec) AS distance_deg, -- Distance between ZTF object and ALLWISE counterpart\n a.w1mpro AS w1_magnitude, -- WISE W1 magnitude\n a.w2mpro AS w2_magnitude, -- WISE W2 magnitude\n a.w3mpro AS w3_magnitude, -- WISE W3 magnitude\n a.w4mpro AS w4_magnitude -- WISE W4 magnitude\nFROM ztf_object ztf\nJOIN allwise a ON q3c_join(ztf.ztf_ra, ztf.ztf_dec, a.ra, a.dec, 0.1) -- Matching within 0.1 degrees\nORDER BY distance_deg ASC; -- Sorting by distance to find the closest match",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a WITH clause to define the ZTF object and its coordinates\nWITH ztf_object AS\n  (SELECT o.oid AS ztf_oid, -- ZTF object identifier\n o.ra AS ztf_ra, -- ZTF object's right ascension\n o.dec AS ztf_dec -- ZTF object's declination\n\n   FROM OBJECT o\n   WHERE o.oid = 'ZTF19aascdol' -- Filtering for the specific ZTF object\n) -- Main query to find ALLWISE matches and calculate the distance\n\nSELECT ztf.ztf_oid AS ztf_identifier, -- ZTF object identifier\n a.oid_catalog AS allwise_identifier, -- ALLWISE catalog identifier\n q3c_dist(ztf.ztf_ra, ztf.ztf_dec, a.ra, a.dec) AS distance_deg, -- Distance between ZTF object and ALLWISE counterpart\n a.w1mpro AS w1_magnitude, -- WISE W1 magnitude\n a.w2mpro AS w2_magnitude, -- WISE W2 magnitude\n a.w3mpro AS w3_magnitude, -- WISE W3 magnitude\n a.w4mpro AS w4_magnitude -- WISE W4 magnitude\nFROM ztf_object ztf\nJOIN allwise a ON q3c_join(ztf.ztf_ra, ztf.ztf_dec, a.ra, a.dec, 0.1) -- Matching within 0.1 degrees\nORDER BY distance_deg ASC; -- Sorting by distance to find the closest match"
+                },
+                "in_toks": 2620,
+                "out_toks": 338,
+                "id": "chatcmpl-BwX1GPjkI8YNS1EkgPRmpwNE8qmlj",
+                "created": 1753289650,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "96": {
+        "0": {
+            "req_id": "96",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf', 'detection']"
+                },
+                "in_toks": 671,
+                "out_toks": 10,
+                "id": "chatcmpl-BwWyqVWKjYMg146OitKurW4RqSVJm",
+                "created": 1753289500,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Create a temporary table with the Solar System identifiers and their coordinates\nWITH CATALOG (ssnamenr,\n              ra, dec) AS (\n                           VALUES ('2003FP134', /* Replace with actual RA and Dec values for 2003FP134 */ NULL,\n                                                                                                          NULL), ('2009UK56', /* Replace with actual RA and Dec values for 2009UK56 */ NULL,\n                                                                                                                                                                                       NULL)) -- Main query to retrieve the required data\n\nSELECT ss.oid,\n       ss.candid,\n       ss.ssdistnr,\n       ss.ssmagnr,\n       ss.ssnamenr,\n       d.mjd AS detection_date,\n       d.fid AS filter_identifier,\n       d.isdiffpos,\n       d.ra,\n       d.dec,\n       d.magpsf AS difference_magnitude,\n       d.sigmapsf AS difference_magnitude_uncertainty\nFROM ss_ztf ss\nJOIN detection d ON ss.oid = d.oid\nWHERE EXISTS\n    (SELECT 1\n     FROM CATALOG c\n     WHERE ss.ssnamenr = c.ssnamenr\n       AND q3c_radial_query(d.ra, d.dec, c.ra, c.dec, 2.0 / 3600.0) -- 2 arcsec converted to degrees\n)\nORDER BY ss.ssnamenr,\n         d.mjd;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Create a temporary table with the Solar System identifiers and their coordinates\nWITH CATALOG (ssnamenr,\n              ra, dec) AS (\n                           VALUES ('2003FP134', /* Replace with actual RA and Dec values for 2003FP134 */ NULL,\n                                                                                                          NULL), ('2009UK56', /* Replace with actual RA and Dec values for 2009UK56 */ NULL,\n                                                                                                                                                                                       NULL)) -- Main query to retrieve the required data\n\nSELECT ss.oid,\n       ss.candid,\n       ss.ssdistnr,\n       ss.ssmagnr,\n       ss.ssnamenr,\n       d.mjd AS detection_date,\n       d.fid AS filter_identifier,\n       d.isdiffpos,\n       d.ra,\n       d.dec,\n       d.magpsf AS difference_magnitude,\n       d.sigmapsf AS difference_magnitude_uncertainty\nFROM ss_ztf ss\nJOIN detection d ON ss.oid = d.oid\nWHERE EXISTS\n    (SELECT 1\n     FROM CATALOG c\n     WHERE ss.ssnamenr = c.ssnamenr\n       AND q3c_radial_query(d.ra, d.dec, c.ra, c.dec, 2.0 / 3600.0) -- 2 arcsec converted to degrees\n)\nORDER BY ss.ssnamenr,\n         d.mjd;"
+                },
+                "in_toks": 2650,
+                "out_toks": 305,
+                "id": "chatcmpl-BwX1MWku8MsC0Zdvc9U8JsdGGZLUA",
+                "created": 1753289656,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "67": {
+        "0": {
+            "req_id": "67",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']"
+                },
+                "in_toks": 649,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWyrSBheEPkdRyjAj4vdVIOttmZN",
+                "created": 1753289501,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a WITH clause to define the ZTF identifiers for the query\nWITH ztf_objects (oid) AS (\n                           VALUES ('ZTF18acxlskz'), ('ZTF22aanppbi'), ('ZTF22abunrft')) -- Querying the 'gaia_ztf' table for rows where the nearest Gaia source lies within 1.5 arcsec\n\nSELECT *\nFROM gaia_ztf\nWHERE oid IN\n    (SELECT oid\n     FROM ztf_objects)-- Filter for the specified ZTF identifiers\n\n  AND neargaia <= 1.5; -- Condition for the nearest Gaia source to be within 1.5 arcsec",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a WITH clause to define the ZTF identifiers for the query\nWITH ztf_objects (oid) AS (\n                           VALUES ('ZTF18acxlskz'), ('ZTF22aanppbi'), ('ZTF22abunrft')) -- Querying the 'gaia_ztf' table for rows where the nearest Gaia source lies within 1.5 arcsec\n\nSELECT *\nFROM gaia_ztf\nWHERE oid IN\n    (SELECT oid\n     FROM ztf_objects)-- Filter for the specified ZTF identifiers\n\n  AND neargaia <= 1.5; -- Condition for the nearest Gaia source to be within 1.5 arcsec"
+                },
+                "in_toks": 2135,
+                "out_toks": 146,
+                "id": "chatcmpl-BwX1Qnoc6od3OwQlaOH5pjkX30Aqf",
+                "created": 1753289660,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "55": {
+        "0": {
+            "req_id": "55",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']"
+                },
+                "in_toks": 608,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWyrYoxgsMVVCf4L6FozWP8vpwSG",
+                "created": 1753289501,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Retrieve all information from the 'object' table for the specified ZTF object 'ZTF20aatxryt'\n\nSELECT *\nFROM OBJECT\nWHERE oid = 'ZTF20aatxryt';",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Retrieve all information from the 'object' table for the specified ZTF object 'ZTF20aatxryt'\n\nSELECT *\nFROM OBJECT\nWHERE oid = 'ZTF20aatxryt';"
+                },
+                "in_toks": 2358,
+                "out_toks": 44,
+                "id": "chatcmpl-BwX1UpgHyevZlwprpxZjIPsLEIIe4",
+                "created": 1753289664,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "47": {
+        "0": {
+            "req_id": "47",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']"
+                },
+                "in_toks": 674,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyrDuxZT8JpIkCqjUsdYVxSxtRy",
+                "created": 1753289501,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find detections for objects with ZTF identifiers 'ZTF23aaawbsc' and 'ZTF21abxlmuw'\n-- that have a real/bogus score (rb) greater than 0.7. The results include the specified columns\n-- and are sorted by ZTF identifier (oid) and detection date (mjd).\n\nSELECT oid AS ztf_identifier, -- ZTF identifier\n candid AS candidate_identifier, -- Candidate identifier\n fid AS filter_identifier, -- Filter identifier\n mjd AS detection_date, -- Detection date\n isdiffpos, -- Is difference positive flag\n ra AS detection_ra, -- Detection right ascension\n dec AS detection_dec, -- Detection declination\n magpsf AS difference_magnitude, -- Difference magnitude\n sigmapsf AS magnitude_uncertainty, -- Magnitude uncertainty\n rb AS real_bogus_score -- Real/bogus score\nFROM detection\nWHERE oid IN ('ZTF23aaawbsc',\n              'ZTF21abxlmuw')-- Filter for the specified ZTF identifiers\n\n  AND rb > 0.7 -- Filter for real/bogus score greater than 0.7\nORDER BY oid, -- Sort by ZTF identifier\n mjd; -- Then sort by detection date",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find detections for objects with ZTF identifiers 'ZTF23aaawbsc' and 'ZTF21abxlmuw'\n-- that have a real/bogus score (rb) greater than 0.7. The results include the specified columns\n-- and are sorted by ZTF identifier (oid) and detection date (mjd).\n\nSELECT oid AS ztf_identifier, -- ZTF identifier\n candid AS candidate_identifier, -- Candidate identifier\n fid AS filter_identifier, -- Filter identifier\n mjd AS detection_date, -- Detection date\n isdiffpos, -- Is difference positive flag\n ra AS detection_ra, -- Detection right ascension\n dec AS detection_dec, -- Detection declination\n magpsf AS difference_magnitude, -- Difference magnitude\n sigmapsf AS magnitude_uncertainty, -- Magnitude uncertainty\n rb AS real_bogus_score -- Real/bogus score\nFROM detection\nWHERE oid IN ('ZTF23aaawbsc',\n              'ZTF21abxlmuw')-- Filter for the specified ZTF identifiers\n\n  AND rb > 0.7 -- Filter for real/bogus score greater than 0.7\nORDER BY oid, -- Sort by ZTF identifier\n mjd; -- Then sort by detection date"
+                },
+                "in_toks": 2491,
+                "out_toks": 297,
+                "id": "chatcmpl-BwX1VCNL12iPRYc20lXOez0fDmXOf",
+                "created": 1753289665,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "79": {
+        "0": {
+            "req_id": "79",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']"
+                },
+                "in_toks": 624,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWysAdoJ7wYveNjSQnonezSvtEUq",
+                "created": 1753289502,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "SELECT catid AS CATALOG_NAME, -- Catalog name\n oid_catalog AS object_identifier_in_catalog, -- Object identifier in the catalog\n dist AS distance_from_catalog_counterpart -- Distance to the closest ZTF object [arcsec]\nFROM xmatch\nWHERE oid = 'ZTF20achscch'; -- ZTF object Id",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT catid AS CATALOG_NAME, -- Catalog name\n oid_catalog AS object_identifier_in_catalog, -- Object identifier in the catalog\n dist AS distance_from_catalog_counterpart -- Distance to the closest ZTF object [arcsec]\nFROM xmatch\nWHERE oid = 'ZTF20achscch'; -- ZTF object Id"
+                },
+                "in_toks": 2006,
+                "out_toks": 82,
+                "id": "chatcmpl-BwX1ZL3x48oxCNeqd8Kuu2sE5macz",
+                "created": 1753289669,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "94": {
+        "0": {
+            "req_id": "94",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']"
+                },
+                "in_toks": 619,
+                "out_toks": 6,
+                "id": "chatcmpl-BwWysRIwTARmkizowpLNMxeHPeFBC",
+                "created": 1753289502,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Retrieve all columns from the 'object' and 'reference' tables for ZTF objects that had a change in the reference\n-- Limit the result to at most 50 rows\n\nSELECT *\nFROM OBJECT o\nWHERE o.reference_change = TRUE\nLIMIT 50;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Retrieve all columns from the 'object' and 'reference' tables for ZTF objects that had a change in the reference\n-- Limit the result to at most 50 rows\n\nSELECT *\nFROM OBJECT o\nWHERE o.reference_change = TRUE\nLIMIT 50;"
+                },
+                "in_toks": 2736,
+                "out_toks": 58,
+                "id": "chatcmpl-BwX1a8ioRmIOZqXy9uVBIhg9vpA5P",
+                "created": 1753289670,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "90": {
+        "0": {
+            "req_id": "90",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "probability",
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'feature', 'feature_version']"
+                },
+                "in_toks": 651,
+                "out_toks": 11,
+                "id": "chatcmpl-BwWytbC88Y9PLsMphI9WiAxhGtpfk",
+                "created": 1753289503,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Subquery to get OIDs of objects with a multiband period lower than 5 days in the specified feature version\nWITH filtered_objects AS\n  (SELECT DISTINCT oid\n   FROM feature\n   WHERE name = 'Multiband_period'\n     AND value < 5\n     AND VERSION = 'lc_classifier_1.2.1-P') -- Main query to retrieve data from the probability table\n\nSELECT *\nFROM probability\nWHERE oid IN\n    (SELECT oid\n     FROM filtered_objects)\n  AND classifier_name = 'lc_classifier'\n  AND ranking IN (1,\n                  2)\nLIMIT 100;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Subquery to get OIDs of objects with a multiband period lower than 5 days in the specified feature version\nWITH filtered_objects AS\n  (SELECT DISTINCT oid\n   FROM feature\n   WHERE name = 'Multiband_period'\n     AND value < 5\n     AND VERSION = 'lc_classifier_1.2.1-P') -- Main query to retrieve data from the probability table\n\nSELECT *\nFROM probability\nWHERE oid IN\n    (SELECT oid\n     FROM filtered_objects)\n  AND classifier_name = 'lc_classifier'\n  AND ranking IN (1,\n                  2)\nLIMIT 100;"
+                },
+                "in_toks": 4587,
+                "out_toks": 126,
+                "id": "chatcmpl-BwX1cYUJ7Hhd9cuhWKaU0Dyis1nRw",
+                "created": 1753289672,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "51": {
+        "0": {
+            "req_id": "51",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']"
+                },
+                "in_toks": 643,
+                "out_toks": 6,
+                "id": "chatcmpl-BwWytcVe1V2T5kgQbTnrxH4amdRvC",
+                "created": 1753289503,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find all epochs in the 'forced_photometry' table for the ZTF object 'ZTF24aaiutyh'\n-- Returns the specified columns sorted by date (mjd)\n\nSELECT oid, -- Object identifier\n mjd AS date, -- Date (Modified Julian Date)\n fid AS filter_id, -- Filter identifier\n mag AS diff_mag, -- Difference magnitude\n e_mag AS diff_mag_uncertainty, -- Uncertainty of the difference magnitude\n mag_corr AS corrected_mag, -- Corrected magnitude\n e_mag_corr AS corrected_mag_uncertainty, -- Uncertainty of the corrected magnitude\n isdiffpos -- Is difference positive flag\nFROM forced_photometry\nWHERE oid = 'ZTF24aaiutyh' -- Filter for the specific object identifier\nORDER BY mjd; -- Sort by date (mjd)",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find all epochs in the 'forced_photometry' table for the ZTF object 'ZTF24aaiutyh'\n-- Returns the specified columns sorted by date (mjd)\n\nSELECT oid, -- Object identifier\n mjd AS date, -- Date (Modified Julian Date)\n fid AS filter_id, -- Filter identifier\n mag AS diff_mag, -- Difference magnitude\n e_mag AS diff_mag_uncertainty, -- Uncertainty of the difference magnitude\n mag_corr AS corrected_mag, -- Corrected magnitude\n e_mag_corr AS corrected_mag_uncertainty, -- Uncertainty of the corrected magnitude\n isdiffpos -- Is difference positive flag\nFROM forced_photometry\nWHERE oid = 'ZTF24aaiutyh' -- Filter for the specific object identifier\nORDER BY mjd; -- Sort by date (mjd)"
+                },
+                "in_toks": 2605,
+                "out_toks": 198,
+                "id": "chatcmpl-BwX1gvgdcH78iLM0xLb9Ybr2QZbXB",
+                "created": 1753289676,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "59": {
+        "0": {
+            "req_id": "59",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']"
+                },
+                "in_toks": 626,
+                "out_toks": 4,
+                "id": "chatcmpl-BwWyuRlzpMQUxrcEgHFZZZGylFKRN",
+                "created": 1753289504,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve the ZTF identifier, filter identifier, number of detections, and mean difference magnitude\n-- for the ZTF object 'ZTF18acsvogv' from the 'magstat' table.\n\nSELECT oid, -- ZTF identifier\n fid, -- Filter identifier\n ndet, -- Number of detections\n magmean -- Mean difference magnitude\nFROM magstat\nWHERE oid = 'ZTF18acsvogv'; -- Filter for the specific ZTF object",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve the ZTF identifier, filter identifier, number of detections, and mean difference magnitude\n-- for the ZTF object 'ZTF18acsvogv' from the 'magstat' table.\n\nSELECT oid, -- ZTF identifier\n fid, -- Filter identifier\n ndet, -- Number of detections\n magmean -- Mean difference magnitude\nFROM magstat\nWHERE oid = 'ZTF18acsvogv'; -- Filter for the specific ZTF object"
+                },
+                "in_toks": 2612,
+                "out_toks": 117,
+                "id": "chatcmpl-BwX1ixbSF5tkknfcDX6djHxHSI2nN",
+                "created": 1753289678,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "100": {
+        "0": {
+            "req_id": "100",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "detection",
+                "non_detection",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'non_detection', 'forced_photometry']"
+                },
+                "in_toks": 683,
+                "out_toks": 14,
+                "id": "chatcmpl-BwWyuMMhikvdJXkG50JJNBhyp4LhT",
+                "created": 1753289504,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Using a UNION query to combine detections, non-detections, and forced photometry points for the specified ZTF object\n\nSELECT oid AS ztf_identifier, -- ZTF object identifier\n mjd AS epoch_date, -- Epoch date\n fid AS filter_identifier, -- Filter identifier\n isdiffpos, -- Is difference positive flag\n magpsf AS detection_diff_mag, -- Detection difference magnitude\n sigmapsf AS detection_diff_mag_uncertainty, -- Detection difference magnitude uncertainty\n NULL AS five_sigma_mag_limit, -- 5-sigma magnitude limit (not applicable for detections)\n NULL AS forced_diff_mag, -- Forced difference magnitude (not applicable for detections)\n NULL AS forced_diff_mag_uncertainty, -- Forced difference magnitude uncertainty (not applicable for detections)\n 'detection' AS TABLE -- Origin table\nFROM detection\nWHERE oid = 'ZTF24aamtvxb'\nUNION ALL\nSELECT oid AS ztf_identifier, -- ZTF object identifier\n mjd AS epoch_date, -- Epoch date\n fid AS filter_identifier, -- Filter identifier\n NULL AS isdiffpos, -- Is difference positive flag (not applicable for non-detections)\n NULL AS detection_diff_mag, -- Detection difference magnitude (not applicable for non-detections)\n NULL AS detection_diff_mag_uncertainty, -- Detection difference magnitude uncertainty (not applicable for non-detections)\n diffmaglim AS five_sigma_mag_limit, -- 5-sigma magnitude limit\n NULL AS forced_diff_mag, -- Forced difference magnitude (not applicable for non-detections)\n NULL AS forced_diff_mag_uncertainty, -- Forced difference magnitude uncertainty (not applicable for non-detections)\n 'non_detection' AS TABLE -- Origin table\nFROM non_detection\nWHERE oid = 'ZTF24aamtvxb'\nUNION ALL\nSELECT oid AS ztf_identifier, -- ZTF object identifier\n mjd AS epoch_date, -- Epoch date\n fid AS filter_identifier, -- Filter identifier\n isdiffpos, -- Is difference positive flag\n NULL AS detection_diff_mag, -- Detection difference magnitude (not applicable for forced photometry)\n NULL AS detection_diff_mag_uncertainty, -- Detection difference magnitude uncertainty (not applicable for forced photometry)\n NULL AS five_sigma_mag_limit, -- 5-sigma magnitude limit (not applicable for forced photometry)\n mag_corr AS forced_diff_mag, -- Forced difference magnitude\n e_mag_corr AS forced_diff_mag_uncertainty, -- Forced difference magnitude uncertainty\n 'forced_photometry' AS TABLE -- Origin table\nFROM forced_photometry\nWHERE oid = 'ZTF24aamtvxb';",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Using a UNION query to combine detections, non-detections, and forced photometry points for the specified ZTF object\n\nSELECT oid AS ztf_identifier, -- ZTF object identifier\n mjd AS epoch_date, -- Epoch date\n fid AS filter_identifier, -- Filter identifier\n isdiffpos, -- Is difference positive flag\n magpsf AS detection_diff_mag, -- Detection difference magnitude\n sigmapsf AS detection_diff_mag_uncertainty, -- Detection difference magnitude uncertainty\n NULL AS five_sigma_mag_limit, -- 5-sigma magnitude limit (not applicable for detections)\n NULL AS forced_diff_mag, -- Forced difference magnitude (not applicable for detections)\n NULL AS forced_diff_mag_uncertainty, -- Forced difference magnitude uncertainty (not applicable for detections)\n 'detection' AS TABLE -- Origin table\nFROM detection\nWHERE oid = 'ZTF24aamtvxb'\nUNION ALL\nSELECT oid AS ztf_identifier, -- ZTF object identifier\n mjd AS epoch_date, -- Epoch date\n fid AS filter_identifier, -- Filter identifier\n NULL AS isdiffpos, -- Is difference positive flag (not applicable for non-detections)\n NULL AS detection_diff_mag, -- Detection difference magnitude (not applicable for non-detections)\n NULL AS detection_diff_mag_uncertainty, -- Detection difference magnitude uncertainty (not applicable for non-detections)\n diffmaglim AS five_sigma_mag_limit, -- 5-sigma magnitude limit\n NULL AS forced_diff_mag, -- Forced difference magnitude (not applicable for non-detections)\n NULL AS forced_diff_mag_uncertainty, -- Forced difference magnitude uncertainty (not applicable for non-detections)\n 'non_detection' AS TABLE -- Origin table\nFROM non_detection\nWHERE oid = 'ZTF24aamtvxb'\nUNION ALL\nSELECT oid AS ztf_identifier, -- ZTF object identifier\n mjd AS epoch_date, -- Epoch date\n fid AS filter_identifier, -- Filter identifier\n isdiffpos, -- Is difference positive flag\n NULL AS detection_diff_mag, -- Detection difference magnitude (not applicable for forced photometry)\n NULL AS detection_diff_mag_uncertainty, -- Detection difference magnitude uncertainty (not applicable for forced photometry)\n NULL AS five_sigma_mag_limit, -- 5-sigma magnitude limit (not applicable for forced photometry)\n mag_corr AS forced_diff_mag, -- Forced difference magnitude\n e_mag_corr AS forced_diff_mag_uncertainty, -- Forced difference magnitude uncertainty\n 'forced_photometry' AS TABLE -- Origin table\nFROM forced_photometry\nWHERE oid = 'ZTF24aamtvxb';"
+                },
+                "in_toks": 3311,
+                "out_toks": 600,
+                "id": "chatcmpl-BwX1kLeVoNflLQDNxtV4Luf5MpllR",
+                "created": 1753289680,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "106": {
+        "0": {
+            "req_id": "106",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']"
+                },
+                "in_toks": 728,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWyvLtYpjlKU7YCCogfWQxFwQ14F",
+                "created": 1753289505,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to find at most 30 ZTF objects satisfying the given conditions\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       o.firstmjd AS first_detection_date,\n\n  (SELECT p1.probability\n   FROM probability p1\n   WHERE p1.oid = o.oid\n     AND p1.class_name = 'bogus'\n     AND p1.classifier_name = 'stamp_classifier'\n     AND p1.classifier_version = 'stamp_classifier_1.0.4') AS prob_stamp_bogus,\n\n  (SELECT p2.probability\n   FROM probability p2\n   WHERE p2.oid = o.oid\n     AND p2.class_name = 'Transient'\n     AND p2.classifier_name = 'lc_classifier_top') AS prob_lc_transient\nFROM OBJECT o\nWHERE o.ndet > 10\n  AND\n    (SELECT p1.probability\n     FROM probability p1\n     WHERE p1.oid = o.oid\n       AND p1.class_name = 'bogus'\n       AND p1.classifier_name = 'stamp_classifier'\n       AND p1.classifier_version = 'stamp_classifier_1.0.4') > 0.7\n  AND\n    (SELECT p2.probability\n     FROM probability p2\n     WHERE p2.oid = o.oid\n       AND p2.class_name = 'Transient'\n       AND p2.classifier_name = 'lc_classifier_top') > 0.9\nORDER BY prob_stamp_bogus DESC\nLIMIT 30;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to find at most 30 ZTF objects satisfying the given conditions\n\nSELECT o.oid AS ztf_identifier,\n       o.ndet AS number_of_detections,\n       o.firstmjd AS first_detection_date,\n\n  (SELECT p1.probability\n   FROM probability p1\n   WHERE p1.oid = o.oid\n     AND p1.class_name = 'bogus'\n     AND p1.classifier_name = 'stamp_classifier'\n     AND p1.classifier_version = 'stamp_classifier_1.0.4') AS prob_stamp_bogus,\n\n  (SELECT p2.probability\n   FROM probability p2\n   WHERE p2.oid = o.oid\n     AND p2.class_name = 'Transient'\n     AND p2.classifier_name = 'lc_classifier_top') AS prob_lc_transient\nFROM OBJECT o\nWHERE o.ndet > 10\n  AND\n    (SELECT p1.probability\n     FROM probability p1\n     WHERE p1.oid = o.oid\n       AND p1.class_name = 'bogus'\n       AND p1.classifier_name = 'stamp_classifier'\n       AND p1.classifier_version = 'stamp_classifier_1.0.4') > 0.7\n  AND\n    (SELECT p2.probability\n     FROM probability p2\n     WHERE p2.oid = o.oid\n       AND p2.class_name = 'Transient'\n       AND p2.classifier_name = 'lc_classifier_top') > 0.9\nORDER BY prob_stamp_bogus DESC\nLIMIT 30;"
+                },
+                "in_toks": 2662,
+                "out_toks": 346,
+                "id": "chatcmpl-BwX1pTlS2xChaGkXjDbcEZEkjb61z",
+                "created": 1753289685,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "56": {
+        "0": {
+            "req_id": "56",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']"
+                },
+                "in_toks": 693,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWywZcVNtlqHHsfDJlrm2y53evry",
+                "created": 1753289506,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve objects with specific ZTF identifiers where the corrected light curve was not computed\n-- and return the requested columns, sorted by the first detection date.\n\nSELECT oid AS ztf_identifier, -- ZTF identifier\n ndet AS number_of_detections, -- Number of detections\n meanra AS mean_ra, -- Mean Right Ascension\n meandec AS mean_dec, -- Mean Declination\n firstmjd AS first_detection_date, -- Date of first detection\n lastmjd AS last_detection_date, -- Date of last detection\n g_r_mean AS mean_g_r_difference, -- Difference between mean g- and r-band difference magnitudes\n g_r_mean_corr AS mean_g_r_corrected_difference -- Difference between mean g- and r-band corrected magnitudes\nFROM OBJECT\nWHERE oid IN ('ZTF20abywydb',\n              'ZTF20abzpxxu',\n              'ZTF20acduffd')-- Filter for specific ZTF identifiers\n\n  AND corrected = FALSE -- Filter for objects where the corrected light curve was not computed\nORDER BY firstmjd; -- Sort by the first detection date",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve objects with specific ZTF identifiers where the corrected light curve was not computed\n-- and return the requested columns, sorted by the first detection date.\n\nSELECT oid AS ztf_identifier, -- ZTF identifier\n ndet AS number_of_detections, -- Number of detections\n meanra AS mean_ra, -- Mean Right Ascension\n meandec AS mean_dec, -- Mean Declination\n firstmjd AS first_detection_date, -- Date of first detection\n lastmjd AS last_detection_date, -- Date of last detection\n g_r_mean AS mean_g_r_difference, -- Difference between mean g- and r-band difference magnitudes\n g_r_mean_corr AS mean_g_r_corrected_difference -- Difference between mean g- and r-band corrected magnitudes\nFROM OBJECT\nWHERE oid IN ('ZTF20abywydb',\n              'ZTF20abzpxxu',\n              'ZTF20acduffd')-- Filter for specific ZTF identifiers\n\n  AND corrected = FALSE -- Filter for objects where the corrected light curve was not computed\nORDER BY firstmjd; -- Sort by the first detection date"
+                },
+                "in_toks": 2992,
+                "out_toks": 248,
+                "id": "chatcmpl-BwX1t4dJo6nMis7YEinOPmU8CvPyB",
+                "created": 1753289689,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "48": {
+        "0": {
+            "req_id": "48",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'feature_version']"
+                },
+                "in_toks": 633,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWyykmY26gmJMrKJLo98qBExZcM1",
+                "created": 1753289508,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve all features for the ZTF object 'ZTF18abqyaix'\n-- The results are sorted by ZTF identifier (oid), filter identifier (fid), and feature version (version)\n\nSELECT oid AS \"ZTF identifier\",\n       name AS \"feature name\",\n       value,\n       fid AS \"filter identifier\",\n       VERSION AS \"feature version\"\nFROM feature\nWHERE oid = 'ZTF18abqyaix'\nORDER BY oid,\n         fid,\n         VERSION;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve all features for the ZTF object 'ZTF18abqyaix'\n-- The results are sorted by ZTF identifier (oid), filter identifier (fid), and feature version (version)\n\nSELECT oid AS \"ZTF identifier\",\n       name AS \"feature name\",\n       value,\n       fid AS \"filter identifier\",\n       VERSION AS \"feature version\"\nFROM feature\nWHERE oid = 'ZTF18abqyaix'\nORDER BY oid,\n         fid,\n         VERSION;"
+                },
+                "in_toks": 4384,
+                "out_toks": 114,
+                "id": "chatcmpl-BwX1xCG7i5N9qBCbUJaZZ2CwhESit",
+                "created": 1753289693,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "58": {
+        "0": {
+            "req_id": "58",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']"
+                },
+                "in_toks": 650,
+                "out_toks": 7,
+                "id": "chatcmpl-BwWyyRKjz3UwaWbV392665T9nFOqW",
+                "created": 1753289508,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Query to retrieve at most 20 ZTF objects satisfying the specified conditions\n\nSELECT *\nFROM OBJECT\nWHERE ndet >= 30 -- Minimum number of detections is 30\n\n  AND g_r_max_corr > 3.5 -- Difference between minimum g- and r-band corrected magnitudes larger than 3.5\n\n  AND deltajd > 20 -- Difference between last and first detection times larger than 20 days\nLIMIT 20; -- Return at most 20 objects",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Query to retrieve at most 20 ZTF objects satisfying the specified conditions\n\nSELECT *\nFROM OBJECT\nWHERE ndet >= 30 -- Minimum number of detections is 30\n\n  AND g_r_max_corr > 3.5 -- Difference between minimum g- and r-band corrected magnitudes larger than 3.5\n\n  AND deltajd > 20 -- Difference between last and first detection times larger than 20 days\nLIMIT 20; -- Return at most 20 objects"
+                },
+                "in_toks": 2949,
+                "out_toks": 106,
+                "id": "chatcmpl-BwX1zwm4OsFspM7uo8kePzrzE1r1n",
+                "created": 1753289695,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "78": {
+        "0": {
+            "req_id": "78",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['taxonomy']"
+                },
+                "in_toks": 613,
+                "out_toks": 3,
+                "id": "chatcmpl-BwWyyWb94nIDCLcY0hyX7LfFG3kEY",
+                "created": 1753289508,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "SELECT classifier_name,\n       classifier_version,\n       classes\nFROM taxonomy\nWHERE classifier_name = 'lc_classifier';",
+            "sql_response": {
+                "responses": {
+                    "0": "SELECT classifier_name,\n       classifier_version,\n       classes\nFROM taxonomy\nWHERE classifier_name = 'lc_classifier';"
+                },
+                "in_toks": 1927,
+                "out_toks": 34,
+                "id": "chatcmpl-BwX20humQ2nPqIbtuZ2Fu1pIok9OT",
+                "created": 1753289696,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    },
+    "39": {
+        "0": {
+            "req_id": "39",
+            "experiment_id": "run_0",
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection']"
+                },
+                "in_toks": 706,
+                "out_toks": 11,
+                "id": "chatcmpl-BwWyzOu8tMImFI761V5OgaY9IL0vf",
+                "created": 1753289509,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "sql_query": "-- Get the required columns and filter based on the conditions provided\nWITH highest_prob_cv_nova AS\n  (-- Subquery to get objects with the highest probability class as CV/Nova by the stochastic light curve classifier\n SELECT p.oid\n   FROM probability p\n   WHERE p.class_name = 'CV/Nova'\n     AND p.classifier_name = 'lc_classifier_stochastic'\n     AND p.ranking = 1),\n     filtered_objects AS\n  (-- Subquery to filter objects with at most 50 detections and collect corrected difference magnitude in the r-band filter\n SELECT d.oid,\n        d.candid,\n        d.fid,\n        d.ra,\n        d.dec,\n        d.magpsf_corr,\n        d.sigmapsf_corr\n   FROM detection d\n   WHERE d.oid IN\n       (SELECT oid\n        FROM highest_prob_cv_nova)\n     AND d.fid = 2 -- r-band filter\n\n     AND d.corrected = TRUE\n     AND d.oid IN\n       (SELECT o.oid\n        FROM OBJECT o\n        WHERE o.ndet <= 50)),\n     magnitude_analysis AS\n  (-- Subquery to calculate the maximum rise from minimum in each detection\n SELECT fo.oid,\n        fo.candid,\n        fo.fid AS f_id,\n        fo.ra,\n        fo.dec,\n        fo.magpsf_corr,\n        fo.sigmapsf_corr,\n        (MAX(fo.magpsf_corr) - MIN(fo.magpsf_corr)) AS max_rise_from_min\n   FROM filtered_objects fo\n   GROUP BY fo.oid,\n            fo.candid,\n            fo.fid,\n            fo.ra,\n            fo.dec,\n            fo.magpsf_corr,\n            fo.sigmapsf_corr) -- Final query to get the first 1000 rows ordered by object identifier\n\nSELECT *\nFROM magnitude_analysis\nORDER BY oid\nLIMIT 1000;",
+            "sql_response": {
+                "responses": {
+                    "0": "-- Get the required columns and filter based on the conditions provided\nWITH highest_prob_cv_nova AS\n  (-- Subquery to get objects with the highest probability class as CV/Nova by the stochastic light curve classifier\n SELECT p.oid\n   FROM probability p\n   WHERE p.class_name = 'CV/Nova'\n     AND p.classifier_name = 'lc_classifier_stochastic'\n     AND p.ranking = 1),\n     filtered_objects AS\n  (-- Subquery to filter objects with at most 50 detections and collect corrected difference magnitude in the r-band filter\n SELECT d.oid,\n        d.candid,\n        d.fid,\n        d.ra,\n        d.dec,\n        d.magpsf_corr,\n        d.sigmapsf_corr\n   FROM detection d\n   WHERE d.oid IN\n       (SELECT oid\n        FROM highest_prob_cv_nova)\n     AND d.fid = 2 -- r-band filter\n\n     AND d.corrected = TRUE\n     AND d.oid IN\n       (SELECT o.oid\n        FROM OBJECT o\n        WHERE o.ndet <= 50)),\n     magnitude_analysis AS\n  (-- Subquery to calculate the maximum rise from minimum in each detection\n SELECT fo.oid,\n        fo.candid,\n        fo.fid AS f_id,\n        fo.ra,\n        fo.dec,\n        fo.magpsf_corr,\n        fo.sigmapsf_corr,\n        (MAX(fo.magpsf_corr) - MIN(fo.magpsf_corr)) AS max_rise_from_min\n   FROM filtered_objects fo\n   GROUP BY fo.oid,\n            fo.candid,\n            fo.fid,\n            fo.ra,\n            fo.dec,\n            fo.magpsf_corr,\n            fo.sigmapsf_corr) -- Final query to get the first 1000 rows ordered by object identifier\n\nSELECT *\nFROM magnitude_analysis\nORDER BY oid\nLIMIT 1000;"
+                },
+                "in_toks": 3188,
+                "out_toks": 386,
+                "id": "chatcmpl-BwX21KHCfPqiZcoBgkJ2uZr6tt54J",
+                "created": 1753289697,
+                "model": "gpt-4o-2024-11-20"
+            },
+            "pred_diff": null,
+            "diff_response": null
+        }
+    }
+}
