@@ -1,13 +1,13 @@
 {
-    "data_path": "llm/data/txt2sql_alerce_train_v4_0.csv",
+    "data_path": "llm/data/txt2sql_alerce_test_v4_0.csv",
     "data_format": "csv",
-    "model_name": "gpt-4.1-2025-04-14",
+    "model_name": "gpt-4o-2024-11-20",
     "save_path": "./results",
-    "exp_name": "alerce_train_sbs_v4",
-    "parallel": false,
+    "exp_name": "alerce_test_direct_v8",
+    "parallel": true,
     "num_processes": 2,
     "access_time": 2,
-    "n_tries": 8,
+    "n_tries": 3,
     "alias_handling": true,
     "self_correction": "none"
 }

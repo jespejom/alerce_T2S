@@ -46,6 +46,8 @@ def get_db_schema_prompt(db_schema: dict, query_tables: list) -> str:
         str: The text prompt for the database schema linking.
     """
     schema_description = ""
+    # print(query_tables)
+    # xd
     for table_name in query_tables:
         if table_name in db_schema.keys():
             schema_description += db_schema[table_name] + "\n"

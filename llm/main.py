@@ -65,7 +65,7 @@ def seq_predict_tables(data: pd.DataFrame,
             pred_tables, schlink_response = schema_linking_model.predict_tables(request, n=n_exps)
             for i in range(n_exps):
                 schlink_experiments[req_id][str(i)] = {
-                    "pred_tables": pred_tables[i],
+                    "pred_tables": pred_tables,
                     "schema_linking_response": schlink_response
                 }
 

@@ -1,3 +1,4 @@
+from prompts import DBSchemaPrompts, SchemaLinkingPrompts
 from prompts import (
     DBSchemaPrompts, SchemaLinkingPrompts, DiffClassificationPrompts, Q3cClassificationPrompts, SelfCorrectionPrompts,
     DirectSQLGenPrompts

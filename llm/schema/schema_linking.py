@@ -154,7 +154,7 @@ class SchemaLinking:
         
         # Predict the tables associated with the query
         pred_tables = self.model.generate(model_input, n=n)
-
+        # print(pred_tables)
         try:
             tables_list = []
             # Parse the tables list from the response
@@ -168,7 +168,9 @@ class SchemaLinking:
         except ValueError as e:
             # Add more context to the error
             raise ValueError(f"Failed to process schema linking result: {e}")
-
+        # print(self.tables_list)
+        # print(type(self.tables_list))
+        
         return self.tables_list, pred_tables
     
     def get_prompt_version(self) -> str:
