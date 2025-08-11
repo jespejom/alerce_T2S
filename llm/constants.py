@@ -39,9 +39,9 @@ class ResponsePrefix:
 # SQL Error types
 class SQLErrorType:
     TIMEOUT = "timeout"
-    NOT_EXIST = "not exist"
+    UNDEFINED = "undefined"
     OTHER = "other"
     
     @classmethod
     def get_valid_error_types(cls):
-        return [cls.TIMEOUT, cls.NOT_EXIST, cls.OTHER]
+        return [cls.TIMEOUT, cls.UNDEFINED, cls.OTHER]

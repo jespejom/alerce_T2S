@@ -673,6 +673,14 @@ def join_eval_results(
     for eval_exp in eval_data_results:
         req_id = str(eval_exp['req_id'])
         n_exp = str(eval_exp['n_exp'])
+
+        try: corrected_experiments[req_id][n_exp]['correction_applied']
+        except:
+            raise ValueError(
+                f"Experiment {req_id} with n_exp {n_exp} does not have a correction applied. "
+                "Please ensure the corrected experiments are properly structured."
+            )
+        
         if corrected_experiments[req_id][n_exp]['correction_applied']:
             eval_results = corrected_eval_data_dict[req_id][n_exp]
             eval_results['pred_tables'] = corrected_experiments[req_id][n_exp]['pred_tables']

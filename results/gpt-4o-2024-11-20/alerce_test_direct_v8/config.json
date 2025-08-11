@@ -13,10 +13,10 @@
     "promptV_diff_class": "diff_v8",
     "promptV_gen": "dir_v8",
     "promptV_sc": "sc_v3",
-    "num_processes": 2,
+    "num_processes": 4,
     "parallel": true,
     "access_time": 2,
-    "n_tries": 3,
+    "n_tries": 7,
     "alias_handling": true,
     "batch": true,
     "model_name_decomp": "gpt-4o-2024-11-20",
@@ -24,7 +24,7 @@
     "max_new_tokens_decomp": 4000,
     "t": 0.0,
     "top_p": null,
-    "date_executed": "2025-07-28 17:45:36",
+    "date_executed": "2025-08-05 18:43:23",
     "experiment_settings": {
         "schema_linking": {
             "model": {

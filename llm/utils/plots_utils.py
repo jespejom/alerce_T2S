@@ -1800,7 +1800,7 @@ def get_error_class(error_message: str) -> dict:
     if 'timeout' in error_message.lower():
         error_type = SQLErrorType.TIMEOUT
     elif 'not exist' in error_message.lower() or 'does not exist' in error_message.lower():
-        error_type = SQLErrorType.NOT_EXIST
+        error_type = SQLErrorType.UNDEFINED
     else:
         error_type = SQLErrorType.OTHER
     
@@ -2056,6 +2056,170 @@ def plot_execution_errors_by_model_type(
     plt.tight_layout()
     plt.show()
 
+
+
+
+
+def plot_execution_errors_by_model_interactive(
+        evaluation_results_: Dict[str, Dict[str, Any]],
+) -> None:
+
+
+    import copy
+    evaluation_results = copy.deepcopy(evaluation_results_)
+    # Extract model names from the results dictionary
+    models = sorted(list(evaluation_results.keys()))
+    
+    # Create widgets for interactive selection
+    model_dropdown = widgets.Dropdown(
+        options=models,
+        description='Model:',
+        value=models[0] if models else None,
+        layout=widgets.Layout(width='50%')
+    )
+    
+    y_lim = widgets.Dropdown(
+        options=[('Count', False), ('Percentage', True)],
+        description='Y-axis:',
+        value=True,
+        layout=widgets.Layout(width='50%')
+    )
+
+    error_type = widgets.Dropdown(
+        options=[('All',False), ('Type', True)],
+        description='Error Type:',
+        value=False,
+        layout=widgets.Layout(width='50%')
+    )
+
+    med_hard_dropdown = widgets.Dropdown(
+        options=[('Simple-Medium-Hard', False), ('Simple-Medium/Hard', True)],
+        description='Difficulties:',
+        value=False,
+        layout=widgets.Layout(width='50%')
+    )
+    
+    output_widget = widgets.Output()
+
+    def update_plot(model, y_lim, error_type, medium_hard):
+        clear_output(wait=True)
+        # experiments = sorted([exp for exp in evaluation_results[model].keys() if exp in exp_names])
+        experiments = sorted(list(evaluation_results[model].keys()))
+
+        experiment_labels = {}
+    
+        for self_corr_key in [ 'corrected', 'self_corrected',]:
+            experiment_labels[self_corr_key] = {}
+            for experiment in experiments:
+            # Check if the experiment is self-corrected or corrected
+            # Iterate through self-corrected and corrected results
+                try:
+                    if "dir" in experiment:
+                        exp_label = "Direct"
+                    if "sbs" in experiment:
+                        exp_label = "Step-by-Step"
+                    results = evaluation_results[model][experiment][self_corr_key]['detailed_results']
+                    if medium_hard:
+                        # Change medium and advanced difficulties to medium-hard
+                        for res_i in results:
+                            if res_i['difficulty'] == 'medium' or res_i['difficulty'] == 'advanced': res_i['difficulty'] = 'medium-hard'
+                    error_types = []
+                    total_exps = len(results)
+                    print(total_exps)
+                
+                    for res in results:
+                        error_info = res['comparison'].get('error_pred', None)
+                        if error_info:
+                            if error_type:
+                                error_types.append(get_error_class(error_info).get('error_type').upper())
+                            else:
+                                error_types.append(get_error_class(error_info).get('error_class'))
+
+                        else:
+                            continue
+                    
+                    # Store the error types for each experiment
+                    experiment_labels[self_corr_key][exp_label] = error_types
+                    print(experiment_labels[self_corr_key][exp_label])
+                
+                except KeyError as e:
+                    print(f"Warning: Missing data for {model} - {experiment}: {e}")
+
+        fig, axs = plt.subplots(1, 2, figsize=(16, 10), sharex=True, sharey=True)
+        for i, (self_corr_key, data) in enumerate(experiment_labels.items()):
+            # group the error types by their class and by experiment, to plot them without stacking
+            for j, (exp_label, error_list) in enumerate(data.items()):
+                error_counts = pd.Series(error_list).value_counts().reset_index()
+                # Change "QueryCanceled" to "Timeout"
+                if error_type == False:
+                    error_counts['index'] = error_counts['index'].replace({
+                        'QueryCanceled': 'Timeout',})
+                error_counts.columns = ['error_type', 'error_count']
+                error_counts['experiment'] = exp_label
+                if j == 0:
+                    error_data = error_counts
+                else:
+                    error_data = pd.concat([error_data, error_counts], ignore_index=True)
+                    
+            if y_lim:
+                # Convert error counts to percentages
+                # total_count = error_data['error_count'].sum()
+                total_count = total_exps
+                if total_count > 0:
+                    error_data['error_count'] = error_data['error_count'] / total_count * 100
+                else:
+                    error_data['error_count'] = 0
+                sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment')
+            else:
+                # Plot error counts directly
+                # error_data = error_data.groupby(['error_type', 'experiment']).sum().reset_index()
+                # sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment', palette='Set2')
+                sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment')
+            plt.xticks(rotation=45, ha='right', fontsize=14)
+            plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
+        axs[0].set_xlabel("Without Self-Correction", fontsize=18)
+        # axs[0].set_ylabel("Error Count", fontsize=18)
+        axs[1].set_xlabel("With Self-Correction", fontsize=18)
+        axs[0].yaxis.set_visible(True)
+        axs[1].yaxis.set_visible(False)
+        # if y_lim true, set y-axis limit to [0, 1]
+        # if y_lim:
+        # else:
+        if y_lim:
+            axs[0].set_ylim(0, 100)  # Set y-axis limit to [0, 100] for percentage
+            axs[1].set_ylim(0, 100)  # Set y-axis limit to [0, 100] for percentage
+            # set y-axis separately by 10
+            axs[0].set_yticks(np.arange(0, 101, 10))
+            axs[1].set_yticks(np.arange(0, 101, 10))
+            axs[0].set_ylabel("Error Percentage of Total Queries", fontsize=18)
+            
+        else:
+            axs[0].set_ylabel("Error Count", fontsize=18)
+
+
+        plt.subplots_adjust(hspace=0.02, )
+        plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
+        axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
+        
+        plt.suptitle(f"Execution Errors, Direct vs Step-By-Step", fontsize=20)
+        plt.tight_layout()
+        plt.show()
+
+    # Create interactive widget
+    interact_widget = widgets.interactive(
+        update_plot,
+        model=model_dropdown,
+        y_lim=y_lim,
+        error_type=error_type,
+        medium_hard=med_hard_dropdown
+    )
+    
+    # Display the widgets and output
+    display(widgets.VBox([interact_widget, output_widget]))
+    
+    # Initial plot
+    if models:
+        update_plot(models[0], True, False, False)
 
 
 def plot_diff_classification(evaluation_results: Dict[str, Dict[str, Any]]) -> None:

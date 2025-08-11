@@ -5,9 +5,9 @@
     "save_path": "./results",
     "exp_name": "alerce_test_direct_v8",
     "parallel": true,
-    "num_processes": 2,
+    "num_processes": 3,
     "access_time": 2,
-    "n_tries": 3,
+    "n_tries": 7,
     "alias_handling": true,
-    "self_correction": "none"
+    "self_correction": "self-correction"
 }
