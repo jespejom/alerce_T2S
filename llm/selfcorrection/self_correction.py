@@ -94,7 +94,7 @@ class SelfCorrection:
         # Select the appropriate prompt format based on error type
         if error_type == SQLErrorType.TIMEOUT:
             prompt_format = self.timeout_prompt_format
-        elif error_type == SQLErrorType.NOT_EXIST:
+        elif error_type == SQLErrorType.UNDEFINED:
             prompt_format = self.not_exist_prompt_format
         else:  # Default to schema error prompt for other errors
             prompt_format = self.schema_error_prompt_format

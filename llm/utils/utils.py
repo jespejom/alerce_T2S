@@ -118,7 +118,7 @@ def get_error_class(error_message: str) -> dict:
     if 'timeout' in error_message.lower():
         error_type = SQLErrorType.TIMEOUT
     elif 'not exist' in error_message.lower() or 'does not exist' in error_message.lower():
-        error_type = SQLErrorType.NOT_EXIST
+        error_type = SQLErrorType.UNDEFINED
     else:
         error_type = SQLErrorType.OTHER
     
