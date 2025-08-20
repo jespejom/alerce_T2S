@@ -4,7 +4,7 @@
     "model_name": "gpt-4o-2024-11-20",
     "exp_name": "alerce_test_sbs_v4",
     "sql_gen_method": "step-by-step",
-    "n_exps": 5,
+    "n_exps": 10,
     "save_path": "./results",
     "eval": true,
     "self_correction": true,
@@ -24,7 +24,7 @@
     "max_new_tokens_decomp": 4000,
     "t": 0.0,
     "top_p": null,
-    "date_executed": "2025-08-15 23:20:03",
+    "date_executed": "2025-08-19 09:32:12",
     "experiment_settings": {
         "schema_linking": {
             "model": {

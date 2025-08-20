@@ -64,6 +64,71 @@
                 "created": 1755195645,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1648,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUDAFtpJNmg1rSPmFWXwbLWoXdE",
+                "created": 1755620909,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1648,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUEHGAUSkbiVP9dWcQeTGhtKJdR",
+                "created": 1755620910,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1648,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUFibcy4YvoeyFfGeNHJbphgxWp",
+                "created": 1755620911,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1648,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUG4kIkFqEoVrR5QK3eTOwVLheT",
+                "created": 1755620912,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1648,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUIatagTEtRxTRQKPo5wTPfMnNb",
+                "created": 1755620914,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "27": {
@@ -129,6 +194,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WrBakg6xcVXhE1gMKXBJzuEBR3r",
                 "created": 1755195649,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1139,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUKlJswdVGcHq9TCtTUar5VxoCu",
+                "created": 1755620916,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1184,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JULZK6A1gdTDcGVhEM5dxkE8hVn",
+                "created": 1755620917,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1184,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUNsCRx4Z3GKYDD5ksqrgt0lNrQ",
+                "created": 1755620919,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1184,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUOOWUPW0sWqo6F7c15MG2OJ7oQ",
+                "created": 1755620920,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1184,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUP5v0fe1VVsydPVX3c7Te6pT7C",
+                "created": 1755620921,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -198,6 +328,71 @@
                 "created": 1755195654,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4087,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUQ3TaTsoDLrERm3jrdpbf5tpEO",
+                "created": 1755620922,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4803,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUQghredxKJxVCC6JpwJJFZXHhF",
+                "created": 1755620922,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4086,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUR9IDfPme4CbGYpiZuV4AbodOE",
+                "created": 1755620923,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4086,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUS1EGxL4NphjqTaRbvkoj56Dqq",
+                "created": 1755620924,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4086,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUTBqZKMz4CwJc83gEyEzcSJs0H",
+                "created": 1755620925,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "37": {
@@ -263,6 +458,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WrJtMUQihdbfESm6hTU4TueN3Gk",
                 "created": 1755195657,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUUmfrv9KR5Osatotm3CDkrrZVW",
+                "created": 1755620926,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUVd6pVr2HpNxDM2L8K7qvqiBk2",
+                "created": 1755620927,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUWiDVr4jCUK2dKWXCNQbfOJiTd",
+                "created": 1755620928,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUYfPurXJbuGFtKj0VwCZdlPi78",
+                "created": 1755620930,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1138,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUa263hxxh8g7mvOGrtNd9ny4Fu",
+                "created": 1755620932,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -332,6 +592,71 @@
                 "created": 1755195661,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUc1bhhme2DpHRkKjuSw69CrdT5",
+                "created": 1755620934,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUgQIGBFYmMTJB8jBEcQHbXvdul",
+                "created": 1755620938,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUhiNCgy5VeGNXzvBuFx0LKax2S",
+                "created": 1755620939,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUhvC52G0fhOMKch4FQoiGmjsg9",
+                "created": 1755620939,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUiq7aDBQDYnf56dUHEAsr4PM91",
+                "created": 1755620940,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "1": {
@@ -397,6 +722,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WrSiCfcITRWNQ5i3o5Z3JtiyDDB",
                 "created": 1755195666,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4194,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUifJuo9xnhzj8QoZMqSi4pzlM9",
+                "created": 1755620940,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4194,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUjHDZQQTgDf20iKkdGMfniMgn5",
+                "created": 1755620941,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4194,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUkGFzyDRjMRYvwbxqTaL1uI1v1",
+                "created": 1755620942,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4194,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUkSBJSc490Syat7ktcDOEif7uo",
+                "created": 1755620942,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 4194,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUl4rKMcqkOQZPQWeR82ojSHqwl",
+                "created": 1755620943,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -466,6 +856,71 @@
                 "created": 1755195671,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 2553,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUmC2b4vG5QT6nARKMnsB42c7Ct",
+                "created": 1755620944,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 2553,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUmHKl24p4776LYdU8FZKS3HhK1",
+                "created": 1755620944,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 2553,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUnKY1PHCy0II5LBO28yaMILviH",
+                "created": 1755620945,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 2553,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUpdH0ODbyfNvbKu7MoWpiCov8M",
+                "created": 1755620947,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 2553,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUprloNegskC8SwizY7Ek4pyRwq",
+                "created": 1755620947,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "19": {
@@ -531,6 +986,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WraGCPlMgLBnrAGndnYBdXPEhj0",
                 "created": 1755195674,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1142,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUqawbbFLbq0CQAynmXB5mRB8up",
+                "created": 1755620948,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1142,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUqEPJ9mllLHUpDxWLgINwXFHsd",
+                "created": 1755620948,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1142,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUr9f16SdKWNwpEUWXh5y2hH7hQ",
+                "created": 1755620949,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1142,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUrbqatVTLOVYm3rrDMlYb71ZnJ",
+                "created": 1755620949,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1142,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUsjcqAT9sD1MIqMnzmlNzfmNVL",
+                "created": 1755620950,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -600,6 +1120,71 @@
                 "created": 1755195678,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1896,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUtX9K5PNjnKLIXJeMrIsdC3NuV",
+                "created": 1755620951,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1896,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUuSFOM1XcEVnbwR9g5MXI508BR",
+                "created": 1755620952,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1896,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUvtYzqa4B7liQcjxQ11LyL7Cjf",
+                "created": 1755620953,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1896,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUwiqhJFByV0rqFAzQTgaZWw9my",
+                "created": 1755620954,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1896,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUwzPTJx6KnWJNeUr0KorUp4HaN",
+                "created": 1755620954,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "30": {
@@ -665,6 +1250,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WrhJkXJRpUYz7PR7E2lMDCYpV3E",
                 "created": 1755195681,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1145,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUxYAHJISNENeb4YvdFsgby6HI4",
+                "created": 1755620955,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1145,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUx53vx6RlbZkXnwsfTplyFef4T",
+                "created": 1755620955,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1145,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUyxAIN5EqWwRNRGONoRZXbvwAk",
+                "created": 1755620956,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1145,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUzhbz9e7BvuItbnRpfAsVfC7kB",
+                "created": 1755620957,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1145,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JUzESlyIvZ4igxe2LqDhMtPHn6G",
+                "created": 1755620957,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -734,6 +1384,71 @@
                 "created": 1755195685,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1085,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV03JnrrRvvlwoVPTBIeHTnFK1d",
+                "created": 1755620958,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1085,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV0b8F9iaeGBKhbBBNFQf5nfzYy",
+                "created": 1755620958,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1085,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV1aLBAQcVke056wUUeQpJofIuI",
+                "created": 1755620959,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1085,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV2nXEJQ7xzTT5WVSungBRsGG6z",
+                "created": 1755620960,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1085,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV2le0fcHcJKvQmkMH2EEUw0Yrz",
+                "created": 1755620960,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "12": {
@@ -799,6 +1514,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WrpzFg0Y3LFdQ1q6Q9v9wuS97bY",
                 "created": 1755195689,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV389km2ciVpJz8Qin4doykQZUS",
+                "created": 1755620961,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV4SLK4cfLN7xy3hbvUpBVkauSZ",
+                "created": 1755620962,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV5nDKjiekZhrafsqlZNGMnexuc",
+                "created": 1755620963,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV6H1hV5v4aEAEkNQU7CQ9abLv5",
+                "created": 1755620964,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 947,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV7JWL3OTYeQ96HuayGYeCA7Geb",
+                "created": 1755620965,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -868,6 +1648,71 @@
                 "created": 1755195694,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1021,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV8rjPCLiiAuImOuoR4SO9Atf3G",
+                "created": 1755620966,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1021,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV9gdJrJsR0MdcSdgUh7mud7mZt",
+                "created": 1755620967,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1021,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JV95oqjgaD7f9RyrocAX7I3eugT",
+                "created": 1755620967,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1021,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVA85Qfhh6j3exj1Xhmr4Rss49u",
+                "created": 1755620968,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1021,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVBA1x6K3ApiZBeIfsgCfofew0r",
+                "created": 1755620969,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "75": {
@@ -933,6 +1778,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WryqlggYwU62kdwIZBbYDBX5yDl",
                 "created": 1755195698,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 582,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVBv6BZXCJShy6mgKlkkFvPs3Zg",
+                "created": 1755620969,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 582,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVCMPPa3EiEBvmJRadD4B1JtTLe",
+                "created": 1755620970,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 582,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVCDY5XhNxAwoCK4vBT9nvTgYGp",
+                "created": 1755620970,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 582,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVD3DKe22H1IbwhN1sG8ppFtdYf",
+                "created": 1755620971,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 582,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVEKTkQzz7o2hxip9yWmdT3RRnc",
+                "created": 1755620972,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1002,6 +1912,71 @@
                 "created": 1755195701,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1254,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVEPW4LEwwvVXdgab7RHEOUKmJ4",
+                "created": 1755620972,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1254,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVFn6NADvZvdJL6avtUGoeMBPnT",
+                "created": 1755620973,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1254,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVGhvZ4K8VFvDO9QEL8vpzd3km5",
+                "created": 1755620974,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1254,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVGrPahA7hmWI6Fw21tDEHOKb6X",
+                "created": 1755620974,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1254,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVHXErHrpNTXb6zh1BXZaYg8hvE",
+                "created": 1755620975,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "89": {
@@ -1067,6 +2042,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4Ws6m46PrP8A6U3RxdY1Y1MlcDS0",
                 "created": 1755195706,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1417,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVIBL3ohhtLodEhJNMx38YnAwol",
+                "created": 1755620976,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1417,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVIX5YgHi2myY9ShXrcTFtYFMjQ",
+                "created": 1755620976,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1417,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVJXn9kgnjSho5DFjPFuuqjKMKO",
+                "created": 1755620977,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1417,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVKmlxMOW5uZSfp35gA0PGlPUF5",
+                "created": 1755620978,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1417,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVKBaPB7bJLGciGu5r1z7I3LaI2",
+                "created": 1755620978,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1136,6 +2176,71 @@
                 "created": 1755195709,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVNJusjYO1WUKfMtN8qxGMj7nJB",
+                "created": 1755620981,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVOzbMfHJs1WJEc4Qz0IxdtlhAC",
+                "created": 1755620982,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVPJHmK1Ib40s99ZMzDfkhPrGKg",
+                "created": 1755620983,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVQ1sUsLdC7qRc3gOopCr4Cnrus",
+                "created": 1755620984,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVREnzqW77k2CCOZ48xd7q0ilMi",
+                "created": 1755620985,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "103": {
@@ -1201,6 +2306,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WsERQGWq12LvDmgXLNrTzp7ksom",
                 "created": 1755195714,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1906,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVRAZtDewk6xa8jwfZJQKTHbNxQ",
+                "created": 1755620985,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1906,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVSvQ6VGyvQvPb5xpEPBSSCWMRO",
+                "created": 1755620986,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1906,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVTIosouGv9sWYtjwk4F2MdCfBU",
+                "created": 1755620987,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1906,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVULIJDtSTnRnKZoy4OiSdZgMcE",
+                "created": 1755620988,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1906,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVUKbrODHQjU7tPLrfT3F9orf0h",
+                "created": 1755620988,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1270,6 +2440,71 @@
                 "created": 1755195717,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 570,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVVRXGJt7mvlVXVCAjK0xezVczP",
+                "created": 1755620989,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 570,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVWDyZRypVGXDSV0cVFXon14laC",
+                "created": 1755620990,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 570,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVXjjiog0UyoyezHCIScUmok85R",
+                "created": 1755620991,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 570,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVaYIiH8ZtPUVpuCvAe9kqipegk",
+                "created": 1755620994,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 570,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVcnkPpryUeRPSv1xMMzI8VfmPk",
+                "created": 1755620996,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "99": {
@@ -1335,6 +2570,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WsLikNxVt37gATzVW8i9NaFIGbI",
                 "created": 1755195721,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1815,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVdGI2YZNSJ9Q1gwEHecotb4fbw",
+                "created": 1755620997,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1815,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVfrJEZgI5pXTVj5Me87K8D0at8",
+                "created": 1755620999,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1815,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVhN8zXiE0r5g4CVdAfVxEjuVX9",
+                "created": 1755621001,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1815,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVhLf3hXfHjatzPBvbkxrXJuIk9",
+                "created": 1755621001,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1815,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVid5QEnRBamqrTCBpUDzXEx6Ae",
+                "created": 1755621002,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1404,6 +2704,71 @@
                 "created": 1755195725,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1167,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVjNeaRFzH5sRsvAUrjRC9rdbzp",
+                "created": 1755621003,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1167,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVkTRlWFIXSgzeGCGWCUwFnmAE4",
+                "created": 1755621004,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1167,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVkBCpBN0Uzt2JxwV3YYAGgCCS8",
+                "created": 1755621004,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1167,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVlIkaNROunS2cWhh7QLzOEWS21",
+                "created": 1755621005,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1167,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVmal8mmqD6e9lXvlkUCbEiDNhb",
+                "created": 1755621006,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "80": {
@@ -1469,6 +2834,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WsSD2AYIOOWLd6rhTVUdR9JXXDo",
                 "created": 1755195728,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 569,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVmU31vJqGi0dPKCH2Ej0LIic3f",
+                "created": 1755621006,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 569,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVnEPs2aPPDWag9ZJAhwaAprCzd",
+                "created": 1755621007,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 569,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVnEoSFZh0FkvE9tTAbba1ttVyL",
+                "created": 1755621007,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 569,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVojIdlmPRUNpxNOrQmtN5oWYXu",
+                "created": 1755621008,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 569,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVpoIYi5QqoI7VwlyVx0lbo3feH",
+                "created": 1755621009,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1538,6 +2968,71 @@
                 "created": 1755195731,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1236,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVp5IesRodsI7H4xByzfAsCFxnC",
+                "created": 1755621009,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1236,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVqiZiJHnShDe9SqjQevdL2Enye",
+                "created": 1755621010,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1236,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVqsns9cYYpV4HCE7w3yKyUW2Ko",
+                "created": 1755621010,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1236,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVrLOWrk8Ug2y3cAm8BdXVwVk7r",
+                "created": 1755621011,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1236,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVstEdZvkR28SIJacXjhFVYxltw",
+                "created": 1755621012,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "63": {
@@ -1603,6 +3098,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WsaWFC9aRf7Og8YwrS44eSX97j4",
                 "created": 1755195736,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVsE1qBndf7hCoE5QbWu73dJlM4",
+                "created": 1755621012,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVtLUo87RGGs2fxgSPkD4okQ2Rq",
+                "created": 1755621013,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVunrYYIvaMrGJC074rcUaIyPZO",
+                "created": 1755621014,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVwVI4D848XRnQmxGCptFukX4Hl",
+                "created": 1755621016,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 635,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVx3hG7oxoEKvG3YgKxiH5gwnJ8",
+                "created": 1755621017,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1672,6 +3232,71 @@
                 "created": 1755195739,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 600,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JVzX86GZrLqGLVi5Az6c0logjUX",
+                "created": 1755621019,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 600,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW1vDNyi4ii57jytycAGvkJJiBl",
+                "created": 1755621021,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 600,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW26NaVE7DmqJ03yDtxLIQTgSFl",
+                "created": 1755621022,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 600,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW2sKNIU1baFBO4zpOaCNZkgKz2",
+                "created": 1755621022,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 600,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW3Y9SY294Gi65khfskJybdwlr9",
+                "created": 1755621023,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "92": {
@@ -1737,6 +3362,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WshauLA9AnRu2LQFLregTek3xYG",
                 "created": 1755195743,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1724,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW4NUW4Wbfuq2p5jrLEkfg7f2cM",
+                "created": 1755621024,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1724,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW6598DlnO3Kd2XvxPOEpL9uSNg",
+                "created": 1755621026,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1724,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW6v7mkxBmCDSqGpBOVa4yu9Dzz",
+                "created": 1755621026,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1724,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW7gz1WNPRgbYzPIvTAh3KyKLc2",
+                "created": 1755621027,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1724,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JW93ocKrh3krtMcVdRrh9DZqOGF",
+                "created": 1755621029,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1806,6 +3496,71 @@
                 "created": 1755195747,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 2056,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWAxPAIlZh9i9t2TTlkfEmYfLtP",
+                "created": 1755621030,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 2056,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWBLXbX7Gte8oxnSI63z8SlIUE4",
+                "created": 1755621031,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 2056,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWBu0Fqtr0VxcBJOL3avc99aDK9",
+                "created": 1755621031,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 2056,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWE6ohoKDet09oy1YWo0OTOFMOT",
+                "created": 1755621034,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 2056,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWGyF48q5TgQFOF0loSnaAZdGui",
+                "created": 1755621036,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "81": {
@@ -1871,6 +3626,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WsptpG9Dtc5f3UGxm4buivIfmwc",
                 "created": 1755195751,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1257,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWHN6KemwYeWnIXSAJeWcyNaL8K",
+                "created": 1755621037,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1257,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWHKU8CnVUyWYJ4g8Oehc5NvAJn",
+                "created": 1755621037,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1257,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWIxCuDgCiXaVBKTnJlFKOQkt5Q",
+                "created": 1755621038,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1257,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWJAuAorcs3FOb0an1YteLXKM5L",
+                "created": 1755621039,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1257,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWK0nNNo5ljJcT14sdmKoSqfFMS",
+                "created": 1755621040,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -1940,6 +3760,71 @@
                 "created": 1755195754,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1214,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWK8mQQMVkymP5atZHB6gi9OZ5u",
+                "created": 1755621040,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1214,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWLkBdpF2iYCRzhw4QKw5BFmpBX",
+                "created": 1755621041,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1214,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWMy6TLG0VHv7GbM57Jr5W6EX8C",
+                "created": 1755621042,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1214,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWMa2SxGpHCEqaqj2MSJyV2jfJ6",
+                "created": 1755621042,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1214,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWNvTdjvYOOeaF2XtmN1RApO5G1",
+                "created": 1755621043,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "61": {
@@ -2005,6 +3890,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WswFOyvWvxoPqAMR4kQ42P3aViM",
                 "created": 1755195758,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1163,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWOs0VsnApDEsF5zkaHSHk7CBxB",
+                "created": 1755621044,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1163,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWO7LbcyBfOcG2j2BaPeNmGq7B7",
+                "created": 1755621044,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1163,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWPIsVJkSb2m5siX2A7p7jGqqCR",
+                "created": 1755621045,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1163,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWPhVltNKdFeWBPLBwws7eo14WO",
+                "created": 1755621045,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1163,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWQmvKklNs8JsDAg7tMZMK6z9BM",
+                "created": 1755621046,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2074,6 +4024,71 @@
                 "created": 1755195762,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1388,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWREyWzjoO3exfX09rE4NbXyKNd",
+                "created": 1755621047,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1388,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWRcpwCjddir2IokUyDLxtGWMCl",
+                "created": 1755621047,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1388,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWSTBNJtEUuoyQmIOJqkcoD8oFJ",
+                "created": 1755621048,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1388,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWTpKunS84utA9YN8GttyFhOzhb",
+                "created": 1755621049,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1388,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWTriJMomLPPAbbm6pdGcjSwAY3",
+                "created": 1755621049,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "71": {
@@ -2139,6 +4154,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4Wt3URYqZyeoF94PnClwq30LrpLD",
                 "created": 1755195765,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 843,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWU3w2AiOIwLlmm9xVDj2pCkB8w",
+                "created": 1755621050,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 843,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWUTQW7pShGWN0k6K27HeOYludv",
+                "created": 1755621050,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 843,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWVC5n2tZ0NQRtQ7E68DyvBc01R",
+                "created": 1755621051,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 843,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWWgHiyrQIwbh2V6lZwTdQ9ehNl",
+                "created": 1755621052,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 843,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWXnZhjuPpuZkO9WWAiX5lTJx7k",
+                "created": 1755621053,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2208,6 +4288,71 @@
                 "created": 1755195769,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1271,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWZFYeEprpigBCvUB41us9X8TIP",
+                "created": 1755621055,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1271,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWazOJa5e8IaU4looUqcvShElzP",
+                "created": 1755621056,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1271,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWbupANIPGlRh53I09mpcQbtXzz",
+                "created": 1755621057,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1271,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWcdWfqNHDpzYuiJjD9uRrFwRvD",
+                "created": 1755621058,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1271,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWc1GiSdPsnGPjqELNI4kSdOV6Z",
+                "created": 1755621058,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "107": {
@@ -2273,6 +4418,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WtA3uHN7J2ZqHe47SscVNvJ2SSC",
                 "created": 1755195772,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1887,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWdDn2uVabcVFcMAPynK0OhQUry",
+                "created": 1755621059,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1887,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWekGqEHIIhwOWUKMkYjw6I5snf",
+                "created": 1755621060,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1887,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWea6p866HTrkBKsihUdwpZqxtj",
+                "created": 1755621060,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1887,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWfOrdfcXwET47APSao2XuN7QLK",
+                "created": 1755621061,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1887,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWgTyhaA2wzH48XCaSc8tT2KgVN",
+                "created": 1755621062,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2342,6 +4552,71 @@
                 "created": 1755195775,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1119,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWizhlh13e3bPI2hsCkd3Wjpa08",
+                "created": 1755621064,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1119,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWkr1hB0wpvzHGxLdKv4P41RKbe",
+                "created": 1755621066,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1119,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWlmad9I2kzDGzUQ4iLLhCN5M5A",
+                "created": 1755621067,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1119,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWmLzRpWdJTKreT7M2H4KIIVjMS",
+                "created": 1755621068,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1119,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWnDRe5h31SECM8MivQeSO1zKE1",
+                "created": 1755621069,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "84": {
@@ -2407,6 +4682,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WtGKL9L5TEBZct2EPEXlaNdCeNL",
                 "created": 1755195778,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1143,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWn5YaRUysO3dJTy5nEYlEIMUbi",
+                "created": 1755621069,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1625,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWoC0bzafZeg41oQTJIfPdBYSyw",
+                "created": 1755621070,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1143,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWoDsAoJxdCjkGhxvYjYQu5rF59",
+                "created": 1755621070,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1625,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWpNqN1WLBVR2R2z2lWGcdffWS3",
+                "created": 1755621071,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1625,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWqyeu61RQrOefS1pHPXdEikVJd",
+                "created": 1755621072,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2476,6 +4816,71 @@
                 "created": 1755195782,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1192,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWr7l42g4hTsY85yWeN51s9yN2X",
+                "created": 1755621073,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1192,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWszx0mucrRn1CrEUgb0XkCBjzW",
+                "created": 1755621074,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1192,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWtScguDi7Ki6udXWcAIcfQCD7v",
+                "created": 1755621075,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1192,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWtdbyYJcfu91vOvxbtEGmwPrI7",
+                "created": 1755621075,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1192,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWulY5bJo0Wdkkyq4QiRLNi8tJY",
+                "created": 1755621076,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "67": {
@@ -2541,6 +4946,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WtN6eimKaYRCqvEVp7NCW2T9Sgl",
                 "created": 1755195785,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 677,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWvGNZIEkKWdY5TwNt2SpXqDkpq",
+                "created": 1755621077,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 677,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWwCEB9f5n2v8pov9FeSsa2CpJR",
+                "created": 1755621078,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 677,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWwkmaW6IK9TXkfMl8eeSa4D6d6",
+                "created": 1755621078,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 677,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWxfEQXDRs0RW7l05XhcMIfC4pD",
+                "created": 1755621079,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 677,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWymfnpJ9G2fa89y0yuDYQu4vww",
+                "created": 1755621080,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2610,6 +5080,71 @@
                 "created": 1755195789,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 901,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWz6G0GSUZ9HRaQaCgNAUg4INgr",
+                "created": 1755621081,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 901,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JWzCu9QTgdKLa5fperYOqxnpp44",
+                "created": 1755621081,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 901,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX1QPGmG6scHNX5nu0Y8KZwd88G",
+                "created": 1755621083,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 901,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX1GNaajF3PQLpz2MD30oefw1OD",
+                "created": 1755621083,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 901,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX2cYz5kaWSnrUVmQjco8CARiR4",
+                "created": 1755621084,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "47": {
@@ -2675,6 +5210,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WtUEx6132iAtzBSq7G78a42SMW5",
                 "created": 1755195792,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1033,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX3aO8D6CO0kdZdQ25hvvtix53T",
+                "created": 1755621085,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1033,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX4YntffuFIExoftFA2jnU3Qf7v",
+                "created": 1755621086,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1033,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX5WJAdLTANBQEKwQTb4AKYK2E5",
+                "created": 1755621087,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1033,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX5bTPJdwWxDThzGPlc6QEal2QI",
+                "created": 1755621087,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1033,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX620Gs63WvyQdxmM8gO7qu7kYe",
+                "created": 1755621088,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2744,6 +5344,71 @@
                 "created": 1755195795,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 548,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX8OLpWyIpglqtmcIgiyvmhmeNt",
+                "created": 1755621090,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 548,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JX9jorn5Z5s91CbFKEdf12xxGa8",
+                "created": 1755621091,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 548,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXA7zj1JVoWzQsEkLvQZifRikm9",
+                "created": 1755621092,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 548,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXBh82X4lX1pOgMPh9HpRh344hh",
+                "created": 1755621093,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 548,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXBRipw5zduBkDVaddkef7ouH9c",
+                "created": 1755621093,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "94": {
@@ -2809,6 +5474,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WtbOOLaAXP66JO97Y13jKiXfYAN",
                 "created": 1755195799,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1278,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXCmQH7YjiHUVBcmlkgX6h04vUl",
+                "created": 1755621094,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1278,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXDOFwgXSqpc4IB7Pu5gftCRxTP",
+                "created": 1755621095,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1278,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXEr86Ig4CEDUsvbrdYhxCmDWxR",
+                "created": 1755621096,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1278,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXEhv46YqMFuXqMan9azKn6jhdK",
+                "created": 1755621096,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 1278,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXFPupY2qqVBogNjtCnjJdJtgDt",
+                "created": 1755621097,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -2878,6 +5608,71 @@
                 "created": 1755195804,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 3129,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXGOuOOX7U6DUD119JuNi6VwJc4",
+                "created": 1755621098,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 3129,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXGR5Txlum0nML2LPePkKpI5M2M",
+                "created": 1755621098,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 3129,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXHsO1sS2E9ziq7CvWfECKOiZV0",
+                "created": 1755621099,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 3129,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXIjIVcbAktLsKDnWxi3l5lx086",
+                "created": 1755621100,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 3129,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXJ0aKDXqHYA7WALcjoPafvYfwZ",
+                "created": 1755621101,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "51": {
@@ -2943,6 +5738,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4Wtj4gE4BIOvoiWIRBZH7msvzyYB",
                 "created": 1755195807,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1146,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXJQ0jcSD1wfJ3ef57VZbN2V5eg",
+                "created": 1755621101,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1146,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXKoh05vgjNJm2p3PvuEMQxanCt",
+                "created": 1755621102,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1146,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXKDP1UDh9KGhbrNICDvCUbMhj9",
+                "created": 1755621102,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1146,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXLbeooWBCBqxe4X27gv4WhXLUR",
+                "created": 1755621103,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1146,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXMi3bTlHkq8oX80SpXTFr4lnF0",
+                "created": 1755621104,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -3012,6 +5872,71 @@
                 "created": 1755195810,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1154,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXMbSLMJZJJwBqhdI3fcc4yu7jJ",
+                "created": 1755621104,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1154,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXNvpzfIe6UM9f2W8xXYoZrrf0Z",
+                "created": 1755621105,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1154,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXOCnbHGN5qhwFqhiDxR5Yctez7",
+                "created": 1755621106,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1154,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXPpk574L7mWf7z56KEQRWXpXaI",
+                "created": 1755621107,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1154,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXPzOtE0PJKIbWbxBBSzQ6d5IY5",
+                "created": 1755621107,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "100": {
@@ -3077,6 +6002,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4Wtqg3TUWVRF73mI4sqA6X5E0tJV",
                 "created": 1755195814,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1852,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXQJjb4wbffmblKdZZUiFY0qVpX",
+                "created": 1755621108,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1852,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXQVktq3SGk5P3VGUeVbmhCadbf",
+                "created": 1755621108,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1852,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXRkdW4dwligsrjieRqnKc1e3kv",
+                "created": 1755621109,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1852,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXSQoetHRicwWanhca54eB1UfvO",
+                "created": 1755621110,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1852,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXSfcqDJ9zStV31cDq5m1V7qlgM",
+                "created": 1755621110,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -3146,6 +6136,71 @@
                 "created": 1755195818,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1205,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXTqmYJlOo1IoCLTOvnQ1lzYE8u",
+                "created": 1755621111,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1205,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXT40vL3C8xBzDNcu0ZmsJu4Nf6",
+                "created": 1755621111,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1205,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXUKlFVWxCc2NYqYZ8SnfdPNOII",
+                "created": 1755621112,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1205,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXVNJSc2Vno3SR0M9m9rIeCB5mg",
+                "created": 1755621113,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1205,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXWFDixVQ9F1dFuLc8SVDfmoDyY",
+                "created": 1755621114,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "56": {
@@ -3211,6 +6266,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WtxSBKn2fxURdfz4eUt56PiHHkZ",
                 "created": 1755195821,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1534,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXWMXlriYXuqCVuYozA78EUSCqJ",
+                "created": 1755621114,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1534,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXXdVLFJKQKH3fznb2mfC3brCJs",
+                "created": 1755621115,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1534,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXYLwhkmR8EqIfYGQuRliY8hJEG",
+                "created": 1755621116,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1534,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXY5K2ej4zdJ42tJwzBozNDyMzi",
+                "created": 1755621116,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1534,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXZXMCaFOMaPsm2QrFrFMKkaKma",
+                "created": 1755621117,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -3280,6 +6400,71 @@
                 "created": 1755195832,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2927,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXaJkIYojYKNsfzsHTlpUEr0LGY",
+                "created": 1755621118,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2927,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXbjOa5FYgjGTjgOZ0cCh4ybuKm",
+                "created": 1755621119,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2927,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXbzxYFROPeuBpWNTdLs4FergfM",
+                "created": 1755621119,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2927,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXcxXrTEOWBn3UJCixGzO8VY1uD",
+                "created": 1755621120,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 2927,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXcDyLTlqZRygF64Wv59sF7epii",
+                "created": 1755621120,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "58": {
@@ -3345,6 +6530,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WuByvjElrB7zkjGc8jtKKJikF8u",
                 "created": 1755195835,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1491,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXdYBKMzuP72tzT8QhY97l5FMMF",
+                "created": 1755621121,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1491,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXeigz3HKoe8SHAV1IqDDzPAh6q",
+                "created": 1755621122,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1491,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXflUNXK5loHjtYEKchlnVuJYBY",
+                "created": 1755621123,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1491,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXg3P4TP7lbc5k20soTxw3y8jsK",
+                "created": 1755621124,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1491,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXg3Oec8rw3WpDGXti14WKJBff8",
+                "created": 1755621124,
                 "model": "gpt-4o-2024-11-20"
             }
         }
@@ -3414,6 +6664,71 @@
                 "created": 1755195838,
                 "model": "gpt-4o-2024-11-20"
             }
+        },
+        "5": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 469,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXhjleMh2pt19UQvEBHTvWy5LzB",
+                "created": 1755621125,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 469,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXiajCsotez9YDnsVWOAroBvvv9",
+                "created": 1755621126,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 469,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXjoXDT3Px168nr0lT0IJNyZUs3",
+                "created": 1755621127,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 469,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXkBbFTafP7fGLrnQnMj8afVjeS",
+                "created": 1755621128,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 469,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXknxVVdAInKqfnQfwOEqdmmisX",
+                "created": 1755621128,
+                "model": "gpt-4o-2024-11-20"
+            }
         }
     },
     "39": {
@@ -3479,6 +6794,71 @@
                 "out_toks": 6,
                 "id": "chatcmpl-C4WuH3rXYHnS516j5F3yaX9AnoBHy",
                 "created": 1755195841,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "5": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1731,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXlIjLDRKArOtsB7248H2CQb5Ht",
+                "created": 1755621129,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "6": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1731,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXmIDefCq7eO5PPvgUmfVeyQSP0",
+                "created": 1755621130,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "7": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1731,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXmTQxpt0Zl0IyePy5b3HZ0r8F3",
+                "created": 1755621130,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "8": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1731,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXn5G2cZSbp9XoH4h0Zc419PFdU",
+                "created": 1755621131,
+                "model": "gpt-4o-2024-11-20"
+            }
+        },
+        "9": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 1731,
+                "out_toks": 6,
+                "id": "chatcmpl-C6JXoHsjWPBKvyPUxw7M2qGzPa75r",
+                "created": 1755621132,
                 "model": "gpt-4o-2024-11-20"
             }
         }

@@ -694,7 +694,9 @@ def plot_perfect_match_by_difficulty_interactive(
             fig.supylabel('% Perfect Matching Queries', fontsize=24, x=0.02)
             
             # Add legend
-            plt.legend(title='Experiments', bbox_to_anchor=(1.02, 0.88))
+            # plt.legend(title='Experiments', bbox_to_anchor=(1.02, 0.88))
+            # plt.legend(title='Experiments', loc='upper left', bbox_to_anchor=(1.02, 1))
+            axs[0].legend(title='Experiments', loc='upper left', bbox_to_anchor=(0.88, 1))
             plt.tight_layout()
             plt.show()
     
