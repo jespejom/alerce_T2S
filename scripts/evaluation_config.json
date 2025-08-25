@@ -7,7 +7,7 @@
     "parallel": true,
     "num_processes": 3,
     "access_time": 2,
-    "n_tries": 7,
+    "n_tries": 3,
     "alias_handling": true,
     "self_correction": "both"
 }

@@ -6,7 +6,7 @@
     "sql_gen_method": "direct",
     "n_exps": 2,
     "save_path": "./results",
-    "eval": true,
+    "eval": false,
     "self_correction": true,
     "schema_linking_method": true,
     "promptV_sl": "sl_v3",
