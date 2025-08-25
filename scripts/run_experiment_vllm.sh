@@ -10,13 +10,17 @@ export PYTHONPATH="$PYTHONPATH:$(pwd)"
 # Default values
 DATA_PATH="llm/data/txt2sql_alerce_train_v4_0.csv"
 DATA_FORMAT="csv"
-MODEL_NAME="Qwen/Qwen2.5-Coder-3B"
+MODEL_NAME="Qwen/Qwen2.5-1.5B-Instruct"
 EXP_NAME="alerce_train_direct_v8"
 SQL_GEN="direct"
 N_EXPS=3
 SAVE_PATH="./results"
 EVAL="false"
+<<<<<<< HEAD
 SELF_CORRECTION="false"
+=======
+SELF_CORRECTION="true"
+>>>>>>> 3dec1266fad168b4318e1d39c9d02856401b22b4
 SL_METHOD="true"
 PROMPT_SL="sl_v3"
 PROMPT_DC="diff_v8"
