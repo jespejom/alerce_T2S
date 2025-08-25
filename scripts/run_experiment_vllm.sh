@@ -10,10 +10,10 @@ export PYTHONPATH="$PYTHONPATH:$(pwd)"
 # Default values
 DATA_PATH="llm/data/txt2sql_alerce_train_v4_0.csv"
 DATA_FORMAT="csv"
-MODEL_NAME="Qwen/Qwen2.5-1.5B-Instruct"
+MODEL_NAME="openai/gpt-oss-20b"
 EXP_NAME="alerce_train_direct_v8"
 SQL_GEN="direct"
-N_EXPS=3
+N_EXPS=2
 SAVE_PATH="./results"
 EVAL="false"
 <<<<<<< HEAD
