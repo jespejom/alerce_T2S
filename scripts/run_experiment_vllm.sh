@@ -2,6 +2,7 @@
 # Script to run ALeRCE Text-to-SQL experiment
 # Usage:
 #  vllm serve model/model_name
+# GPT-OSS-20B VLLM_ATTENTION_BACKEND=TRITON_ATTN_VLLM_V1 vllm serve openai/gpt-oss-20b --gpu-memory-utilization 0.9 --max-num-seqs 20 --max-model-len 32000
 #  ./run_experiment_vllm.sh [options]
 
 # Set Python path to include project root
@@ -16,11 +17,7 @@ SQL_GEN="direct"
 N_EXPS=2
 SAVE_PATH="./results"
 EVAL="false"
-<<<<<<< HEAD
 SELF_CORRECTION="false"
-=======
-SELF_CORRECTION="true"
->>>>>>> 3dec1266fad168b4318e1d39c9d02856401b22b4
 SL_METHOD="true"
 PROMPT_SL="sl_v3"
 PROMPT_DC="diff_v8"
