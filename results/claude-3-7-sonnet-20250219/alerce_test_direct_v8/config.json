@@ -4,7 +4,7 @@
     "model_name": "claude-3-7-sonnet-20250219",
     "exp_name": "alerce_test_direct_v8",
     "sql_gen_method": "direct",
-    "n_exps": 2,
+    "n_exps": 5,
     "save_path": "./results",
     "eval": true,
     "self_correction": true,
@@ -13,10 +13,10 @@
     "promptV_diff_class": "diff_v8",
     "promptV_gen": "dir_v8",
     "promptV_sc": "sc_v3",
-    "num_processes": 8,
+    "num_processes": 4,
     "parallel": true,
     "access_time": 2,
-    "n_tries": 4,
+    "n_tries": 5,
     "alias_handling": true,
     "batch": true,
     "model_name_decomp": "claude-3-7-sonnet-20250219",
@@ -24,7 +24,7 @@
     "max_new_tokens_decomp": 4000,
     "t": 0.0,
     "top_p": null,
-    "date_executed": "2025-06-11 05:24:01",
+    "date_executed": "2025-10-21 07:32:43",
     "experiment_settings": {
         "schema_linking": {
             "model": {
@@ -101,8 +101,7 @@
             },
             "tables_list": [
                 "object",
-                "detection",
-                "probability"
+                "detection"
             ],
             "general_task": "\nAs a SQL expert with a willingness to assist users, you are tasked with crafting a PostgreSQL query for the Automatic Learning for the Rapid Classification of Events (ALeRCE) Database in 2023. This database serves as a repository for information about individual spatial objects, encompassing various statistics, properties, detections, and features observed by survey telescopes.\nThe tables within the database are categorized into three types: time and band independent (e.g., object, probability), time-independent (e.g., magstats), and time and band-dependent (e.g., detection). Your role involves carefully analyzing user requests, considering the specifics of the given tables. It is crucial to pay attention to explicit conditions outlined by the user and always maintain awareness of the broader context.\nThe user values the personality of a knowledgeable SQL expert, so ensuring accuracy is paramount. Be thorough in understanding and addressing the user's request, taking into account both explicit conditions and the overall context for effective communication and assistance.\n",
             "general_context": "\n## ALeRCE Pipeline Details\n- Stamp Classifier (denoted as \u2018stamp_classifier\u2019): All alerts related to new objects undergo stamp-based classification.\n- Light Curve Classifier (denoted as \u2018lc_classifier\u2019): A balanced hierarchical random forest classifier employing four models and 15 classes.\n- The first hierarchical classifier has three classes: [periodic, stochastic, transient], denoted as \u2018lc_classifier_top.\u2019\n- Three additional classifiers specialize in different spatial object types: Periodic, Transient, and Stochastic, denoted as \u2018lc_classifier_periodic,\u2019 \u2018lc_classifier_transient,\u2019 and \u2018lc_classifier_stochastic,\u2019 respectively.\n- The 15 classes are separated for each object type:\n  - Transient: [SNe Ia ('SNIa'), SNe Ib/c ('SNIbc'), SNe II ('SNII'), and Super Luminous SNe ('SLSN')].\n  - Stochastic: [Active Galactic Nuclei ('AGN'), Quasi Stellar Object ('QSO'), 'Blazar', Cataclysmic Variable/Novae ('CV/Nova'), and Young Stellar Object ('YSO')].\n  - Periodic: [Delta Scuti ('DSCT'), RR Lyrae ('RRL'), Cepheid ('Ceph'), Long Period Variable ('LPV'), Eclipsing Binary ('E'), and other periodic objects ('Periodic-Other')].\n## Spatial Object Types by Classifier\n- classifier_name=('lc_classifier', 'lc_classifier_top', 'lc_classifier_transient', 'lc_classifier_stochastic', 'lc_classifier_periodic', 'stamp_classifier')\n- Classes in 'lc_classifier'= ('SNIa', 'SNIbc', 'SNII', 'SLSN', 'QSO', 'AGN', 'Blazar', 'CV/Nova', 'YSO', 'LPV', 'E', 'DSCT', 'RRL', 'CEP', 'Periodic-Other')\n- Classes in 'lc_classifier_top'= ('transient', 'stochastic', 'periodic')\n- Classes in 'lc_classifier_transient'= ('SNIa', 'SNIbc', 'SNII', 'SLSN')\n- Classes in 'lc_classifier_stochastic'= ('QSO', 'AGN', 'Blazar', 'CV/Nova', 'YSO')\n- Classes in 'lc_classifier_periodic'= ('LPV', 'E', 'DSCT', 'RRL', 'CEP', 'Periodic-Other')\n- Classes in 'stamp_classifier'= ('SN', 'AGN', 'VS', 'asteroid', 'bogus')\n## DEFAULT CONDITIONS YOU NEED TO SET\n### IF THE 'probability' TABLE is used, use always the next conditions, unless the user explicitly specifies different probability conditions.\n- 'probability.ranking' = 1 ; this only return the most likely probabilities.\n- 'probability.classifier_name='lc_classifier' ; this will return the classifications by the light curve classifier\n### GENERAL\n- If the user doesn't specify explicit columns or information that is not in a column, choose all the columns, for example by using the \u201cSELECT *\u201d SQL statement.\n- Use the exact class names as they are in the database, marked with single quotes, for example, 'SNIa'.\n# If you need to use 2 or 3 tables, try using a sub-query over 'probability' or 'object' if it is necessary (priority in this order).\n",

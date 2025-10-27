@@ -33,6 +33,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 48,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_011Uq2Qcj29zLioFGzATvhsS"
+                },
+                "created": {
+                    "0": "msg_011Uq2Qcj29zLioFGzATvhsS"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 48,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_013hravyFMv6HuwyTqzRinkK"
+                },
+                "created": {
+                    "0": "msg_013hravyFMv6HuwyTqzRinkK"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 48,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01QfXtTLw9hH7NErxh8w8Pth"
+                },
+                "created": {
+                    "0": "msg_01QfXtTLw9hH7NErxh8w8Pth"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "27": {
@@ -66,6 +117,57 @@
                 },
                 "created": {
                     "0": "msg_011ZB1E9kmPM1x1kUk6sLf47"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 91,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Fdo7mZciGqQzFWm49MzYC8"
+                },
+                "created": {
+                    "0": "msg_01Fdo7mZciGqQzFWm49MzYC8"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 91,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Km1gFA8DoUKpi4Vunjw38m"
+                },
+                "created": {
+                    "0": "msg_01Km1gFA8DoUKpi4Vunjw38m"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 91,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01QB91gPTxX9gSCzNWU8e4J9"
+                },
+                "created": {
+                    "0": "msg_01QB91gPTxX9gSCzNWU8e4J9"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -105,6 +207,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 55,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_017H5sScW7iXxdZbuUcYtwxY"
+                },
+                "created": {
+                    "0": "msg_017H5sScW7iXxdZbuUcYtwxY"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 55,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01P7bNLVCfT8u8LjdFe4isTp"
+                },
+                "created": {
+                    "0": "msg_01P7bNLVCfT8u8LjdFe4isTp"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 55,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_017ferJLDbkQyPVJHCrGCJEb"
+                },
+                "created": {
+                    "0": "msg_017ferJLDbkQyPVJHCrGCJEb"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "37": {
@@ -138,6 +291,57 @@
                 },
                 "created": {
                     "0": "msg_017ZhpQ7zN8hc5qzMcJkyG1A"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 41,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01B7WHrM2b4jp4VV2P3xoJDg"
+                },
+                "created": {
+                    "0": "msg_01B7WHrM2b4jp4VV2P3xoJDg"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 41,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LqamxgXB6pVP2zWcRAbp2J"
+                },
+                "created": {
+                    "0": "msg_01LqamxgXB6pVP2zWcRAbp2J"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 41,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01YbqgNBAT8WWW1tkvfJwmRb"
+                },
+                "created": {
+                    "0": "msg_01YbqgNBAT8WWW1tkvfJwmRb"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -177,6 +381,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 159,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Eu6TN615QiTS7GkrboifQi"
+                },
+                "created": {
+                    "0": "msg_01Eu6TN615QiTS7GkrboifQi"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 159,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01DUDAZN4Lf5DTTULUNep8pk"
+                },
+                "created": {
+                    "0": "msg_01DUDAZN4Lf5DTTULUNep8pk"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 159,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0145fNdD1U5xg3yko5BYEZ17"
+                },
+                "created": {
+                    "0": "msg_0145fNdD1U5xg3yko5BYEZ17"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "1": {
@@ -210,6 +465,57 @@
                 },
                 "created": {
                     "0": "msg_01BkRxPLaaqdEN3svsg4isyg"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 170,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01BjmQU5Hkc5HFvYEkB77EtR"
+                },
+                "created": {
+                    "0": "msg_01BjmQU5Hkc5HFvYEkB77EtR"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 170,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01VaExnVgMC6Fawk1nA6b9jg"
+                },
+                "created": {
+                    "0": "msg_01VaExnVgMC6Fawk1nA6b9jg"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 170,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01ViF1ZbzEPoUQzouijHgYuG"
+                },
+                "created": {
+                    "0": "msg_01ViF1ZbzEPoUQzouijHgYuG"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -249,6 +555,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 124,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_018W6nRkqjuwhPQNJnJhquos"
+                },
+                "created": {
+                    "0": "msg_018W6nRkqjuwhPQNJnJhquos"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 124,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_013bLxqqjscJXSdkvHRAy91w"
+                },
+                "created": {
+                    "0": "msg_013bLxqqjscJXSdkvHRAy91w"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 124,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_013VjWQrTH7ARFaJgtw3WVru"
+                },
+                "created": {
+                    "0": "msg_013VjWQrTH7ARFaJgtw3WVru"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "19": {
@@ -282,6 +639,57 @@
                 },
                 "created": {
                     "0": "msg_018PabiPgN7ww7vEzUzYGLvr"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 89,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01SB2FaR3TmojAb7rE1UWfz4"
+                },
+                "created": {
+                    "0": "msg_01SB2FaR3TmojAb7rE1UWfz4"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 89,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Wyb3kDPZw4nmT1PFwoFS8S"
+                },
+                "created": {
+                    "0": "msg_01Wyb3kDPZw4nmT1PFwoFS8S"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 89,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_014dcwrQHiZ3eV3p9nNFSB28"
+                },
+                "created": {
+                    "0": "msg_014dcwrQHiZ3eV3p9nNFSB28"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -321,6 +729,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 240,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LEcc6NyE7VD7WLWuCMRGQo"
+                },
+                "created": {
+                    "0": "msg_01LEcc6NyE7VD7WLWuCMRGQo"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 240,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_016y5mxvx6nLTr1xH5uXLJuy"
+                },
+                "created": {
+                    "0": "msg_016y5mxvx6nLTr1xH5uXLJuy"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 240,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01EFuKAuGKge8Jj6iAMfr6vn"
+                },
+                "created": {
+                    "0": "msg_01EFuKAuGKge8Jj6iAMfr6vn"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "30": {
@@ -354,6 +813,57 @@
                 },
                 "created": {
                     "0": "msg_018e7epPFj8Wc8io1Jwr8NHz"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 47,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01HJ8EbxYymfAvELdiFsyyof"
+                },
+                "created": {
+                    "0": "msg_01HJ8EbxYymfAvELdiFsyyof"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 47,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01MqWfiFio6o7iad1ZQH3JVT"
+                },
+                "created": {
+                    "0": "msg_01MqWfiFio6o7iad1ZQH3JVT"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 47,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01EhbZwZCYxjuF8Yw2fNVANh"
+                },
+                "created": {
+                    "0": "msg_01EhbZwZCYxjuF8Yw2fNVANh"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -393,6 +903,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 31,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Xn6hu553RQHtPdSMcYJJWF"
+                },
+                "created": {
+                    "0": "msg_01Xn6hu553RQHtPdSMcYJJWF"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 31,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GsqiiPDprD2e59K5ThqP14"
+                },
+                "created": {
+                    "0": "msg_01GsqiiPDprD2e59K5ThqP14"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 31,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01L1gD5cJ6kZWmXg6JhJrLgi"
+                },
+                "created": {
+                    "0": "msg_01L1gD5cJ6kZWmXg6JhJrLgi"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "12": {
@@ -426,6 +987,57 @@
                 },
                 "created": {
                     "0": "msg_01TNXi2uFSPaEx1E2VbqYqwW"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1097,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01AWEnj2UudvKYT5dWAU7e1B"
+                },
+                "created": {
+                    "0": "msg_01AWEnj2UudvKYT5dWAU7e1B"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1097,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01XoC3WKjtRDzCc1cuTUCPvD"
+                },
+                "created": {
+                    "0": "msg_01XoC3WKjtRDzCc1cuTUCPvD"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1097,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01XAb2xFxRYRig2zBTd91Y2f"
+                },
+                "created": {
+                    "0": "msg_01XAb2xFxRYRig2zBTd91Y2f"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -465,6 +1077,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1180,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01XaSmvsg3jebBPgtKC3BWie"
+                },
+                "created": {
+                    "0": "msg_01XaSmvsg3jebBPgtKC3BWie"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1180,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0148MTsbx6VgcoxQiH5QHJdf"
+                },
+                "created": {
+                    "0": "msg_0148MTsbx6VgcoxQiH5QHJdf"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1180,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_015JjVYvCz3UJJQD5WpEGJCY"
+                },
+                "created": {
+                    "0": "msg_015JjVYvCz3UJJQD5WpEGJCY"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "75": {
@@ -498,6 +1161,57 @@
                 },
                 "created": {
                     "0": "msg_014aGJoffS1dwHHbRKuYxpMm"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 658,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0161MHv6v74iMswAmmiL2buG"
+                },
+                "created": {
+                    "0": "msg_0161MHv6v74iMswAmmiL2buG"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 658,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01KpuXo4oQRkqy982RUN8YAE"
+                },
+                "created": {
+                    "0": "msg_01KpuXo4oQRkqy982RUN8YAE"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 658,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01DoAAP8zqHnyheQv2rNJoTV"
+                },
+                "created": {
+                    "0": "msg_01DoAAP8zqHnyheQv2rNJoTV"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -537,6 +1251,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 82,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01XF9i2GjCV6FUvKaCAq5ueG"
+                },
+                "created": {
+                    "0": "msg_01XF9i2GjCV6FUvKaCAq5ueG"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 82,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01UfxWaEzqe7ixxNvCBLjL88"
+                },
+                "created": {
+                    "0": "msg_01UfxWaEzqe7ixxNvCBLjL88"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 82,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Ng6oPYWjAka7AcnVKSBBQc"
+                },
+                "created": {
+                    "0": "msg_01Ng6oPYWjAka7AcnVKSBBQc"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "89": {
@@ -570,6 +1335,57 @@
                 },
                 "created": {
                     "0": "msg_01PfQoY2AKvyJQxj3qLvotkm"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 52,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_012kPjGhEK66uyLR8hRyse5T"
+                },
+                "created": {
+                    "0": "msg_012kPjGhEK66uyLR8hRyse5T"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 52,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01MxJWEDb4VfZgjjQBp8UrF9"
+                },
+                "created": {
+                    "0": "msg_01MxJWEDb4VfZgjjQBp8UrF9"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 52,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01SdUNac9LTNpSrnPMFKq6Yx"
+                },
+                "created": {
+                    "0": "msg_01SdUNac9LTNpSrnPMFKq6Yx"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -609,6 +1425,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 898,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_017nBFF3bUbxg6MaGfjN8CKy"
+                },
+                "created": {
+                    "0": "msg_017nBFF3bUbxg6MaGfjN8CKy"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 898,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_018nYsuwwtFBK7x6i4ZLnv4v"
+                },
+                "created": {
+                    "0": "msg_018nYsuwwtFBK7x6i4ZLnv4v"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 898,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_017EHA9CdPCmqJNERHQ2BAr4"
+                },
+                "created": {
+                    "0": "msg_017EHA9CdPCmqJNERHQ2BAr4"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "103": {
@@ -642,6 +1509,57 @@
                 },
                 "created": {
                     "0": "msg_01Ks8TjKDD2EHUGYQPxUdGfK"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 109,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01EYHeDrRgBVYWHGgeCYHEdP"
+                },
+                "created": {
+                    "0": "msg_01EYHeDrRgBVYWHGgeCYHEdP"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 109,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01EwPejcPuyoXBfU9xBptPhp"
+                },
+                "created": {
+                    "0": "msg_01EwPejcPuyoXBfU9xBptPhp"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 109,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Dp4Rgu5yvS5DFQcdfdY6cC"
+                },
+                "created": {
+                    "0": "msg_01Dp4Rgu5yvS5DFQcdfdY6cC"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -681,6 +1599,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 648,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01PKkmMfZEbMx4KJ5iNvAZNg"
+                },
+                "created": {
+                    "0": "msg_01PKkmMfZEbMx4KJ5iNvAZNg"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 648,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01HoAGSDnBtm5s3GFGvGs5em"
+                },
+                "created": {
+                    "0": "msg_01HoAGSDnBtm5s3GFGvGs5em"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 648,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_015cHMecbZkQBH61UZnS19ef"
+                },
+                "created": {
+                    "0": "msg_015cHMecbZkQBH61UZnS19ef"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "99": {
@@ -714,6 +1683,57 @@
                 },
                 "created": {
                     "0": "msg_01Nb1gGhNCoY7XB2QGxBQGRn"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 73,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01CHUXXDT7kSyMaEAcBypYff"
+                },
+                "created": {
+                    "0": "msg_01CHUXXDT7kSyMaEAcBypYff"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 73,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GbdKWKnbBAc3voZZpjPc7v"
+                },
+                "created": {
+                    "0": "msg_01GbdKWKnbBAc3voZZpjPc7v"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 73,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01BeKq4fL6e8amqrMJA5E5Zv"
+                },
+                "created": {
+                    "0": "msg_01BeKq4fL6e8amqrMJA5E5Zv"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -753,6 +1773,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 89,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01FR6AArG7HLVcRBmcd8jnAm"
+                },
+                "created": {
+                    "0": "msg_01FR6AArG7HLVcRBmcd8jnAm"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 89,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_015o14yrSB7VgM5HCTCmSYzp"
+                },
+                "created": {
+                    "0": "msg_015o14yrSB7VgM5HCTCmSYzp"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 89,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_019atoN4sAa482qRWhiKB6Fh"
+                },
+                "created": {
+                    "0": "msg_019atoN4sAa482qRWhiKB6Fh"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "80": {
@@ -786,6 +1857,57 @@
                 },
                 "created": {
                     "0": "msg_0156TB1abxq58gyazHNz1TmU"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 644,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01KRFJf55xUcbnarmdNrwdM6"
+                },
+                "created": {
+                    "0": "msg_01KRFJf55xUcbnarmdNrwdM6"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 644,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01PyGaDigbRafAb3aQaDpRH2"
+                },
+                "created": {
+                    "0": "msg_01PyGaDigbRafAb3aQaDpRH2"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 644,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01VU3WiJFbf1xjVeHeiTFBXD"
+                },
+                "created": {
+                    "0": "msg_01VU3WiJFbf1xjVeHeiTFBXD"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -825,6 +1947,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 60,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01MR8M5uRungCX1XyQJbHSfo"
+                },
+                "created": {
+                    "0": "msg_01MR8M5uRungCX1XyQJbHSfo"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 60,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01B9LoPZ7Hzf8C53qRJ8gpdz"
+                },
+                "created": {
+                    "0": "msg_01B9LoPZ7Hzf8C53qRJ8gpdz"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 60,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01HDmtZN5JTrEJL9GQLT3yfS"
+                },
+                "created": {
+                    "0": "msg_01HDmtZN5JTrEJL9GQLT3yfS"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "63": {
@@ -858,6 +2031,57 @@
                 },
                 "created": {
                     "0": "msg_011dRtyguwj8K3XpPVMoPBiS"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 720,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Q7tVUryp4ihVc2NVnA2eqx"
+                },
+                "created": {
+                    "0": "msg_01Q7tVUryp4ihVc2NVnA2eqx"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 720,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01UaA1PxnDh192D6BGNdrwYa"
+                },
+                "created": {
+                    "0": "msg_01UaA1PxnDh192D6BGNdrwYa"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 720,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Koy4jSnuF6fUXMELSZsDes"
+                },
+                "created": {
+                    "0": "msg_01Koy4jSnuF6fUXMELSZsDes"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -897,6 +2121,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 58,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01CCmSiAaCwTQogdgYciCidP"
+                },
+                "created": {
+                    "0": "msg_01CCmSiAaCwTQogdgYciCidP"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 58,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01PKJmt7UbfJZcm1GttArA2b"
+                },
+                "created": {
+                    "0": "msg_01PKJmt7UbfJZcm1GttArA2b"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 58,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Mg3HfwChjoFKist4LWSVvH"
+                },
+                "created": {
+                    "0": "msg_01Mg3HfwChjoFKist4LWSVvH"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "92": {
@@ -930,6 +2205,57 @@
                 },
                 "created": {
                     "0": "msg_01A6KTKt96hAHoeLwvsQKvPx"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 83,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01FvD6vf8pvAYK3RkUjjqYyf"
+                },
+                "created": {
+                    "0": "msg_01FvD6vf8pvAYK3RkUjjqYyf"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 83,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_015UemgxQYo9B68E6FWyYnti"
+                },
+                "created": {
+                    "0": "msg_015UemgxQYo9B68E6FWyYnti"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 83,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01MKinG39KZwN9W8PeGZHS2n"
+                },
+                "created": {
+                    "0": "msg_01MKinG39KZwN9W8PeGZHS2n"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -969,6 +2295,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 73,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01CDHR5cTsmhftVupsBna8Mb"
+                },
+                "created": {
+                    "0": "msg_01CDHR5cTsmhftVupsBna8Mb"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 73,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01NxnUSM7CqktUb4FBmJrpiP"
+                },
+                "created": {
+                    "0": "msg_01NxnUSM7CqktUb4FBmJrpiP"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 73,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_016eSu26qnp9CjCZRwNzn8bG"
+                },
+                "created": {
+                    "0": "msg_016eSu26qnp9CjCZRwNzn8bG"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "81": {
@@ -1002,6 +2379,57 @@
                 },
                 "created": {
                     "0": "msg_01DeCY1wX5RYZ2Lsoe4CcfCg"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 629,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_015C2r1bwzvaNh9KCm9HFpr2"
+                },
+                "created": {
+                    "0": "msg_015C2r1bwzvaNh9KCm9HFpr2"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 629,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LzXpY6Nas8rTAmZZB5Vjtx"
+                },
+                "created": {
+                    "0": "msg_01LzXpY6Nas8rTAmZZB5Vjtx"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 629,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01KpTs83PSyUxAx2R9TwHn4o"
+                },
+                "created": {
+                    "0": "msg_01KpTs83PSyUxAx2R9TwHn4o"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1041,6 +2469,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 83,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01CzqWEd5PTqGUWPzuJKWZUR"
+                },
+                "created": {
+                    "0": "msg_01CzqWEd5PTqGUWPzuJKWZUR"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 83,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01TgLHnzBrjoPRyKwTfPp84W"
+                },
+                "created": {
+                    "0": "msg_01TgLHnzBrjoPRyKwTfPp84W"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 83,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_013ysG4e3i6TZm3Du8UTXJNS"
+                },
+                "created": {
+                    "0": "msg_013ysG4e3i6TZm3Du8UTXJNS"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "61": {
@@ -1074,6 +2553,57 @@
                 },
                 "created": {
                     "0": "msg_01CsPRwrYrnSeJi39ncgP3rz"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 60,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_018pSnDTg7AKASxsUDmVbXx5"
+                },
+                "created": {
+                    "0": "msg_018pSnDTg7AKASxsUDmVbXx5"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 60,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01SjFgiiC3oEMdW3yfeqpSZ9"
+                },
+                "created": {
+                    "0": "msg_01SjFgiiC3oEMdW3yfeqpSZ9"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 60,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01XEjZBUpkXmn7z42QuWSRiU"
+                },
+                "created": {
+                    "0": "msg_01XEjZBUpkXmn7z42QuWSRiU"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1113,6 +2643,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 115,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01SJS8GqRHYdwk7sH1jZrDvj"
+                },
+                "created": {
+                    "0": "msg_01SJS8GqRHYdwk7sH1jZrDvj"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 115,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01VxsQN87ZuwSfGa7jjKztgr"
+                },
+                "created": {
+                    "0": "msg_01VxsQN87ZuwSfGa7jjKztgr"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 115,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Bzax9MJ2uyh1T5outJgKW5"
+                },
+                "created": {
+                    "0": "msg_01Bzax9MJ2uyh1T5outJgKW5"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "71": {
@@ -1146,6 +2727,57 @@
                 },
                 "created": {
                     "0": "msg_01HNebPLxdioF7tVZrYHZNaf"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 961,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01VkXEyhPH97quJssHzihUkM"
+                },
+                "created": {
+                    "0": "msg_01VkXEyhPH97quJssHzihUkM"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 961,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LYWLhwQx4LPSoPKPfiiEqo"
+                },
+                "created": {
+                    "0": "msg_01LYWLhwQx4LPSoPKPfiiEqo"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 961,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01FtHJKYvu1idzuqvoX4h1Qo"
+                },
+                "created": {
+                    "0": "msg_01FtHJKYvu1idzuqvoX4h1Qo"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1185,6 +2817,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 94,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01P8tBLoqmrBTt916NoitMFa"
+                },
+                "created": {
+                    "0": "msg_01P8tBLoqmrBTt916NoitMFa"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 94,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GZNXkX1PUarMVRFzM9vz9G"
+                },
+                "created": {
+                    "0": "msg_01GZNXkX1PUarMVRFzM9vz9G"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 94,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01455JZkPcW7dqE6ShAeDErq"
+                },
+                "created": {
+                    "0": "msg_01455JZkPcW7dqE6ShAeDErq"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "107": {
@@ -1218,6 +2901,57 @@
                 },
                 "created": {
                     "0": "msg_01EEkKk9WA4DuYn1ZVFyhg8d"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 134,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01L5ZJr9tHcYcNTSJVMEL4sr"
+                },
+                "created": {
+                    "0": "msg_01L5ZJr9tHcYcNTSJVMEL4sr"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 134,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GMXhv2XYvaD3LgD2WPMAuA"
+                },
+                "created": {
+                    "0": "msg_01GMXhv2XYvaD3LgD2WPMAuA"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 134,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_014hGufSZF5S5GxQeqxmM3f1"
+                },
+                "created": {
+                    "0": "msg_014hGufSZF5S5GxQeqxmM3f1"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1257,6 +2991,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 36,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Eg1mDhQxPWzZa8Ypy438rL"
+                },
+                "created": {
+                    "0": "msg_01Eg1mDhQxPWzZa8Ypy438rL"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 36,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01NUTibA7NvdrhrYpzfc3qxs"
+                },
+                "created": {
+                    "0": "msg_01NUTibA7NvdrhrYpzfc3qxs"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 36,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_017mU7JqQhuMdpQfUBCga7ix"
+                },
+                "created": {
+                    "0": "msg_017mU7JqQhuMdpQfUBCga7ix"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "84": {
@@ -1290,6 +3075,57 @@
                 },
                 "created": {
                     "0": "msg_01Dhynb1iVfA483pj8QjPN6F"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 64,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01QNikUWg71oP2T69GYP2fPY"
+                },
+                "created": {
+                    "0": "msg_01QNikUWg71oP2T69GYP2fPY"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 64,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Ho2XcqnG89fXMW17PmwGPS"
+                },
+                "created": {
+                    "0": "msg_01Ho2XcqnG89fXMW17PmwGPS"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 64,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_014m8tfkgAypipM7Xm6jNvPZ"
+                },
+                "created": {
+                    "0": "msg_014m8tfkgAypipM7Xm6jNvPZ"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1329,6 +3165,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 103,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01NuEBkHHNehmpLJMKwvGtvJ"
+                },
+                "created": {
+                    "0": "msg_01NuEBkHHNehmpLJMKwvGtvJ"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 103,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_018EN49kE2vDeNqunCFfKr9y"
+                },
+                "created": {
+                    "0": "msg_018EN49kE2vDeNqunCFfKr9y"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 103,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01YLAgxochs4GCYwVRqnqAky"
+                },
+                "created": {
+                    "0": "msg_01YLAgxochs4GCYwVRqnqAky"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "67": {
@@ -1362,6 +3249,57 @@
                 },
                 "created": {
                     "0": "msg_01Q9Tv2gdwhveypAgKw7SZFg"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GdqhBZBZJqNUk978PXQA9S"
+                },
+                "created": {
+                    "0": "msg_01GdqhBZBZJqNUk978PXQA9S"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Cm5op6YHoTCbxxXoAFiFN9"
+                },
+                "created": {
+                    "0": "msg_01Cm5op6YHoTCbxxXoAFiFN9"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 791,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_018HDj8Wxrjitktg6JcZ9Awv"
+                },
+                "created": {
+                    "0": "msg_018HDj8Wxrjitktg6JcZ9Awv"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1401,6 +3339,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1055,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01AJ3rKPVwHyF9oMPHMitKdJ"
+                },
+                "created": {
+                    "0": "msg_01AJ3rKPVwHyF9oMPHMitKdJ"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1055,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01352aeVXoKxXESJoGVsguyX"
+                },
+                "created": {
+                    "0": "msg_01352aeVXoKxXESJoGVsguyX"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 1055,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01T6o6ChRi2jovaJ2u9wtH3w"
+                },
+                "created": {
+                    "0": "msg_01T6o6ChRi2jovaJ2u9wtH3w"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "47": {
@@ -1434,6 +3423,57 @@
                 },
                 "created": {
                     "0": "msg_0158tDd9pSVy6q4upLNoXbeh"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 110,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01A6STDyhpK2RHXL6U5AJbC6"
+                },
+                "created": {
+                    "0": "msg_01A6STDyhpK2RHXL6U5AJbC6"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 110,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0181UVKHbUYTMhhwaePoyoNc"
+                },
+                "created": {
+                    "0": "msg_0181UVKHbUYTMhhwaePoyoNc"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 110,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_015wp92MNzpUpRaDREvjAcvU"
+                },
+                "created": {
+                    "0": "msg_015wp92MNzpUpRaDREvjAcvU"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1473,6 +3513,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 617,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_019FxdosJCFQGrMh4J8JNtDa"
+                },
+                "created": {
+                    "0": "msg_019FxdosJCFQGrMh4J8JNtDa"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 617,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GZ2kosmksgmewPJJLxjX6N"
+                },
+                "created": {
+                    "0": "msg_01GZ2kosmksgmewPJJLxjX6N"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 617,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LzRRyphFhXZV4Z5DknH7vf"
+                },
+                "created": {
+                    "0": "msg_01LzRRyphFhXZV4Z5DknH7vf"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "94": {
@@ -1506,6 +3597,57 @@
                 },
                 "created": {
                     "0": "msg_01DNZDz2nab3Ss3X7Jcn5WP8"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 45,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Qunpr5rgVdh1arL5jtPjAY"
+                },
+                "created": {
+                    "0": "msg_01Qunpr5rgVdh1arL5jtPjAY"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 45,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01P6ujSBNHUgyamrfoeV7u2F"
+                },
+                "created": {
+                    "0": "msg_01P6ujSBNHUgyamrfoeV7u2F"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 45,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01Ssyy28jd1PtpmpV5EADXjb"
+                },
+                "created": {
+                    "0": "msg_01Ssyy28jd1PtpmpV5EADXjb"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1545,6 +3687,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 80,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_012TeSBgSAyG12KZpKR63g9p"
+                },
+                "created": {
+                    "0": "msg_012TeSBgSAyG12KZpKR63g9p"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 80,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01U4hTkNbRCfVypeVJi46yoR"
+                },
+                "created": {
+                    "0": "msg_01U4hTkNbRCfVypeVJi46yoR"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 80,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01JW97643VXZcn381N95dvhp"
+                },
+                "created": {
+                    "0": "msg_01JW97643VXZcn381N95dvhp"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "51": {
@@ -1578,6 +3771,57 @@
                 },
                 "created": {
                     "0": "msg_01QS5pNMKQQLF2y4gRMyiy3e"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 72,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01NxyWFAM2kT5TTawZr9wixP"
+                },
+                "created": {
+                    "0": "msg_01NxyWFAM2kT5TTawZr9wixP"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 72,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_018zDy8fxtdeQyP4fj2nad7h"
+                },
+                "created": {
+                    "0": "msg_018zDy8fxtdeQyP4fj2nad7h"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 72,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01M1SscVfMRNkJX6ctriWkkU"
+                },
+                "created": {
+                    "0": "msg_01M1SscVfMRNkJX6ctriWkkU"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1617,6 +3861,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 53,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_012Q15H6LMSpeEiiUgMFPtHL"
+                },
+                "created": {
+                    "0": "msg_012Q15H6LMSpeEiiUgMFPtHL"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 53,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01RFvZCBi1QDAzRuA6TudJ11"
+                },
+                "created": {
+                    "0": "msg_01RFvZCBi1QDAzRuA6TudJ11"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 53,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01NLp69bUHB3qmsBDRU4suwx"
+                },
+                "created": {
+                    "0": "msg_01NLp69bUHB3qmsBDRU4suwx"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "100": {
@@ -1650,6 +3945,57 @@
                 },
                 "created": {
                     "0": "msg_01MDuxhjCxMF6KATPBdiX3Jz"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 112,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01SercBucutZHaBRZ3DbXnje"
+                },
+                "created": {
+                    "0": "msg_01SercBucutZHaBRZ3DbXnje"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 112,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01ThQgCWLUVa4t3YHBRXdbLx"
+                },
+                "created": {
+                    "0": "msg_01ThQgCWLUVa4t3YHBRXdbLx"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 112,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0168Qi2dacvCxruxa5XUs8Di"
+                },
+                "created": {
+                    "0": "msg_0168Qi2dacvCxruxa5XUs8Di"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1689,6 +4035,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 168,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01JBSF4FvVnufjEpddi1Fb23"
+                },
+                "created": {
+                    "0": "msg_01JBSF4FvVnufjEpddi1Fb23"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 168,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LvYRKhBk1hVm79Xf2hwNbK"
+                },
+                "created": {
+                    "0": "msg_01LvYRKhBk1hVm79Xf2hwNbK"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "medium",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'medium'}"
+                },
+                "in_toks": 168,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LNNMHwh2QyoGZcoPeYyubG"
+                },
+                "created": {
+                    "0": "msg_01LNNMHwh2QyoGZcoPeYyubG"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "56": {
@@ -1722,6 +4119,57 @@
                 },
                 "created": {
                     "0": "msg_01F8Z6Ho3wozhPnkRdmkMPpm"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 134,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01QAXndSdxvmBv7oY35gFtX3"
+                },
+                "created": {
+                    "0": "msg_01QAXndSdxvmBv7oY35gFtX3"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 134,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01MgzjrUFnt8nn6UfsZaWoiq"
+                },
+                "created": {
+                    "0": "msg_01MgzjrUFnt8nn6UfsZaWoiq"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 134,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01DHT28NheLySJ9n2tfvRuqt"
+                },
+                "created": {
+                    "0": "msg_01DHT28NheLySJ9n2tfvRuqt"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1761,6 +4209,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 61,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01BRpHWTBt7SnmMVaKm9y1TT"
+                },
+                "created": {
+                    "0": "msg_01BRpHWTBt7SnmMVaKm9y1TT"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 61,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01GyDQRdgteGNYsABrWmGoxi"
+                },
+                "created": {
+                    "0": "msg_01GyDQRdgteGNYsABrWmGoxi"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 61,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01WsqgAa8t34rdmdB7qp84M9"
+                },
+                "created": {
+                    "0": "msg_01WsqgAa8t34rdmdB7qp84M9"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "58": {
@@ -1794,6 +4293,57 @@
                 },
                 "created": {
                     "0": "msg_01AMZC8CH4hbcpVCHN4Cgzrm"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 78,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01AXTH6ZFu4F2tn854eufikL"
+                },
+                "created": {
+                    "0": "msg_01AXTH6ZFu4F2tn854eufikL"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 78,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_017y8oeMDu3Z4bh6DpNCmcGV"
+                },
+                "created": {
+                    "0": "msg_017y8oeMDu3Z4bh6DpNCmcGV"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 78,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01BsJB5Xr3BeZ1Yf9kzJDNfa"
+                },
+                "created": {
+                    "0": "msg_01BsJB5Xr3BeZ1Yf9kzJDNfa"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
@@ -1833,6 +4383,57 @@
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
+        },
+        "2": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 516,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0111CBUvh3y9zuX1vFNnwXzz"
+                },
+                "created": {
+                    "0": "msg_0111CBUvh3y9zuX1vFNnwXzz"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 516,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_0169B6Wp9w3cVyGkG9VGuLHw"
+                },
+                "created": {
+                    "0": "msg_0169B6Wp9w3cVyGkG9VGuLHw"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "simple",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'simple'}"
+                },
+                "in_toks": 516,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01LGd5S4Sv4Qek7knbvpybkS"
+                },
+                "created": {
+                    "0": "msg_01LGd5S4Sv4Qek7knbvpybkS"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
         }
     },
     "39": {
@@ -1866,6 +4467,57 @@
                 },
                 "created": {
                     "0": "msg_01SoDcrGyu3bbAMcbZTgt6cH"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "2": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 139,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01UhbYgEUYWodQpCwidL8kdj"
+                },
+                "created": {
+                    "0": "msg_01UhbYgEUYWodQpCwidL8kdj"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "3": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 139,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_013ac4fQ1Zskzz9rJNzZcLHQ"
+                },
+                "created": {
+                    "0": "msg_013ac4fQ1Zskzz9rJNzZcLHQ"
+                },
+                "model": "claude-3-5-sonnet-20241022"
+            }
+        },
+        "4": {
+            "pred_diff": "advanced",
+            "diff_response": {
+                "responses": {
+                    "0": "{'class': 'advanced'}"
+                },
+                "in_toks": 139,
+                "out_toks": 10,
+                "id": {
+                    "0": "msg_01T7zNukL8drhGr9zP9Yb16F"
+                },
+                "created": {
+                    "0": "msg_01T7zNukL8drhGr9zP9Yb16F"
                 },
                 "model": "claude-3-5-sonnet-20241022"
             }
