@@ -56,13 +56,20 @@ class GPTModel(LLMModel):
                     "model": model_name,
                     "messages": messages,
                     "temperature": t,
-                    "max_tokens": max_tokens,
+                    # "max_tokens": max_tokens,
+                    "max_completion_tokens": max_tokens,
                     "n": n,
                 }
                 
                 # Add top_p if it's set
                 if top_p is not None:
                     params["top_p"] = top_p
+
+                # add parameter
+                if model_name.startswith("gpt-5"):
+                    params["verbosity"] = "low"
+                    
+
                     
                 # Call OpenAI API to generate text completion
                 model_response = openai.chat.completions.create(**params)
@@ -248,7 +255,8 @@ class GPTModel(LLMModel):
             body = {
                 "model": self.model_name,
                 "messages": batch["messages"], # list of messages in the Openai api format
-                "max_tokens": self.max_tokens,
+                # "max_tokens": self.max_tokens,
+                "max_completion_tokens": self.max_tokens,
                 "temperature": self.temperature,
                 "top_p": self.top_p,
                 "n": batch['n'], # number of completions to generate
