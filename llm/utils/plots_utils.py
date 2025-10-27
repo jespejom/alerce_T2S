@@ -514,6 +514,7 @@ def plot_perfect_match_by_difficulty_interactive(
         evaluation_results_: Dict[str, Dict[str, Any]],
         std_dev: Union[str, None] = None,
         formatted_columns: bool = True,
+        take_error_gold: bool = False,
 ) -> None:
     """
     Interactive plot of perfect match rates for OID and column matches by difficulty from evaluation results.
@@ -591,10 +592,12 @@ def plot_perfect_match_by_difficulty_interactive(
                         for res_i in results:
                             if res_i['difficulty'] == 'medium' or res_i['difficulty'] == 'advanced': res_i['difficulty'] = 'medium-hard'
                 
-                    aggregate_metrics = metrics_aggregation(results=results)
+                    aggregate_metrics = metrics_aggregation(results=results, take_error_gold=take_error_gold)
                     
+                    print("=========================================")
                     print(f"Number of gold queries with errors for experiment {exp_label}: {aggregate_metrics['errors']['gold_errors']}")
-                    
+                    print(f"Gold queries with errors (IDs): {np.unique(aggregate_metrics['errors']['gold_list'])}")
+
                     # Use the aggregate metrics based on std_dev setting
                     if std_dev == 'all' or std_dev is None:
                         results = aggregate_metrics['by_difficulty']
@@ -655,11 +658,17 @@ def plot_perfect_match_by_difficulty_interactive(
                 oid_rates = [data['oid'][d] for d in difficulties]
                 column_rates = [data['column'][d] for d in difficulties]
                 
+                if "direct" in exp_label:
+                    method_label = "Direct"
+                elif "sbs" in exp_label or "step-by-step" in exp_label:
+                    method_label = "Step-by-Step"
+                else:
+                    method_label = exp_label
                 # Plot OID matches
-                bars1 = axs[0].bar(x + offset, oid_rates, width, label=exp_label)
-                
+                bars1 = axs[0].bar(x + offset, oid_rates, width, label=method_label)
+
                 # Plot Column matches
-                bars2 = axs[1].bar(x + offset, column_rates, width, label=exp_label)
+                bars2 = axs[1].bar(x + offset, column_rates, width, label=method_label)
                 
                 # Add error bars if std_dev is provided
                 if std_dev:
@@ -690,7 +699,7 @@ def plot_perfect_match_by_difficulty_interactive(
             axs[1].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
             
             # Set title and labels
-            plt.suptitle(f'Perfect Match Rates by Difficulty for {model}', fontsize=24)
+            plt.suptitle(f'Query Generation Strategies for {model}', fontsize=24)
             fig.supylabel('% Perfect Matching Queries', fontsize=24, x=0.02)
             
             # Add legend
@@ -1247,7 +1256,9 @@ def plot_perfect_match_by_difficulty_model(
                 
             aggregate_metrics = metrics_aggregation(results=results)
             # ['errors']['gold_errors']
+            print("================================")
             print(f"Number of gold queries with errors for experiment {exp_label}: {aggregate_metrics['errors']['gold_errors']}")
+            print(f"Gold queries with errors (IDs): {np.unique(aggregate_metrics['errors']['gold_list'])}")
             # Use the aggregate metrics directly
             if std_dev == 'all' or std_dev is None:
                 # results = evaluation_results[model][experiment][self_corr_key]['aggregate_metrics']['by_difficulty']
@@ -1354,7 +1365,8 @@ def plot_perfect_match_by_difficulty_models(
         exp_names: List[str],
         std_dev: Union[str, None] = None,
         self_corr: bool = True,
-        formatted_columns: bool = True
+        formatted_columns: bool = True,
+        take_error_golds: bool = False,
 ) -> None:
     """
     Plots the perfect match rates for OID and column matches by difficulty from evaluation results for a specific model and experiments.
@@ -1415,9 +1427,11 @@ def plot_perfect_match_by_difficulty_models(
                     column_match_rates_std = {}
 
                 results = evaluation_results[model][experiment][self_corr_key]['detailed_results']
-                aggregate_metrics = metrics_aggregation(results=results)
-                # ['errors']['gold_errors']
+                aggregate_metrics = metrics_aggregation(results=results, take_error_gold=take_error_golds)
+                
+                print(f"================================ {model} - {experiment} ================================")
                 print(f"Number of gold queries with errors for experiment {exp_label}: {aggregate_metrics['errors']['gold_errors']}")
+                print(f"Gold queries with errors (IDs): {np.unique(aggregate_metrics['errors']['gold_list'])}")
                 # Use the aggregate metrics directly
                 if std_dev == 'all' or std_dev is None:
                     # results = evaluation_results[model][experiment][self_corr_key]['aggregate_metrics']['by_difficulty']
@@ -1463,7 +1477,7 @@ def plot_perfect_match_by_difficulty_models(
     # order difficulties: simple, medium, advanced
     difficulties = sorted(difficulties, key=lambda x: ['simple', 'medium', 'advanced'].index(x) if x in ['simple', 'medium', 'advanced'] else 3)
     x = np.arange(len(difficulties))  # the label locations
-    width = 0.2  # the width of the bars
+    width = 0.1  # the width of the bars
     std = []
     std_ = []
     std__ = []
@@ -1504,7 +1518,6 @@ def plot_perfect_match_by_difficulty_models(
     for j, ax in enumerate(axs):
         for i, bar in enumerate(ax.patches):
             height = bar.get_height()
-            print(height)
             # Add the value on top of the bar, just above the standard bar height
             ax.text(bar.get_x() + bar.get_width()/2, height + 0.01 + std[j][i], f"{height:.2f}", ha='center', va='bottom')            
     # add general y label
@@ -1516,6 +1529,653 @@ def plot_perfect_match_by_difficulty_models(
     # plt.xlabel('Difficulties')
     # plt.legend( bbox_to_anchor=(1.02, 1.0),)
     plt.show()
+
+
+
+def table_perfect_match_by_difficulty_models(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    std_dev: Union[str, None] = None,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = False,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Creates separate tables showing perfect match rates for OID and column matches by difficulty and self-correction status.
+    
+    Args:
+        evaluation_results (Dict[str, Dict[str, Any]]): A dictionary containing evaluation results with keys
+                            for models and experiments, and values containing metrics.
+        model_names (List[str]): List of model names to include in the table.
+        exp_names (List[str]): A list of experiment names to include in the table.
+        std_dev (str): The standard deviation type to use for the table. Options are 'run', 'req_id', or 'all'.
+        formatted_columns (bool): If True, uses formatted column results; otherwise uses regular column results.
+        take_error_golds (bool): Whether to include gold queries with errors.
+        table_size (str): Size of the table. Options: 'tiny', 'scriptsize', 'footnotesize', 'small', 'normalsize', 'large'.
+        adjust_margins (bool): If True, adds margin adjustment commands to fit table in page.
+
+    Returns:
+        Tuple[pd.DataFrame, pd.DataFrame]: Two tables - one for rows and one for columns.
+    """
+    
+    from llm.utils.eval_utils import metrics_aggregation
+    
+    # Initialize data collection
+    rows_data = {}
+    columns_data = {}
+    difficulties = set()
+    
+    # Collect data for both corrected and self_corrected
+    for self_corr in [False, True]:
+        self_corr_key = 'self_corrected' if self_corr else 'corrected'
+        self_corr_label = 'W/o Self-Correction' if not self_corr else 'W/ Self-Correction'
+        
+        for model in sorted(model_names):
+            if model not in rows_data:
+                rows_data[model] = {}
+                columns_data[model] = {}
+            
+            experiments = sorted([exp for exp in evaluation_results[model].keys() if exp in exp_names])
+            
+            # Aggregate metrics across all experiments for this model
+            all_results = []
+            for experiment in experiments:
+                try:
+                    results = evaluation_results[model][experiment][self_corr_key]['detailed_results']
+                    all_results.extend(results)
+                except KeyError as e:
+                    print(f"Warning: Missing data for {model} - {experiment} - {self_corr_key}: {e}")
+                    continue
+            
+            if not all_results:
+                continue
+            
+            # Aggregate metrics across all experiments
+            aggregate_metrics = metrics_aggregation(results=all_results, take_error_gold=take_error_golds)
+            
+            print(f"================================ {model} - {self_corr_label} ================================")
+            print(f"Number of gold queries with errors: {aggregate_metrics['errors']['gold_errors']}")
+            
+            # Use the appropriate metrics based on std_dev setting
+            if std_dev == 'all' or std_dev is None:
+                results_by_diff = aggregate_metrics['by_difficulty']
+            elif std_dev == 'run':
+                results_by_diff = aggregate_metrics['by_difficulty_runs']
+            elif std_dev == 'req_id':
+                results_by_diff = aggregate_metrics['by_difficulty_req_id']
+            else:
+                raise ValueError(f"Unknown standard deviation type: {std_dev}")
+            
+            # Extract metrics for each difficulty
+            for difficulty, metrics in results_by_diff.items():
+                difficulties.add(difficulty)
+                
+                # OID metrics
+                oid_mean = metrics['oids']['perfect_match_rate']
+                oid_std = metrics['oids'].get('perfect_match_rate_std', 0) if std_dev else 0
+                
+                # Column metrics
+                if formatted_columns and 'columns_formatted' in metrics:
+                    col_mean = metrics['columns_formatted']['perfect_match_rate']
+                    col_std = metrics['columns_formatted'].get('perfect_match_rate_std', 0) if std_dev else 0
+                else:
+                    col_mean = metrics['columns']['perfect_match_rate']
+                    col_std = metrics['columns'].get('perfect_match_rate_std', 0) if std_dev else 0
+                
+                # Store in separate table data
+                difficulty_clean = difficulty.replace('advanced', 'hard')
+                col_key = (self_corr_label, difficulty_clean.capitalize())
+                
+                if std_dev:
+                    rows_data[model][col_key] = f"{oid_mean:.3f} ± {oid_std:.3f}"
+                    columns_data[model][col_key] = f"{col_mean:.3f} ± {col_std:.3f}"
+                else:
+                    rows_data[model][col_key] = f"{oid_mean:.3f}"
+                    columns_data[model][col_key] = f"{col_mean:.3f}"
+    
+    # Sort difficulties
+    difficulties = sorted(list(difficulties), key=lambda x: ['simple', 'medium', 'advanced'].index(x) if x in ['simple', 'medium', 'advanced'] else 3)
+    
+    # Create MultiIndex columns
+    columns_index = []
+    for self_corr_label in ['W/o Self-Correction', 'W/ Self-Correction']:
+        for difficulty in difficulties:
+            difficulty_clean = difficulty.replace('advanced', 'hard')
+            columns_index.append((self_corr_label, difficulty_clean.capitalize()))
+    
+    # Create DataFrames with MultiIndex columns
+    rows_df = pd.DataFrame.from_dict(rows_data, orient='index')
+    columns_df = pd.DataFrame.from_dict(columns_data, orient='index')
+    
+    # Reorder columns to match the desired structure
+    rows_df = rows_df.reindex(columns=columns_index)
+    columns_df = columns_df.reindex(columns=columns_index)
+    
+    # Create MultiIndex for columns
+    multi_columns = pd.MultiIndex.from_tuples(columns_index, names=['Self-Correction', 'Difficulty'])
+    rows_df.columns = multi_columns
+    columns_df.columns = multi_columns
+    
+    # Fill NaN values with empty string
+    rows_df = rows_df.fillna('')
+    columns_df = columns_df.fillna('')
+    
+    # Find best results per column for bold formatting
+    def format_best_values(df):
+        """Add bold formatting to the best (highest) values in each column"""
+        df_formatted = df.copy()
+        
+        for col in df.columns:
+            # Extract numeric values from strings like "0.123 ± 0.045" or "0.123"
+            numeric_values = []
+            for val in df[col]:
+                if val == '':
+                    numeric_values.append(-1)  # Use -1 for empty values
+                else:
+                    # Extract the first number (before ±)
+                    try:
+                        num = float(val.split(' ±')[0]) if ' ±' in val else float(val)
+                        numeric_values.append(num)
+                    except ValueError:
+                        numeric_values.append(-1)
+            
+            # Find the maximum value and its indices
+            max_val = max(numeric_values)
+            if max_val > 0:  # Only format if there are valid values
+                max_indices = [i for i, val in enumerate(numeric_values) if val == max_val]
+                
+                # Add bold formatting to the best values
+                for idx in max_indices:
+                    original_val = df_formatted.iloc[idx, df_formatted.columns.get_loc(col)]
+                    if original_val != '':
+                        df_formatted.iloc[idx, df_formatted.columns.get_loc(col)] = f"\\textbf{{{original_val}}}"
+        
+        return df_formatted
+    
+    def create_enhanced_latex_table(df_formatted, caption, label, table_size='small', adjust_margins=False):
+        """Create enhanced LaTeX table with proper formatting and optional margin adjustment"""
+        # Determine number of difficulties (assumes equal columns for each self-correction method)
+        n_difficulties = len(df_formatted.columns) // 2
+        
+        # Create column format with vertical line between W/o and W/ self-correction (no line at the end)
+        col_format = '|c|' + 'c' * n_difficulties + '|' + 'c' * n_difficulties + '|'
+        
+        # Generate LaTeX table
+        latex_str = df_formatted.to_latex(
+            escape=False, 
+            multicolumn_format='c',
+            column_format=col_format,
+            caption=caption,
+            label=label,
+            position='htbp'
+        )
+        
+        # Add table size and centering
+        size_commands = {
+            'tiny': '\\tiny',
+            'scriptsize': '\\scriptsize', 
+            'footnotesize': '\\footnotesize',
+            'small': '\\small',
+            'normalsize': '\\normalsize',
+            'large': '\\large'
+        }
+        
+        size_cmd = size_commands.get(table_size, '\\small')
+        
+        # Prepare margin adjustment commands
+        margin_start = ""
+        margin_end = ""
+        if adjust_margins:
+            margin_start = """\\adjustbox{width=\\textwidth,center}{
+"""
+            margin_end = """
+}"""
+        
+        # Replace formatting
+        latex_str = latex_str.replace('\\begin{tabular}', f'{size_cmd}\n\\centering\n{margin_start}\\begin{{tabular}}')
+        latex_str = latex_str.replace('\\end{tabular}', f'\\end{{tabular}}{margin_end}')
+        latex_str = latex_str.replace('\\toprule', '\\hline')
+        latex_str = latex_str.replace('\\bottomrule', '\\hline')
+        
+        # Process lines to add hline between self-correction and difficulty rows
+        lines = latex_str.split('\n')
+        new_lines = []
+        header_count = 0
+        
+        for i, line in enumerate(lines):
+            new_lines.append(line)
+            # Count header rows and add hline between first and second header row
+            if ('W/o Self-Correction' in line and 'W/ Self-Correction' in line) or \
+               any(difficulty in line for difficulty in ['Simple', 'Medium', 'Hard']):
+                header_count += 1
+                # Add hline after first header row (self-correction row)
+                if header_count == 1:
+                    new_lines.append('\\hline')
+        
+        # Remove midrule replacements
+        latex_str_modified = '\n'.join(new_lines)
+        latex_str_modified = latex_str_modified.replace('\\midrule', '')
+        
+        # Add adjustbox package note if margins are adjusted
+        if adjust_margins:
+            package_note = "% Note: Add \\usepackage{adjustbox} to your LaTeX preamble for margin adjustment\n"
+            latex_str_modified = package_note + latex_str_modified
+        
+        return latex_str_modified
+    
+    # Format best values with bold
+    rows_df_formatted = format_best_values(rows_df)
+    columns_df_formatted = format_best_values(columns_df)
+    
+    # Print tables in LaTeX format with enhanced formatting
+    print("\n" + "="*80)
+    print("ROWS (Perfect Match Rates) - LaTeX Format")
+    print("="*80)
+
+    latex_str_rows = create_enhanced_latex_table(
+        rows_df_formatted, 
+        'Perfect Match Rates for Rows',
+        'tab:rows_perfect_match',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_rows)
+
+    print("\n" + "="*80)
+    print("COLUMNS (Perfect Match Rates) - LaTeX Format") 
+    print("="*80)
+
+    latex_str_columns = create_enhanced_latex_table(
+        columns_df_formatted,
+        'Perfect Match Rates for Columns', 
+        'tab:columns_perfect_match',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_columns)
+
+    print("\n" + "="*80)
+    print("Available table sizes: tiny, scriptsize, footnotesize, small, normalsize, large")
+    print("Current table size:", table_size)
+    print("Margin adjustment:", "enabled" if adjust_margins else "disabled")
+    print("="*80)
+    
+    return rows_df_formatted, columns_df_formatted
+
+
+
+
+def table_metrics_by_difficulty_models(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    std_dev: Union[str, None] = None,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = False,
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """
+    Creates separate tables showing precision, recall, and F1-score metrics for rows and columns by difficulty and self-correction status.
+    
+    Args:
+        evaluation_results (Dict[str, Dict[str, Any]]): A dictionary containing evaluation results with keys
+                            for models and experiments, and values containing metrics.
+        model_names (List[str]): List of model names to include in the table.
+        exp_names (List[str]): A list of experiment names to include in the table.
+        std_dev (str): The standard deviation type to use for the table. Options are 'run', 'req_id', or 'all'.
+        formatted_columns (bool): If True, uses formatted column results; otherwise uses regular column results.
+        take_error_golds (bool): Whether to include gold queries with errors.
+        table_size (str): Size of the table. Options: 'tiny', 'scriptsize', 'footnotesize', 'small', 'normalsize', 'large'.
+        adjust_margins (bool): If True, adds margin adjustment commands to fit table in page.
+
+    Returns:
+        Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]: 
+        Six tables - precision (rows, columns), recall (rows, columns), F1-score (rows, columns).
+    """
+    
+    from llm.utils.eval_utils import metrics_aggregation
+    
+    # Initialize data collection for each metric
+    precision_rows_data = {}
+    precision_columns_data = {}
+    recall_rows_data = {}
+    recall_columns_data = {}
+    f1_rows_data = {}
+    f1_columns_data = {}
+    difficulties = set()
+    
+    # Collect data for both corrected and self_corrected
+    for self_corr in [False, True]:
+        self_corr_key = 'self_corrected' if self_corr else 'corrected'
+        self_corr_label = 'W/o Self-Correction' if not self_corr else 'W/ Self-Correction'
+        
+        for model in sorted(model_names):
+            if model not in precision_rows_data:
+                precision_rows_data[model] = {}
+                precision_columns_data[model] = {}
+                recall_rows_data[model] = {}
+                recall_columns_data[model] = {}
+                f1_rows_data[model] = {}
+                f1_columns_data[model] = {}
+            
+            experiments = sorted([exp for exp in evaluation_results[model].keys() if exp in exp_names])
+            
+            # Aggregate metrics across all experiments for this model
+            all_results = []
+            for experiment in experiments:
+                try:
+                    results = evaluation_results[model][experiment][self_corr_key]['detailed_results']
+                    all_results.extend(results)
+                except KeyError as e:
+                    print(f"Warning: Missing data for {model} - {experiment} - {self_corr_key}: {e}")
+                    continue
+            
+            if not all_results:
+                continue
+            
+            # Aggregate metrics across all experiments
+            aggregate_metrics = metrics_aggregation(results=all_results, take_error_gold=take_error_golds)
+            
+            print(f"================================ {model} - {self_corr_label} ================================")
+            print(f"Number of gold queries with errors: {aggregate_metrics['errors']['gold_errors']}")
+            
+            # Use the appropriate metrics based on std_dev setting
+            if std_dev == 'all' or std_dev is None:
+                results_by_diff = aggregate_metrics['by_difficulty']
+            elif std_dev == 'run':
+                results_by_diff = aggregate_metrics['by_difficulty_runs']
+            elif std_dev == 'req_id':
+                results_by_diff = aggregate_metrics['by_difficulty_req_id']
+            else:
+                raise ValueError(f"Unknown standard deviation type: {std_dev}")
+            
+            # Extract metrics for each difficulty
+            for difficulty, metrics in results_by_diff.items():
+                difficulties.add(difficulty)
+                
+                # OID metrics
+                oid_precision = metrics['oids']['precision']
+                oid_precision_std = metrics['oids'].get('precision_std', 0) if std_dev else 0
+                oid_recall = metrics['oids']['recall']
+                oid_recall_std = metrics['oids'].get('recall_std', 0) if std_dev else 0
+                oid_f1 = metrics['oids']['f1_score']
+                oid_f1_std = metrics['oids'].get('f1_score_std', 0) if std_dev else 0
+                
+                # Column metrics
+                if formatted_columns and 'columns_formatted' in metrics:
+                    col_precision = metrics['columns_formatted']['precision']
+                    col_precision_std = metrics['columns_formatted'].get('precision_std', 0) if std_dev else 0
+                    col_recall = metrics['columns_formatted']['recall']
+                    col_recall_std = metrics['columns_formatted'].get('recall_std', 0) if std_dev else 0
+                    col_f1 = metrics['columns_formatted']['f1_score']
+                    col_f1_std = metrics['columns_formatted'].get('f1_score_std', 0) if std_dev else 0
+                else:
+                    col_precision = metrics['columns']['precision']
+                    col_precision_std = metrics['columns'].get('precision_std', 0) if std_dev else 0
+                    col_recall = metrics['columns']['recall']
+                    col_recall_std = metrics['columns'].get('recall_std', 0) if std_dev else 0
+                    col_f1 = metrics['columns']['f1_score']
+                    col_f1_std = metrics['columns'].get('f1_score_std', 0) if std_dev else 0
+                
+                # Store in separate table data
+                difficulty_clean = difficulty.replace('advanced', 'hard')
+                col_key = (self_corr_label, difficulty_clean.capitalize())
+                
+                if std_dev:
+                    precision_rows_data[model][col_key] = f"{oid_precision:.3f} ± {oid_precision_std:.3f}"
+                    precision_columns_data[model][col_key] = f"{col_precision:.3f} ± {col_precision_std:.3f}"
+                    recall_rows_data[model][col_key] = f"{oid_recall:.3f} ± {oid_recall_std:.3f}"
+                    recall_columns_data[model][col_key] = f"{col_recall:.3f} ± {col_recall_std:.3f}"
+                    f1_rows_data[model][col_key] = f"{oid_f1:.3f} ± {oid_f1_std:.3f}"
+                    f1_columns_data[model][col_key] = f"{col_f1:.3f} ± {col_f1_std:.3f}"
+                else:
+                    precision_rows_data[model][col_key] = f"{oid_precision:.3f}"
+                    precision_columns_data[model][col_key] = f"{col_precision:.3f}"
+                    recall_rows_data[model][col_key] = f"{oid_recall:.3f}"
+                    recall_columns_data[model][col_key] = f"{col_recall:.3f}"
+                    f1_rows_data[model][col_key] = f"{oid_f1:.3f}"
+                    f1_columns_data[model][col_key] = f"{col_f1:.3f}"
+    
+    # Sort difficulties
+    difficulties = sorted(list(difficulties), key=lambda x: ['simple', 'medium', 'advanced'].index(x) if x in ['simple', 'medium', 'advanced'] else 3)
+    
+    # Create MultiIndex columns
+    columns_index = []
+    for self_corr_label in ['W/o Self-Correction', 'W/ Self-Correction']:
+        for difficulty in difficulties:
+            difficulty_clean = difficulty.replace('advanced', 'hard')
+            columns_index.append((self_corr_label, difficulty_clean.capitalize()))
+    
+    # Create DataFrames with MultiIndex columns
+    precision_rows_df = pd.DataFrame.from_dict(precision_rows_data, orient='index')
+    precision_columns_df = pd.DataFrame.from_dict(precision_columns_data, orient='index')
+    recall_rows_df = pd.DataFrame.from_dict(recall_rows_data, orient='index')
+    recall_columns_df = pd.DataFrame.from_dict(recall_columns_data, orient='index')
+    f1_rows_df = pd.DataFrame.from_dict(f1_rows_data, orient='index')
+    f1_columns_df = pd.DataFrame.from_dict(f1_columns_data, orient='index')
+    
+    # Reorder columns to match the desired structure
+    precision_rows_df = precision_rows_df.reindex(columns=columns_index)
+    precision_columns_df = precision_columns_df.reindex(columns=columns_index)
+    recall_rows_df = recall_rows_df.reindex(columns=columns_index)
+    recall_columns_df = recall_columns_df.reindex(columns=columns_index)
+    f1_rows_df = f1_rows_df.reindex(columns=columns_index)
+    f1_columns_df = f1_columns_df.reindex(columns=columns_index)
+    
+    # Create MultiIndex for columns
+    multi_columns = pd.MultiIndex.from_tuples(columns_index, names=['Self-Correction', 'Difficulty'])
+    precision_rows_df.columns = multi_columns
+    precision_columns_df.columns = multi_columns
+    recall_rows_df.columns = multi_columns
+    recall_columns_df.columns = multi_columns
+    f1_rows_df.columns = multi_columns
+    f1_columns_df.columns = multi_columns
+    
+    # Fill NaN values with empty string
+    precision_rows_df = precision_rows_df.fillna('')
+    precision_columns_df = precision_columns_df.fillna('')
+    recall_rows_df = recall_rows_df.fillna('')
+    recall_columns_df = recall_columns_df.fillna('')
+    f1_rows_df = f1_rows_df.fillna('')
+    f1_columns_df = f1_columns_df.fillna('')
+    
+    # Find best results per column for bold formatting
+    def format_best_values(df):
+        """Add bold formatting to the best (highest) values in each column"""
+        df_formatted = df.copy()
+        
+        for col in df.columns:
+            # Extract numeric values from strings like "0.123 ± 0.045" or "0.123"
+            numeric_values = []
+            for val in df[col]:
+                if val == '':
+                    numeric_values.append(-1)  # Use -1 for empty values
+                else:
+                    # Extract the first number (before ±)
+                    try:
+                        num = float(val.split(' ±')[0]) if ' ±' in val else float(val)
+                        numeric_values.append(num)
+                    except ValueError:
+                        numeric_values.append(-1)
+            
+            # Find the maximum value and its indices
+            max_val = max(numeric_values)
+            if max_val > 0:  # Only format if there are valid values
+                max_indices = [i for i, val in enumerate(numeric_values) if val == max_val]
+                
+                # Add bold formatting to the best values
+                for idx in max_indices:
+                    original_val = df_formatted.iloc[idx, df_formatted.columns.get_loc(col)]
+                    if original_val != '':
+                        df_formatted.iloc[idx, df_formatted.columns.get_loc(col)] = f"\\textbf{{{original_val}}}"
+        
+        return df_formatted
+    
+    def create_enhanced_latex_table(df_formatted, caption, label, table_size='small', adjust_margins=False):
+        """Create enhanced LaTeX table with proper formatting and optional margin adjustment"""
+        # Determine number of difficulties (assumes equal columns for each self-correction method)
+        n_difficulties = len(df_formatted.columns) // 2
+        
+        # Create column format with vertical line between W/o and W/ self-correction (no line at the end)
+        col_format = '|c|' + 'c' * n_difficulties + '|' + 'c' * n_difficulties + '|'
+        
+        # Generate LaTeX table
+        latex_str = df_formatted.to_latex(
+            escape=False, 
+            multicolumn_format='c',
+            column_format=col_format,
+            caption=caption,
+            label=label,
+            position='htbp'
+        )
+        
+        # Add table size and centering
+        size_commands = {
+            'tiny': '\\tiny',
+            'scriptsize': '\\scriptsize', 
+            'footnotesize': '\\footnotesize',
+            'small': '\\small',
+            'normalsize': '\\normalsize',
+            'large': '\\large'
+        }
+        
+        size_cmd = size_commands.get(table_size, '\\small')
+        
+        # Prepare margin adjustment commands
+        margin_start = ""
+        margin_end = ""
+        if adjust_margins:
+            margin_start = """\\adjustbox{width=\\textwidth,center}{
+"""
+            margin_end = """
+}"""
+        
+        # Replace formatting
+        latex_str = latex_str.replace('\\begin{tabular}', f'{size_cmd}\n\\centering\n{margin_start}\\begin{{tabular}}')
+        latex_str = latex_str.replace('\\end{tabular}', f'\\end{{tabular}}{margin_end}')
+        latex_str = latex_str.replace('\\toprule', '\\hline')
+        latex_str = latex_str.replace('\\bottomrule', '\\hline')
+        
+        # Process lines to add hline between self-correction and difficulty rows
+        lines = latex_str.split('\n')
+        new_lines = []
+        header_count = 0
+        
+        for i, line in enumerate(lines):
+            new_lines.append(line)
+            # Count header rows and add hline between first and second header row
+            if ('W/o Self-Correction' in line and 'W/ Self-Correction' in line) or \
+               any(difficulty in line for difficulty in ['Simple', 'Medium', 'Hard']):
+                header_count += 1
+                # Add hline after first header row (self-correction row)
+                if header_count == 1:
+                    new_lines.append('\\hline')
+        
+        # Remove midrule replacements
+        latex_str_modified = '\n'.join(new_lines)
+        latex_str_modified = latex_str_modified.replace('\\midrule', '')
+        
+        # Add adjustbox package note if margins are adjusted
+        if adjust_margins:
+            package_note = "% Note: Add \\usepackage{adjustbox} to your LaTeX preamble for margin adjustment\n"
+            latex_str_modified = package_note + latex_str_modified
+        
+        return latex_str_modified
+    
+    # Format best values with bold
+    precision_rows_df_formatted = format_best_values(precision_rows_df)
+    precision_columns_df_formatted = format_best_values(precision_columns_df)
+    recall_rows_df_formatted = format_best_values(recall_rows_df)
+    recall_columns_df_formatted = format_best_values(recall_columns_df)
+    f1_rows_df_formatted = format_best_values(f1_rows_df)
+    f1_columns_df_formatted = format_best_values(f1_columns_df)
+    
+    # Print tables in LaTeX format with enhanced formatting
+    print("\n" + "="*80)
+    print("PRECISION - ROWS - LaTeX Format")
+    print("="*80)
+    latex_str_precision_rows = create_enhanced_latex_table(
+        precision_rows_df_formatted, 
+        'Precision Scores for Rows',
+        'tab:precision_rows',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_precision_rows)
+
+    print("\n" + "="*80)
+    print("PRECISION - COLUMNS - LaTeX Format") 
+    print("="*80)
+    latex_str_precision_columns = create_enhanced_latex_table(
+        precision_columns_df_formatted,
+        'Precision Scores for Columns', 
+        'tab:precision_columns',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_precision_columns)
+
+    print("\n" + "="*80)
+    print("RECALL - ROWS - LaTeX Format")
+    print("="*80)
+    latex_str_recall_rows = create_enhanced_latex_table(
+        recall_rows_df_formatted, 
+        'Recall Scores for Rows',
+        'tab:recall_rows',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_recall_rows)
+
+    print("\n" + "="*80)
+    print("RECALL - COLUMNS - LaTeX Format") 
+    print("="*80)
+    latex_str_recall_columns = create_enhanced_latex_table(
+        recall_columns_df_formatted,
+        'Recall Scores for Columns', 
+        'tab:recall_columns',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_recall_columns)
+
+    print("\n" + "="*80)
+    print("F1-SCORE - ROWS - LaTeX Format")
+    print("="*80)
+    latex_str_f1_rows = create_enhanced_latex_table(
+        f1_rows_df_formatted, 
+        'F1-Scores for Rows',
+        'tab:f1_rows',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_f1_rows)
+
+    print("\n" + "="*80)
+    print("F1-SCORE - COLUMNS - LaTeX Format") 
+    print("="*80)
+    latex_str_f1_columns = create_enhanced_latex_table(
+        f1_columns_df_formatted,
+        'F1-Scores for Columns', 
+        'tab:f1_columns',
+        table_size,
+        adjust_margins
+    )
+    print(latex_str_f1_columns)
+
+    print("\n" + "="*80)
+    print("Available table sizes: tiny, scriptsize, footnotesize, small, normalsize, large")
+    print("Current table size:", table_size)
+    print("Margin adjustment:", "enabled" if adjust_margins else "disabled")
+    print("="*80)
+    
+    return (precision_rows_df_formatted, precision_columns_df_formatted, 
+            recall_rows_df_formatted, recall_columns_df_formatted, 
+            f1_rows_df_formatted, f1_columns_df_formatted)
+
 
 
 # This function is a modified version of the original plot_perfect_match_by_difficulty_model_sc
@@ -1818,6 +2478,7 @@ def plot_execution_errors_by_model(
         evaluation_results: Dict[str, Dict[str, Any]],
         model_name: str,
         exp_names: str,
+        percentage: bool = False,
 ) -> None:
     """
     Plots the execution errors by model and experiment.
@@ -1852,6 +2513,7 @@ def plot_execution_errors_by_model(
                     if error_info:
                         error_types.append(get_error_class(error_info).get('error_class'))
                     else:
+                        error_types.append(0)  # No error
                         continue
                 
                 # Store the error types for each experiment
@@ -1875,20 +2537,40 @@ def plot_execution_errors_by_model(
                 error_data = error_counts
             else:
                 error_data = pd.concat([error_data, error_counts], ignore_index=True)
+            
+        if percentage:
+            total_errors = error_data['error_count'].sum()
+            error_data['error_count'] = (error_data['error_count'] / total_errors) * 100
+        # remove rows with error_type 0
+        error_data = error_data[error_data['error_type'] != 0]
                 
         sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment')
+        if percentage:
+            # add value labels on top of each bar
+            for p in axs[i].patches:
+                height = p.get_height()
+                axs[i].annotate(f'{height:.1f}',
+                                (p.get_x() + p.get_width() / 2., height),
+                                ha='center', va='center',
+                                xytext=(0, 9),
+                                textcoords='offset points',
+                                fontsize=12)
         plt.xticks(rotation=45, ha='right', fontsize=14)
         plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
     axs[0].set_xlabel("Without Self-Correction", fontsize=18)
-    axs[0].set_ylabel("Error Count", fontsize=18)
+    if percentage: 
+        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=18)
+        axs[0].set_ylim(0, 100)
+        axs[1].set_ylim(0, 100)
+    else: axs[0].set_ylabel("Error Count", fontsize=18)
     axs[1].set_xlabel("With Self-Correction", fontsize=18)
-    axs[0].yaxis.set_visible(False)
-    axs[1].yaxis.set_visible(False)
+    axs[0].yaxis.set_visible(True)
+    axs[1].yaxis.set_visible(True)
     plt.subplots_adjust(hspace=0.02, )
     plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
     axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
     
-    plt.suptitle(f"Execution Errors, Direct vs Step-By-Step", fontsize=20)
+    plt.suptitle(f"Execution Errors by Generation Method", fontsize=20)
     plt.ylabel("Error Count")
     plt.tight_layout()
     plt.show()
@@ -1898,6 +2580,7 @@ def plot_execution_errors_by_model_by_difficulty(
         model_name: str,
         exp_names: str,
         self_corr: bool = True,
+        percentage: bool = False,
 ) -> None:
     """
     Plots the execution errors by model and experiment.
@@ -1939,6 +2622,7 @@ def plot_execution_errors_by_model_by_difficulty(
                     error_class = get_error_class(error_info).get('error_class')
                     experiment_labels[exp_label][difficulty].append(error_class)
                 else:
+                    experiment_labels[exp_label][difficulty].append(0)  # No error
                     continue
         
         except KeyError as e:
@@ -1968,19 +2652,38 @@ def plot_execution_errors_by_model_by_difficulty(
         if error_data.empty:
             print(f"No errors found for difficulty {difficulty} in model {model_name}.")
             continue
+        if percentage:
+            total_errors = error_data['error_count'].sum()
+            error_data['error_count'] = (error_data['error_count'] / total_errors) * 100
+        # remove rows with error_type 0
+        error_data = error_data[error_data['error_type'] != 0]
+
         # Group the error types by their class and by experiment, to plot them without stacking
         error_data = error_data.groupby(['error_type', 'experiment']).sum().reset_index()
         sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment')
+        if percentage:
+            # add value labels on top of each bar
+            for p in axs[i].patches:
+                height = p.get_height()
+                axs[i].annotate(f'{height:.1f}',
+                                (p.get_x() + p.get_width() / 2., height),
+                                ha='center', va='center',
+                                xytext=(0, 9),
+                                textcoords='offset points',
+                                fontsize=12)
         axs[i].set_title(f"{difficulty.replace('advanced','hard')}", fontsize=16)
         axs[i].set_xlabel("Error Type", fontsize=14)
-        axs[i].set_ylabel("Error Count", fontsize=14)
+        if percentage: 
+            axs[i].set_ylabel("Percentage from Total Queries (%)", fontsize=14)
+            axs[i].set_ylim(0, 100)
+        else: axs[i].set_ylabel("Error Count", fontsize=14)
         axs[i].set_xticklabels(axs[i].get_xticklabels(), rotation=45, ha='right', fontsize=14)
         # axs[i].set_ylim(0, error_data['error_count'].max() * 1.1)  # Set y-axis limit to 10% above max count
         axs[i].legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
-    axs[0].yaxis.set_visible(False)
+    # axs[0].yaxis.set_visible(False)
     axs[1].yaxis.set_visible(False)
     axs[2].yaxis.set_visible(False)
-    plt.subplots_adjust(hspace=0.02, )
+    plt.subplots_adjust(hspace=0.01, )
     # plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
     # axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
     plt.suptitle(f"Execution Errors by difficulty", fontsize=20)
@@ -1992,6 +2695,7 @@ def plot_execution_errors_by_model_type(
         evaluation_results: Dict[str, Dict[str, Any]],
         model_name: str,
         exp_names: str,
+        percentage: bool = False,
 ) -> None:
     """
     Plots the execution errors by model and experiment.
@@ -2026,6 +2730,7 @@ def plot_execution_errors_by_model_type(
                     if error_info:
                         error_types.append(get_error_class(error_info).get('error_type').upper())
                     else:
+                        error_types.append(0)  # No error
                         continue
                 
                 # Store the error types for each experiment
@@ -2043,17 +2748,36 @@ def plot_execution_errors_by_model_type(
                 error_data = error_counts
             else:
                 error_data = pd.concat([error_data, error_counts], ignore_index=True) 
+        if percentage:
+            total_errors = error_data['error_count'].sum()
+            error_data['error_count'] = (error_data['error_count'] / total_errors) * 100
+        # remove rows with error_type 0
+        error_data = error_data[error_data['error_type'] != 0]
         sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment')
+        if percentage:
+            # add value labels on top of each bar
+            for p in axs[i].patches:
+                height = p.get_height()
+                axs[i].annotate(f'{height:.1f}',
+                                (p.get_x() + p.get_width() / 2., height),
+                                ha='center', va='center',
+                                xytext=(0, 9),
+                                textcoords='offset points',
+                                fontsize=12)
         plt.xticks(rotation=45, ha='right', fontsize=14)
         plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
     axs[0].set_xlabel("Without Self-Correction", fontsize=18)
-    axs[0].set_ylabel("Error Count", fontsize=18)
+    if percentage: 
+        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=18)
+        axs[0].set_ylim(0, 100)
+        axs[1].set_ylim(0, 100)
+    else: axs[0].set_ylabel("Error Count", fontsize=18)
     axs[1].set_xlabel("With Self-Correction", fontsize=18)
-    axs[1].yaxis.set_visible(False)
+    axs[1].yaxis.set_visible(True)
     plt.subplots_adjust(hspace=0.02, )
     axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
     
-    plt.suptitle(f"Execution Errors, Direct vs Step-By-Step", fontsize=20)
+    plt.suptitle(f"Execution Errors Type by Generation Method", fontsize=20)
     plt.ylabel("Error Count")
     plt.tight_layout()
     plt.show()
@@ -2563,3 +3287,248 @@ def compute_schema_linking_metrics_interactive(
     display(widgets.HBox([model_dropdown, experiment_dropdown]))
     display(output)
     on_selection_change()
+
+
+
+
+
+
+
+
+
+
+
+
+
+def plot_perfect_match_by_request_interactive(
+        evaluation_results_: Dict[str, Dict[str, Any]],
+        formatted_columns: bool = True,
+        take_error_golds: bool = False,
+) -> None:
+    """
+    Interactive plot of percentage of perfect match rates for OID and column matches by request and difficulty from evaluation results.
+    It shows the percentage of perfect matches by each request separated in three subplots for simple, medium, and advanced difficulties.
+    
+    Args:
+        evaluation_results (Dict[str, Dict[str, Any]]): A dictionary containing evaluation results with keys
+                                   for models and experiments, and values containing metrics.
+        formatted_columns (bool): If True, uses formatted column results; otherwise uses regular column results.
+
+    Returns:
+        None: This function displays an interactive plot but does not return any value.
+    """
+    import copy
+    evaluation_results = copy.deepcopy(evaluation_results_)
+    # Extract model names from the results dictionary
+    models = sorted(list(evaluation_results.keys()), reverse=True)
+    
+    # Create widgets for interactive selection
+    model_dropdown = widgets.Dropdown(
+        options=models,
+        description='Model:',
+        value=models[0] if models else None,
+        layout=widgets.Layout(width='50%')
+    )
+    
+    self_corr_dropdown = widgets.Dropdown(
+        options=[('With Self-Correction', True), ('Without Self-Correction', False)],
+        description='Self-Correction:',
+        value=True,
+        layout=widgets.Layout(width='50%')
+    )
+
+    med_hard_dropdown = widgets.Dropdown(
+        options=[('Simple-Medium-Hard', False), ('Simple-Medium/Hard', True)],
+        description='Difficulties:',
+        value=False,
+        layout=widgets.Layout(width='50%')
+    )
+
+    diff_plot_dropdown = widgets.Dropdown(
+        options=[('All Difficulties', 'all'), ('Simple', 'simple'), ('Medium', 'medium'), ('Medium-Hard', 'medium-hard'), ('Advanced', 'advanced')],
+        description='Plot Difficulty:',
+        value='all',
+        layout=widgets.Layout(width='50%')
+    )
+    
+    output_widget = widgets.Output()
+    
+    from llm.utils.eval_utils import metrics_aggregation
+    
+    def update_plot(model, self_corr, medium_hard, diff_plot):
+        """Update the plot based on selected model and self-correction setting"""
+        with output_widget:
+            clear_output(wait=True)
+            evaluation_results = copy.deepcopy(evaluation_results_)
+            
+            # Self-corrected results key
+            self_corr_key = 'self_corrected' if self_corr else 'corrected'
+
+            # Medium-hard setting
+            medium_hard = medium_hard
+            
+            # Initialize data collection lists
+            experiment_labels = {}
+            difficulties = []
+            req_list = {}
+            
+            # Collect data for plotting
+            experiments = sorted(list(evaluation_results[model].keys()))
+            for experiment in experiments:
+                try:
+                    exp_label = f"{model}-{experiment}"
+                    oid_match_rates = {}
+                    column_match_rates = {}
+                    
+                    results = evaluation_results[model][experiment][self_corr_key]['detailed_results']
+                    print(results)
+
+                    
+                    if medium_hard:
+                        # Change medium and advanced req_list to medium-hard
+                        for res_i in results:
+                            if res_i['difficulty'] == 'medium' or res_i['difficulty'] == 'advanced': res_i['difficulty'] = 'medium-hard'
+                
+                    aggregate_metrics = metrics_aggregation(results=results, take_error_gold=take_error_golds)
+                    
+                    results = aggregate_metrics['by_difficulty_req_id']
+
+                    print(f"Number of gold queries with errors for experiment {exp_label}: {aggregate_metrics['errors']['gold_errors']}")
+                    
+                    # Iterate through results to extract match rates by difficulty
+                    for diff, diff_metrics in results.items():
+                        if diff not in difficulties:
+                            difficulties.append(diff)
+                        oid_match_rates[diff] = {}
+                        column_match_rates[diff] = {}
+                        req_list[diff] = []
+
+                        for req, metrics in diff_metrics['req_id_metrics'].items():
+                            if req not in req_list[diff]:
+                                req_list[diff].append(req)
+
+                            # Extract OID metrics
+                            oid_match_rates[diff][str(req)] = metrics['oids']['perfect_match_rate']
+                            
+                            # Extract column metrics
+                            if formatted_columns and 'columns_formatted' in metrics:
+                                column_match_rates[diff][str(req)] = metrics['columns_formatted']['perfect_match_rate']
+                            else:
+                                column_match_rates[diff][str(req)] = metrics['columns']['perfect_match_rate']
+
+                    # Add metrics to experiment_labels
+                    experiment_labels[exp_label] = {
+                        'oid': oid_match_rates,
+                        'column': column_match_rates
+                    }
+                except KeyError as e:
+                    print(f"Warning: Missing data for {model} - {experiment}: {e}")
+
+            # Sort req_list
+            difficulties = sorted(difficulties, key=lambda x: ['simple', 'medium', 'medium-hard', 'advanced'].index(x))
+
+            if diff_plot in difficulties:
+                # Create the plot
+                fig, axs = plt.subplots(2, 1, figsize=(20, 10))
+                
+                # Plot each experiment
+                for i, (exp_label, data) in enumerate(experiment_labels.items()):
+                    x = np.arange(len(req_list[diff_plot]))  # the label locations
+                    width = 0.35  # the width of the bars
+                    offset = (i - len(experiment_labels)/2) * width / len(experiment_labels)  # offset for multiple experiments
+                    oid_rates = [data['oid'][diff_plot][str(req)] for req in sorted(req_list[diff_plot])]
+                    column_rates = [data['column'][diff_plot][str(req)] for req in sorted(req_list[diff_plot])]
+
+                    # Plot OID matches
+                    bars1 = axs[0].bar(x + offset, oid_rates, width, label=exp_label)
+                    
+                    # Plot Column matches
+                    bars2 = axs[1].bar(x + offset, column_rates, width, label=exp_label)
+                    
+                    # Add values on top of the bars
+                    for bar in bars1:
+                        height = bar.get_height()
+                        axs[0].text(bar.get_x() + bar.get_width()/2, height + 0.01, f"{height:.2f}", ha='center', va='bottom')
+
+                    for bar in bars2:
+                        height = bar.get_height()
+                        axs[1].text(bar.get_x() + bar.get_width()/2, height + 0.01, f"{height:.2f}", ha='center', va='bottom')
+
+                    axs[0].set_xticks(x)
+                    axs[0].set_xticklabels(sorted(req_list[diff_plot]))
+                    axs[1].set_xticks(x)
+                    axs[1].set_xticklabels(sorted(req_list[diff_plot]))
+                    axs[0].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
+                    axs[1].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
+                # Set x-ticks and labels
+                axs[0].set_ylabel('Rows', fontsize=20)
+                axs[1].set_ylabel('Columns', fontsize=20)
+
+            else:
+                # Create the plot
+                fig, axs = plt.subplots(2, len(difficulties), figsize=(40, 10))
+                
+                # Plot each experiment
+                for i, (exp_label, data) in enumerate(experiment_labels.items()):
+                    for j, diff in enumerate(difficulties):
+                        x = np.arange(len(req_list[diff]))  # the label locations
+                        width = 0.35  # the width of the bars
+                        offset = (i - len(experiment_labels)/2) * width / len(experiment_labels)  # offset for multiple experiments
+                        oid_rates = [data['oid'][diff][str(req)] for req in sorted(req_list[diff])]
+                        column_rates = [data['column'][diff][str(req)] for req in sorted(req_list[diff])]
+
+                        # Plot OID matches
+                        bars1 = axs[0][j].bar(x + offset, oid_rates, width, label=exp_label)
+                        
+                        # Plot Column matches
+                        bars2 = axs[1][j].bar(x + offset, column_rates, width, label=exp_label)
+                        
+                        # Add values on top of the bars
+                        for bar in bars1:
+                            height = bar.get_height()
+                            axs[0][j].text(bar.get_x() + bar.get_width()/2, height + 0.01, f"{height:.2f}", ha='center', va='bottom')
+
+                        for bar in bars2:
+                            height = bar.get_height()
+                            axs[1][j].text(bar.get_x() + bar.get_width()/2, height + 0.01, f"{height:.2f}", ha='center', va='bottom')
+
+                        axs[0][j].set_xticks(x)
+                        axs[0][j].set_xticklabels(sorted(req_list[diff]))
+                        axs[1][j].set_xticks(x)
+                        axs[1][j].set_xticklabels(sorted(req_list[diff]))
+                        axs[0][j].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
+                        axs[1][j].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
+                # Set x-ticks and labels
+                axs[0][0].set_ylabel('Rows', fontsize=20)
+                axs[1][0].set_ylabel('Columns', fontsize=20)
+                
+            # change advanced to hard
+            # req_list_labels = [d.replace('advanced', 'hard') for d in req_list]
+            
+            # Set title and labels
+            plt.suptitle(f'Perfect Match Rates by Difficulty for {model}', fontsize=24)
+            fig.supylabel('% Perfect Matching Queries', fontsize=24, x=0.02)
+            
+            # Add legend
+            # plt.legend(title='Experiments', bbox_to_anchor=(1.02, 0.88))
+            # plt.legend(title='Experiments', loc='upper left', bbox_to_anchor=(1.02, 1))
+            # axs[0]
+            plt.legend(title='Experiments', loc='upper left', bbox_to_anchor=(0.88, 1))
+            plt.tight_layout()
+            plt.show()
+    
+    # Create interactive widget
+    interact_widget = widgets.interactive(
+        update_plot,
+        model=model_dropdown,
+        self_corr=self_corr_dropdown,
+        medium_hard=med_hard_dropdown,
+        diff_plot=diff_plot_dropdown
+    )
+    
+    # Display the widgets and output
+    display(widgets.VBox([interact_widget, output_widget]))
+    
+    # Initial plot
+    if models:
+        update_plot(models[0], False, False, 'all')

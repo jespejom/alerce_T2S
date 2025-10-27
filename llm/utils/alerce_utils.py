@@ -29,34 +29,41 @@ def create_conn_alerce(access_time: int = 2):
   
   n_tries = 3
   params = None
+  params = {
+          "dbname" : "ztf",
+          "user" : "alerceread",
+          "host": "54.205.99.47",
+          "password" : "w*C*u8AXZ4e%d+zv"
+      }
   
-  # Fetch parameters from URL with retry logic
-  for n_try in range(n_tries):
-    try:
-      response = requests.get(url)
-      if response.status_code != 200:
-        if n_try < n_tries - 1:
-          time.sleep(2 ** n_try)  # exponential backoff
+  if params is None:
+    # Fetch parameters from URL with retry logic
+    for n_try in range(1, n_tries + 1):
+      try:
+        response = requests.get(url)
+        if response.status_code != 200:
+          if n_try < n_tries:
+            time.sleep(2 ** n_try)  # exponential backoff
+            continue
+          else:
+            raise ValueError(f"Failed to fetch URL: {url}, Status Code: {response.status_code}")
+        
+        params = response.json().get('params')
+        if not params:
+          raise ValueError("Missing 'params' in the JSON response")
+        break
+          
+      except requests.RequestException as e:
+        if n_try < n_tries:
+          time.sleep(2 ** n_try)
           continue
         else:
-          raise ValueError(f"Failed to fetch URL: {url}, Status Code: {response.status_code}")
-      
-      params = response.json().get('params')
-      if not params:
-        raise ValueError("Missing 'params' in the JSON response")
-      break
-        
-    except requests.RequestException as e:
-      if n_try < n_tries - 1:
-        time.sleep(2 ** n_try)
-        continue
-      else:
-        raise ValueError(f"Network error when fetching {url}: {str(e)}")
-    except ValueError as e:
-      if "JSON" in str(e):
-        raise ValueError("Invalid JSON response from URL")
-      else:
-        raise e
+          raise ValueError(f"Network error when fetching {url}: {str(e)}")
+      except ValueError as e:
+        if "JSON" in str(e):
+          raise ValueError("Invalid JSON response from URL")
+        else:
+          raise e
   
   # Create connection string based on access level
   if access_time == 2:
@@ -95,6 +102,7 @@ def run_sql_alerce(
   try:
     engine = create_conn_alerce(access_time=access_time)
   except ValueError as e:
+    print(f"Error creating connection: {str(e)}")
     return None, e
     
   query = None

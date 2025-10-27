@@ -3,12 +3,13 @@ import json
 from typing import List, Dict
 import numpy as np
 
-def metrics_aggregation(results: List[dict]) -> dict:
+def metrics_aggregation(results: List[dict], take_error_gold: bool = False) -> dict:
     """
     Aggregate the metrics from multiple SQL query comparisons.
 
     Args:
         results (list): A list of dictionaries containing the comparison results for each SQL query.
+        take_error_gold (bool): Flag indicating if it is considered queries where the gold query failed. True means they are considered.
 
     Returns:
         dict: A dictionary containing the aggregated metrics for OIDs and columns, 
@@ -36,7 +37,8 @@ def metrics_aggregation(results: List[dict]) -> dict:
     
     error_counts = {
         'gold': 0,
-        'pred': 0
+        'pred': 0,
+        'gold_list': [],
     }
     
     execution_times = {
@@ -66,7 +68,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
                 'oids_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_fmt_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
-                'error_counts': {'gold': 0, 'pred': 0},
+                'error_counts': {'gold': 0, 'pred': 0, 'gold_list': []},
                 'execution_times': {'gold_values': [], 'pred_values': []},
                 'group_total_items': 0
             }
@@ -75,7 +77,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
                 'oids_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_fmt_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
-                'error_counts': {'gold': 0, 'pred': 0},
+                'error_counts': {'gold': 0, 'pred': 0, 'gold_list': []},
                 'execution_times': {'gold_values': [], 'pred_values': []},
                 'group_total_items': 0
             }
@@ -84,7 +86,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
                 'oids_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_fmt_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
-                'error_counts': {'gold': 0, 'pred': 0},
+                'error_counts': {'gold': 0, 'pred': 0, 'gold_list': []},
                 'execution_times': {'gold_values': [], 'pred_values': []},
                 'group_total_items': 0
             }
@@ -97,7 +99,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
                 'oids_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_fmt_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
-                'error_counts': {'gold': 0, 'pred': 0},
+                'error_counts': {'gold': 0, 'pred': 0, 'gold_list': []},
                 'execution_times': {'gold_values': [], 'pred_values': []},
                 'group_total_items': 0
             }
@@ -110,7 +112,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
                 'oids_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
                 'columns_fmt_metrics': {'precision_values': [], 'recall_values': [], 'f1_values': [], 'perfect_match_count': [], 'count': 0},
-                'error_counts': {'gold': 0, 'pred': 0},
+                'error_counts': {'gold': 0, 'pred': 0, 'gold_list': []},
                 'execution_times': {'gold_values': [], 'pred_values': []},
                 'group_total_items': 0
             }
@@ -124,12 +126,17 @@ def metrics_aggregation(results: List[dict]) -> dict:
         # Count errors (overall and group-specific)
         if comparison.get('error_gold'):
             error_counts['gold'] += 1
+            error_counts['gold_list'].append(result['req_id'])
             metrics_by_n_run[n_run_val]['error_counts']['gold'] += 1
             metrics_by_req_id[req_id_val]['error_counts']['gold'] += 1
             metrics_by_difficulty[difficulty_val]['error_counts']['gold'] += 1
+            metrics_by_difficulty[difficulty_val]['error_counts']['gold_list'].append(result['req_id'])
             metrics_by_difficulty_runs[difficulty_val][n_run_val]['error_counts']['gold'] += 1
+            metrics_by_difficulty_runs[difficulty_val][n_run_val]['error_counts']['gold_list'].append(result['req_id'])
             metrics_by_difficulty_req_id[difficulty_val][req_id_val]['error_counts']['gold'] += 1
-            continue # Skip further processing for this result if gold query failed
+            metrics_by_difficulty_req_id[difficulty_val][req_id_val]['error_counts']['gold_list'].append(result['req_id'])
+            if not take_error_gold:
+                continue # Skip further processing for this result if gold query failed
             
         if comparison.get('error_pred'):
             error_counts['pred'] += 1
@@ -378,6 +385,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
         },
         'errors': {
             'gold_errors': error_counts['gold'],
+            'gold_list': error_counts['gold_list'],
             'pred_errors': error_counts['pred'],
             'total_processed_after_gold_errors': len(results) - error_counts['gold']
         }
@@ -451,7 +459,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
 
     final_metrics_by_n_run = {}
     for n_run_key, group_sums in metrics_by_n_run.items():
-        if group_sums['oids_metrics']['perfect_match_count'] == []: continue # skip queries where gold query failed
+        if group_sums['oids_metrics']['perfect_match_count'] == [] and not take_error_gold: continue # skip queries where gold query failed
         final_metrics_by_n_run[n_run_key] = _process_group_metrics_dict(
             group_sums, 
             group_sums['group_total_items']
@@ -460,7 +468,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
 
     final_metrics_by_req_id = {}
     for req_id_key, group_sums in metrics_by_req_id.items():
-        if group_sums['oids_metrics']['perfect_match_count'] == []: continue # skip queries where gold query failed
+        if group_sums['oids_metrics']['perfect_match_count'] == [] and not take_error_gold: continue # skip queries where gold query failed
         final_metrics_by_req_id[req_id_key] = _process_group_metrics_dict(
             group_sums, 
             group_sums['group_total_items']
@@ -469,7 +477,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
 
     final_metrics_by_difficulty = {}
     for diff_key, group_sums in metrics_by_difficulty.items():
-        if group_sums['oids_metrics']['perfect_match_count'] == []: continue # skip queries where gold query failed
+        if group_sums['oids_metrics']['perfect_match_count'] == [] and not take_error_gold: continue # skip queries where gold query failed
         final_metrics_by_difficulty[diff_key] = _process_group_metrics_dict(
             group_sums, 
             group_sums['group_total_items'],
@@ -483,7 +491,7 @@ def metrics_aggregation(results: List[dict]) -> dict:
         # For each difficulty, calculate metrics per run
         runs_metrics = {}
         for run_key, run_metrics in runs_dict.items():
-            if run_metrics['oids_metrics']['perfect_match_count'] == []: continue # skip queries where gold query failed
+            if run_metrics['oids_metrics']['perfect_match_count'] == [] and not take_error_gold: continue # skip queries where gold query failed
             runs_metrics[run_key] = _process_group_metrics_dict(
                 run_metrics,
                 run_metrics['group_total_items'],
