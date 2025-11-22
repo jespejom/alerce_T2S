@@ -6,14 +6,14 @@ import numpy as np
 import multiprocessing as mp
 from utils.alerce_utils import run_sql_alerce
 from utils.utils import extract_sql
-from utils.eval_utils import metrics_aggregation
+from utils.eval_utils import get_query_columns, replace_renamed_columns, metrics_aggregation
 from typing import Union, Dict, List, Tuple, Any
 import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def compare_results_oids(gold_result, pred_result, alias_handling=True):
+def compare_results_oids(gold_result, pred_result, alias_handling=True, sql_query_pred=None):
     """
     Compare the identifiers results of two SQL queries and return the precision, recall, and F1 score.
     
@@ -21,10 +21,10 @@ def compare_results_oids(gold_result, pred_result, alias_handling=True):
         gold_result (pandas.DataFrame): The expected identifiers result of the SQL query.
         pred_result (pandas.DataFrame): The predicted identifiers result of the SQL query.
         alias_handling (bool): Whether to handle column name aliases for identifiers
+        sql_query_pred (str): The predicted SQL query. Used for extracting column info if alias_handling is True.
     Returns:
         dict: A dictionary containing the precision, recall, and F1 score of the comparison of identifiers.
     """
-    import pandas as pd
     
     # If the gold_result is empty, raise an error
     if gold_result is None or gold_result.empty:
@@ -56,45 +56,57 @@ def compare_results_oids(gold_result, pred_result, alias_handling=True):
     pred_df = pred_df.loc[:, ~pred_df.columns.duplicated()]
 
     # Define potential identifier columns and their aliases
-    identifier_columns = {
-        'oid': ['oid', 'ztf_identifier', 'ztf identifier', 'ztf_oid', 'object', 'ztf', 
-                'ztf_id', 'ztf object identifier', 'unique_object_identifier', 
-                'object_identifier', 'ztf_object_id'],
-        'oid_catalog': ['oid_catalog', 'catalog_id', 'catalog_identifier', 'catalog_oid'],
-        'objectidps1': ['objectidps1', 'ps1_id', 'ps1_identifier', 'panstarrs_id'],
-        'classifier_name': ['classifier_name', 'classifier', 'model_name'],
-        'count': ['count', 'n_count', 'num_count', 'total_count']
-    }
+    # identifier_columns = {
+    #     'oid': ['oid', 'ztf_identifier', 'ztf identifier', 'ztf_oid', 'object', 'ztf', 
+    #             'ztf_id', 'ztf object identifier', 'unique_object_identifier', 
+    #             'object_identifier', 'ztf_object_id'],
+    #     'oid_catalog': ['oid_catalog', 'catalog_id', 'catalog_identifier', 'catalog_oid'],
+    #     'objectidps1': ['objectidps1', 'ps1_id', 'ps1_identifier', 'panstarrs_id'],
+    #     'classifier_name': ['classifier_name', 'classifier', 'model_name'],
+    #     'count': ['count', 'n_count', 'num_count', 'total_count']
+    # }
+
+    # define identifier columns as a list for priority search ordered by relevance
+    identifier_columns = ["candid", "oid", "oid_catalog", "objectidps1", "classifier_name", "count"]
     
     # Find identifier column in each dataframe
     gold_id_col = None
     pred_id_col = None
     
     # First try to find exact match for primary identifier columns
-    for id_type, aliases in identifier_columns.items():
+    # for id_type, aliases in identifier_columns.items():
+    for id_type in identifier_columns:
         if id_type in gold_df.columns:
             gold_id_col = id_type
+            break
+    for id_type in identifier_columns:
         if id_type in pred_df.columns:
             pred_id_col = id_type
+            break
     
     # If no exact match, look for aliases if alias handling is enabled
     if alias_handling:
-        if gold_id_col is None:
-            for id_type, aliases in identifier_columns.items():
-                for alias in aliases:
-                    if alias in gold_df.columns:
-                        gold_id_col = alias
-                        break
-                if gold_id_col:
-                    break
+        # if gold_id_col is None:
+        #     for id_type in identifier_columns:
+        #         for alias in aliases:
+        #             if alias in gold_df.columns:
+        #                 gold_id_col = alias
+        #                 break
+        #         if gold_id_col:
+        #             break
         
         if pred_id_col is None:
-            for id_type, aliases in identifier_columns.items():
-                for alias in aliases:
-                    if alias in pred_df.columns:
-                        pred_id_col = alias
-                        break
-                if pred_id_col:
+            # Get the formatted columns from the SQL query
+            pred_cols_formatted = get_query_columns(sql_query_pred)
+            pred_cols_name = [j['name'] for j in pred_cols_formatted] # get the names of the columns
+            pred_cols_real = [j['real_name'] for j in pred_cols_formatted] # get the real names of the columns
+            # Replace the renamed columns in the predicted columns
+            pred_cols_final = replace_renamed_columns(pred_cols_name, pred_cols_real, pred_result.columns.tolist())
+            pred_cols_final = [col.lower() for col in pred_cols_final]  # normalize to lowercase
+            
+            for i, id_type in enumerate(identifier_columns):
+                if id_type in pred_cols_final:
+                    pred_id_col = pred_result.columns.tolist()[pred_cols_final.index(id_type)]
                     break
     
     # If still no identifier column, try to find any column that might contain 'oid' in its name
@@ -220,87 +232,6 @@ def compare_results_columns(gold_result, pred_result):
         'comparison_type': 'columns',
     }
 
-import ast
-import sqlparse
-def get_query_columns(sql):
-    try:
-        stmt = sqlparse.parse(sql)[0]
-        columns = []
-        column_identifiers = []
-
-        # get column_identifieres
-        in_select = False
-        for token in stmt.tokens:
-            if isinstance(token, sqlparse.sql.Comment):
-                continue
-            if str(token).lower() == 'select':
-                in_select = True
-            elif in_select and token.ttype is sqlparse.tokens.Wildcard:
-                column_identifiers.append(token)
-                break
-            elif token.value == 'table_name':
-                column_identifiers.append(token)
-                break
-            elif in_select and token.ttype is None:
-                if isinstance(token, sqlparse.sql.Function):
-                    column_identifiers.append(token)
-                    break
-                elif isinstance(token, sqlparse.sql.Identifier):
-                    column_identifiers.append(token)
-                    continue
-                else:
-                    for identifier in token.get_identifiers():
-                        column_identifiers.append(identifier)
-                    break
-            elif in_select and token.ttype is sqlparse.tokens.Keyword:
-                break
-                
-        # get column names
-        for column_identifier in column_identifiers:
-            if isinstance(column_identifier, sqlparse.sql.Function):
-                for identifier in column_identifier.get_parameters():
-                    columns.append({"name": identifier.value, "real_name": column_identifier.get_name().lower()})
-            else:
-                try: 
-                    columns.append({"name": column_identifier.get_name(), "real_name": column_identifier.get_real_name()})
-                except:
-                    columns.append({"name": column_identifier.value, "real_name": column_identifier.value})
-    except:
-        columns = []
-        # If there is an error in parsing the SQL, return an empty list
-        # This is a fallback to avoid breaking the evaluation process
-        logger.error("Error parsing SQL query to get columns.")
-
-    return columns
-
-def replace_renamed_columns(mod_cols, or_cols, pred_cols = None):
-    
-    if (sorted(mod_cols) == sorted(or_cols)):
-        return None
-
-    # if pd.isna(pred_cols):
-    if pred_cols is not None:
-
-        if '*' in or_cols:
-
-            or_cols_ = or_cols.remove('*')
-            return or_cols_
-        else:
-            return or_cols
-    else:
-        if type(pred_cols) == str:
-
-            pred_cols = ast.literal_eval(pred_cols)
-            
-        pred_cols_ = pred_cols.copy()
-
-        for m_col, o_col in zip(mod_cols, or_cols):
-            if o_col == '*':
-                continue
-            else:
-
-                pred_cols_ = [o_col if x == m_col else x for x in pred_cols_]
-        return pred_cols_
 
 def compare_results_columns_formatted(sql_pred, gold_result, pred_result):
     """
@@ -473,7 +404,7 @@ def compare_sql_queries(
     
     # Compare identifiers (OIDs)
     try:
-        comparison_result['oids'] = compare_results_oids(gold_result, pred_result, alias_handling=alias_handling)
+        comparison_result['oids'] = compare_results_oids(gold_result, pred_result, alias_handling=alias_handling, sql_query_pred=sql_query_pred)
     except Exception as e:
         comparison_result['oids'] = {
             'precision': 0,
@@ -666,7 +597,7 @@ def compare_sql_queries_multiple(
         comparison_result[i] = {}
         # Compare identifiers (OIDs)
         try:
-            comparison_result[i]['oids'] = compare_results_oids(gold_result, pred_result, alias_handling=alias_handling)
+            comparison_result[i]['oids'] = compare_results_oids(gold_result, pred_result, alias_handling=alias_handling, sql_query_pred=sql_query_pred)
         except Exception as e:
             comparison_result[i]['oids'] = {
                 'precision': 0,

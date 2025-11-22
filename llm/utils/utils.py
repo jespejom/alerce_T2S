@@ -46,8 +46,7 @@ def get_db_schema_prompt(db_schema: dict, query_tables: list) -> str:
         str: The text prompt for the database schema linking.
     """
     schema_description = ""
-    # print(query_tables)
-    # xd
+    
     for table_name in query_tables:
         if table_name in db_schema.keys():
             schema_description += db_schema[table_name] + "\n"
@@ -71,21 +70,25 @@ def extract_sql(sql_query_response: str, format_sql: bool = True) -> str:
     Returns:
         str: The extracted SQL query.
     """
-    # Check if the response contains a code block
-    code_block_match = re.search(r"```(sql|SQL)\s*([\s\S]*?)```", sql_query_response)
+    try:
+        # Check if the response contains a code block
+        code_block_match = re.search(r"```(sql|SQL)\s*([\s\S]*?)```", sql_query_response)
 
-    if code_block_match:
-        sql_code = code_block_match.group(2).strip()  # Get the SQL code
-        if format_sql:
-            sql_code = sqlparse.format(sql_code, reindent=True, keyword_case='upper')
-        return sql_code
-    else:
-        # If no code block is found, return the response as is
-        if format_sql:
-            sql_code = sqlparse.format(sql_query_response, reindent=True, keyword_case='upper')
+        if code_block_match:
+            sql_code = code_block_match.group(2).strip()  # Get the SQL code
+            if format_sql:
+                sql_code = sqlparse.format(sql_code, reindent=True, keyword_case='upper')
+            return sql_code
         else:
-            sql_code = sql_query_response.strip()
-        return sql_code
+            # If no code block is found, return the response as is
+            if format_sql:
+                sql_code = sqlparse.format(sql_query_response, reindent=True, keyword_case='upper')
+            else:
+                sql_code = sql_query_response.strip()
+            return sql_code
+    except Exception as e:
+        # In case of any error during extraction or formatting, return the original response
+        return sql_query_response
 
 
 def get_error_class(error_message: str) -> dict:

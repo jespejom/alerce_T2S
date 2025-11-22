@@ -4,7 +4,7 @@
     "model_name": "gpt-4.1-2025-04-14",
     "exp_name": "alerce_test_sbs_v4",
     "sql_gen_method": "step-by-step",
-    "n_exps": 5,
+    "n_exps": 10,
     "save_path": "./results",
     "eval": true,
     "self_correction": true,
@@ -18,13 +18,13 @@
     "access_time": 2,
     "n_tries": 5,
     "alias_handling": true,
-    "batch": true,
+    "batch": false,
     "model_name_decomp": "gpt-4.1-2025-04-14",
     "max_new_tokens": 4000,
     "max_new_tokens_decomp": 4000,
     "t": 0.0,
     "top_p": null,
-    "date_executed": "2025-10-21 15:45:15",
+    "date_executed": "2025-11-11 15:19:38",
     "experiment_settings": {
         "schema_linking": {
             "model": {

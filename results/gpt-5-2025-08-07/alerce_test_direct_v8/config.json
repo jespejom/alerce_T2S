@@ -4,7 +4,7 @@
     "model_name": "gpt-5-2025-08-07",
     "exp_name": "alerce_test_direct_v8",
     "sql_gen_method": "direct",
-    "n_exps": 5,
+    "n_exps": 10,
     "save_path": "./results",
     "eval": true,
     "self_correction": true,
@@ -18,13 +18,13 @@
     "access_time": 2,
     "n_tries": 5,
     "alias_handling": true,
-    "batch": true,
+    "batch": false,
     "model_name_decomp": "gpt-5-2025-08-07",
-    "max_new_tokens": 4000,
-    "max_new_tokens_decomp": 4000,
+    "max_new_tokens": 12000,
+    "max_new_tokens_decomp": 12000,
     "t": 1.0,
     "top_p": null,
-    "date_executed": "2025-10-20 15:47:42",
+    "date_executed": "2025-11-12 05:12:41",
     "experiment_settings": {
         "schema_linking": {
             "model": {
@@ -43,7 +43,7 @@
             "model": {
                 "model_name": "gpt-5-2025-08-07",
                 "temperature": 1.0,
-                "max_tokens": 4000,
+                "max_tokens": 12000,
                 "top_p": 1.0
             },
             "db_schema": {
@@ -76,7 +76,7 @@
             "model": {
                 "model_name": "gpt-5-2025-08-07",
                 "temperature": 1.0,
-                "max_tokens": 4000,
+                "max_tokens": 12000,
                 "top_p": 1.0
             },
             "db_schema": {

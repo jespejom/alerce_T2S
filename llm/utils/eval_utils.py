@@ -3,6 +3,94 @@ import json
 from typing import List, Dict
 import numpy as np
 
+
+import ast
+import sqlparse
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+def get_query_columns(sql):
+    try:
+        stmt = sqlparse.parse(sql)[0]
+        columns = []
+        column_identifiers = []
+
+        # get column_identifieres
+        in_select = False
+        for token in stmt.tokens:
+            if isinstance(token, sqlparse.sql.Comment):
+                continue
+            if str(token).lower() == 'select':
+                in_select = True
+            elif in_select and token.ttype is sqlparse.tokens.Wildcard:
+                column_identifiers.append(token)
+                break
+            elif token.value == 'table_name':
+                column_identifiers.append(token)
+                break
+            elif in_select and token.ttype is None:
+                if isinstance(token, sqlparse.sql.Function):
+                    column_identifiers.append(token)
+                    break
+                elif isinstance(token, sqlparse.sql.Identifier):
+                    column_identifiers.append(token)
+                    continue
+                else:
+                    for identifier in token.get_identifiers():
+                        column_identifiers.append(identifier)
+                    break
+            elif in_select and token.ttype is sqlparse.tokens.Keyword:
+                break
+                
+        # get column names
+        for column_identifier in column_identifiers:
+            if isinstance(column_identifier, sqlparse.sql.Function):
+                for identifier in column_identifier.get_parameters():
+                    columns.append({"name": identifier.value, "real_name": column_identifier.get_name().lower()})
+            else:
+                try: 
+                    columns.append({"name": column_identifier.get_name(), "real_name": column_identifier.get_real_name()})
+                except:
+                    columns.append({"name": column_identifier.value, "real_name": column_identifier.value})
+    except:
+        columns = []
+        # If there is an error in parsing the SQL, return an empty list
+        # This is a fallback to avoid breaking the evaluation process
+        logger.error("Error parsing SQL query to get columns.")
+
+    return columns
+
+def replace_renamed_columns(mod_cols, or_cols, pred_cols = None):
+    
+    if (sorted(mod_cols) == sorted(or_cols)):
+        return None
+
+    # if pd.isna(pred_cols):
+    if pred_cols is not None:
+
+        if '*' in or_cols:
+
+            or_cols_ = or_cols.remove('*')
+            return or_cols_
+        else:
+            return or_cols
+    else:
+        if type(pred_cols) == str:
+
+            pred_cols = ast.literal_eval(pred_cols)
+            
+        pred_cols_ = pred_cols.copy()
+
+        for m_col, o_col in zip(mod_cols, or_cols):
+            if o_col == '*':
+                continue
+            else:
+
+                pred_cols_ = [o_col if x == m_col else x for x in pred_cols_]
+        return pred_cols_
+
+
 def metrics_aggregation(results: List[dict], take_error_gold: bool = False) -> dict:
     """
     Aggregate the metrics from multiple SQL query comparisons.
@@ -560,7 +648,7 @@ def metrics_aggregation(results: List[dict], take_error_gold: bool = False) -> d
         for req_id, req_id_metrics in req_ids_dict.items():
             if req_id_metrics['oids_metrics']['perfect_match_count'] == []: continue # skip queries where gold query failed
             elif len(req_id_metrics['oids_metrics']['perfect_match_count']) != n_exps:
-                print(f"Warning: Request ID {req_id} has {req_id_metrics['oids_metrics']['perfect_match_count']} perfect matches, expected {n_exps}.")
+                print(f"Warning model: Request ID {req_id} has {req_id_metrics['oids_metrics']['perfect_match_count']} perfect matches, expected {n_exps}.")
 
             req_metrics[req_id] = _process_group_metrics_dict(
                 req_id_metrics,
@@ -1100,63 +1188,67 @@ def evaluation_results_to_dataframe(
                     }
                     rows.append(row)
                 
-            for row_i in results["corrected"]['detailed_results']:
-                sql_output = row_i['comparison']
-                oids_results = sql_output.get('oids')
-                cols_results = sql_output.get('columns')
-                row = {
-                    # experiment metadata
-                    "model_name": model_name,
-                    "exp_name": exp_name,
-                    "req_id": row_i["req_id"],
-                    "n_exp": row_i["n_exp"],
-                    # SQL output metadata
-                    "gold_diff": row_i["difficulty"],
-                    "pred_diff": row_i["pred_diff"],
-                    "pred_tables": row_i["pred_tables"],
-                    "gold_sql": sql_output['sql_gold'],
-                    "pred_sql": sql_output['sql_pred'],
-                    # oid results
-                    'oid_precision': oids_results.get('precision', None),
-                    'oid_recall': oids_results.get('recall', None),
-                    'oid_f1_score': oids_results.get('f1_score', None),
-                    'oid_perfect_match': oids_results.get('perfect_match', None),
-                    'oid_true_positives': oids_results.get('true_positives', None),
-                    'oid_false_positives': oids_results.get('false_positives', None),
-                    'oid_false_negatives': oids_results.get('false_negatives', None),
-                    'oid_size_gold': oids_results.get('size_gold', None),
-                    'oid_size_pred': oids_results.get('size_pred', None),
-                    'oid_comparison_type': oids_results.get('comparison_type', None),
-                    'oid_gold_id_col': oids_results.get('gold_id_col', None),
-                    'oid_pred_id_col': oids_results.get('pred_id_col', None),
-                    # column results
-                    'cols_precision': cols_results.get('precision', None),
-                    'cols_recall': cols_results.get('recall', None),
-                    'cols_f1_score': cols_results.get('f1_score', None),
-                    'cols_perfect_match': cols_results.get('perfect_match', None),
-                    'cols_true_positives': cols_results.get('true_positives', None),
-                    'cols_false_positives': cols_results.get('false_positives', None),
-                    'cols_false_negatives': cols_results.get('false_negatives', None),
-                    'cols_size_gold': cols_results.get('size_gold', None),
-                    'cols_size_pred': cols_results.get('size_pred', None),
-                    'cols_comparison_type': cols_results.get('comparison_type', None),
-                    # column results formatted
-                    'cols_precision_formatted': cols_results.get('precision_formatted', None),
-                    'cols_recall_formatted': cols_results.get('recall_formatted', None),
-                    'cols_f1_score_formatted': cols_results.get('f1_score_formatted', None),
-                    'cols_perfect_match_formatted': cols_results.get('perfect_match_formatted', None),
-                    'cols_true_positives_formatted': cols_results.get('true_positives_formatted', None),
-                    'cols_false_positives_formatted': cols_results.get('false_positives_formatted', None),
-                    'cols_false_negatives_formatted': cols_results.get('false_negatives_formatted', None),
-                    'cols_size_gold_formatted': cols_results.get('size_gold_formatted', None),
-                    'cols_size_pred_formatted': cols_results.get('size_pred_formatted', None),
-                    'cols_comparison_type_formatted': cols_results.get('comparison_type_formatted', None),
-                    # SQL output results
-                    "exec_time_gold": sql_output.get('execution_time_gold', None),
-                    "exec_time_pred": sql_output.get('execution_time_pred', None),
-                    "error_gold": sql_output.get('error_gold', None),
-                    "error_pred": sql_output.get('error_pred', None),
-                    "self_corrected": False
-                }
-                rows.append(row)
+            if "detailed_results" in results["corrected"]:
+                for row_i in results["corrected"]['detailed_results']:
+                    sql_output = row_i['comparison']
+                    oids_results = sql_output.get('oids')
+                    cols_results = sql_output.get('columns')
+                    row = {
+                        # experiment metadata
+                        "model_name": model_name,
+                        "exp_name": exp_name,
+                        "req_id": row_i["req_id"],
+                        "n_exp": row_i["n_exp"],
+                        # SQL output metadata
+                        "gold_diff": row_i["difficulty"],
+                        "pred_diff": row_i["pred_diff"],
+                        "pred_tables": row_i["pred_tables"],
+                        "gold_sql": sql_output['sql_gold'],
+                        "pred_sql": sql_output['sql_pred'],
+                        # oid results
+                        'oid_precision': oids_results.get('precision', None),
+                        'oid_recall': oids_results.get('recall', None),
+                        'oid_f1_score': oids_results.get('f1_score', None),
+                        'oid_perfect_match': oids_results.get('perfect_match', None),
+                        'oid_true_positives': oids_results.get('true_positives', None),
+                        'oid_false_positives': oids_results.get('false_positives', None),
+                        'oid_false_negatives': oids_results.get('false_negatives', None),
+                        'oid_size_gold': oids_results.get('size_gold', None),
+                        'oid_size_pred': oids_results.get('size_pred', None),
+                        'oid_comparison_type': oids_results.get('comparison_type', None),
+                        'oid_gold_id_col': oids_results.get('gold_id_col', None),
+                        'oid_pred_id_col': oids_results.get('pred_id_col', None),
+                        # column results
+                        'cols_precision': cols_results.get('precision', None),
+                        'cols_recall': cols_results.get('recall', None),
+                        'cols_f1_score': cols_results.get('f1_score', None),
+                        'cols_perfect_match': cols_results.get('perfect_match', None),
+                        'cols_true_positives': cols_results.get('true_positives', None),
+                        'cols_false_positives': cols_results.get('false_positives', None),
+                        'cols_false_negatives': cols_results.get('false_negatives', None),
+                        'cols_size_gold': cols_results.get('size_gold', None),
+                        'cols_size_pred': cols_results.get('size_pred', None),
+                        'cols_comparison_type': cols_results.get('comparison_type', None),
+                        # column results formatted
+                        'cols_precision_formatted': cols_results.get('precision_formatted', None),
+                        'cols_recall_formatted': cols_results.get('recall_formatted', None),
+                        'cols_f1_score_formatted': cols_results.get('f1_score_formatted', None),
+                        'cols_perfect_match_formatted': cols_results.get('perfect_match_formatted', None),
+                        'cols_true_positives_formatted': cols_results.get('true_positives_formatted', None),
+                        'cols_false_positives_formatted': cols_results.get('false_positives_formatted', None),
+                        'cols_false_negatives_formatted': cols_results.get('false_negatives_formatted', None),
+                        'cols_size_gold_formatted': cols_results.get('size_gold_formatted', None),
+                        'cols_size_pred_formatted': cols_results.get('size_pred_formatted', None),
+                        'cols_comparison_type_formatted': cols_results.get('comparison_type_formatted', None),
+                        # SQL output results
+                        "exec_time_gold": sql_output.get('execution_time_gold', None),
+                        "exec_time_pred": sql_output.get('execution_time_pred', None),
+                        "error_gold": sql_output.get('error_gold', None),
+                        "error_pred": sql_output.get('error_pred', None),
+                        "self_corrected": False
+                    }
+                    rows.append(row)
+            else:
+                print(f"No detailed results found for {model_name}/{exp_name} corrected evaluation.")
+                continue
     return pd.DataFrame(rows)

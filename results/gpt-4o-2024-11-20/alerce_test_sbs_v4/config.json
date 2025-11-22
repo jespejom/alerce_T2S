@@ -13,18 +13,18 @@
     "promptV_diff_class": "diff_v8",
     "promptV_gen": "sbs_v4",
     "promptV_sc": "sc_v3",
-    "num_processes": 4,
+    "num_processes": 3,
     "parallel": true,
     "access_time": 2,
     "n_tries": 5,
     "alias_handling": true,
     "batch": true,
-    "model_name_decomp": "gpt-4o-2024-11-20",
+    "model_name_decomp": "gpt-4.1-2025-04-14",
     "max_new_tokens": 4000,
     "max_new_tokens_decomp": 4000,
     "t": 0.0,
     "top_p": null,
-    "date_executed": "2025-08-19 09:32:12",
+    "date_executed": "2025-11-10 16:36:13",
     "experiment_settings": {
         "schema_linking": {
             "model": {
@@ -89,7 +89,7 @@
         },
         "difficulty_classification": {
             "model": {
-                "model_name": "gpt-4o-2024-11-20",
+                "model_name": "gpt-4.1-2025-04-14",
                 "temperature": 0.0,
                 "max_tokens": 4000,
                 "top_p": 1.0

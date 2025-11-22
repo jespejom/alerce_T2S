@@ -2,6 +2,7 @@ import os
 from model.llm import LLMModel
 from model.gpt import GPTModel
 from model.claude import ClaudeModel
+from model.gemini import GeminiModel
 from model.vllm import vLLMModel
 import tiktoken
 import logging
@@ -50,6 +51,14 @@ def load_sql_model(model_name: str, **kwargs) -> LLMModel:
             logger.info("ANTHROPIC_API_KEY found in environment variables.")
 
         return ClaudeModel(model_name, temperature=temperature, max_tokens=max_tokens, top_p=top_p)
+    elif model_name.startswith('gemini'):
+        # set google api key
+        if 'GEMINI_API_KEY' not in os.environ:
+            logger.warning("GEMINI_API_KEY not found in environment variables. Setting it now.")
+            os.environ['GEMINI_API_KEY'] = input("Please enter your Gemini API key: ")
+        else:
+            logger.info("GEMINI_API_KEY found in environment variables.")
+        return GeminiModel(model_name, temperature=temperature, max_tokens=max_tokens, top_p=top_p)
     else:
         # raise ValueError(f"Unsupported model: {model_name}")
         return vLLMModel(model_name, temperature=temperature, max_tokens=max_tokens, top_p=top_p)
@@ -88,10 +97,15 @@ models_info =  [{'model':'gpt-3.5-turbo', 'inp_price': 0.0005 , 'out_price': 0.0
                 {'model':'gpt-4-32k', 'inp_price': 0.06, 'out_price': 0.12},
                 {'model':'gpt-4.1-2025-04-14', 'inp_price': 0.002, 'out_price': 0.008},
                 {'model':'text-davinci-003', 'inp_price': 0.02, 'out_price': 0.02},
+                # Claude Models
                 {'model':'claude-3-7-sonnet-20250219', 'inp_price': 0.003, 'out_price': 0.015},
                 {'model':'claude-3-5-sonnet-20240620', 'inp_price': 0.003, 'out_price': 0.015},
                 {'model':'claude-3-opus-20240229', 'inp_price': 0.015, 'out_price': 0.075},
-                {'model':'claude-3-haiku-20240307', 'inp_price': 0.0025, 'out_price': 0.00125},]
+                {'model':'claude-3-haiku-20240307', 'inp_price': 0.0025, 'out_price': 0.00125},
+                # Gemini Models
+                {'model':'gemini-2.5-pro', 'inp_price': 0.00125, 'out_price': 0.01},
+                {'model':'gemini-2.5-flash', 'inp_price': 0.0003, 'out_price': 0.0025},
+                ]
 
 ### Calculate price a paragraph of text
 def calc_price(input_text,model='gpt-3.5-turbo', output_tokens=0, inp_tokens=0):

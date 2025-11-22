@@ -113,11 +113,13 @@ class SchemaLinking:
             raise ValueError("Empty tables list")
             
         # Process the list string into a Python list
-        tables_list = content.replace(" ", "").split(',')
+        tables_list = content.replace(" ", "").replace("\n", "").strip().split(',')
         tables_list = [table.strip("'\"") for table in tables_list]
         
         # Validate that extracted tables exist in the schema
+        print("Extracted tables:", tables_list)
         valid_tables = [table for table in tables_list if table in self.db_schema]
+        print("Valid tables:", valid_tables)
         if not valid_tables:
             raise ValueError("No valid tables found in the response")
             
@@ -154,7 +156,7 @@ class SchemaLinking:
         
         # Predict the tables associated with the query
         pred_tables = self.model.generate(model_input, n=n)
-        # print(pred_tables)
+        print(pred_tables)
         try:
             tables_list = []
             # Parse the tables list from the response
@@ -167,8 +169,8 @@ class SchemaLinking:
                 self.tables_list = tables_list
         except ValueError as e:
             # Add more context to the error
+            print(self.tables_list)
             raise ValueError(f"Failed to process schema linking result: {e}")
-        # print(self.tables_list)
         # print(type(self.tables_list))
         
         return self.tables_list, pred_tables

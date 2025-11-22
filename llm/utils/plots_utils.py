@@ -1189,7 +1189,9 @@ def plot_perfect_match_by_difficulty_model(
         std_dev: Union[str, None] = None,
         self_corr: bool = True,
         formatted_columns: bool = True,
-        medium_hard: bool = False
+        medium_hard: bool = False,
+        take_error_gold: bool = False,
+        save_fig: Union[str, None] = None
 ) -> None:
     """
     Plots the perfect match rates for OID and column matches by difficulty from evaluation results for a specific model and experiments.
@@ -1254,7 +1256,7 @@ def plot_perfect_match_by_difficulty_model(
                 for res_i in results:
                     if res_i['difficulty'] == 'medium' or res_i['difficulty'] == 'advanced': res_i['difficulty'] = 'medium-hard'
                 
-            aggregate_metrics = metrics_aggregation(results=results)
+            aggregate_metrics = metrics_aggregation(results=results, take_error_gold=take_error_gold)
             # ['errors']['gold_errors']
             print("================================")
             print(f"Number of gold queries with errors for experiment {exp_label}: {aggregate_metrics['errors']['gold_errors']}")
@@ -1333,21 +1335,21 @@ def plot_perfect_match_by_difficulty_model(
     axs[1].set_ylabel('Columns', fontsize=20)
     
     axs[1].set_xticks(x)
-    # change advanced to hard
-    difficulties = [d.replace('advanced', 'hard') for d in difficulties]
-    axs[1].set_xticklabels(difficulties)
+    # change advanced to hard and change first letter to uppercase
+    difficulties = [d.replace('advanced', 'hard').capitalize() for d in difficulties]
+    axs[1].set_xticklabels(difficulties, fontsize=18)
     axs[0].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
     axs[1].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
-    axs[0].legend(bbox_to_anchor=(1.02, 1.0))
+    axs[0].legend(bbox_to_anchor=(1.0, 1.0))
     # set suptitle
-    plt.suptitle('Query Generation Strategies', fontsize=24, y=0.95)
+    plt.suptitle('Query Generation Strategies', fontsize=24, y=0.92)
     # Add values on top of the bars
     for j, ax in enumerate(axs):
         for i, bar in enumerate(ax.patches):
             height = bar.get_height()
             # print(height)
             # Add the value on top of the bar, just above the standard bar height
-            ax.text(bar.get_x() + bar.get_width()/2, height + 0.01 + std[j][i], f"{height:.3f}", ha='center', va='bottom')            
+            ax.text(bar.get_x() + bar.get_width()/2, height + 0.01 + std[j][i], f"{height:.2f}", ha='center', va='bottom')            
     # add general y label
     fig.supylabel('% Perfect Matching Queries', fontsize=24, x=0.04)
     axs[0].set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])    
@@ -1356,6 +1358,13 @@ def plot_perfect_match_by_difficulty_model(
     # plt.tight_layout()
     # plt.xlabel('Difficulties')
     plt.legend( bbox_to_anchor=(1.02, 1.0),)
+    
+    for ax in axs:
+        ax.grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
     plt.show()
 
 
@@ -1367,6 +1376,7 @@ def plot_perfect_match_by_difficulty_models(
         self_corr: bool = True,
         formatted_columns: bool = True,
         take_error_golds: bool = False,
+        save_fig: Union[str, None] = None
 ) -> None:
     """
     Plots the perfect match rates for OID and column matches by difficulty from evaluation results for a specific model and experiments.
@@ -1481,21 +1491,25 @@ def plot_perfect_match_by_difficulty_models(
     std = []
     std_ = []
     std__ = []
-    for i, (exp_label, data) in enumerate(experiment_labels.items()):
+    for i, (exp_name, data) in enumerate(experiment_labels.items()):
         oid_rates = [data['oid'][d] for d in difficulties]
         column_rates = [data['column'][d] for d in difficulties]
         # Plot OID matches
-        axs[0].bar(x + (i - 0.5) * width, oid_rates, width, label=exp_label)
+        if 'claude-3-7' in exp_name: exp_label = 'Claude-3.7'
+        elif 'gpt' in exp_name: 
+            exp_label = "-".join(exp_name.split('-')[0:2]).replace('gpt', 'GPT')
+        else: exp_label = exp_name
+        axs[0].bar(x + (i - 1.5) * width, oid_rates, width, label=exp_label, align='center')
         # If std_dev is used, add error bars
         # Plot Column matches
-        axs[1].bar(x + (i - 0.5) * width, column_rates, width, label=exp_label, )
+        axs[1].bar(x + (i - 1.5) * width, column_rates, width, label=exp_label, align='center')
         if std_dev:
             oid_std = [data['oid_std'][d] for d in difficulties]
             std_.extend(oid_std)
-            axs[0].errorbar(x + (i - 0.5) * width, oid_rates, yerr=oid_std, fmt='none', ecolor='black', capsize=5)
+            axs[0].errorbar(x + (i - 1.5) * width, oid_rates, yerr=oid_std, fmt='none', ecolor='black', capsize=5, elinewidth=1)
             column_std = [data['column_std'][d] for d in difficulties]
             std__.extend(column_std)
-            axs[1].errorbar(x + (i - 0.5) * width, column_rates, yerr=column_std, fmt='none', ecolor='black', capsize=5)
+            axs[1].errorbar(x + (i - 1.5) * width, column_rates, yerr=column_std, fmt='none', ecolor='black', capsize=5, elinewidth=1)
             # for n in range(len(difficulties)):
             #     std_.append(oid_std[n])
             #     std_.append(column_std[n])
@@ -1505,13 +1519,13 @@ def plot_perfect_match_by_difficulty_models(
     axs[0].set_ylabel('Rows', fontsize=20)
     axs[1].set_ylabel('Columns', fontsize=20)
     
+    # change advanced to hard and change first letter to uppercase
+    difficulties = [d.replace('advanced', 'hard').capitalize() for d in difficulties]
     axs[1].set_xticks(x)
-    # change advanced to hard
-    difficulties = [d.replace('advanced', 'hard') for d in difficulties]
-    axs[1].set_xticklabels(difficulties)
+    axs[1].set_xticklabels(difficulties, fontsize=18)
     axs[0].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
     axs[1].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
-    axs[0].legend(bbox_to_anchor=(1.02, 1.02))
+    axs[0].legend(bbox_to_anchor=(1.005, 1.02))
     # set suptitle
     plt.suptitle('LLM Comparison', fontsize=24, y=0.95)
     # Add values on top of the bars
@@ -1528,6 +1542,13 @@ def plot_perfect_match_by_difficulty_models(
     # plt.tight_layout()
     # plt.xlabel('Difficulties')
     # plt.legend( bbox_to_anchor=(1.02, 1.0),)
+    
+    for ax in axs:
+        ax.grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
     plt.show()
 
 
@@ -1804,6 +1825,1249 @@ def table_perfect_match_by_difficulty_models(
     
     return rows_df_formatted, columns_df_formatted
 
+
+
+import pandas as pd
+from typing import Dict, List, Union, Any, Tuple
+
+# Helper function to extract numeric value for comparison
+def _get_value(val_str: Union[str, None]) -> float:
+    if val_str is None:
+        return -1.0
+    try:
+        # Extract number before " $\pm$" or just the number
+        clean = val_str.split(' $')[0].split(' ±')[0]
+        return float(clean)
+    except:
+        return -1.0
+
+def generate_latex_table_by_experiment(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    std_dev: Union[str, None] = None,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = True,
+) -> str:
+    """
+    Creates a SINGLE table with a SHARED header, split vertically by 
+    Metric Type (OID/Column) AND by experiment name.
+    
+    This stacks all results into one large table, e.g.:
+    - OID Match - Experiment 1
+    - OID Match - Experiment 2
+    - Column Match - Experiment 1
+    - Column Match - Experiment 2
+    
+    Args:
+        evaluation_results: Nested dict of evaluation results.
+        model_names: List of models to include.
+        exp_names: List of experiment names to include *separately*.
+        std_dev: Standard deviation type ('run', 'req_id', 'all', or None).
+        formatted_columns: Whether to use 'columns_formatted' metrics.
+        take_error_golds: Whether to include gold queries with errors.
+        table_size: LaTeX font size command.
+        adjust_margins: Whether to use 'table*' and squeeze columns.
+
+    Returns:
+        str: A string containing the complete, ready-to-use LaTeX table.
+    """
+    
+    # Attempt to import the aggregation utility
+    try:
+        from llm.utils.eval_utils import metrics_aggregation
+    except ImportError:
+        print("Warning: 'llm.utils.eval_utils.metrics_aggregation' not found.")
+        print("Please ensure this utility is available in your environment.")
+        # Define a basic placeholder if it's not found, to avoid crashing
+        # This assumes a very specific structure and is NOT a real replacement.
+        def metrics_aggregation(results, take_error_gold):
+            print("Using placeholder 'metrics_aggregation' due to import error.")
+            # This is a fallback and will likely fail if data is complex.
+            # A more robust solution would be needed if this is a common issue.
+            if results:
+                return results[0].get('summary', {})
+            return {}
+
+    
+    # --- 1. Data Collection ---
+    # We store data in a flat map for easy lookup
+    # Key: (Metric_Type, Exp_Name, Model, SC_Status, Difficulty)
+    data_map = {} 
+    difficulties_found = set()
+    sorted_exp_names = sorted(exp_names)
+    sorted_models = sorted(model_names)
+    
+    for exp_name in sorted_exp_names:
+        for model in sorted_models:
+            if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+                continue # Skip if model or experiment data is missing
+            
+            for self_corr in [False, True]:
+                self_corr_key = 'self_corrected' if self_corr else 'corrected'
+                sc_label = 'W/ Self-Corr' if self_corr else 'W/o Self-Corr'
+                
+                try:
+                    # Get results for this *specific* experiment
+                    results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+                except KeyError:
+                    # This experiment/model/sc_key combo might not exist
+                    continue
+                
+                if not results_list:
+                    continue
+                    
+                # Aggregate metrics for *this experiment's results only*
+                agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+                
+                if std_dev == 'run':
+                    results_by_diff = agg_metrics.get('by_difficulty_runs', {})
+                elif std_dev == 'req_id':
+                    results_by_diff = agg_metrics.get('by_difficulty_req_id', {})
+                else:
+                    results_by_diff = agg_metrics.get('by_difficulty', {}) # Default or 'all'
+
+                for diff, metrics in results_by_diff.items():
+                    diff_clean = diff.replace('advanced', 'hard').capitalize()
+                    difficulties_found.add(diff_clean)
+                    
+                    # --- ROW (OID) METRICS ---
+                    oid_mean = metrics.get('oids', {}).get('perfect_match_rate', 0)
+                    oid_std = metrics.get('oids', {}).get('perfect_match_rate_std', 0) if std_dev else 0
+                    
+                    # --- COLUMN METRICS ---
+                    col_metrics = metrics.get('columns_formatted', metrics.get('columns', {})) if formatted_columns else metrics.get('columns', {})
+                    col_mean = col_metrics.get('perfect_match_rate', 0)
+                    col_std = col_metrics.get('perfect_match_rate_std', 0) if std_dev else 0
+
+                    # Format Strings
+                    val_fmt = "{:.3f}"
+                    if std_dev:
+                        val_fmt += " $\pm$ {:.3f}"
+                        row_str = val_fmt.format(oid_mean, oid_std)
+                        col_str = val_fmt.format(col_mean, col_std)
+                    else:
+                        row_str = val_fmt.format(oid_mean)
+                        col_str = val_fmt.format(col_mean)
+                    
+                    data_map[('ID Match', exp_name, model, sc_label, diff_clean)] = row_str
+                    data_map[('Column Match', exp_name, model, sc_label, diff_clean)] = col_str
+
+    # --- 2. Find Max Values for Bolding (within each metric + experiment group) ---
+    
+    diff_order = ['Simple', 'Medium', 'Hard']
+    sorted_diffs = sorted(list(difficulties_found), 
+                          key=lambda x: diff_order.index(x) if x in diff_order else 99)
+    sc_labels = ['W/o Self-Corr', 'W/ Self-Corr']
+    metric_labels = ['ID Match', 'Column Match']
+    
+    max_vals = {} # Key: (Metric, Exp_Name, Difficulty, SC_Status) -> max_value
+    for metric in metric_labels:
+        for exp_name in sorted_exp_names:
+            for diff in sorted_diffs:
+                for sc in sc_labels:
+                    vals = [_get_value(data_map.get((metric, exp_name, model, sc, diff))) for model in sorted_models]
+                    max_vals[(metric, exp_name, diff, sc)] = max(vals) if (vals and any(v > -1 for v in vals)) else -1
+
+    # --- 3. Manually Build LaTeX Table String ---
+    
+    latex_lines = []
+    
+    # Calculate column counts
+    num_data_cols = len(sorted_diffs) * 2
+    total_cols = 1 + num_data_cols # 1 for Model stub
+    
+    # Preamble
+    table_env = "table*" if adjust_margins else "table"
+    latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+    
+    size_commands = {
+        'tiny': '\\tiny', 'scriptsize': '\\scriptsize', 'footnotesize': '\\footnotesize',
+        'small': '\\small', 'normalsize': '\\normalsize', 'large': '\\large'
+    }
+    latex_lines.append(size_commands.get(table_size, '\\small'))
+    
+    latex_lines.append(r"\centering")
+    
+    if adjust_margins:
+        latex_lines.append(r"\setlength{\tabcolsep}{4pt}") 
+    
+    col_def = "l" + ("c" * num_data_cols)
+    latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+    latex_lines.append(r"\toprule")
+
+    # -- Header Row 1: Difficulties (Spanned) --
+    header_1 = [""] # Empty for stub
+    for diff in sorted_diffs:
+        header_1.append(f"\\multicolumn{{2}}{{c}}{{{diff}}}")
+    latex_lines.append(" & ".join(header_1) + r" \\")
+
+    # -- Cmidrules for Difficulty Spans --
+    cmid_rules = []
+    for i in range(len(sorted_diffs)):
+        start_col = 2 + (i * 2)
+        end_col = 3 + (i * 2)
+        cmid_rules.append(f"\\cmidrule(lr){{{start_col}-{end_col}}}")
+    latex_lines.append(" ".join(cmid_rules))
+    
+    # -- Header Row 2: Self-Correction (Decked) --
+    header_2 = ["Model"] # Stub header
+    for _ in sorted_diffs:
+        header_2.append("W/o Self-Corr")
+        header_2.append("W/ Self-Corr")
+    latex_lines.append(" & ".join(header_2) + r" \\")
+    latex_lines.append(r"\midrule")
+
+    # -- Body: Iterate through metrics, experiments, and models --
+    for i, metric in enumerate(metric_labels):
+        if i > 0:
+            latex_lines.append(r"\midrule") # Separator between OID and Column
+            
+        for j, exp_name in enumerate(sorted_exp_names):
+            if j > 0:
+                # Add a lighter rule between experiments *within* the same metric block
+                latex_lines.append(f"\\cmidrule(lr){{1-{total_cols}}}")
+            
+            # -- Row Spanner for Metric Type + Experiment --
+            metric_label = "ID Match (Rows)" if metric == "ID Match" else "Column Match"
+            # Clean up exp_name for display (e.g., remove underscores)
+            # exp_display = exp_name.replace("_", " ").title()
+            exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+            exp_display = 'Direct' if 'direct' in exp_name else exp_display
+            spanner_label = f"\\textbf{{{metric_label} -- {exp_display}}}"
+            latex_lines.append(f"\\multicolumn{{{total_cols}}}{{l}}{{{spanner_label}}} \\\\")
+            
+            # -- Data Rows for this Metric + Experiment --
+            for model in sorted_models:
+                if 'claude-3-7' in model: model_label = 'Claude-3.7'
+                elif 'gpt' in model: 
+                    model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+                else: model_label = model
+                line = [model_label] # Start with model name
+                has_data = False
+                for diff in sorted_diffs:
+                    for sc in sc_labels:
+                        val_str = data_map.get((metric, exp_name, model, sc, diff), "-")
+                        if val_str != "-":
+                            has_data = True
+                        val_num = _get_value(val_str)
+                        max_val = max_vals.get((metric, exp_name, diff, sc), -1)
+                        
+                        # Apply bold if it's the max for this group
+                        if abs(val_num - max_val) < 1e-6 and max_val >= 0:
+                            line.append(f"\\textbf{{{val_str}}}")
+                        else:
+                            line.append(val_str)
+                
+                # Only add the row if it contains data
+                if has_data:
+                    latex_lines.append(" & ".join(line) + r" \\")
+
+    # -- Footer --
+    latex_lines.append(r"\bottomrule")
+    latex_lines.append(r"\end{tabular}")
+    
+    # Caption and Label
+    latex_lines.append(r"\caption{Perfect Match Rates by Metric, Experiment, Difficulty, and Self-Correction. Best result in each group and column is bolded.}")
+    latex_lines.append(r"\label{tab:combined_vertical_results_by_exp}")
+    
+    latex_lines.append(f"\\end{{{table_env}}}")
+    
+    final_latex_string = "\n".join(latex_lines)
+    
+    # Print for user
+    print("\n" + "="*80)
+    print("Vertically Split LaTeX Table by Experiment (Booktabs Format)")
+    print("="*80)
+    print(final_latex_string)
+    print("="*80)
+    
+    return final_latex_string
+
+
+# def generate_latex_tables_by_sc_status(
+#     evaluation_results: Dict[str, Dict[str, Any]],
+#     model_names: List[str],
+#     exp_names: List[str],
+#     std_dev: Union[str, None] = None,
+#     formatted_columns: bool = True,
+#     take_error_golds: bool = False,
+#     table_size: str = 'small',
+#     adjust_margins: bool = True,
+# ) -> str:
+#     """
+#     Creates TWO SEPARATE tables, one for "W/o Self-Correction" and one 
+#     for "W/ Self-Correction".
+    
+#     Each table maintains the vertical stacking format (i.e., stacked by 
+#     Metric Type and Experiment Name).
+    
+#     The headers are simplified to only show difficulties, as the
+#     self-correction status is defined by the table itself.
+
+#     Args:
+#         [Same as generate_latex_table_by_experiment]
+
+#     Returns:
+#         str: A single string containing the LaTeX for BOTH tables,
+#              one after the other, separated by a '\\bigskip'.
+#     """
+    
+#     # Attempt to import the aggregation utility
+#     try:
+#         from llm.utils.eval_utils import metrics_aggregation
+#     except ImportError:
+#         print("Warning: 'llm.utils.eval_utils.metrics_aggregation' not found.")
+#         print("Please ensure this utility is available in your environment.")
+#         def metrics_aggregation(results, take_error_gold):
+#             print("Using placeholder 'metrics_aggregation' due to import error.")
+#             if results:
+#                 # This is a dangerous assumption, update if necessary
+#                 return results[0].get('summary', {})
+#             return {}
+
+    
+#     # --- 1. Data Collection ---
+#     # This logic is identical to generate_latex_table_by_experiment
+#     # We collect all data first.
+#     # Key: (Metric_Type, Exp_Name, Model, SC_Status, Difficulty)
+#     data_map = {} 
+#     difficulties_found = set()
+#     sorted_exp_names = sorted(exp_names)
+#     sorted_models = sorted(model_names)
+    
+#     for exp_name in sorted_exp_names:
+#         for model in sorted_models:
+#             if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+#                 continue 
+            
+#             for self_corr in [False, True]:
+#                 self_corr_key = 'self_corrected' if self_corr else 'corrected'
+#                 sc_label = 'W/ Self-Corr' if self_corr else 'W/o Self-Corr'
+                
+#                 try:
+#                     results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+#                 except KeyError:
+#                     continue
+                
+#                 if not results_list:
+#                     continue
+                    
+#                 agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+                
+#                 if std_dev == 'run':
+#                     results_by_diff = agg_metrics.get('by_difficulty_runs', {})
+#                 elif std_dev == 'req_id':
+#                     results_by_diff = agg_metrics.get('by_difficulty_req_id', {})
+#                 else:
+#                     results_by_diff = agg_metrics.get('by_difficulty', {}) 
+
+#                 for diff, metrics in results_by_diff.items():
+#                     diff_clean = diff.replace('advanced', 'hard').capitalize()
+#                     difficulties_found.add(diff_clean)
+                    
+#                     oid_mean = metrics.get('oids', {}).get('perfect_match_rate', 0)
+#                     oid_std = metrics.get('oids', {}).get('perfect_match_rate_std', 0) if std_dev else 0
+                    
+#                     col_metrics = metrics.get('columns_formatted', metrics.get('columns', {})) if formatted_columns else metrics.get('columns', {})
+#                     col_mean = col_metrics.get('perfect_match_rate', 0)
+#                     col_std = col_metrics.get('perfect_match_rate_std', 0) if std_dev else 0
+
+#                     val_fmt = "{:.3f}"
+#                     if std_dev:
+#                         val_fmt += " $\pm$ {:.3f}"
+#                         row_str = val_fmt.format(oid_mean, oid_std)
+#                         col_str = val_fmt.format(col_mean, col_std)
+#                     else:
+#                         row_str = val_fmt.format(oid_mean)
+#                         col_str = val_fmt.format(col_mean)
+
+#                     data_map[('ID Match', exp_name, model, sc_label, diff_clean)] = row_str
+#                     data_map[('Column Match', exp_name, model, sc_label, diff_clean)] = col_str
+
+#     # --- 2. Find Max Values for Bolding (within each metric + experiment group) ---
+#     # This logic is also identical, as we need all max values pre-calculated.
+#     diff_order = ['Simple', 'Medium', 'Hard']
+#     sorted_diffs = sorted(list(difficulties_found), 
+#                           key=lambda x: diff_order.index(x) if x in diff_order else 99)
+#     sc_labels = ['W/o Self-Corr', 'W/ Self-Corr']
+#     metric_labels = ['ID Match', 'Column Match']
+    
+#     max_vals = {} # Key: (Metric, Exp_Name, Difficulty, SC_Status) -> max_value
+#     for metric in metric_labels:
+#         for exp_name in sorted_exp_names:
+#             for diff in sorted_diffs:
+#                 for sc in sc_labels:
+#                     vals = [_get_value(data_map.get((metric, exp_name, model, sc, diff))) for model in sorted_models]
+#                     max_vals[(metric, exp_name, diff, sc)] = max(vals) if (vals and any(v > -1 for v in vals)) else -1
+
+#     # --- 3. Manually Build LaTeX Table Strings (Looping for each SC status) ---
+    
+#     all_latex_tables = []
+    
+#     for sc_bool, sc_title in [(False, "W/o Self-Correction"), (True, "W/ Self-Correction")]:
+        
+#         # This is the key to get data from our map
+#         sc_label_key = "W/o Self-Corr" if not sc_bool else "W/ Self-Corr"
+        
+#         latex_lines = []
+        
+#         # Calculate column counts (Simplified header)
+#         num_data_cols = len(sorted_diffs)
+#         total_cols = 1 + num_data_cols # 1 for Model stub
+        
+#         # Preamble
+#         table_env = "table*" if adjust_margins else "table"
+#         latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+        
+#         size_commands = {
+#             'tiny': '\\tiny', 'scriptsize': '\\scriptsize', 'footnotesize': '\\footnotesize',
+#             'small': '\\small', 'normalsize': '\\normalsize', 'large': '\\large'
+#         }
+#         latex_lines.append(size_commands.get(table_size, '\\small'))
+        
+#         latex_lines.append(r"\centering")
+        
+#         if adjust_margins:
+#             latex_lines.append(r"\setlength{\tabcolsep}{4pt}") 
+        
+#         # Simplified column definition
+#         col_def = "l" + ("c" * num_data_cols)
+#         latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+#         latex_lines.append(r"\toprule")
+
+#         # -- Simplified Header Row --
+#         header = ["Model"] + sorted_diffs
+#         latex_lines.append(" & ".join(header) + r" \\")
+#         latex_lines.append(r"\midrule")
+
+#         # -- Body: Iterate through metrics, experiments, and models --
+#         for i, metric in enumerate(metric_labels):
+#             if i > 0:
+#                 latex_lines.append(r"\midrule") # Separator between OID and Column
+                
+#             for j, exp_name in enumerate(sorted_exp_names):
+#                 if j > 0:
+#                     latex_lines.append(f"\\cmidrule(lr){{1-{total_cols}}}")
+                
+#                 # -- Row Spanner for Metric Type + Experiment --
+#                 metric_label = "ID Match (Rows)" if metric == "ID Match" else "Column Match"
+#                 # exp_display = exp_name.replace("_", " ").title()
+#                 exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+#                 exp_display = 'Direct' if 'direct' in exp_name else exp_display
+#                 spanner_label = f"\\textbf{{{metric_label} -- {exp_display}}}"
+#                 latex_lines.append(f"\\multicolumn{{{total_cols}}}{{l}}{{{spanner_label}}} \\\\")
+                
+#                 # -- Data Rows for this Metric + Experiment --
+#                 for model in sorted_models:
+#                     if 'claude-3-7' in model: model_label = 'Claude-3.7'
+#                     elif 'gpt' in model: 
+#                         model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+#                     else: model_label = model
+#                     line = [model_label] # Start with model name
+#                     has_data = False
+#                     for diff in sorted_diffs:
+#                         # *** KEY CHANGE ***
+#                         # Get data for the specific SC status of this table
+#                         val_str = data_map.get((metric, exp_name, model, sc_label_key, diff), "-")
+                        
+#                         if val_str != "-":
+#                             has_data = True
+#                         val_num = _get_value(val_str)
+                        
+#                         # Get max val for this specific SC status
+#                         max_val = max_vals.get((metric, exp_name, diff, sc_label_key), -1)
+                        
+#                         if abs(val_num - max_val) < 1e-6 and max_val >= 0:
+#                             line.append(f"\\textbf{{{val_str}}}")
+#                         else:
+#                             line.append(val_str)
+                    
+#                     if has_data:
+#                         latex_lines.append(" & ".join(line) + r" \\")
+
+#         # -- Footer --
+#         latex_lines.append(r"\bottomrule")
+#         latex_lines.append(r"\end{tabular}")
+        
+#         # -- Caption and Label (Customized for SC status) --
+#         caption = (
+#             "Perfect Match Rates by Metric and Experiment "
+#             f"({sc_title}). Best result in each group "
+#             "and column is bolded."
+#         )
+#         latex_lines.append(f"\\caption{{{caption}}}")
+        
+#         label_sc_suffix = "_wo_sc" if not sc_bool else "_w_sc"
+#         latex_lines.append(f"\\label{{tab:vertical_by_exp{label_sc_suffix}}}")
+        
+#         latex_lines.append(f"\\end{{{table_env}}}")
+        
+#         all_latex_tables.append("\n".join(latex_lines))
+    
+#     # Join the two tables with a vertical space
+#     final_latex_string = "\n\n\\bigskip\n\n".join(all_latex_tables)
+    
+#     # Print for user
+#     print("\n" + "="*80)
+#     print("TWO SEPARATE LaTeX Tables by Self-Correction (Booktabs Format)")
+#     print("="*80)
+#     print(final_latex_string)
+#     print("="*80)
+    
+#     return final_latex_string
+
+
+def generate_latex_tables_by_sc_status(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    std_dev: Union[str, None] = None,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = True,
+    parallel_metrics: bool = False, # <-- NEW INPUT
+) -> str:
+    """
+    Creates TWO SEPARATE tables, one for "W/o Self-Correction" and one 
+    for "W/ Self-Correction".
+    
+    Can generate tables in two formats based on `parallel_metrics`:
+    
+    1. parallel_metrics=False (Default):
+       - Long format.
+       - Stacks metrics vertically (ID Match - Exp1, ID Match - Exp2, ...).
+       - Headers are just 'Simple', 'Medium', 'Hard'.
+       
+    2. parallel_metrics=True:
+       - Wide format.
+       - Metrics (ID Match, Column Match) are parallel column groups.
+       - Experiments (Exp1, Exp2) are vertical row spanners.
+       - Headers are Metric -> Difficulty.
+
+    Args:
+        [Same as generate_latex_table_by_experiment]
+        parallel_metrics (bool): Selects the table format.
+
+    Returns:
+        str: A single string containing the LaTeX for BOTH tables,
+             one after the other, separated by a '\\bigskip'.
+    """
+    
+    # Attempt to import the aggregation utility
+    try:
+        from llm.utils.eval_utils import metrics_aggregation
+    except ImportError:
+        print("Warning: 'llm.utils.eval_utils.metrics_aggregation' not found.")
+        print("Please ensure this utility is available in your environment.")
+        def metrics_aggregation(results, take_error_gold):
+            print("Using placeholder 'metrics_aggregation' due to import error.")
+            if results:
+                # This is a dangerous assumption, update if necessary
+                return results[0].get('summary', {})
+            return {}
+
+    
+    # --- 1. Data Collection ---
+    # This logic is identical for both formats
+    data_map = {} 
+    difficulties_found = set()
+    sorted_exp_names = sorted(exp_names)
+    sorted_models = sorted(model_names)
+    
+    for exp_name in sorted_exp_names:
+        for model in sorted_models:
+            if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+                continue 
+            
+            for self_corr in [False, True]:
+                self_corr_key = 'self_corrected' if self_corr else 'corrected'
+                sc_label = 'W/ Self-Corr' if self_corr else 'W/o Self-Corr'
+                
+                try:
+                    results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+                except KeyError:
+                    continue
+                
+                if not results_list:
+                    continue
+                    
+                agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+                
+                if std_dev == 'run':
+                    results_by_diff = agg_metrics.get('by_difficulty_runs', {})
+                elif std_dev == 'req_id':
+                    results_by_diff = agg_metrics.get('by_difficulty_req_id', {})
+                else:
+                    results_by_diff = agg_metrics.get('by_difficulty', {}) 
+
+                for diff, metrics in results_by_diff.items():
+                    diff_clean = diff.replace('advanced', 'hard').capitalize()
+                    difficulties_found.add(diff_clean)
+                    
+                    oid_mean = metrics.get('oids', {}).get('perfect_match_rate', 0)
+                    oid_std = metrics.get('oids', {}).get('perfect_match_rate_std', 0) if std_dev else 0
+                    
+                    col_metrics = metrics.get('columns_formatted', metrics.get('columns', {})) if formatted_columns else metrics.get('columns', {})
+                    col_mean = col_metrics.get('perfect_match_rate', 0)
+                    col_std = col_metrics.get('perfect_match_rate_std', 0) if std_dev else 0
+
+                    val_fmt = "{:.3f}"
+                    if std_dev:
+                        val_fmt += " $\pm$ {:.3f}"
+                        row_str = val_fmt.format(oid_mean, oid_std)
+                        col_str = val_fmt.format(col_mean, col_std)
+                    else:
+                        row_str = val_fmt.format(oid_mean)
+                        col_str = val_fmt.format(col_mean)
+
+                    data_map[('ID Match', exp_name, model, sc_label, diff_clean)] = row_str
+                    data_map[('Column Match', exp_name, model, sc_label, diff_clean)] = col_str
+
+    # --- 2. Find Max Values for Bolding ---
+    # This logic is also identical for both formats
+    diff_order = ['Simple', 'Medium', 'Hard']
+    sorted_diffs = sorted(list(difficulties_found), 
+                          key=lambda x: diff_order.index(x) if x in diff_order else 99)
+    sc_labels = ['W/o Self-Corr', 'W/ Self-Corr']
+    metric_labels = ['ID Match', 'Column Match']
+    
+    max_vals = {} # Key: (Metric, Exp_Name, Difficulty, SC_Status) -> max_value
+    for metric in metric_labels:
+        for exp_name in sorted_exp_names:
+            for diff in sorted_diffs:
+                for sc in sc_labels:
+                    vals = [_get_value(data_map.get((metric, exp_name, model, sc, diff))) for model in sorted_models]
+                    max_vals[(metric, exp_name, diff, sc)] = max(vals) if (vals and any(v > -1 for v in vals)) else -1
+
+    # --- 3. Manually Build LaTeX Table Strings (Looping for each SC status) ---
+    
+    all_latex_tables = []
+    size_commands = {
+        'tiny': '\\tiny', 'scriptsize': '\\scriptsize', 'footnotesize': '\\footnotesize',
+        'small': '\\small', 'normalsize': '\\normalsize', 'large': '\\large'
+    }
+    for sc_bool, sc_title in [(False, "W/o Self-Correction"), (True, "W/ Self-Correction")]:
+        
+        sc_label_key = "W/o Self-Corr" if not sc_bool else "W/ Self-Corr"
+        latex_lines = []
+        
+        table_env = "table*" if adjust_margins else "table"
+        size_cmd = size_commands.get(table_size, '\\small')
+        
+        # --- PREAMBLE ---
+        latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+        latex_lines.append(size_cmd)
+        latex_lines.append(r"\centering")
+        if adjust_margins:
+            latex_lines.append(r"\setlength{\tabcolsep}{4pt}") 
+        
+        if parallel_metrics:
+            # --- NEW FORMAT: WIDE (Parallel Metrics) ---
+            num_diffs = len(sorted_diffs)
+            num_data_cols = num_diffs * 2 # ID group + Column group
+            total_cols = 1 + num_data_cols
+            
+            # Column def with vertical lines
+            col_def = "l | " + ("c" * num_diffs) + " | " + ("c" * num_diffs)
+            latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+            latex_lines.append(r"\toprule")
+
+            # -- Header 1: Metric Type (Spanned) --
+            header_1 = [""] # Empty for stub
+            header_1.append(f"\\multicolumn{{{num_diffs}}}{{c|}}{{ID Match (Rows)}}")
+            header_1.append(f"\\multicolumn{{{num_diffs}}}{{c|}}{{Column Match}}")
+            latex_lines.append(" & ".join(header_1) + r" \\")
+
+            # -- Header 2: Difficulties (Decked) --
+            header_2 = ["Model"] + sorted_diffs + sorted_diffs # e.g., Model, S, M, H, S, M, H
+            latex_lines.append(" & ".join(header_2) + r" \\")
+            latex_lines.append(r"\midrule")
+
+            # -- Body: Iterate through experiments (as spanners) and models --
+            for j, exp_name in enumerate(sorted_exp_names):
+                if j > 0:
+                    latex_lines.append(f"\\cmidrule(lr){{1-{total_cols}}}")
+                
+                # -- Row Spanner for Experiment --
+                exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+                exp_display = 'Direct' if 'direct' in exp_name else exp_display
+                spanner_label = f"\\textbf{{{exp_display}}}"
+                latex_lines.append(f"\\multicolumn{{{total_cols}}}{{l}}{{{spanner_label}}} \\\\")
+                
+                # -- Data Rows for this Experiment --
+                for model in sorted_models:
+                    if 'claude-3-7' in model: model_label = 'Claude-3.7'
+                    elif 'gpt' in model: 
+                        model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+                    else: model_label = model
+                    
+                    line = [model_label]
+                    has_data = False
+                    
+                    # --- ID Match Block ---
+                    for diff in sorted_diffs:
+                        val_str = data_map.get(('ID Match', exp_name, model, sc_label_key, diff), "-")
+                        if val_str != "-": has_data = True
+                        val_num = _get_value(val_str)
+                        max_val = max_vals.get(('ID Match', exp_name, diff, sc_label_key), -1)
+                        if abs(val_num - max_val) < 1e-6 and max_val >= 0:
+                            line.append(f"\\textbf{{{val_str}}}")
+                        else:
+                            line.append(val_str)
+                            
+                    # --- Column Match Block ---
+                    for diff in sorted_diffs:
+                        val_str = data_map.get(('Column Match', exp_name, model, sc_label_key, diff), "-")
+                        if val_str != "-": has_data = True
+                        val_num = _get_value(val_str)
+                        max_val = max_vals.get(('Column Match', exp_name, diff, sc_label_key), -1)
+                        if abs(val_num - max_val) < 1e-6 and max_val >= 0:
+                            line.append(f"\\textbf{{{val_str}}}")
+                        else:
+                            line.append(val_str)
+
+                    if has_data:
+                        latex_lines.append(" & ".join(line) + r" \\")
+
+        else:
+            # --- OLD FORMAT: LONG (Stacked Metrics) ---
+            num_data_cols = len(sorted_diffs)
+            total_cols = 1 + num_data_cols
+            
+            col_def = "l" + ("c" * num_data_cols)
+            latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+            latex_lines.append(r"\toprule")
+
+            # -- Simplified Header Row --
+            header = ["Model"] + sorted_diffs
+            latex_lines.append(" & ".join(header) + r" \\")
+            latex_lines.append(r"\midrule")
+
+            # -- Body: Iterate through metrics, experiments, and models --
+            for i, metric in enumerate(metric_labels):
+                if i > 0:
+                    latex_lines.append(r"\midrule") # Separator between OID and Column
+                    
+                for j, exp_name in enumerate(sorted_exp_names):
+                    if j > 0:
+                        latex_lines.append(f"\\cmidrule(lr){{1-{total_cols}}}")
+                    
+                    metric_label = "ID Match (Rows)" if metric == "ID Match" else "Column Match"
+                    exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+                    exp_display = 'Direct' if 'direct' in exp_name else exp_display
+                    spanner_label = f"\\textbf{{{metric_label} -- {exp_display}}}"
+                    latex_lines.append(f"\\multicolumn{{{total_cols}}}{{l}}{{{spanner_label}}} \\\\")
+                    
+                    for model in sorted_models:
+                        if 'claude-3-7' in model: model_label = 'Claude-3.7'
+                        elif 'gpt' in model: 
+                            model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+                        else: model_label = model
+                        line = [model_label]
+                        has_data = False
+                        for diff in sorted_diffs:
+                            val_str = data_map.get((metric, exp_name, model, sc_label_key, diff), "-")
+                            if val_str != "-": has_data = True
+                            val_num = _get_value(val_str)
+                            max_val = max_vals.get((metric, exp_name, diff, sc_label_key), -1)
+                            
+                            if abs(val_num - max_val) < 1e-6 and max_val >= 0:
+                                line.append(f"\\textbf{{{val_str}}}")
+                            else:
+                                line.append(val_str)
+                        
+                        if has_data:
+                            latex_lines.append(" & ".join(line) + r" \\")
+
+        # --- FOOTER (Common to both formats) ---
+        latex_lines.append(r"\bottomrule")
+        latex_lines.append(r"\end{tabular}")
+        
+        caption = (
+            "Perfect Match Rates by Experiment "
+            f"({sc_title}). Best result in each group "
+            "and column is bolded."
+        )
+        latex_lines.append(f"\\caption{{{caption}}}")
+        
+        label_sc_suffix = "_wo_sc" if not sc_bool else "_w_sc"
+        label_format = "_parallel" if parallel_metrics else "_stacked"
+        latex_lines.append(f"\\label{{tab:vertical_by_exp{label_sc_suffix}{label_format}}}")
+        
+        latex_lines.append(f"\\end{{{table_env}}}")
+        
+        all_latex_tables.append("\n".join(latex_lines))
+    
+    # Join the two tables with a vertical space
+    final_latex_string = "\n\n\\bigskip\n\n".join(all_latex_tables)
+    
+    # Print for user
+    print("\n" + "="*80)
+    print(f"TWO SEPARATE LaTeX Tables by Self-Correction (Format: {'Parallel' if parallel_metrics else 'Stacked'})")
+    print("="*80)
+    print(final_latex_string)
+    print("="*80)
+    
+    return final_latex_string
+
+
+def generate_latex_ranking_tables(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    use_self_correction: bool = True,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = True,
+) -> str:
+    """
+    Creates separate tables for each experiment, showing the *rank*
+    of each model, as shown in the user-provided image.
+    
+    - Ranks are calculated per-column (higher score = rank 1).
+    - A 'SUM' column is added.
+    - Models are sorted by 'SUM' (lowest is best).
+    - Uses a specific self-correction status as defined by `use_self_correction`.
+
+    Args:
+        evaluation_results: Nested dict of evaluation results.
+        model_names: List of models to include.
+        exp_names: List of experiment names to rank.
+        use_self_correction: (bool) If True, uses "W/ Self-Corr" data. 
+                             If False, uses "W/o Self-Corr" data.
+        formatted_columns: Whether to use 'columns_formatted' metrics.
+        take_error_golds: Whether to include gold queries with errors.
+        table_size: LaTeX font size command.
+        adjust_margins: Whether to use 'table*' and squeeze columns.
+
+    Returns:
+        str: A single string containing the LaTeX for ALL ranking tables,
+             one after the other, separated by a '\\bigskip'.
+    """
+    
+    # Attempt to import the aggregation utility
+    try:
+        from llm.utils.eval_utils import metrics_aggregation
+    except ImportError:
+        print("Warning: 'llm.utils.eval_utils.metrics_aggregation' not found.")
+        print("Please ensure this utility is available in your environment.")
+        def metrics_aggregation(results, take_error_gold):
+            print("Using placeholder 'metrics_aggregation' due to import error.")
+            if results:
+                return results[0].get('summary', {})
+            return {}
+
+    
+    # --- 1. Data Collection ---
+    # We only store the raw *mean* values for ranking.
+    # Key: (Metric_Type, Exp_Name, Model, Difficulty)
+    data_map = {} 
+    difficulties_found = set()
+    sorted_exp_names = sorted(exp_names)
+    sorted_models = sorted(model_names)
+    
+    sc_label_key = "W/ Self-Corr" if use_self_correction else "W/o Self-Corr"
+    sc_title = "W/ Self-Correction" if use_self_correction else "W/o Self-Correction"
+    self_corr_key = 'self_corrected' if use_self_correction else 'corrected'
+    
+    for exp_name in sorted_exp_names:
+        for model in sorted_models:
+            if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+                continue 
+                
+            try:
+                results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+            except KeyError:
+                continue
+            
+            if not results_list:
+                continue
+                
+            agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+            
+            # We only need 'by_difficulty' for the mean scores
+            results_by_diff = agg_metrics.get('by_difficulty', {}) 
+
+            for diff, metrics in results_by_diff.items():
+                diff_clean = diff.replace('advanced', 'hard').capitalize()
+                difficulties_found.add(diff_clean)
+                
+                oid_mean = metrics.get('oids', {}).get('perfect_match_rate', 0)
+                
+                col_metrics = metrics.get('columns_formatted', metrics.get('columns', {})) if formatted_columns else metrics.get('columns', {})
+                col_mean = col_metrics.get('perfect_match_rate', 0)
+
+                # Store the raw float values, not strings
+                data_map[('ID Match', exp_name, model, diff_clean)] = oid_mean
+                data_map[('Column Match', exp_name, model, diff_clean)] = col_mean
+
+    # --- 2. Build and Rank Tables per Experiment ---
+    
+    diff_order = ['Simple', 'Medium', 'Hard']
+    sorted_diffs = sorted(list(difficulties_found), 
+                          key=lambda x: diff_order.index(x) if x in diff_order else 99)
+    metric_labels = ['ID Match', 'Column Match']
+    
+    # These are the columns from your image: RS, RM, RH, CS, CM, CH
+    rank_col_headers = []
+    for m_short, _ in [('R', 'ID Match'), ('C', 'Column Match')]:
+        for d_short in [d[0] for d in sorted_diffs]: # S, M, H
+            rank_col_headers.append(f"{m_short}{d_short}")
+
+    all_latex_tables = []
+
+    for exp_name in sorted_exp_names:
+        
+        # --- Create DataFrame with raw scores ---
+        pd_data = []
+        for model in sorted_models:
+            # Get model display name
+            if 'claude-3-7' in model: model_label = 'Claude-3.7'
+            elif 'gpt' in model: 
+                model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+            else: model_label = model
+            
+            row_data = {'Model': model_label}
+            has_data = False
+            for metric in metric_labels:
+                for diff in sorted_diffs:
+                    # e.g., 'R' + 'S' -> 'RS'
+                    col_key = f"{'R' if metric == 'ID Match' else 'C'}{diff[0]}"
+                    score = data_map.get((metric, exp_name, model, diff), None)
+                    
+                    if score is not None:
+                        has_data = True
+                    row_data[col_key] = score
+            
+            if has_data:
+                pd_data.append(row_data)
+
+        if not pd_data:
+            continue # Skip if no data for this experiment
+
+        df_scores = pd.DataFrame(pd_data).set_index('Model').fillna(-1)
+        
+        # --- Rank the DataFrame ---
+        # ascending=False means higher scores get lower ranks (Rank 1)
+        # method='min' handles ties (e.g., two 1st places, next is 3rd)
+        df_ranks = df_scores.rank(ascending=False, method='min').astype(int)
+        
+        # --- Sum and Sort ---
+        df_ranks['SUM'] = df_ranks.sum(axis=1)
+        df_ranks = df_ranks.sort_values(by='SUM', ascending=True)
+
+        # --- 3. Build LaTeX String for this table ---
+        latex_lines = []
+        table_env = "table*" if adjust_margins else "table"
+        latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+        
+        size_commands = {
+            'tiny': '\\tiny', 'scriptsize': '\\scriptsize', 'footnotesize': '\\footnotesize',
+            'small': '\\small', 'normalsize': '\\normalsize', 'large': '\\large'
+        }
+        latex_lines.append(size_commands.get(table_size, '\\small'))
+        latex_lines.append(r"\centering")
+
+        # Column definition: l | c c c | c c c || c
+        # Vertical lines as seen in your drawing
+        col_def = "l | " + " ".join(["c"] * len(sorted_diffs)) + " | " \
+                  + " ".join(["c"] * len(sorted_diffs)) + " || c"
+        
+        latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+        latex_lines.append(r"\toprule")
+        
+        # Header Row
+        header = ["LLM"] + rank_col_headers + ["SUM"]
+        latex_lines.append(" & ".join(header) + r" \\")
+        latex_lines.append(r"\midrule")
+        
+        # Data Rows
+        for model_label, row in df_ranks.iterrows():
+            row_values = [model_label] + [str(r) for r in row.values]
+            latex_lines.append(" & ".join(row_values) + r" \\")
+            
+        latex_lines.append(r"\bottomrule")
+        latex_lines.append(r"\end{tabular}")
+        
+        # Caption and Label
+        exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+        exp_display = 'Direct' if 'direct' in exp_name else exp_display
+        
+        caption = f"Model Ranking for {exp_display} ({sc_title})"
+        latex_lines.append(f"\\caption{{{caption}}}")
+        
+        label_exp = "_sbs" if 'sbs' in exp_name else "_direct"
+        label_sc = "_w_sc" if use_self_correction else "_wo_sc"
+        latex_lines.append(f"\\label{{tab:rank_{label_exp}{label_sc}}}")
+        
+        latex_lines.append(f"\\end{{{table_env}}}")
+        all_latex_tables.append("\n".join(latex_lines))
+
+    # Join all tables
+    final_latex_string = "\n\n\\bigskip\n\n".join(all_latex_tables)
+    
+    # Print for user
+    print("\n" + "="*80)
+    print(f"LaTeX Ranking Tables ({sc_title})")
+    print("="*80)
+    print(final_latex_string)
+    print("="*80)
+    
+    return final_latex_string
+
+
+def generate_latex_table_metrics_by_experiment(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    std_dev: Union[str, None] = None,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = True,
+    metric_type: List[str] = 'perfect_match_rate',
+) -> str:
+    """
+    Creates a SINGLE table with a SHARED header, split vertically by 
+    Metric Type (OID/Column) AND by experiment name.
+    
+    This stacks all results into one large table, e.g.:
+    - OID Match - Experiment 1
+    - OID Match - Experiment 2
+    - Column Match - Experiment 1
+    - Column Match - Experiment 2
+    
+    Args:
+        evaluation_results: Nested dict of evaluation results.
+        model_names: List of models to include.
+        exp_names: List of experiment names to include *separately*.
+        std_dev: Standard deviation type ('run', 'req_id', 'all', or None).
+        formatted_columns: Whether to use 'columns_formatted' metrics.
+        take_error_golds: Whether to include gold queries with errors.
+        table_size: LaTeX font size command.
+        adjust_margins: Whether to use 'table*' and squeeze columns.
+        metrics: List of metric keys to include in the table.
+
+    Returns:
+        str: A string containing the complete, ready-to-use LaTeX table.
+    """
+    
+    # Attempt to import the aggregation utility
+    try:
+        from llm.utils.eval_utils import metrics_aggregation
+    except ImportError:
+        print("Warning: 'llm.utils.eval_utils.metrics_aggregation' not found.")
+        print("Please ensure this utility is available in your environment.")
+        # Define a basic placeholder if it's not found, to avoid crashing
+        # This assumes a very specific structure and is NOT a real replacement.
+        def metrics_aggregation(results, take_error_gold):
+            print("Using placeholder 'metrics_aggregation' due to import error.")
+            # This is a fallback and will likely fail if data is complex.
+            # A more robust solution would be needed if this is a common issue.
+            if results:
+                return results[0].get('summary', {})
+            return {}
+
+    
+    # --- 1. Data Collection ---
+    # We store data in a flat map for easy lookup
+    # Key: (Metric_Type, Exp_Name, Model, SC_Status, Difficulty)
+    data_map = {} 
+    difficulties_found = set()
+    sorted_exp_names = sorted(exp_names)
+    sorted_models = sorted(model_names)
+    
+    for exp_name in sorted_exp_names:
+        for model in sorted_models:
+            if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+                continue # Skip if model or experiment data is missing
+            
+            for self_corr in [False, True]:
+                self_corr_key = 'self_corrected' if self_corr else 'corrected'
+                sc_label = 'W/ Self-Corr' if self_corr else 'W/o Self-Corr'
+                
+                try:
+                    # Get results for this *specific* experiment
+                    results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+                except KeyError:
+                    # This experiment/model/sc_key combo might not exist
+                    continue
+                
+                if not results_list:
+                    continue
+                    
+                # Aggregate metrics for *this experiment's results only*
+                agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+                
+                if std_dev == 'run':
+                    results_by_diff = agg_metrics.get('by_difficulty_runs', {})
+                elif std_dev == 'req_id':
+                    results_by_diff = agg_metrics.get('by_difficulty_req_id', {})
+                else:
+                    results_by_diff = agg_metrics.get('by_difficulty', {}) # Default or 'all'
+
+                for diff, metrics in results_by_diff.items():
+                    diff_clean = diff.replace('advanced', 'hard').capitalize()
+                    difficulties_found.add(diff_clean)
+                    
+                    # --- ROW (OID) METRICS ---
+                    oid_mean = metrics.get('oids', {}).get(metric_type, 0)
+                    oid_std = metrics.get('oids', {}).get(f"{metric_type}_std", 0) if std_dev else 0
+                    
+                    # --- COLUMN METRICS ---
+                    col_metrics = metrics.get('columns_formatted', metrics.get('columns', {})) if formatted_columns else metrics.get('columns', {})
+                    col_mean = col_metrics.get(metric_type, 0)
+                    col_std = col_metrics.get(f"{metric_type}_std", 0) if std_dev else 0
+
+                    # Format Strings
+                    val_fmt = "{:.3f}"
+                    if std_dev:
+                        val_fmt += " $\pm$ {:.3f}"
+                        row_str = val_fmt.format(oid_mean, oid_std)
+                        col_str = val_fmt.format(col_mean, col_std)
+                    else:
+                        row_str = val_fmt.format(oid_mean)
+                        col_str = val_fmt.format(col_mean)
+                    
+                    data_map[(f'ID {metric_type}', exp_name, model, sc_label, diff_clean)] = row_str
+                    data_map[(f'Column {metric_type}', exp_name, model, sc_label, diff_clean)] = col_str
+
+    # --- 2. Find Max Values for Bolding (within each metric + experiment group) ---
+    
+    diff_order = ['Simple', 'Medium', 'Hard']
+    sorted_diffs = sorted(list(difficulties_found), 
+                          key=lambda x: diff_order.index(x) if x in diff_order else 99)
+    sc_labels = ['W/o Self-Corr', 'W/ Self-Corr']
+    metric_labels = [f'ID {metric_type}', f'Column {metric_type}']
+    
+    max_vals = {} # Key: (Metric, Exp_Name, Difficulty, SC_Status) -> max_value
+    for metric in metric_labels:
+        for exp_name in sorted_exp_names:
+            for diff in sorted_diffs:
+                for sc in sc_labels:
+                    vals = [_get_value(data_map.get((metric, exp_name, model, sc, diff))) for model in sorted_models]
+                    max_vals[(metric, exp_name, diff, sc)] = max(vals) if (vals and any(v > -1 for v in vals)) else -1
+
+    # --- 3. Manually Build LaTeX Table String ---
+    
+    latex_lines = []
+    
+    # Calculate column counts
+    num_data_cols = len(sorted_diffs) * 2
+    total_cols = 1 + num_data_cols # 1 for Model stub
+    
+    # Preamble
+    table_env = "table*" if adjust_margins else "table"
+    latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+    
+    size_commands = {
+        'tiny': '\\tiny', 'scriptsize': '\\scriptsize', 'footnotesize': '\\footnotesize',
+        'small': '\\small', 'normalsize': '\\normalsize', 'large': '\\large'
+    }
+    latex_lines.append(size_commands.get(table_size, '\\small'))
+    
+    latex_lines.append(r"\centering")
+    
+    if adjust_margins:
+        latex_lines.append(r"\setlength{\tabcolsep}{4pt}") 
+    
+    col_def = "l" + ("c" * num_data_cols)
+    latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+    latex_lines.append(r"\toprule")
+
+    # -- Header Row 1: Difficulties (Spanned) --
+    header_1 = [""] # Empty for stub
+    for diff in sorted_diffs:
+        header_1.append(f"\\multicolumn{{2}}{{c}}{{{diff}}}")
+    latex_lines.append(" & ".join(header_1) + r" \\")
+
+    # -- Cmidrules for Difficulty Spans --
+    cmid_rules = []
+    for i in range(len(sorted_diffs)):
+        start_col = 2 + (i * 2)
+        end_col = 3 + (i * 2)
+        cmid_rules.append(f"\\cmidrule(lr){{{start_col}-{end_col}}}")
+    latex_lines.append(" ".join(cmid_rules))
+    
+    # -- Header Row 2: Self-Correction (Decked) --
+    header_2 = ["Model"] # Stub header
+    for _ in sorted_diffs:
+        header_2.append("W/o Self-Corr")
+        header_2.append("W/ Self-Corr")
+    latex_lines.append(" & ".join(header_2) + r" \\")
+    latex_lines.append(r"\midrule")
+
+    # -- Body: Iterate through metrics, experiments, and models --
+    for i, metric in enumerate(metric_labels):
+        if i > 0:
+            latex_lines.append(r"\midrule") # Separator between OID and Column
+            
+        for j, exp_name in enumerate(sorted_exp_names):
+            if j > 0:
+                # Add a lighter rule between experiments *within* the same metric block
+                latex_lines.append(f"\\cmidrule(lr){{1-{total_cols}}}")
+            
+            # -- Row Spanner for Metric Type + Experiment --
+            metric_label = f"ID {metric_type} (Rows)" if metric.startswith("ID") else f"Column {metric_type}"
+            metric_label = metric_label.replace("_", "\_")
+            # Clean up exp_name for display (e.g., remove underscores)
+            # exp_display = exp_name.replace("_", " ").title()
+            exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+            exp_display = 'Direct' if 'direct' in exp_name else exp_display
+            spanner_label = f"\\textbf{{{metric_label} -- {exp_display}}}"
+            latex_lines.append(f"\\multicolumn{{{total_cols}}}{{l}}{{{spanner_label}}} \\\\")
+            
+            # -- Data Rows for this Metric + Experiment --
+            for model in sorted_models:
+                if 'claude-3-7' in model: model_label = 'Claude-3.7'
+                elif 'gpt' in model: 
+                    model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+                else: model_label = model
+                line = [model_label] # Start with model name
+                has_data = False
+                for diff in sorted_diffs:
+                    for sc in sc_labels:
+                        val_str = data_map.get((metric, exp_name, model, sc, diff), "-")
+                        if val_str != "-":
+                            has_data = True
+                        val_num = _get_value(val_str)
+                        max_val = max_vals.get((metric, exp_name, diff, sc), -1)
+                        
+                        # Apply bold if it's the max for this group
+                        if abs(val_num - max_val) < 1e-6 and max_val >= 0:
+                            line.append(f"\\textbf{{{val_str}}}")
+                        else:
+                            line.append(val_str)
+                
+                # Only add the row if it contains data
+                if has_data:
+                    latex_lines.append(" & ".join(line) + r" \\")
+
+    # -- Footer --
+    latex_lines.append(r"\bottomrule")
+    latex_lines.append(r"\end{tabular}")
+    
+    # Caption and Label
+    latex_lines.append(r"\caption{'{metric_type}' by Experiment, Difficulty, and Self-Correction. Best result in each group and column is bolded.}")
+    latex_lines.append(r"\label{tab:combined_vertical_results_by_exp}")
+    
+    latex_lines.append(f"\\end{{{table_env}}}")
+    
+    final_latex_string = "\n".join(latex_lines)
+    
+    # Print for user
+    print("\n" + "="*80)
+    print("Vertically Split LaTeX Table by Experiment (Booktabs Format)")
+    print("="*80)
+    print(final_latex_string)
+    print("="*80)
+    
+    return final_latex_string
 
 
 
@@ -2093,13 +3357,15 @@ def table_metrics_by_difficulty_models(
     f1_rows_df_formatted = format_best_values(f1_rows_df)
     f1_columns_df_formatted = format_best_values(f1_columns_df)
     
+    if "sbs" in exp_names[0]: exp_label = "using step-by-step generation method"
+    if "dir" in exp_names[0]: exp_label = "using direct generation method"
     # Print tables in LaTeX format with enhanced formatting
     print("\n" + "="*80)
     print("PRECISION - ROWS - LaTeX Format")
     print("="*80)
     latex_str_precision_rows = create_enhanced_latex_table(
         precision_rows_df_formatted, 
-        'Precision Scores for Rows',
+        f'Precision Scores for Rows {exp_label}',
         'tab:precision_rows',
         table_size,
         adjust_margins
@@ -2111,7 +3377,7 @@ def table_metrics_by_difficulty_models(
     print("="*80)
     latex_str_precision_columns = create_enhanced_latex_table(
         precision_columns_df_formatted,
-        'Precision Scores for Columns', 
+        f'Precision Scores for Columns {exp_label}', 
         'tab:precision_columns',
         table_size,
         adjust_margins
@@ -2123,7 +3389,7 @@ def table_metrics_by_difficulty_models(
     print("="*80)
     latex_str_recall_rows = create_enhanced_latex_table(
         recall_rows_df_formatted, 
-        'Recall Scores for Rows',
+        f'Recall Scores for Rows {exp_label}',
         'tab:recall_rows',
         table_size,
         adjust_margins
@@ -2135,7 +3401,7 @@ def table_metrics_by_difficulty_models(
     print("="*80)
     latex_str_recall_columns = create_enhanced_latex_table(
         recall_columns_df_formatted,
-        'Recall Scores for Columns', 
+        f'Recall Scores for Columns {exp_label}', 
         'tab:recall_columns',
         table_size,
         adjust_margins
@@ -2147,7 +3413,7 @@ def table_metrics_by_difficulty_models(
     print("="*80)
     latex_str_f1_rows = create_enhanced_latex_table(
         f1_rows_df_formatted, 
-        'F1-Scores for Rows',
+        f'F1-Scores for Rows {exp_label}',
         'tab:f1_rows',
         table_size,
         adjust_margins
@@ -2159,7 +3425,7 @@ def table_metrics_by_difficulty_models(
     print("="*80)
     latex_str_f1_columns = create_enhanced_latex_table(
         f1_columns_df_formatted,
-        'F1-Scores for Columns', 
+        f'F1-Scores for Columns {exp_label}', 
         'tab:f1_columns',
         table_size,
         adjust_margins
@@ -2185,7 +3451,9 @@ def plot_perfect_match_by_difficulty_model_sc(
         model_name: str,
         exp_names: List[str],
         std_dev: Union[str, None] = None,
-        formatted_columns: bool = True
+        formatted_columns: bool = True,
+        take_error_golds: bool = False,
+        save_fig: Union[str, None] = None
 ) -> None:
     """
     Plots the perfect match rates for OID and column matches by difficulty from evaluation results for a specific model and experiments,
@@ -2249,7 +3517,7 @@ def plot_perfect_match_by_difficulty_model_sc(
                     column_match_rates_std = {}
 
                 results = evaluation_results[model_name][experiment][self_corr_key]['detailed_results']
-                aggregate_metrics = metrics_aggregation(results=results)
+                aggregate_metrics = metrics_aggregation(results=results, take_error_gold=take_error_golds)
                 # ['errors']['gold_errors']
                 print(f"Number of gold queries with errors for experiment {exp_label}: {aggregate_metrics['errors']['gold_errors']}")
                 # Use the aggregate metrics directly
@@ -2303,7 +3571,7 @@ def plot_perfect_match_by_difficulty_model_sc(
     for i, (self_corr_key, data) in enumerate(experiment_labels.items()):
         stds_ = []
         stds__ = []
-        for j, (exp_label, exp_data) in enumerate(data.items()):
+        for j, (exp_label, exp_data) in enumerate(sorted(data.items())):
             oid_rates = [exp_data['oid'][d] for d in difficulties]
             column_rates = [exp_data['column'][d] for d in difficulties]
             # Plot OID matches
@@ -2313,27 +3581,31 @@ def plot_perfect_match_by_difficulty_model_sc(
             axs[1, i].bar(x + (j - 0.5) * width, column_rates, width, label=exp_label, )
             if std_dev:
                 oid_std = [exp_data['oid_std'][d] for d in difficulties]
-                # stds_.extend(oid_std)
+                stds_.extend(oid_std)
                 axs[0, i].errorbar(x + (j - 0.5) * width, oid_rates, yerr=oid_std, fmt='none', ecolor='black', capsize=5)
                 column_std = [exp_data['column_std'][d] for d in difficulties]
-                # stds_.extend(column_std)
+                stds__.extend(column_std)
                 axs[1, i].errorbar(x + (j - 0.5) * width, column_rates, yerr=column_std, fmt='none', ecolor='black', capsize=5)
-                for n in range(len(column_std)):
-                    stds_.append(oid_std[n])
-                    stds_.append(column_std[n])
-            stds__.append(stds_)
+                # for n in range(len(column_std)):
+                #     stds_.append(oid_std[n])
+                #     stds_.append(column_std[n])
+            # stds__.append(stds_)
         # Store the standard deviations for later use
-        stds.extend(stds__)  # Mean of the standard deviations for each subplot
+        # stds.extend(stds__)  # Mean of the standard deviations for each subplot
         # stds.append(stds__)  # Mean of the standard deviations for each subplot
+        stds.append(stds_)
+        stds.append(stds__)
 
     # Set x-ticks and labels
     axs[0, 0].set_ylabel('Rows', fontsize=20)
     axs[1, 0].set_ylabel('Columns', fontsize=20)
     
     axs[1, 0].set_xticks(x)
+    axs[1, 1].set_xticks(x)
     # change advanced to hard
-    difficulties = [d.replace('advanced', 'hard') for d in difficulties]
-    axs[1, 0].set_xticklabels(difficulties)
+    difficulties = [d.replace('advanced', 'hard').capitalize() for d in difficulties]
+    axs[1, 0].set_xticklabels(difficulties, fontsize=18)
+    axs[1, 1].set_xticklabels(difficulties, fontsize=18)
     axs[0, 0].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
     axs[1, 0].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
     axs[0, 1].set_ylim(0, 1)  # Set y-axis limit to [0, 1] for percentage
@@ -2343,17 +3615,19 @@ def plot_perfect_match_by_difficulty_model_sc(
     axs[1, 1].yaxis.set_visible(False)
     # remove the 0 value from the y-axis of the first plot
     axs[0, 0].set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])    
-    # Set title by each column
-    axs[0, 0].set_title('Without Self-Correction', fontsize=18)
-    axs[0, 1].set_title('With Self-Correction', fontsize=18)
+    # Set x label by each column
+    # axs[0, 0].set_title('Without Self-Correction', fontsize=18)
+    # axs[0, 1].set_title('With Self-Correction', fontsize=18)
+    axs[1, 0].set_xlabel('Without Self-Correction', fontsize=24)
+    axs[1, 1].set_xlabel('With Self-Correction', fontsize=24)
 
     # add legend to the first column
-    axs[0, 1].legend(bbox_to_anchor=(1.02, 1.0))
+    axs[0, 1].legend(bbox_to_anchor=(1.01, 1.0))
     # Remove space between the two rows of subplots
-    plt.subplots_adjust(hspace=0.0, )
+    plt.subplots_adjust(hspace=0.0, wspace=0.01)
 
     # set suptitle
-    plt.suptitle('Query Generation Strategies: Self-Correction', fontsize=24, y=0.95)
+    plt.suptitle('Query Generation Strategies: Self-Correction vs. No Self-Correction', fontsize=24, y=0.95)
     # Add values on top of the bars
     for j, ax in enumerate(axs.flatten()):
         for i, bar in enumerate(ax.patches):
@@ -2362,9 +3636,17 @@ def plot_perfect_match_by_difficulty_model_sc(
             # add the value on top of the bar, just above the standard deviation bar height
             ax.text(bar.get_x() + bar.get_width()/2, height +0.01+ stds[j][i], f"{height:.2f}", ha='center', va='bottom')
     # add general y label
-    fig.supylabel('% Perfect Matching Queries', fontsize=24, x=0.02)
+    fig.supylabel('% Perfect Matching Queries', fontsize=24, x=0.05)
     # plt.tight_layout()
-    plt.legend(bbox_to_anchor=(1.02, 1.0),)
+    plt.legend(bbox_to_anchor=(1.01, 1.0),)
+    for ax in axs.flatten():
+        ax.grid(True, which='both')
+    plt.grid(True)
+
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
     plt.show()
 
 # plot 3 plots, one for each difficulty level, showing the perfect match rates for OID and column matches by req_id
@@ -2479,6 +3761,7 @@ def plot_execution_errors_by_model(
         model_name: str,
         exp_names: str,
         percentage: bool = False,
+        save_fig: Union[str, None] = None,
 ) -> None:
     """
     Plots the execution errors by model and experiment.
@@ -2549,30 +3832,53 @@ def plot_execution_errors_by_model(
             # add value labels on top of each bar
             for p in axs[i].patches:
                 height = p.get_height()
-                axs[i].annotate(f'{height:.1f}',
-                                (p.get_x() + p.get_width() / 2., height),
-                                ha='center', va='center',
-                                xytext=(0, 9),
-                                textcoords='offset points',
-                                fontsize=12)
+                if height > 0:
+                    axs[i].annotate(f'{height:.1f}',
+                                    (p.get_x() + p.get_width() / 2., height),
+                                    ha='center', va='center',
+                                    xytext=(0, 9),
+                                    textcoords='offset points',
+                                    fontsize=12)
+        else:
+            for p in axs[i].patches:
+                height = p.get_height()
+                if height > 0:
+                    axs[i].annotate(f'{int(height)}',
+                                    (p.get_x() + p.get_width() / 2., height),
+                                    ha='center', va='center',
+                                    xytext=(0, 9),
+                                    textcoords='offset points',
+                                    fontsize=12)
         plt.xticks(rotation=45, ha='right', fontsize=14)
         plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
-    axs[0].set_xlabel("Without Self-Correction", fontsize=18)
+        # remove legend title
+        axs[i].legend_.set_title(None)
+    axs[0].set_xlabel("Without Self-Correction", fontsize=22)
     if percentage: 
-        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=18)
+        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=24)
         axs[0].set_ylim(0, 100)
         axs[1].set_ylim(0, 100)
-    else: axs[0].set_ylabel("Error Count", fontsize=18)
-    axs[1].set_xlabel("With Self-Correction", fontsize=18)
+    else: axs[0].set_ylabel("Error Count", fontsize=24)
+    axs[1].set_xlabel("With Self-Correction", fontsize=22)
     axs[0].yaxis.set_visible(True)
     axs[1].yaxis.set_visible(True)
-    plt.subplots_adjust(hspace=0.02, )
-    plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
-    axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
+    plt.legend(bbox_to_anchor=(1.0, 1.0), fontsize=12)
+    axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=65, ha='right', fontsize=18)
+    axs[1].set_xticklabels(axs[1].get_xticklabels(), rotation=65, ha='right', fontsize=18)
+    axs[0].grid(True)
+    axs[1].grid(True)
     
-    plt.suptitle(f"Execution Errors by Generation Method", fontsize=20)
-    plt.ylabel("Error Count")
+    plt.suptitle(f"Execution Errors by Generation Method", fontsize=24, y=0.965)
+    plt.ylabel("Error Count", fontsize=24)
+    
+    plt.subplots_adjust(hspace=0.1, wspace=0.02)
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
     plt.tight_layout()
+    axs[0].grid(True)
+    axs[1].grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
     plt.show()
 
 def plot_execution_errors_by_model_by_difficulty(
@@ -2581,6 +3887,7 @@ def plot_execution_errors_by_model_by_difficulty(
         exp_names: str,
         self_corr: bool = True,
         percentage: bool = False,
+        save_fig: Union[str, None] = None,
 ) -> None:
     """
     Plots the execution errors by model and experiment.
@@ -2589,106 +3896,161 @@ def plot_execution_errors_by_model_by_difficulty(
         evaluation_results (Dict[str, Dict[str, Any]]): A dictionary containing evaluation results with keys
                                    for models and experiments, and values containing metrics.
         model_name (str): The name of the model to plot results for.
-        exp_name (str): The name of the experiment to plot results for.
+        exp_names (str): The name of the experiments to plot results for.
         self_corr (bool): If True, uses self-corrected results; otherwise uses corrected results.
+        percentage (bool): If True, shows percentages instead of counts.
 
     Returns:
         None: This function displays a plot but does not return any value.
     """
     
     experiments = sorted([exp for exp in evaluation_results[model_name].keys() if exp in exp_names])
-    experiment_labels = {}
-    if self_corr: self_corr_key = 'self_corrected'
-    else: self_corr_key = 'corrected'
+    if self_corr: 
+        self_corr_key = 'self_corrected'
+    else: 
+        self_corr_key = 'corrected'
     
     experiment_labels = {}
+    total_queries_per_exp_diff = {}  # Track total queries per experiment and difficulty for percentage calculation
+    
     for experiment in experiments:
-    # Check if the experiment is self-corrected or corrected
-    # Iterate through self-corrected and corrected results
         try:
             if "dir" in experiment:
                 exp_label = "Direct"
-            if "sbs" in experiment:
+            elif "sbs" in experiment:
                 exp_label = "Step-by-Step"
+            else:
+                exp_label = experiment
+            
             results = evaluation_results[model_name][experiment][self_corr_key]['detailed_results']
             
             experiment_labels[exp_label] = {}
+            total_queries_per_exp_diff[exp_label] = {}
+            
             for res in results:
                 error_info = res['comparison'].get('error_pred', None)
                 difficulty = res.get('difficulty')
+                
                 if difficulty not in experiment_labels[exp_label]:
                     experiment_labels[exp_label][difficulty] = []
+                    total_queries_per_exp_diff[exp_label][difficulty] = 0
+                
+                total_queries_per_exp_diff[exp_label][difficulty] += 1
+                
                 if error_info:
                     error_class = get_error_class(error_info).get('error_class')
                     experiment_labels[exp_label][difficulty].append(error_class)
-                else:
-                    experiment_labels[exp_label][difficulty].append(0)  # No error
-                    continue
         
         except KeyError as e:
             print(f"Warning: Missing data for {model_name} - {experiment}: {e}")
+    
     print(experiment_labels)
+    
     difficulties = sorted(set(
         difficulty for data in experiment_labels.values() for difficulty in data.keys()
     ), key=lambda x: ['simple', 'medium', 'advanced'].index(x) if x in ['simple', 'medium', 'advanced'] else 3)
-    # change advanced to hard
-    # difficulties = [d.replace('advanced', 'hard') for d in difficulties]
-    fig, axs = plt.subplots(1, len(difficulties), figsize=(20, 10), sharex=True, sharey=True)
+    
+    # Handle case where there's only one difficulty (can't use indexing on single subplot)
+    if len(difficulties) == 1:
+        fig, ax = plt.subplots(1, 1, figsize=(10, 8))
+        axs = [ax]
+    else:
+        fig, axs = plt.subplots(1, len(difficulties), figsize=(6 * len(difficulties), 8), sharey=True, sharex=True)
+        if len(difficulties) == 2:
+            axs = list(axs)  # Ensure axs is always a list
+    
     for i, difficulty in enumerate(difficulties):
-        error_data = []
+        error_data_combined = []
+        
         for exp_label, data in experiment_labels.items():
-            if difficulty in data:
+            if difficulty in data and data[difficulty]:  # Only process if there are errors
                 error_counts = pd.Series(data[difficulty]).value_counts().reset_index()
                 # Change "QueryCanceled" to "Timeout"
                 error_counts['index'] = error_counts['index'].replace({
-                    'QueryCanceled': 'Timeout',})
+                    'QueryCanceled': 'Timeout'})
                 error_counts.columns = ['error_type', 'error_count']
                 error_counts['experiment'] = exp_label
-                if len(error_data) == 0:
-                    error_data = error_counts
-                else:
-                    error_data = pd.concat([error_data, error_counts], ignore_index=True)
+                
+                if percentage:
+                    total_queries = total_queries_per_exp_diff[exp_label][difficulty]
+                    error_counts['error_count'] = (error_counts['error_count'] / total_queries) * 100
+                
+                error_data_combined.append(error_counts)
+        
         # Plot the errors for each difficulty
-        if error_data.empty:
+        if not error_data_combined:
             print(f"No errors found for difficulty {difficulty} in model {model_name}.")
+            axs[i].text(0.5, 0.5, 'No Errors', horizontalalignment='center', 
+                       verticalalignment='center', transform=axs[i].transAxes, fontsize=16)
+            axs[i].set_xlabel(f"{difficulty.replace('advanced','hard').title()}", fontsize=16)
             continue
-        if percentage:
-            total_errors = error_data['error_count'].sum()
-            error_data['error_count'] = (error_data['error_count'] / total_errors) * 100
-        # remove rows with error_type 0
-        error_data = error_data[error_data['error_type'] != 0]
-
-        # Group the error types by their class and by experiment, to plot them without stacking
-        error_data = error_data.groupby(['error_type', 'experiment']).sum().reset_index()
+        
+        error_data = pd.concat(error_data_combined, ignore_index=True)
+        
+        # Create the bar plot
         sns.barplot(x='error_type', y='error_count', data=error_data, ax=axs[i], hue='experiment')
-        if percentage:
-            # add value labels on top of each bar
-            for p in axs[i].patches:
-                height = p.get_height()
-                axs[i].annotate(f'{height:.1f}',
-                                (p.get_x() + p.get_width() / 2., height),
-                                ha='center', va='center',
-                                xytext=(0, 9),
-                                textcoords='offset points',
-                                fontsize=12)
-        axs[i].set_title(f"{difficulty.replace('advanced','hard')}", fontsize=16)
-        axs[i].set_xlabel("Error Type", fontsize=14)
-        if percentage: 
-            axs[i].set_ylabel("Percentage from Total Queries (%)", fontsize=14)
-            axs[i].set_ylim(0, 100)
-        else: axs[i].set_ylabel("Error Count", fontsize=14)
-        axs[i].set_xticklabels(axs[i].get_xticklabels(), rotation=45, ha='right', fontsize=14)
-        # axs[i].set_ylim(0, error_data['error_count'].max() * 1.1)  # Set y-axis limit to 10% above max count
-        axs[i].legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
-    # axs[0].yaxis.set_visible(False)
-    axs[1].yaxis.set_visible(False)
-    axs[2].yaxis.set_visible(False)
-    plt.subplots_adjust(hspace=0.01, )
-    # plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
-    # axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
-    plt.suptitle(f"Execution Errors by difficulty", fontsize=20)
-    plt.ylabel("Error Count")
+        
+        # Add value labels on top of each bar
+        for p in axs[i].patches:
+            height = p.get_height()
+            if height > 0:
+                if percentage:
+                    axs[i].annotate(f'{height:.1f}%',
+                                    (p.get_x() + p.get_width() / 2., height),
+                                    ha='center', va='bottom',
+                                    xytext=(0, 3),
+                                    textcoords='offset points',
+                                    fontsize=10)
+                else:
+                    axs[i].annotate(f'{int(height)}',
+                                    (p.get_x() + p.get_width() / 2., height),
+                                    ha='center', va='bottom',
+                                    xytext=(0, 3),
+                                    textcoords='offset points',
+                                    fontsize=10)
+        
+        # Set labels and formatting - put difficulty label at bottom as xlabel
+        axs[i].set_xlabel(f"{difficulty.replace('advanced','hard').title()}", fontsize=20)
+        axs[i].set_title("")  # Remove title from top
+        
+        if i == 0:  # Only show y-label on first subplot
+            if percentage: 
+                axs[i].set_ylabel("Error Percentage (%)", fontsize=24)
+            else: 
+                axs[i].set_ylabel("Error Count", fontsize=24)
+        else:
+            axs[i].set_ylabel("")
+        
+        # Rotate x-axis labels for better readability
+        axs[i].tick_params(axis='x', rotation=65, labelsize=16)
+        axs[i].tick_params(axis='y', labelsize=12)
+        
+        # Add legend only to the last subplot
+        if i == len(difficulties) - 1:
+            axs[i].legend(bbox_to_anchor=(0.65, 1), loc='upper left', fontsize=12)
+        else:
+            axs[i].get_legend().remove()
+    
+    if percentage: 
+        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=18)
+        axs[0].set_ylim(0, 100)
+        axs[1].set_ylim(0, 100)
+        axs[2].set_ylim(0, 100)
+    # Set main title and layout
+    if self_corr:
+        corr_text = "With Self-Correction"
+    else:
+        corr_text = "Without Self-Correction"
+    fig.suptitle(f"Execution Errors by Difficulty - {model_name} ({corr_text})", fontsize=24)
     plt.tight_layout()
+    for ax in axs:
+        ax.grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    # reduce space between subplots
+    plt.subplots_adjust(wspace=0.03)
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
     plt.show()
 
 def plot_execution_errors_by_model_type(
@@ -2696,6 +4058,7 @@ def plot_execution_errors_by_model_type(
         model_name: str,
         exp_names: str,
         percentage: bool = False,
+        save_fig: Union[str, None] = None,
 ) -> None:
     """
     Plots the execution errors by model and experiment.
@@ -2757,32 +4120,417 @@ def plot_execution_errors_by_model_type(
         if percentage:
             # add value labels on top of each bar
             for p in axs[i].patches:
-                height = p.get_height()
-                axs[i].annotate(f'{height:.1f}',
-                                (p.get_x() + p.get_width() / 2., height),
-                                ha='center', va='center',
-                                xytext=(0, 9),
-                                textcoords='offset points',
-                                fontsize=12)
+                if p.get_height() > 0:
+                    height = p.get_height()
+                    axs[i].annotate(f'{height:.1f}',
+                                    (p.get_x() + p.get_width() / 2., height),
+                                    ha='center', va='center',
+                                    xytext=(0, 9),
+                                    textcoords='offset points',
+                                    fontsize=12)
+        else:
+            for p in axs[i].patches:
+                if p.get_height() > 0:
+                    height = p.get_height()
+                    axs[i].annotate(f'{int(height)}',
+                                    (p.get_x() + p.get_width() / 2., height),
+                                    ha='center', va='center',
+                                    xytext=(0, 9),
+                                    textcoords='offset points',
+                                    fontsize=12)
         plt.xticks(rotation=45, ha='right', fontsize=14)
-        plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
-    axs[0].set_xlabel("Without Self-Correction", fontsize=18)
+        # plt.legend(bbox_to_anchor=(1.02, 1.0), fontsize=12)
+        # Add legend only to the last subplot
+        if i == len(axs) - 1:
+            axs[i].legend(bbox_to_anchor=(0.75, 1), loc='upper left', fontsize=12)
+        else:
+            axs[i].get_legend().remove()
+    axs[0].set_xlabel("Without Self-Correction", fontsize=22)
     if percentage: 
-        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=18)
+        axs[0].set_ylabel("Percentage from Total Queries (%)", fontsize=24)
         axs[0].set_ylim(0, 100)
         axs[1].set_ylim(0, 100)
-    else: axs[0].set_ylabel("Error Count", fontsize=18)
-    axs[1].set_xlabel("With Self-Correction", fontsize=18)
+    else: axs[0].set_ylabel("Error Count", fontsize=24)
+    axs[1].set_xlabel("With Self-Correction", fontsize=22)
     axs[1].yaxis.set_visible(True)
     plt.subplots_adjust(hspace=0.02, )
     axs[0].set_xticklabels(axs[0].get_xticklabels(), rotation=45, ha='right', fontsize=14)
     
-    plt.suptitle(f"Execution Errors Type by Generation Method", fontsize=20)
-    plt.ylabel("Error Count")
+    plt.suptitle(f"Execution Errors Type by Generation Method", fontsize=24)
+    plt.ylabel("Error Count", fontsize=24)
     plt.tight_layout()
+    
+    for ax in axs:
+        ax.grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
     plt.show()
 
 
+def plot_percentage_errors_by_model(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_name: str,
+    exp_names: str,
+    formatted_columns: bool = True,
+    percentage: bool = False,
+    save_fig: Union[str, None] = None,
+) -> None:
+    """
+    Plots the percentage between correct queries (n_perfect_match = 1), queries with semantic errors (n_perfect_match != 0 but without execution error),
+    and queries with execution errors, by model and experiment.
+
+    Args:
+    evaluation_results (Dict[str, Dict[str, Any]]): A dictionary containing evaluation results with keys
+                    for models and experiments, and values containing metrics.
+    model_name (str): The name of the model to plot results for.
+    exp_name (str): The name of the experiment to plot results for.
+    self_corr (bool): If True, uses self-corrected results; otherwise uses corrected results.
+
+    Returns:
+    None: This function displays a plot but does not return any value.
+    """
+    
+    experiments = sorted([exp for exp in evaluation_results[model_name].keys() if exp in exp_names])
+    experiment_labels = {}
+    for self_corr_key in [ 'corrected', 'self_corrected',]:
+        experiment_labels[self_corr_key] = {}
+        for experiment in experiments:
+        # Check if the experiment is self-corrected or corrected
+        # Iterate through self-corrected and corrected results
+            try:
+                if "dir" in experiment:
+                    exp_label = "Direct"
+                if "sbs" in experiment:
+                    exp_label = "Step-by-Step"
+                results = evaluation_results[model_name][experiment][self_corr_key]['detailed_results']
+                error_types_oids = []
+                error_types_columns = []
+                for res in results:
+                    error_info = res['comparison'].get('error_pred', None)
+                    if error_info:
+                        error_types_oids.append(2)  # Execution error
+                        error_types_columns.append(2)  # Execution error
+                    else:
+                        if res['comparison']['oids']['perfect_match'] == 1:
+                            error_types_oids.append(0)  # Perfect match
+                        else:
+                            error_types_oids.append(1)  # Semantic error
+                        if formatted_columns and res['comparison']['columns_formatted']['perfect_match'] == 1:
+                            error_types_columns.append(0)  # Perfect match
+                        elif not formatted_columns and res['comparison']['columns']['perfect_match'] == 1:
+                            error_types_columns.append(0)  # Perfect match
+                        else:
+                            error_types_columns.append(1)  # Semantic error
+                
+                # Store the error types for each experiment
+                experiment_labels[self_corr_key][exp_label] = {
+                    'oids': error_types_oids,
+                    'columns': error_types_columns
+                }
+            
+            except KeyError as e:
+                print(f"Warning: Missing data for {model_name} - {experiment}: {e}")
+    
+    # Create 2x2 subplot layout
+    fig, axs = plt.subplots(2, 2, figsize=(16, 10), sharex=True, sharey=True)
+    
+    # Define error type labels for better visualization
+    error_labels = {0: 'Perfect Match', 1: 'Semantic Error', 2: 'Execution Error'}
+    
+    # Plot for each self-correction key and metric type
+    for i, (self_corr_key, data) in enumerate(experiment_labels.items()):
+        for metric_idx, metric_type in enumerate(['oids', 'columns']):
+            # Combine data for all experiments for this metric type
+            combined_data = []
+            
+            for exp_label, error_dict in data.items():
+                error_list = error_dict[metric_type]
+                error_counts = pd.Series(error_list).value_counts().reset_index()
+                error_counts.columns = ['error_type', 'error_count']
+                error_counts['experiment'] = exp_label
+                
+                if percentage:
+                    total_count = len(error_list)
+                    error_counts['error_count'] = (error_counts['error_count'] / total_count) * 100
+                
+                combined_data.append(error_counts)
+                
+                if combined_data:
+                    error_data = pd.concat(combined_data, ignore_index=True)
+                
+                # Map error types to labels
+                error_data['error_type'] = error_data['error_type'].map(error_labels)
+            
+            # Create the bar plot
+            sns.barplot(x='error_type', y='error_count', data=error_data, 
+                    ax=axs[metric_idx, i], hue='experiment')
+            
+            # Add value labels on top of each bar
+            for p in axs[metric_idx, i].patches:
+                height = p.get_height()
+                if height > 0:
+                    if percentage:
+                        axs[metric_idx, i].annotate(f'{height:.1f}%',
+                                        (p.get_x() + p.get_width() / 2., height),
+                                        ha='center', va='bottom',
+                                        xytext=(0, 3),
+                                        textcoords='offset points',
+                                        fontsize=10)
+                    else:
+                        axs[metric_idx, i].annotate(f'{int(height)}',
+                                        (p.get_x() + p.get_width() / 2., height),
+                                        ha='center', va='bottom',
+                                        xytext=(0, 3),
+                                        textcoords='offset points',
+                                        fontsize=10)
+            
+            # Set titles and labels
+            if metric_idx == 1:  # second row (oids)
+                if i == 0:
+                    axs[metric_idx, i].set_xlabel("Without Self-Correction", fontsize=20)
+                else:
+                    axs[metric_idx, i].set_xlabel("With Self-Correction", fontsize=20)
+            
+            if metric_idx == 0:
+                axs[metric_idx, i].set_ylabel("Rows", fontsize=20)
+            else:
+                axs[metric_idx, i].set_ylabel("Columns", fontsize=20)
+            
+            # Rotate x-axis labels
+            # axs[metric_idx, i].tick_params(axis='x', rotation=45, labelsize=10)
+            
+            # Add legend only to the top-right subplot
+            if i == 1:
+                axs[metric_idx, i].legend(bbox_to_anchor=(0.6, 1), loc='upper left', fontsize=16)
+            else:
+                if axs[metric_idx, i].get_legend():
+                    axs[metric_idx, i].get_legend().remove()
+    
+    # Adjust layout
+    # plt.tight_layout()
+    plt.subplots_adjust(hspace=0.035, wspace=0.02)
+    # Set y-axis label
+    if percentage:
+        # plt.ylabel("Percentage (%)", fontsize=14, )
+        fig.supylabel('Percentage (%)', fontsize=24, x=0.055)
+
+        # set limit to 100
+        for ax in axs.flatten():
+            ax.set_ylim(0, 100)
+    else:
+        plt.ylabel("Count", fontsize=24)
+    # set x-axis labels fontsize
+    for ax in axs.flatten():
+        ax.tick_params(axis='x', labelsize=16)
+    # Set main title
+    if 'claude-3-7' in model_name: model_label = 'Claude-3.7'
+    elif 'gpt' in model_name: 
+        model_label = "-".join(model_name.split('-')[0:2]).replace('gpt', 'GPT')
+    else: model_label = model_name
+    plt.suptitle(f"Query Results Distribution by Generation Method - {model_label}", fontsize=24, y=0.92)
+    
+    for ax in axs.flatten():
+        ax.grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
+    plt.show()
+
+
+
+def plot_percentage_errors_by_model_by_difficulty(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_name: str,
+    exp_names: str,
+    self_corr: bool = True,
+    formatted_columns: bool = True,
+    percentage: bool = False,
+    save_fig: Union[str, None] = None,
+) -> None:
+    """
+    Plots the percentage between correct queries (n_perfect_match = 1), queries with semantic errors (n_perfect_match != 0 but without execution error),
+    and queries with execution errors, by model and experiment.
+
+    Args:
+    evaluation_results (Dict[str, Dict[str, Any]]): A dictionary containing evaluation results with keys
+                    for models and experiments, and values containing metrics.
+    model_name (str): The name of the model to plot results for.
+    exp_names (str): The names of the experiments to plot results for.
+    self_corr (bool): If True, uses self-corrected results; otherwise uses corrected results.
+    formatted_columns (bool): If True, uses formatted columns for comparison; otherwise uses raw columns.
+    percentage (bool): If True, shows percentages instead of counts.
+    save_fig (Union[str, None]): If provided, saves the figure to the given path.
+
+    Returns:
+    None: This function displays a plot but does not return any value.
+    """
+    
+    experiments = sorted([exp for exp in evaluation_results[model_name].keys() if exp in exp_names])
+    if self_corr: 
+        self_corr_key = 'self_corrected'
+    else: 
+        self_corr_key = 'corrected'
+    
+    experiment_labels = {}
+    total_queries_per_exp_diff = {}  # Track total queries per experiment and difficulty for percentage calculation
+
+    for experiment in experiments:
+    # Check if the experiment is self-corrected or corrected
+    # Iterate through self-corrected and corrected results
+        try:
+            if "dir" in experiment:
+                exp_label = "Direct"
+            if "sbs" in experiment:
+                exp_label = "Step-by-Step"
+            results = evaluation_results[model_name][experiment][self_corr_key]['detailed_results']
+            
+            experiment_labels[exp_label] = {}
+            total_queries_per_exp_diff[exp_label] = {}
+            for res in results:
+                error_info = res['comparison'].get('error_pred', None)
+                difficulty = res.get('difficulty')
+                
+                if difficulty not in experiment_labels[exp_label]:
+                    experiment_labels[exp_label][difficulty] = {}
+                    experiment_labels[exp_label][difficulty] = {}
+                    experiment_labels[exp_label][difficulty]['oids'] = []
+                    experiment_labels[exp_label][difficulty]['columns'] = []
+                    total_queries_per_exp_diff[exp_label][difficulty] = 0
+                
+                total_queries_per_exp_diff[exp_label][difficulty] += 1
+
+                if error_info:
+                    experiment_labels[exp_label][difficulty]['oids'].append(2)  # Execution error
+                    experiment_labels[exp_label][difficulty]['columns'].append(2)  # Execution error
+                else:
+                    if res['comparison']['oids']['perfect_match'] == 1:
+                        experiment_labels[exp_label][difficulty]['oids'].append(0)  # Perfect match
+                    else:
+                        experiment_labels[exp_label][difficulty]['oids'].append(1)  # Semantic error
+                    if formatted_columns and res['comparison']['columns_formatted']['perfect_match'] == 1:
+                        experiment_labels[exp_label][difficulty]['columns'].append(0)  # Perfect match
+                    elif not formatted_columns and res['comparison']['columns']['perfect_match'] == 1:
+                        experiment_labels[exp_label][difficulty]['columns'].append(0)  # Perfect match
+                    else:
+                        experiment_labels[exp_label][difficulty]['columns'].append(1)  # Semantic error
+        
+        except KeyError as e:
+            print(f"Warning: Missing data for {model_name} - {experiment}: {e}")
+    
+    difficulties = sorted(set(
+        difficulty for data in experiment_labels.values() for difficulty in data.keys()
+    ), key=lambda x: ['simple', 'medium', 'advanced'].index(x) if x in ['simple', 'medium', 'advanced'] else 3)
+
+    print(difficulties)
+    
+    if len(difficulties) == 1:
+        fig, ax = plt.subplots(2, 1, figsize=(10, 8))
+        axs = [ax]
+    else:
+        fig, axs = plt.subplots(2, len(difficulties), figsize=(6 * len(difficulties), 8), sharey=True, sharex=True)
+        if len(difficulties) == 2:
+            axs = list(axs)  # Ensure axs is always a list
+    
+    # Define error type labels for better visualization
+    error_labels = {0: 'Perfect Match', 1: 'Semantic Error', 2: 'Execution Error'}
+    
+    for i, difficulty in enumerate(difficulties):
+        for metric_idx, metric_type in enumerate(['oids', 'columns']):
+            # Combine data for all experiments for this metric type
+            combined_data = []
+            
+            for exp_label, data in experiment_labels.items():
+                if difficulty in data and data[difficulty]:  # Only process if there are errors
+                    error_list = data[difficulty][metric_type]
+                    error_counts = pd.Series(error_list).value_counts().reset_index()
+                    error_counts.columns = ['error_type', 'error_count']
+                    error_counts['experiment'] = exp_label
+                    
+                    if percentage:
+                        total_count = total_queries_per_exp_diff[exp_label][difficulty]
+                        error_counts['error_count'] = (error_counts['error_count'] / total_count) * 100
+                    
+                    combined_data.append(error_counts)
+            
+            if not combined_data:
+                print(f"No data for difficulty {difficulty} and metric {metric_type} in model {model_name}.")
+                axs[metric_idx, i].text(0.5, 0.5, 'No Data', horizontalalignment='center', 
+                           verticalalignment='center', transform=axs[metric_idx, i].transAxes, fontsize=16)
+                axs[metric_idx, i].set_xlabel(f"{difficulty.replace('advanced','hard').title()}", fontsize=16)
+                continue
+            error_data = pd.concat(combined_data, ignore_index=True)
+            
+            # Map error types to labels
+            error_data['error_type'] = error_data['error_type'].map(error_labels)
+            # Create the bar plot
+            sns.barplot(x='error_type', y='error_count', data=error_data, 
+                    ax=axs[metric_idx, i], hue='experiment')
+            # Add value labels on top of each bar
+            for p in axs[metric_idx, i].patches:
+                height = p.get_height()
+                if height > 0:
+                    if percentage:
+                        axs[metric_idx, i].annotate(f'{height:.1f}%',
+                                        (p.get_x() + p.get_width() / 2., height),
+                                        ha='center', va='bottom',
+                                        xytext=(0, 3),
+                                        textcoords='offset points',
+                                        fontsize=10)
+                    else:
+                        axs[metric_idx, i].annotate(f'{int(height)}',
+                                        (p.get_x() + p.get_width() / 2., height),
+                                        ha='center', va='bottom',
+                                        xytext=(0, 3),
+                                        textcoords='offset points',
+                                        fontsize=10)
+            # Set titles and labels - put difficulty label at bottom as xlabel
+            axs[metric_idx, i].set_xlabel(f"{difficulty.replace('advanced','hard').title()}", fontsize=20)
+            if metric_idx == 0:
+                axs[metric_idx, i].set_title("")  # Remove title from top
+            if metric_idx == 0:
+                if i == 0:  # Only show y-label on first subplot
+                    axs[metric_idx, i].set_ylabel("Rows", fontsize=20)
+            else:
+                axs[metric_idx, i].set_ylabel("Columns", fontsize=20)
+            # Rotate x-axis labels
+            axs[metric_idx, i].tick_params(axis='x', labelsize=16)
+            axs[metric_idx, i].tick_params(axis='y', labelsize=16)
+            # Add legend only to the last subplot
+            if metric_idx == 0 and i == len(difficulties) - 1:
+                axs[metric_idx, i].legend(bbox_to_anchor=(0.65, 1), loc='upper left', fontsize=12)
+            else:
+                axs[metric_idx, i].get_legend().remove()
+    # Adjust layout
+    plt.subplots_adjust(hspace=0.045, wspace=0.025)
+    # Set y-axis label
+    if percentage:
+        fig.supylabel('Percentage (%)', fontsize=24, x=0.055)
+
+        # set limit to 100
+        for ax in axs.flatten():
+            ax.set_ylim(0, 100)
+    else:
+        plt.ylabel("Count", fontsize=24)
+    # set x-axis labels fontsize
+    for ax in axs.flatten():
+        ax.tick_params(axis='x', labelsize=13)
+    # Set main title
+    if 'claude-3-7' in model_name: model_label = 'Claude-3.7'
+    elif 'gpt' in model_name: 
+        model_label = "-".join(model_name.split('-')[0:2]).replace('gpt', 'GPT')
+    else: model_label = model_name
+    plt.suptitle(f"Query Results Distribution by Generation Method - {model_label}", fontsize=24, y=0.92)
+    
+    for ax in axs.flatten():
+        ax.grid(True)
+    sns.set(style="whitegrid")
+    sns.set_style("ticks")
+    if save_fig:
+        plt.savefig(save_fig, bbox_inches='tight')
+    plt.show()
 
 
 
@@ -2946,6 +4694,607 @@ def plot_execution_errors_by_model_interactive(
     # Initial plot
     if models:
         update_plot(models[0], True, False, False)
+
+
+
+
+# def statistical_test(
+#     evaluation_results: Dict[str, Dict[str, Any]],
+#     model_names: List[str],
+#     exp_names: List[str],
+#     use_self_correction: bool = True,
+#     formatted_columns: bool = True,
+#     take_error_golds: bool = False,
+#     table_size: str = 'small',
+#     adjust_margins: bool = True,
+# ) -> str:
+#     """
+#     Computes statistical significance tests (p-values) between different experiments
+#     for specified models and generates LaTeX tables summarizing the results.
+    
+#     Args:
+#         evaluation_results: Nested dict of evaluation results.
+#         model_names: List of models to include.
+#         exp_names: List of experiment names to rank.
+#         use_self_correction: (bool) If True, uses "W/ Self-Corr" data. 
+#                              If False, uses "W/o Self-Corr" data.
+#         formatted_columns: Whether to use 'columns_formatted' metrics.
+#         take_error_golds: Whether to include gold queries with errors.
+#         table_size: LaTeX font size command.
+#         adjust_margins: Whether to use 'table*' and squeeze columns.
+
+#     Returns:
+#         str: A single string containing the LaTeX for ALL ranking tables,
+#              one after the other, separated by a '\\bigskip'.
+#     """
+#     from mlxtend.evaluate import permutation_test
+
+#     # Attempt to import the aggregation utility
+#     try:
+#         from llm.utils.eval_utils import metrics_aggregation
+#     except ImportError:
+#         print("Warning: 'llm.utils.eval_utils.metrics_aggregation' not found.")
+#         print("Please ensure this utility is available in your environment.")
+#         def metrics_aggregation(results, take_error_gold):
+#             print("Using placeholder 'metrics_aggregation' due to import error.")
+#             if results:
+#                 return results[0].get('summary', {})
+#             return {}
+
+    
+#     # --- 1. Data Collection ---
+#     # We only store the raw *mean* values for ranking.
+#     # Key: (Metric_Type, Exp_Name, Model, Difficulty)
+#     data_map = {} 
+#     difficulties_found = set()
+#     sorted_exp_names = sorted(exp_names)
+#     sorted_models = sorted(model_names)
+    
+#     sc_label_key = "W/ Self-Corr" if use_self_correction else "W/o Self-Corr"
+#     sc_title = "W/ Self-Correction" if use_self_correction else "W/o Self-Correction"
+#     self_corr_key = 'self_corrected' if use_self_correction else 'corrected'
+    
+#     for model in sorted_models:
+
+        
+#         for exp_name in sorted_exp_names:
+#             if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+#                 continue 
+                
+#             try:
+#                 results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+#             except KeyError:
+#                 continue
+            
+#             if not results_list:
+#                 continue
+                
+#             agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+            
+#             # We only need 'by_difficulty' for the mean scores
+#             results_by_diff = agg_metrics.get('by_difficulty_runs', {}) 
+
+
+#             for diff, metrics in results_by_diff.items():
+#                 diff_clean = diff.replace('advanced', 'hard').capitalize()
+#                 difficulties_found.add(diff_clean)
+#                 for run_id, exp_value in results_by_diff.get(diff, {}).get('runs_metrics', {}).items():
+#                     oid_value = exp_value.get('oids', {}).get('perfect_match_rate', 0)
+                
+#                     col_metrics = exp_value.get('columns_formatted', metrics.get('columns', {})) if formatted_columns else metrics.get('columns', {})
+#                     col_value = col_metrics.get('perfect_match_rate', 0)
+
+#                     # Store the raw float values, not strings
+#                     data_map[('ID Match', exp_name, model, diff_clean, run_id)] = oid_value
+#                     data_map[('Column Match', exp_name, model, diff_clean, run_id)] = col_value
+
+#                 # ...
+
+#         # calculate p-value between experiments for each metric and difficulty
+#         # p_value = permutation_test(direct_exp, step_by_step_exp,
+#         #                         method='approximate',
+#         #                         num_rounds=10000,
+#         #                         seed=0)
+
+                
+#     # --- 2. Build and Rank Tables per Experiment ---
+    
+#     diff_order = ['Simple', 'Medium', 'Hard']
+#     sorted_diffs = sorted(list(difficulties_found), 
+#                           key=lambda x: diff_order.index(x) if x in diff_order else 99)
+#     metric_labels = ['ID Match', 'Column Match']
+
+
+def statistical_test(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    use_self_correction: bool = True,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = True,
+) -> str:
+    """
+    Computes statistical significance tests (permutation test) between 
+    two experiments (e.g., Direct vs Step-by-Step) for specified models 
+    and generates a LaTeX table (in 'Wide/Parallel' format) of p-values.
+    
+    Bold values indicate statistical significance (p < 0.05).
+    """
+    
+    try:
+        from mlxtend.evaluate import permutation_test
+    except ImportError:
+        print("Warning: 'mlxtend' library not found.")
+        return "% Error: mlxtend library not found. Please install it to use this function."
+
+    # Attempt to import the aggregation utility
+    try:
+        from llm.utils.eval_utils import metrics_aggregation
+    except ImportError:
+        def metrics_aggregation(results, take_error_gold):
+            if results: return results[0].get('summary', {})
+            return {}
+
+    # --- 1. Data Collection ---
+    # We need lists of run-values to perform the permutation test.
+    # samples[model][metric][difficulty][exp_name] = [val1, val2, ...]
+    samples = {model: {'ID Match': {}, 'Column Match': {}} for model in model_names}
+    
+    difficulties_found = set()
+    sorted_exp_names = sorted(exp_names)
+    sorted_models = sorted(model_names)
+    
+    # Ensure we have at least two experiments to compare
+    if len(sorted_exp_names) < 2:
+        return "% Error: Need at least 2 experiments in 'exp_names' to perform a comparison."
+    
+    # We will compare exp_names[0] vs exp_names[1]
+    exp_A = sorted_exp_names[0]
+    exp_B = sorted_exp_names[1]
+    
+    sc_title = "W/ Self-Correction" if use_self_correction else "W/o Self-Correction"
+    self_corr_key = 'self_corrected' if use_self_correction else 'corrected'
+    
+    for model in sorted_models:
+        for exp_name in [exp_A, exp_B]:
+            if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+                continue 
+                
+            try:
+                results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+            except KeyError:
+                continue
+            
+            if not results_list:
+                continue
+                
+            agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+            
+            # Get RUN-LEVEL metrics
+            results_by_diff = agg_metrics.get('by_difficulty_runs', {}) 
+
+            for diff, metrics in results_by_diff.items():
+                diff_clean = diff.replace('advanced', 'hard').capitalize()
+                difficulties_found.add(diff_clean)
+                
+                # Initialize lists for this difficulty if not present
+                if diff_clean not in samples[model]['ID Match']:
+                    samples[model]['ID Match'][diff_clean] = {exp_A: [], exp_B: []}
+                    samples[model]['Column Match'][diff_clean] = {exp_A: [], exp_B: []}
+                
+                # Iterate over individual runs to get the distribution
+                runs_data = metrics.get('runs_metrics', {})
+                for run_id, run_vals in runs_data.items():
+                    # OID Value
+                    oid_val = run_vals.get('oids', {}).get('perfect_match_rate', 0)
+                    samples[model]['ID Match'][diff_clean][exp_name].append(oid_val)
+                    
+                    # Column Value
+                    col_metrics = run_vals.get('columns_formatted', run_vals.get('columns', {})) if formatted_columns else run_vals.get('columns', {})
+                    col_val = col_metrics.get('perfect_match_rate', 0)
+                    samples[model]['Column Match'][diff_clean][exp_name].append(col_val)
+
+    # --- 2. Perform Permutation Tests ---
+    # p_values[model][metric][difficulty] = p_val (float)
+    p_values = {}
+    
+    for model in sorted_models:
+        p_values[model] = {}
+        for metric in ['ID Match', 'Column Match']:
+            p_values[model][metric] = {}
+            for diff in difficulties_found:
+                # Get samples for both experiments
+                try:
+                    dist_A = samples[model][metric][diff][exp_A]
+                    dist_B = samples[model][metric][diff][exp_B]
+                except KeyError:
+                    p_values[model][metric][diff] = None
+                    continue
+                
+                if not dist_A or not dist_B:
+                    p_values[model][metric][diff] = None
+                    continue
+                    
+                # Run Test
+                # approx method is faster for large number of rounds
+                p_val = permutation_test(
+                    dist_A, dist_B,
+                    method='approximate',
+                    num_rounds=100000,
+                    seed=341987
+                )
+                p_values[model][metric][diff] = p_val
+    print(p_values)
+    # --- 3. Build LaTeX Table (Parallel Format) ---
+    
+    # Add table size and centering
+    size_commands = {
+        'tiny': '\\tiny',
+        'scriptsize': '\\scriptsize', 
+        'footnotesize': '\\footnotesize',
+        'small': '\\small',
+        'normalsize': '\\normalsize',
+        'large': '\\large'
+    }
+
+    diff_order = ['Simple', 'Medium', 'Hard']
+    sorted_diffs = sorted(list(difficulties_found), 
+                          key=lambda x: diff_order.index(x) if x in diff_order else 99)
+    
+    latex_lines = []
+    table_env = "table*" if adjust_margins else "table"
+    size_cmd = size_commands.get(table_size, '\\small')
+    
+    latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+    latex_lines.append(size_cmd)
+    latex_lines.append(r"\centering")
+    if adjust_margins:
+        latex_lines.append(r"\setlength{\tabcolsep}{4pt}") 
+
+    # Wide format layout
+    num_diffs = len(sorted_diffs)
+    num_data_cols = num_diffs * 2 
+    total_cols = 1 + num_data_cols
+    
+    col_def = "l | " + ("c" * num_diffs) + " | " + ("c" * num_diffs)
+    latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+    latex_lines.append(r"\toprule")
+
+    # -- Header 1 --
+    header_1 = [""]
+    header_1.append(f"\\multicolumn{{{num_diffs}}}{{c|}}{{ID Match (p-values)}}")
+    header_1.append(f"\\multicolumn{{{num_diffs}}}{{c|}}{{Column Match (p-values)}}")
+    latex_lines.append(" & ".join(header_1) + r" \\")
+
+    # -- Header 2 --
+    header_2 = ["Model"] + sorted_diffs + sorted_diffs
+    latex_lines.append(" & ".join(header_2) + r" \\")
+    latex_lines.append(r"\midrule")
+
+    # -- Data Rows --
+    for model in sorted_models:
+        if 'claude-3-7' in model: model_label = 'Claude-3.7'
+        elif 'gpt' in model: 
+            model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+        else: model_label = model
+        
+        line = [model_label]
+        
+        # ID Match Block
+        for diff in sorted_diffs:
+            p = p_values[model]['ID Match'].get(diff, None)
+            if p is None:
+                line.append("-")
+            else:
+                val_str = f"{p:.3f}"
+                if p < 0.05: # Significant
+                    line.append(f"\\textbf{{{val_str}}}")
+                else:
+                    line.append(val_str)
+                    
+        # Column Match Block
+        for diff in sorted_diffs:
+            p = p_values[model]['Column Match'].get(diff, None)
+            if p is None:
+                line.append("-")
+            else:
+                val_str = f"{p:.3f}"
+                if p < 0.05: # Significant
+                    line.append(f"\\textbf{{{val_str}}}")
+                else:
+                    line.append(val_str)
+        
+        latex_lines.append(" & ".join(line) + r" \\")
+
+    latex_lines.append(r"\bottomrule")
+    latex_lines.append(r"\end{tabular}")
+    exp_A_display = 'direct' if 'dir' in exp_A else 'step-by-step' if 'sbs' in exp_A else exp_A
+    exp_B_display = 'direct' if 'dir' in exp_B else 'step-by-step' if 'sbs' in exp_B else exp_B
+
+    caption = (
+        f"Statistical Significance (p-values) for {exp_A_display} vs {exp_B_display} "
+        f"({sc_title}). Values $< 0.05$ are bolded."
+    )
+    latex_lines.append(f"\\caption{{{caption}}}")
+    latex_lines.append(r"\label{tab:significance_test}")
+    latex_lines.append(f"\\end{{{table_env}}}")
+    
+    final_str = "\n".join(latex_lines)
+    
+    print("\n" + "="*80)
+    print(f"Statistical Significance Table ({sc_title})")
+    print("="*80)
+    print(final_str)
+    print("="*80)
+    
+    return final_str
+    
+
+
+
+def generate_significance_ranking_table(
+    evaluation_results: Dict[str, Dict[str, Any]],
+    model_names: List[str],
+    exp_names: List[str],
+    use_self_correction: bool = True,
+    formatted_columns: bool = True,
+    take_error_golds: bool = False,
+    table_size: str = 'small',
+    adjust_margins: bool = True,
+) -> str:
+    """
+    Creates a Ranking Table where ranks are determined by statistical significance.
+    
+    Algorithm:
+    1. For each column (Exp, Metric, Diff), models are sorted by score.
+    2. Model 1 is Rank 1.
+    3. Model N is compared to Model N-1 using permutation test.
+       - If NOT Significant (p >= 0.05): Model N gets same Rank as Model N-1.
+       - If Significant (p < 0.05): Model N gets Rank = N (standard ranking).
+       
+    Output format matches generate_latex_ranking_tables.
+    """
+    try:
+        from mlxtend.evaluate import permutation_test
+    except ImportError:
+        print("Warning: 'mlxtend' library not found.")
+        return "% Error: mlxtend library not found."
+
+    # Attempt to import the aggregation utility
+    try:
+        from llm.utils.eval_utils import metrics_aggregation
+    except ImportError:
+        def metrics_aggregation(results, take_error_gold):
+            if results: return results[0].get('summary', {})
+            return {}
+
+    # --- 1. Data Collection ---
+    # Need run-level data AND mean scores
+    # Structure: data[exp][metric][diff] = list of (model_name, mean_score, [run_values])
+    
+    data_store = {} 
+    
+    difficulties_found = set()
+    sorted_exp_names = sorted(exp_names)
+    sorted_models = sorted(model_names)
+    
+    sc_title = "W/ Self-Correction" if use_self_correction else "W/o Self-Correction"
+    self_corr_key = 'self_corrected' if use_self_correction else 'corrected'
+    
+    # Initialize data structure
+    for exp in sorted_exp_names:
+        data_store[exp] = {'ID Match': {}, 'Column Match': {}}
+    
+    for exp_name in sorted_exp_names:
+        for model in sorted_models:
+            if model not in evaluation_results or exp_name not in evaluation_results.get(model, {}):
+                continue 
+            try:
+                results_list = evaluation_results[model][exp_name][self_corr_key]['detailed_results']
+            except KeyError:
+                continue
+            if not results_list: continue
+                
+            agg_metrics = metrics_aggregation(results=results_list, take_error_gold=take_error_golds)
+            results_by_diff = agg_metrics.get('by_difficulty_runs', {}) 
+
+            for diff, metrics in results_by_diff.items():
+                diff_clean = diff.replace('advanced', 'hard').capitalize()
+                difficulties_found.add(diff_clean)
+                
+                # Initialize list if needed
+                if diff_clean not in data_store[exp_name]['ID Match']:
+                    data_store[exp_name]['ID Match'][diff_clean] = []
+                    data_store[exp_name]['Column Match'][diff_clean] = []
+                
+                # Collect Runs
+                oid_runs = []
+                col_runs = []
+                runs_data = metrics.get('runs_metrics', {})
+                for _, run_vals in runs_data.items():
+                    oid_runs.append(run_vals.get('oids', {}).get('perfect_match_rate', 0))
+                    col_m = run_vals.get('columns_formatted', run_vals.get('columns', {})) if formatted_columns else run_vals.get('columns', {})
+                    col_runs.append(col_m.get('perfect_match_rate', 0))
+                
+                # Calculate Mean (or use pre-calc)
+                oid_mean = sum(oid_runs)/len(oid_runs) if oid_runs else 0
+                col_mean = sum(col_runs)/len(col_runs) if col_runs else 0
+                
+                data_store[exp_name]['ID Match'][diff_clean].append({
+                    'model': model,
+                    'mean': oid_mean,
+                    'runs': oid_runs
+                })
+                data_store[exp_name]['Column Match'][diff_clean].append({
+                    'model': model,
+                    'mean': col_mean,
+                    'runs': col_runs
+                })
+
+    # --- 2. Compute Ranks with Significance ---
+    # ranks_map[exp][model] = {'RS': 1, 'RM': 2...}
+    ranks_map = {exp: {m: {} for m in sorted_models} for exp in sorted_exp_names}
+    
+    diff_order = ['Simple', 'Medium', 'Hard']
+    sorted_diffs = sorted(list(difficulties_found), 
+                          key=lambda x: diff_order.index(x) if x in diff_order else 99)
+
+    for exp_name in sorted_exp_names:
+        for metric in ['ID Match', 'Column Match']:
+            for diff in sorted_diffs:
+                # Get list of models for this specific column
+                entries = data_store[exp_name][metric].get(diff, [])
+                
+                if not entries: continue
+                
+                # 1. Sort descending by mean score
+                entries.sort(key=lambda x: x['mean'], reverse=True)
+                
+                # 2. Assign Ranks
+                # First model is Rank 1
+                current_entries_ranks = {} # model -> rank
+                
+                # Base case
+                current_rank = 1
+                current_entries_ranks[entries[0]['model']] = 1
+                
+                # Iterate rest
+                for i in range(1, len(entries)):
+                    prev_model = entries[i-1]
+                    curr_model = entries[i]
+                    
+                    # Permutation Test
+                    if not prev_model['runs'] or not curr_model['runs']:
+                         # Fallback if no runs: Treat as tied? Or distinct?
+                         # Let's treat as distinct rank to be safe
+                         current_entries_ranks[curr_model['model']] = i + 1
+                         continue
+
+                    p_val = permutation_test(
+                        prev_model['runs'], 
+                        curr_model['runs'],
+                        method='approximate',
+                        num_rounds=5000, # Lower rounds for speed in loop
+                        seed=0
+                    )
+                    
+                    if p_val < 0.05:
+                        # Significant difference: Standard Rank (Index + 1)
+                        # e.g. if i=1 (2nd person), rank is 2
+                        current_rank = i + 1
+                    else:
+                        # Not significant: Keep previous rank
+                        # current_rank stays same
+                        pass
+                    
+                    current_entries_ranks[curr_model['model']] = current_rank
+                
+                # Store in main map
+                short_metric = 'R' if metric == 'ID Match' else 'C'
+                col_key = f"{short_metric}{diff[0]}" # e.g. RS, CM
+                
+                for model_name, rank in current_entries_ranks.items():
+                    ranks_map[exp_name][model_name][col_key] = rank
+
+    # --- 3. Generate Tables ---
+    # Add table size and centering
+    size_commands = {
+        'tiny': '\\tiny',
+        'scriptsize': '\\scriptsize', 
+        'footnotesize': '\\footnotesize',
+        'small': '\\small',
+        'normalsize': '\\normalsize',
+        'large': '\\large'
+    }
+    
+    all_latex_tables = []
+    rank_col_headers = []
+    for m_short in ['R', 'C']:
+        for d_short in [d[0] for d in sorted_diffs]:
+            rank_col_headers.append(f"{m_short}{d_short}")
+
+    for exp_name in sorted_exp_names:
+        
+        # Build DataFrame for sorting and printing
+        rows = []
+        for model in sorted_models:
+            # Display Name
+            if 'claude-3-7' in model: model_label = 'Claude-3.7'
+            elif 'gpt' in model: model_label = "-".join(model.split('-')[0:2]).replace('gpt', 'GPT')
+            else: model_label = model
+            
+            r_data = {'Model': model_label}
+            rank_sum = 0
+            has_data = False
+            
+            # Fetch ranks
+            for col_key in rank_col_headers:
+                r = ranks_map[exp_name][model].get(col_key, -1)
+                if r != -1:
+                    r_data[col_key] = r
+                    rank_sum += r
+                    has_data = True
+                else:
+                    r_data[col_key] = "-"
+            
+            if has_data:
+                r_data['SUM'] = rank_sum
+                rows.append(r_data)
+        
+        if not rows: continue
+            
+        # Sort by SUM
+        rows.sort(key=lambda x: x['SUM'])
+        
+        # LaTeX Construction
+        latex_lines = []
+        table_env = "table*" if adjust_margins else "table"
+        latex_lines.append(f"\\begin{{{table_env}}}[htbp]")
+        latex_lines.append(size_commands.get(table_size, '\\small'))
+        latex_lines.append(r"\centering")
+
+        col_def = "l | " + " ".join(["c"] * len(sorted_diffs)) + " | " \
+                  + " ".join(["c"] * len(sorted_diffs)) + " || c"
+        
+        latex_lines.append(f"\\begin{{tabular}}{{{col_def}}}")
+        latex_lines.append(r"\toprule")
+        
+        header = ["LLM"] + rank_col_headers + ["SUM"]
+        latex_lines.append(" & ".join(header) + r" \\")
+        latex_lines.append(r"\midrule")
+        
+        for row in rows:
+            vals = [row['Model']]
+            for k in rank_col_headers:
+                vals.append(str(row[k]))
+            vals.append(str(row['SUM']))
+            latex_lines.append(" & ".join(vals) + r" \\")
+
+        latex_lines.append(r"\bottomrule")
+        latex_lines.append(r"\end{tabular}")
+        
+        exp_display = 'Step-by-Step' if 'sbs' in exp_name else exp_name
+        exp_display = 'Direct' if 'direct' in exp_name else exp_display
+        caption = f"Statistical Ranking for {exp_display} ({sc_title}). Models with no significant difference ($p \ge 0.05$) share the same rank."
+        latex_lines.append(f"\\caption{{{caption}}}")
+        
+        label_exp = "_sbs" if 'sbs' in exp_name else "_direct"
+        label_sc = "_w_sc" if use_self_correction else "_wo_sc"
+        latex_lines.append(f"\\label{{tab:sig_rank_{label_exp}{label_sc}}}")
+        latex_lines.append(f"\\end{{{table_env}}}")
+        
+        all_latex_tables.append("\n".join(latex_lines))
+
+    final_str = "\n\n\\bigskip\n\n".join(all_latex_tables)
+    print("\n" + "="*80)
+    print(f"Significance Ranking Tables ({sc_title})")
+    print("="*80)
+    print(final_str)
+    print("="*80)
+    
+    return final_str
 
 
 def plot_diff_classification(evaluation_results: Dict[str, Dict[str, Any]]) -> None:

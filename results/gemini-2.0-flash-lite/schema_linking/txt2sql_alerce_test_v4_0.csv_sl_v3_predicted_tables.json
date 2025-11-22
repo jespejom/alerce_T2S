@@ -1,0 +1,2943 @@
+{
+    "schema_linking_model": {
+        "model": {
+            "model_name": "gemini-2.0-flash-lite",
+            "temperature": 0.0,
+            "max_tokens": 12000,
+            "top_p": 1.0
+        },
+        "prompt_version": "sl_v3",
+        "db_schema": "\nTABLE \"object\": contains basic filter and time\u2013aggregated statistics such as location, number of observations, and the times of first and last detection.\nTABLE \"probability\": classification probabilities associated to a given object, classifier, and class. Contain the object classification probabilities, including those from the stamp and light curve classifiers, and from different versions of these classifiers.\nTABLE \"feature\": contains the object light curve statistics and other features used for ML classification and which are stored as json files in our database.\nTABLE \"magstat\": contains time\u2013aggregated statistics separated by filter, such as the average magnitude, the initial magnitude change rate, number of detections, etc.\nTABLE \"non_detection\": contains the limiting magnitudes of previous non\u2013detections separated by filter.\nTABLE \"detection\": contains the object light curves including their difference and corrected magnitudes and associated errors separated by filter.\nTABLE \"step\": contains the different pipeline steps and their versions.\nTABLE \"taxonomy\": contains details about the different taxonomies used in our stamp and light curve classifiers, which can evolve with time.\nTABLE \"feature_version\": contains the version of the feature extraction and preprocessing steps used to generate the features.\nTABLE \"xmatch\": contains the object cross\u2013matches and associated cross\u2013match catalogs.\nTABLE \"allwise\": contains the AllWISE catalog information for the objects.\nTABLE \"dataquality\": detailed object information regarding the quality of the data\nTABLE \"gaia_ztf\": GAIA objects near detected ZTF objects\nTABLE \"ss_ztf\": known solar system objects near detected objects\nTABLE \"ps1_ztf\": PanSTARRS objects near detected ZTF objects\nTABLE \"reference\": properties of the reference images used to build templates\nTABLE \"pipeline\": information about the different pipeline steps and their versions\nTABLE \"information_schema.tables\": information about the database tables and columns\nTABLE \"forced_photometry\": contains the forced photometry measurements for each object, including the object position, magnitude, and associated errors, and the photometry of the reference image.\n",
+        "schema_linking_format": "\n# Given the user request, select the tables needed to generate a SQL query\n# The Database has the following tables:\n{db_schema}\n\n{final_instructions}\n",
+        "sl_final_instructions": "\n# Give ONLY the TABLES that are needed to generate the SQL query.\n# Give the answer in the following format: ['table1', 'table2', 'table3', ...]. For example, if the TABLES needed for the user request are TABLE object and TABLE taxonomy, then you should type: ['object', 'taxonomy']\n# Just give the tables and ignore any other task given in the request given as \"request\".\n# Remember to use the exact name of the TABLES, as they are written in the DATABASE SCHEMA. Do NOT create table names.\n# If you think that no table mentioned above is needed, then type: \"\"\n",
+        "tables_list": null
+    },
+    "8": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "step"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "in_toks": 1246,
+                "out_toks": 17,
+                "id": {
+                    "0": "UiQgadH2MdymmtkP6ej2-Qo",
+                    "1": "UyQgadvgFOWiqtsPz-nByA0"
+                },
+                "created": {
+                    "0": "UiQgadH2MdymmtkP6ej2-Qo",
+                    "1": "UyQgadvgFOWiqtsPz-nByA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "in_toks": 1246,
+                "out_toks": 17,
+                "id": {
+                    "0": "UiQgadH2MdymmtkP6ej2-Qo",
+                    "1": "UyQgadvgFOWiqtsPz-nByA0"
+                },
+                "created": {
+                    "0": "UiQgadH2MdymmtkP6ej2-Qo",
+                    "1": "UyQgadvgFOWiqtsPz-nByA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "27": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy', 'magstat']\n",
+                    "1": "['object', 'probability', 'taxonomy', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'taxonomy', 'magstat']\n",
+                    "1": "['object', 'probability', 'taxonomy', 'magstat']\n"
+                },
+                "in_toks": 1328,
+                "out_toks": 28,
+                "id": {
+                    "0": "UyQgaaPSPMeiqtsP9MrqyAw",
+                    "1": "VCQgaZPZHda3mtkPs-2Z4Aw"
+                },
+                "created": {
+                    "0": "UyQgaaPSPMeiqtsP9MrqyAw",
+                    "1": "VCQgaZPZHda3mtkPs-2Z4Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy', 'magstat']\n",
+                    "1": "['object', 'probability', 'taxonomy', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'taxonomy', 'magstat']\n",
+                    "1": "['object', 'probability', 'taxonomy', 'magstat']\n"
+                },
+                "in_toks": 1328,
+                "out_toks": 28,
+                "id": {
+                    "0": "UyQgaaPSPMeiqtsP9MrqyAw",
+                    "1": "VCQgaZPZHda3mtkPs-2Z4Aw"
+                },
+                "created": {
+                    "0": "UyQgaaPSPMeiqtsP9MrqyAw",
+                    "1": "VCQgaZPZHda3mtkPs-2Z4Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "17": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "magstat",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'magstat', 'feature']\n",
+                    "1": "['object', 'probability', 'magstat', 'feature']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'magstat', 'feature']\n",
+                    "1": "['object', 'probability', 'magstat', 'feature']\n"
+                },
+                "in_toks": 1256,
+                "out_toks": 28,
+                "id": {
+                    "0": "VSQgaeLTDvC3qtsPofCpgAE",
+                    "1": "VSQgafmvK9qnmtkP1ayD6Qw"
+                },
+                "created": {
+                    "0": "VSQgaeLTDvC3qtsPofCpgAE",
+                    "1": "VSQgafmvK9qnmtkP1ayD6Qw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "magstat",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'magstat', 'feature']\n",
+                    "1": "['object', 'probability', 'magstat', 'feature']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'magstat', 'feature']\n",
+                    "1": "['object', 'probability', 'magstat', 'feature']\n"
+                },
+                "in_toks": 1256,
+                "out_toks": 28,
+                "id": {
+                    "0": "VSQgaeLTDvC3qtsPofCpgAE",
+                    "1": "VSQgafmvK9qnmtkP1ayD6Qw"
+                },
+                "created": {
+                    "0": "VSQgaeLTDvC3qtsPofCpgAE",
+                    "1": "VSQgafmvK9qnmtkP1ayD6Qw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "37": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "responses_text": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "in_toks": 1234,
+                "out_toks": 8,
+                "id": {
+                    "0": "ViQgaYS_HuaIqtsPhK3i2Aw",
+                    "1": "VyQgaaL4CeqKmtkPpbCq0Aw"
+                },
+                "created": {
+                    "0": "ViQgaYS_HuaIqtsPhK3i2Aw",
+                    "1": "VyQgaaL4CeqKmtkPpbCq0Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "responses_text": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "in_toks": 1234,
+                "out_toks": 8,
+                "id": {
+                    "0": "ViQgaYS_HuaIqtsPhK3i2Aw",
+                    "1": "VyQgaaL4CeqKmtkPpbCq0Aw"
+                },
+                "created": {
+                    "0": "ViQgaYS_HuaIqtsPhK3i2Aw",
+                    "1": "VyQgaaL4CeqKmtkPpbCq0Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "34": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']\n",
+                    "1": "['object', 'feature']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'feature']\n",
+                    "1": "['object', 'feature']\n"
+                },
+                "in_toks": 1428,
+                "out_toks": 14,
+                "id": {
+                    "0": "VyQgaezDLNa5qtsPqfTa0Q0",
+                    "1": "WCQgaaGgGOmnmtkP1-CuiQ0"
+                },
+                "created": {
+                    "0": "VyQgaezDLNa5qtsPqfTa0Q0",
+                    "1": "WCQgaaGgGOmnmtkP1-CuiQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'feature']\n",
+                    "1": "['object', 'feature']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'feature']\n",
+                    "1": "['object', 'feature']\n"
+                },
+                "in_toks": 1428,
+                "out_toks": 14,
+                "id": {
+                    "0": "VyQgaezDLNa5qtsPqfTa0Q0",
+                    "1": "WCQgaaGgGOmnmtkP1-CuiQ0"
+                },
+                "created": {
+                    "0": "VyQgaezDLNa5qtsPqfTa0Q0",
+                    "1": "WCQgaaGgGOmnmtkP1-CuiQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "1": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "magstat",
+                "detection",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n",
+                    "1": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n",
+                    "1": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n"
+                },
+                "in_toks": 1470,
+                "out_toks": 44,
+                "id": {
+                    "0": "WCQgaYydOYmtqtsP16PaqAs",
+                    "1": "WSQgadzjIsiGqtsPyf6gkA0"
+                },
+                "created": {
+                    "0": "WCQgaYydOYmtqtsP16PaqAs",
+                    "1": "WSQgadzjIsiGqtsPyf6gkA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "feature",
+                "magstat",
+                "detection",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n",
+                    "1": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n",
+                    "1": "['object', 'probability', 'feature', 'magstat', 'detection', 'feature_version']\n"
+                },
+                "in_toks": 1470,
+                "out_toks": 44,
+                "id": {
+                    "0": "WCQgaYydOYmtqtsP16PaqAs",
+                    "1": "WSQgadzjIsiGqtsPyf6gkA0"
+                },
+                "created": {
+                    "0": "WCQgaYydOYmtqtsP16PaqAs",
+                    "1": "WSQgadzjIsiGqtsPyf6gkA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "16": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "non_detection",
+                "magstat",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n",
+                    "1": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n",
+                    "1": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n"
+                },
+                "in_toks": 1386,
+                "out_toks": 38,
+                "id": {
+                    "0": "WiQgabXQDaq2qtsP-Zn44Aw",
+                    "1": "WiQgadf5NYL5qtsPgcWdiAs"
+                },
+                "created": {
+                    "0": "WiQgabXQDaq2qtsP-Zn44Aw",
+                    "1": "WiQgadf5NYL5qtsPgcWdiAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "non_detection",
+                "magstat",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n",
+                    "1": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n",
+                    "1": "['object', 'probability', 'non_detection', 'magstat', 'detection']\n"
+                },
+                "in_toks": 1386,
+                "out_toks": 38,
+                "id": {
+                    "0": "WiQgabXQDaq2qtsP-Zn44Aw",
+                    "1": "WiQgadf5NYL5qtsPgcWdiAs"
+                },
+                "created": {
+                    "0": "WiQgabXQDaq2qtsP-Zn44Aw",
+                    "1": "WiQgadf5NYL5qtsPgcWdiAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "19": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']\n",
+                    "1": "['object', 'probability', 'taxonomy']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'taxonomy']\n",
+                    "1": "['object', 'probability', 'taxonomy']\n"
+                },
+                "in_toks": 1326,
+                "out_toks": 20,
+                "id": {
+                    "0": "WyQgad67GY-kmtkP7uz2uA0",
+                    "1": "XCQgaejvBLaJ6dkPhPiluQs"
+                },
+                "created": {
+                    "0": "WyQgad67GY-kmtkP7uz2uA0",
+                    "1": "XCQgaejvBLaJ6dkPhPiluQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'taxonomy']\n",
+                    "1": "['object', 'probability', 'taxonomy']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'taxonomy']\n",
+                    "1": "['object', 'probability', 'taxonomy']\n"
+                },
+                "in_toks": 1326,
+                "out_toks": 20,
+                "id": {
+                    "0": "WyQgad67GY-kmtkP7uz2uA0",
+                    "1": "XCQgaejvBLaJ6dkPhPiluQs"
+                },
+                "created": {
+                    "0": "WyQgad67GY-kmtkP7uz2uA0",
+                    "1": "XCQgaejvBLaJ6dkPhPiluQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "14": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'ps1_ztf']\n",
+                    "1": "['object', 'detection', 'ps1_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'detection', 'ps1_ztf']\n",
+                    "1": "['object', 'detection', 'ps1_ztf']\n"
+                },
+                "in_toks": 1584,
+                "out_toks": 28,
+                "id": {
+                    "0": "XCQgaanVKo61qtsP65GFkQs",
+                    "1": "XSQgafykF_P5qtsP3ZaO0A0"
+                },
+                "created": {
+                    "0": "XCQgaanVKo61qtsP65GFkQs",
+                    "1": "XSQgafykF_P5qtsP3ZaO0A0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection', 'ps1_ztf']\n",
+                    "1": "['object', 'detection', 'ps1_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'detection', 'ps1_ztf']\n",
+                    "1": "['object', 'detection', 'ps1_ztf']\n"
+                },
+                "in_toks": 1584,
+                "out_toks": 28,
+                "id": {
+                    "0": "XCQgaanVKo61qtsP65GFkQs",
+                    "1": "XSQgafykF_P5qtsP3ZaO0A0"
+                },
+                "created": {
+                    "0": "XCQgaanVKo61qtsP65GFkQs",
+                    "1": "XSQgafykF_P5qtsP3ZaO0A0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "30": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "responses_text": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "in_toks": 1244,
+                "out_toks": 8,
+                "id": {
+                    "0": "XSQgaeXMPLfmqtsP9-at8Qo",
+                    "1": "XiQgad7tKrynqtsPu96tiQs"
+                },
+                "created": {
+                    "0": "XSQgaeXMPLfmqtsP9-at8Qo",
+                    "1": "XiQgad7tKrynqtsPu96tiQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "responses_text": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "in_toks": 1244,
+                "out_toks": 8,
+                "id": {
+                    "0": "XSQgaeXMPLfmqtsP9-at8Qo",
+                    "1": "XiQgad7tKrynqtsPu96tiQs"
+                },
+                "created": {
+                    "0": "XSQgaeXMPLfmqtsP9-at8Qo",
+                    "1": "XiQgad7tKrynqtsPu96tiQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "22": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "step"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "in_toks": 1218,
+                "out_toks": 17,
+                "id": {
+                    "0": "XyQgaeaSDZu-mtkPvpq5-Qo",
+                    "1": "XyQgafaJMeiP6dkPpP3zwQ0"
+                },
+                "created": {
+                    "0": "XyQgaeaSDZu-mtkPvpq5-Qo",
+                    "1": "XyQgafaJMeiP6dkPpP3zwQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'step']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "in_toks": 1218,
+                "out_toks": 17,
+                "id": {
+                    "0": "XyQgaeaSDZu-mtkPvpq5-Qo",
+                    "1": "XyQgafaJMeiP6dkPpP3zwQ0"
+                },
+                "created": {
+                    "0": "XyQgaeaSDZu-mtkPvpq5-Qo",
+                    "1": "XyQgafaJMeiP6dkPpP3zwQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "12": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "in_toks": 1320,
+                "out_toks": 16,
+                "id": {
+                    "0": "YCQgaZK2GdGiqtsPwaWY-Ao",
+                    "1": "YSQgad6rBNa2mtkP-O3y-Ao"
+                },
+                "created": {
+                    "0": "YCQgaZK2GdGiqtsPwaWY-Ao",
+                    "1": "YSQgad6rBNa2mtkP-O3y-Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "in_toks": 1320,
+                "out_toks": 16,
+                "id": {
+                    "0": "YCQgaZK2GdGiqtsPwaWY-Ao",
+                    "1": "YSQgad6rBNa2mtkP-O3y-Ao"
+                },
+                "created": {
+                    "0": "YCQgaZK2GdGiqtsPwaWY-Ao",
+                    "1": "YSQgad6rBNa2mtkP-O3y-Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "57": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "in_toks": 1480,
+                "out_toks": 14,
+                "id": {
+                    "0": "YSQgacvFKbSlqtsP3MffgAs",
+                    "1": "YiQgadbmE_GqqtsPvurF-Qo"
+                },
+                "created": {
+                    "0": "YSQgacvFKbSlqtsP3MffgAs",
+                    "1": "YiQgadbmE_GqqtsPvurF-Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "in_toks": 1480,
+                "out_toks": 14,
+                "id": {
+                    "0": "YSQgacvFKbSlqtsP3MffgAs",
+                    "1": "YiQgadbmE_GqqtsPvurF-Qo"
+                },
+                "created": {
+                    "0": "YSQgacvFKbSlqtsP3MffgAs",
+                    "1": "YiQgadbmE_GqqtsPvurF-Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "75": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']\n",
+                    "1": "['ss_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['ss_ztf']\n",
+                    "1": "['ss_ztf']\n"
+                },
+                "in_toks": 1222,
+                "out_toks": 14,
+                "id": {
+                    "0": "YyQgafunBoK-qtsPyY320Qw",
+                    "1": "YyQgab-3IuGiqtsP2KaeoA0"
+                },
+                "created": {
+                    "0": "YyQgafunBoK-qtsPyY320Qw",
+                    "1": "YyQgab-3IuGiqtsP2KaeoA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf']\n",
+                    "1": "['ss_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['ss_ztf']\n",
+                    "1": "['ss_ztf']\n"
+                },
+                "in_toks": 1222,
+                "out_toks": 14,
+                "id": {
+                    "0": "YyQgafunBoK-qtsPyY320Qw",
+                    "1": "YyQgab-3IuGiqtsP2KaeoA0"
+                },
+                "created": {
+                    "0": "YyQgafunBoK-qtsPyY320Qw",
+                    "1": "YyQgab-3IuGiqtsP2KaeoA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "43": {
+        "0": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "in_toks": 1300,
+                "out_toks": 10,
+                "id": {
+                    "0": "ZCQgaZXqE6aCqtsP84rgyA0",
+                    "1": "ZCQgaeSpMoW1qtsPgcaeoA0"
+                },
+                "created": {
+                    "0": "ZCQgaZXqE6aCqtsP84rgyA0",
+                    "1": "ZCQgaeSpMoW1qtsPgcaeoA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "in_toks": 1300,
+                "out_toks": 10,
+                "id": {
+                    "0": "ZCQgaZXqE6aCqtsP84rgyA0",
+                    "1": "ZCQgaeSpMoW1qtsPgcaeoA0"
+                },
+                "created": {
+                    "0": "ZCQgaZXqE6aCqtsP84rgyA0",
+                    "1": "ZCQgaeSpMoW1qtsPgcaeoA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "89": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'dataquality']\n",
+                    "1": "['probability', 'dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'dataquality']\n",
+                    "1": "['probability', 'dataquality']\n"
+                },
+                "in_toks": 1248,
+                "out_toks": 16,
+                "id": {
+                    "0": "ZSQgabyCHaPZqtsP363G6Aw",
+                    "1": "ZiQgaZCUAci_qtsPx7TpiQ0"
+                },
+                "created": {
+                    "0": "ZSQgabyCHaPZqtsP363G6Aw",
+                    "1": "ZiQgaZCUAci_qtsPx7TpiQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'dataquality']\n",
+                    "1": "['probability', 'dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'dataquality']\n",
+                    "1": "['probability', 'dataquality']\n"
+                },
+                "in_toks": 1248,
+                "out_toks": 16,
+                "id": {
+                    "0": "ZSQgabyCHaPZqtsP363G6Aw",
+                    "1": "ZiQgaZCUAci_qtsPx7TpiQ0"
+                },
+                "created": {
+                    "0": "ZSQgabyCHaPZqtsP363G6Aw",
+                    "1": "ZiQgaZCUAci_qtsPx7TpiQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "72": {
+        "0": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "responses_text": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "in_toks": 1240,
+                "out_toks": 8,
+                "id": {
+                    "0": "ZiQgaeajKs63qtsP-bOCyQw",
+                    "1": "ZyQgabWuDeaqmtkP5bqLyAw"
+                },
+                "created": {
+                    "0": "ZiQgaeajKs63qtsP-bOCyQw",
+                    "1": "ZyQgabWuDeaqmtkP5bqLyAw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "responses_text": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "in_toks": 1240,
+                "out_toks": 8,
+                "id": {
+                    "0": "ZiQgaeajKs63qtsP-bOCyQw",
+                    "1": "ZyQgabWuDeaqmtkP5bqLyAw"
+                },
+                "created": {
+                    "0": "ZiQgaeajKs63qtsP-bOCyQw",
+                    "1": "ZyQgabWuDeaqmtkP5bqLyAw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "103": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ps1_ztf']\n",
+                    "1": "['object', 'probability', 'ps1_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'ps1_ztf']\n",
+                    "1": "['object', 'probability', 'ps1_ztf']\n"
+                },
+                "in_toks": 1350,
+                "out_toks": 28,
+                "id": {
+                    "0": "ZyQgabinOYanmtkPsryqmA0",
+                    "1": "aCQgabGjIePzqtsP-pmzSA"
+                },
+                "created": {
+                    "0": "ZyQgabinOYanmtkPsryqmA0",
+                    "1": "aCQgabGjIePzqtsP-pmzSA"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ps1_ztf']\n",
+                    "1": "['object', 'probability', 'ps1_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'ps1_ztf']\n",
+                    "1": "['object', 'probability', 'ps1_ztf']\n"
+                },
+                "in_toks": 1350,
+                "out_toks": 28,
+                "id": {
+                    "0": "ZyQgabinOYanmtkPsryqmA0",
+                    "1": "aCQgabGjIePzqtsP-pmzSA"
+                },
+                "created": {
+                    "0": "ZyQgabinOYanmtkPsryqmA0",
+                    "1": "aCQgabGjIePzqtsP-pmzSA"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "54": {
+        "0": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']\n",
+                    "1": "['non_detection']\n"
+                },
+                "responses_text": {
+                    "0": "['non_detection']\n",
+                    "1": "['non_detection']\n"
+                },
+                "in_toks": 1286,
+                "out_toks": 12,
+                "id": {
+                    "0": "aSQgafLFC5ylmtkPlM3xiAs",
+                    "1": "aSQgafD4K5HmqtsPkNrf8Qo"
+                },
+                "created": {
+                    "0": "aSQgafLFC5ylmtkPlM3xiAs",
+                    "1": "aSQgafD4K5HmqtsPkNrf8Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "non_detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['non_detection']\n",
+                    "1": "['non_detection']\n"
+                },
+                "responses_text": {
+                    "0": "['non_detection']\n",
+                    "1": "['non_detection']\n"
+                },
+                "in_toks": 1286,
+                "out_toks": 12,
+                "id": {
+                    "0": "aSQgafLFC5ylmtkPlM3xiAs",
+                    "1": "aSQgafD4K5HmqtsPkNrf8Qo"
+                },
+                "created": {
+                    "0": "aSQgafLFC5ylmtkPlM3xiAs",
+                    "1": "aSQgafD4K5HmqtsPkNrf8Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "99": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'forced_photometry']\n",
+                    "1": "['object', 'probability', 'forced_photometry']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'forced_photometry']\n",
+                    "1": "['object', 'probability', 'forced_photometry']\n"
+                },
+                "in_toks": 1298,
+                "out_toks": 26,
+                "id": {
+                    "0": "aiQgad3PHaaQmtkPkpbvyAw",
+                    "1": "ayQgaZyZBva7mtkP--vzsA0"
+                },
+                "created": {
+                    "0": "aiQgad3PHaaQmtkPkpbvyAw",
+                    "1": "ayQgaZyZBva7mtkP--vzsA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'forced_photometry']\n",
+                    "1": "['object', 'probability', 'forced_photometry']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'forced_photometry']\n",
+                    "1": "['object', 'probability', 'forced_photometry']\n"
+                },
+                "in_toks": 1298,
+                "out_toks": 26,
+                "id": {
+                    "0": "aiQgad3PHaaQmtkPkpbvyAw",
+                    "1": "ayQgaZyZBva7mtkP--vzsA0"
+                },
+                "created": {
+                    "0": "aiQgad3PHaaQmtkPkpbvyAw",
+                    "1": "ayQgaZyZBva7mtkP--vzsA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "40": {
+        "0": {
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "in_toks": 1316,
+                "out_toks": 10,
+                "id": {
+                    "0": "ayQgaZnPNKOvqtsPpfbMiAs",
+                    "1": "bCQgab-lFf-lmtkP0NnLiAE"
+                },
+                "created": {
+                    "0": "ayQgaZnPNKOvqtsPpfbMiAs",
+                    "1": "bCQgab-lFf-lmtkP0NnLiAE"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "in_toks": 1316,
+                "out_toks": 10,
+                "id": {
+                    "0": "ayQgaZnPNKOvqtsPpfbMiAs",
+                    "1": "bCQgab-lFf-lmtkP0NnLiAE"
+                },
+                "created": {
+                    "0": "ayQgaZnPNKOvqtsPpfbMiAs",
+                    "1": "bCQgab-lFf-lmtkP0NnLiAE"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "80": {
+        "0": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "responses_text": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "in_toks": 1288,
+                "out_toks": 10,
+                "id": {
+                    "0": "bCQgad-oO5usqtsPsf6ywAs",
+                    "1": "bSQgaYSZJt6QmtkP2e-m0Qw"
+                },
+                "created": {
+                    "0": "bCQgad-oO5usqtsPsf6ywAs",
+                    "1": "bSQgaYSZJt6QmtkP2e-m0Qw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "responses_text": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "in_toks": 1288,
+                "out_toks": 10,
+                "id": {
+                    "0": "bCQgad-oO5usqtsPsf6ywAs",
+                    "1": "bSQgaYSZJt6QmtkP2e-m0Qw"
+                },
+                "created": {
+                    "0": "bCQgad-oO5usqtsPsf6ywAs",
+                    "1": "bSQgaYSZJt6QmtkP2e-m0Qw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "45": {
+        "0": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "in_toks": 1260,
+                "out_toks": 10,
+                "id": {
+                    "0": "biQgadzTCq2rqtsP0MnS8Qo",
+                    "1": "biQgaYmgMYO6qtsPtdbA6Aw"
+                },
+                "created": {
+                    "0": "biQgadzTCq2rqtsP0MnS8Qo",
+                    "1": "biQgaYmgMYO6qtsPtdbA6Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "in_toks": 1260,
+                "out_toks": 10,
+                "id": {
+                    "0": "biQgadzTCq2rqtsP0MnS8Qo",
+                    "1": "biQgaYmgMYO6qtsPtdbA6Aw"
+                },
+                "created": {
+                    "0": "biQgadzTCq2rqtsP0MnS8Qo",
+                    "1": "biQgaYmgMYO6qtsPtdbA6Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "63": {
+        "0": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "responses_text": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "in_toks": 1280,
+                "out_toks": 8,
+                "id": {
+                    "0": "byQgaf_FEYudqtsP5YSmuAs",
+                    "1": "byQgafTNN4u-qtsPmcqQ0Aw"
+                },
+                "created": {
+                    "0": "byQgaf_FEYudqtsP5YSmuAs",
+                    "1": "byQgafTNN4u-qtsPmcqQ0Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "responses_text": {
+                    "0": "['probability']\n",
+                    "1": "['probability']\n"
+                },
+                "in_toks": 1280,
+                "out_toks": 8,
+                "id": {
+                    "0": "byQgaf_FEYudqtsP5YSmuAs",
+                    "1": "byQgafTNN4u-qtsPmcqQ0Aw"
+                },
+                "created": {
+                    "0": "byQgaf_FEYudqtsP5YSmuAs",
+                    "1": "byQgafTNN4u-qtsPmcqQ0Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "73": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'ss_ztf']\n",
+                    "1": "['object', 'ss_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'ss_ztf']\n",
+                    "1": "['object', 'ss_ztf']\n"
+                },
+                "in_toks": 1254,
+                "out_toks": 20,
+                "id": {
+                    "0": "cCQgac-mGKesqtsPr5-mgAs",
+                    "1": "cSQgafClCbO_qtsPoeanoA8"
+                },
+                "created": {
+                    "0": "cCQgac-mGKesqtsPr5-mgAs",
+                    "1": "cSQgafClCbO_qtsPoeanoA8"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "ss_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'ss_ztf']\n",
+                    "1": "['object', 'ss_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'ss_ztf']\n",
+                    "1": "['object', 'ss_ztf']\n"
+                },
+                "in_toks": 1254,
+                "out_toks": 20,
+                "id": {
+                    "0": "cCQgac-mGKesqtsPr5-mgAs",
+                    "1": "cSQgafClCbO_qtsPoeanoA8"
+                },
+                "created": {
+                    "0": "cCQgac-mGKesqtsPr5-mgAs",
+                    "1": "cSQgafClCbO_qtsPoeanoA8"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "92": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "magstat",
+                "probability",
+                "step",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat', 'probability', 'step', 'dataquality']\n",
+                    "1": "['object', 'magstat', 'probability', 'step', 'dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'magstat', 'probability', 'step', 'dataquality']\n",
+                    "1": "['object', 'magstat', 'probability', 'step', 'dataquality']\n"
+                },
+                "in_toks": 1310,
+                "out_toks": 36,
+                "id": {
+                    "0": "cSQgaaDqK5GdqtsPm4WTkQ0",
+                    "1": "ciQgab3mFpS9qtsPi6CCSQ"
+                },
+                "created": {
+                    "0": "cSQgaaDqK5GdqtsPm4WTkQ0",
+                    "1": "ciQgab3mFpS9qtsPi6CCSQ"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "magstat",
+                "probability",
+                "step",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat', 'probability', 'step', 'dataquality']\n",
+                    "1": "['object', 'magstat', 'probability', 'step', 'dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'magstat', 'probability', 'step', 'dataquality']\n",
+                    "1": "['object', 'magstat', 'probability', 'step', 'dataquality']\n"
+                },
+                "in_toks": 1310,
+                "out_toks": 36,
+                "id": {
+                    "0": "cSQgaaDqK5GdqtsPm4WTkQ0",
+                    "1": "ciQgab3mFpS9qtsPi6CCSQ"
+                },
+                "created": {
+                    "0": "cSQgaaDqK5GdqtsPm4WTkQ0",
+                    "1": "ciQgab3mFpS9qtsPi6CCSQ"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "102": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "magstat",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat', 'allwise']\n",
+                    "1": "['probability', 'magstat', 'allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'magstat', 'allwise']\n",
+                    "1": "['probability', 'magstat', 'allwise']\n"
+                },
+                "in_toks": 1292,
+                "out_toks": 24,
+                "id": {
+                    "0": "ciQgaaX_NvDmqtsPpf3Z0Aw",
+                    "1": "cyQgabjkIY2zqtsP_9rw4Aw"
+                },
+                "created": {
+                    "0": "ciQgaaX_NvDmqtsPpf3Z0Aw",
+                    "1": "cyQgabjkIY2zqtsP_9rw4Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "magstat",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'magstat', 'allwise']\n",
+                    "1": "['probability', 'magstat', 'allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'magstat', 'allwise']\n",
+                    "1": "['probability', 'magstat', 'allwise']\n"
+                },
+                "in_toks": 1292,
+                "out_toks": 24,
+                "id": {
+                    "0": "ciQgaaX_NvDmqtsPpf3Z0Aw",
+                    "1": "cyQgabjkIY2zqtsP_9rw4Aw"
+                },
+                "created": {
+                    "0": "ciQgaaX_NvDmqtsPpf3Z0Aw",
+                    "1": "cyQgabjkIY2zqtsP_9rw4Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "81": {
+        "0": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']\n",
+                    "1": "['xmatch', 'allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['xmatch', 'allwise']\n",
+                    "1": "['xmatch', 'allwise']\n"
+                },
+                "in_toks": 1286,
+                "out_toks": 18,
+                "id": {
+                    "0": "dCQgaZTBB8KiqtsP8eSs-Ao",
+                    "1": "dCQgacDsKbunqtsPwL_K-Aw"
+                },
+                "created": {
+                    "0": "dCQgaZTBB8KiqtsP8eSs-Ao",
+                    "1": "dCQgacDsKbunqtsPwL_K-Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch",
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch', 'allwise']\n",
+                    "1": "['xmatch', 'allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['xmatch', 'allwise']\n",
+                    "1": "['xmatch', 'allwise']\n"
+                },
+                "in_toks": 1286,
+                "out_toks": 18,
+                "id": {
+                    "0": "dCQgaZTBB8KiqtsP8eSs-Ao",
+                    "1": "dCQgacDsKbunqtsPwL_K-Aw"
+                },
+                "created": {
+                    "0": "dCQgaZTBB8KiqtsP8eSs-Ao",
+                    "1": "dCQgacDsKbunqtsPwL_K-Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "69": {
+        "0": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']\n",
+                    "1": "['ps1_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['ps1_ztf']\n",
+                    "1": "['ps1_ztf']\n"
+                },
+                "in_toks": 1302,
+                "out_toks": 16,
+                "id": {
+                    "0": "dSQgaf-mGraRmtkP9rGugQs",
+                    "1": "dSQgaY-sOJ-kqtsPzp_P8Ao"
+                },
+                "created": {
+                    "0": "dSQgaf-mGraRmtkP9rGugQs",
+                    "1": "dSQgaY-sOJ-kqtsPzp_P8Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ps1_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ps1_ztf']\n",
+                    "1": "['ps1_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['ps1_ztf']\n",
+                    "1": "['ps1_ztf']\n"
+                },
+                "in_toks": 1302,
+                "out_toks": 16,
+                "id": {
+                    "0": "dSQgaf-mGraRmtkP9rGugQs",
+                    "1": "dSQgaY-sOJ-kqtsPzp_P8Ao"
+                },
+                "created": {
+                    "0": "dSQgaf-mGraRmtkP9rGugQs",
+                    "1": "dSQgaY-sOJ-kqtsPzp_P8Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "61": {
+        "0": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "in_toks": 1274,
+                "out_toks": 10,
+                "id": {
+                    "0": "diQgabXqKseHqtsPicvToAs",
+                    "1": "dyQgabPHC-KI6dkPp-nAqQs"
+                },
+                "created": {
+                    "0": "diQgabXqKseHqtsPicvToAs",
+                    "1": "dyQgabPHC-KI6dkPp-nAqQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "in_toks": 1274,
+                "out_toks": 10,
+                "id": {
+                    "0": "diQgabXqKseHqtsPicvToAs",
+                    "1": "dyQgabPHC-KI6dkPp-nAqQs"
+                },
+                "created": {
+                    "0": "diQgabXqKseHqtsPicvToAs",
+                    "1": "dyQgabPHC-KI6dkPp-nAqQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "104": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "object",
+                "ss_ztf",
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n",
+                    "1": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n",
+                    "1": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n"
+                },
+                "in_toks": 1368,
+                "out_toks": 40,
+                "id": {
+                    "0": "dyQgae-vM8eHqtsPgcvToAs",
+                    "1": "eCQgaebSH8XbqtsPkZG6-Ao"
+                },
+                "created": {
+                    "0": "dyQgae-vM8eHqtsPgcvToAs",
+                    "1": "eCQgaebSH8XbqtsPkZG6-Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "object",
+                "ss_ztf",
+                "detection",
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n",
+                    "1": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n",
+                    "1": "['probability', 'object', 'ss_ztf', 'detection', 'dataquality']\n"
+                },
+                "in_toks": 1368,
+                "out_toks": 40,
+                "id": {
+                    "0": "dyQgae-vM8eHqtsPgcvToAs",
+                    "1": "eCQgaebSH8XbqtsPkZG6-Ao"
+                },
+                "created": {
+                    "0": "dyQgae-vM8eHqtsPgcvToAs",
+                    "1": "eCQgaebSH8XbqtsPkZG6-Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "71": {
+        "0": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "responses_text": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "in_toks": 1336,
+                "out_toks": 8,
+                "id": {
+                    "0": "eSQgab79CeDCqtsPqsSD4Aw",
+                    "1": "eiQgab-xBo6yqtsPn7zpgAs"
+                },
+                "created": {
+                    "0": "eSQgab79CeDCqtsPqsSD4Aw",
+                    "1": "eiQgab-xBo6yqtsPn7zpgAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "responses_text": {
+                    "0": "['reference']\n",
+                    "1": "['reference']\n"
+                },
+                "in_toks": 1336,
+                "out_toks": 8,
+                "id": {
+                    "0": "eSQgab79CeDCqtsPqsSD4Aw",
+                    "1": "eiQgab-xBo6yqtsPn7zpgAs"
+                },
+                "created": {
+                    "0": "eSQgab79CeDCqtsPqsSD4Aw",
+                    "1": "eiQgab-xBo6yqtsPn7zpgAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "42": {
+        "0": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "in_toks": 1326,
+                "out_toks": 10,
+                "id": {
+                    "0": "eiQgaYXANZiLqtsP1cLwwA4",
+                    "1": "eyQgacW9Fq7AqtsP6eyNQQ"
+                },
+                "created": {
+                    "0": "eiQgaYXANZiLqtsP1cLwwA4",
+                    "1": "eyQgacW9Fq7AqtsP6eyNQQ"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "dataquality"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "responses_text": {
+                    "0": "['dataquality']\n",
+                    "1": "['dataquality']\n"
+                },
+                "in_toks": 1326,
+                "out_toks": 10,
+                "id": {
+                    "0": "eiQgaYXANZiLqtsP1cLwwA4",
+                    "1": "eyQgacW9Fq7AqtsP6eyNQQ"
+                },
+                "created": {
+                    "0": "eiQgaYXANZiLqtsP1cLwwA4",
+                    "1": "eyQgacW9Fq7AqtsP6eyNQQ"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "107": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf', 'detection']\n",
+                    "1": "['object', 'probability', 'ss_ztf', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'ss_ztf', 'detection']\n",
+                    "1": "['object', 'probability', 'ss_ztf', 'detection']\n"
+                },
+                "in_toks": 1402,
+                "out_toks": 32,
+                "id": {
+                    "0": "fCQgacmFCe2kmtkPq96ugA0",
+                    "1": "fCQgaaCiNJO_qtsP6YP82Aw"
+                },
+                "created": {
+                    "0": "fCQgacmFCe2kmtkPq96ugA0",
+                    "1": "fCQgaaCiNJO_qtsP6YP82Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'ss_ztf', 'detection']\n",
+                    "1": "['object', 'probability', 'ss_ztf', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'ss_ztf', 'detection']\n",
+                    "1": "['object', 'probability', 'ss_ztf', 'detection']\n"
+                },
+                "in_toks": 1402,
+                "out_toks": 32,
+                "id": {
+                    "0": "fCQgacmFCe2kmtkPq96ugA0",
+                    "1": "fCQgaaCiNJO_qtsP6YP82Aw"
+                },
+                "created": {
+                    "0": "fCQgacmFCe2kmtkPq96ugA0",
+                    "1": "fCQgaaCiNJO_qtsP6YP82Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "83": {
+        "0": {
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "in_toks": 1218,
+                "out_toks": 10,
+                "id": {
+                    "0": "fSQgabnWHuyIqtsP3K3iYA",
+                    "1": "fiQgadayBKGuqtsPtO262Aw"
+                },
+                "created": {
+                    "0": "fSQgabnWHuyIqtsP3K3iYA",
+                    "1": "fiQgadayBKGuqtsPtO262Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "allwise"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "responses_text": {
+                    "0": "['allwise']\n",
+                    "1": "['allwise']\n"
+                },
+                "in_toks": 1218,
+                "out_toks": 10,
+                "id": {
+                    "0": "fSQgabnWHuyIqtsP3K3iYA",
+                    "1": "fiQgadayBKGuqtsPtO262Aw"
+                },
+                "created": {
+                    "0": "fSQgabnWHuyIqtsP3K3iYA",
+                    "1": "fiQgadayBKGuqtsPtO262Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "84": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "allwise",
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise', 'xmatch']\n",
+                    "1": "['object', 'allwise', 'xmatch']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'allwise', 'xmatch']\n",
+                    "1": "['object', 'allwise', 'xmatch']\n"
+                },
+                "in_toks": 1264,
+                "out_toks": 24,
+                "id": {
+                    "0": "fiQgaaK3Ksy6qtsPi-yZ8Ao",
+                    "1": "fyQgacS8E8KGqtsPnP378Ao"
+                },
+                "created": {
+                    "0": "fiQgaaK3Ksy6qtsPi-yZ8Ao",
+                    "1": "fyQgacS8E8KGqtsPnP378Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "allwise",
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'allwise', 'xmatch']\n",
+                    "1": "['object', 'allwise', 'xmatch']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'allwise', 'xmatch']\n",
+                    "1": "['object', 'allwise', 'xmatch']\n"
+                },
+                "in_toks": 1264,
+                "out_toks": 24,
+                "id": {
+                    "0": "fiQgaaK3Ksy6qtsPi-yZ8Ao",
+                    "1": "fyQgacS8E8KGqtsPnP378Ao"
+                },
+                "created": {
+                    "0": "fiQgaaK3Ksy6qtsPi-yZ8Ao",
+                    "1": "fyQgacS8E8KGqtsPnP378Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "96": {
+        "0": {
+            "pred_tables": [
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf', 'detection']\n",
+                    "1": "['ss_ztf', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['ss_ztf', 'detection']\n",
+                    "1": "['ss_ztf', 'detection']\n"
+                },
+                "in_toks": 1352,
+                "out_toks": 20,
+                "id": {
+                    "0": "fyQgacKUPJChqtsP5YrN-Aw",
+                    "1": "gCQgadGWI6jBqtsP6_ueuA0"
+                },
+                "created": {
+                    "0": "fyQgacKUPJChqtsP5YrN-Aw",
+                    "1": "gCQgadGWI6jBqtsP6_ueuA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "ss_ztf",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['ss_ztf', 'detection']\n",
+                    "1": "['ss_ztf', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['ss_ztf', 'detection']\n",
+                    "1": "['ss_ztf', 'detection']\n"
+                },
+                "in_toks": 1352,
+                "out_toks": 20,
+                "id": {
+                    "0": "fyQgacKUPJChqtsP5YrN-Aw",
+                    "1": "gCQgadGWI6jBqtsP6_ueuA0"
+                },
+                "created": {
+                    "0": "fyQgacKUPJChqtsP5YrN-Aw",
+                    "1": "gCQgadGWI6jBqtsP6_ueuA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "67": {
+        "0": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']\n",
+                    "1": "['gaia_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['gaia_ztf']\n",
+                    "1": "['gaia_ztf']\n"
+                },
+                "in_toks": 1300,
+                "out_toks": 16,
+                "id": {
+                    "0": "gSQgabG4DeWiqtsPz-nByA0",
+                    "1": "gSQgaey7KYSO6dkP4bL0uQ0"
+                },
+                "created": {
+                    "0": "gSQgabG4DeWiqtsPz-nByA0",
+                    "1": "gSQgaey7KYSO6dkP4bL0uQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "gaia_ztf"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['gaia_ztf']\n",
+                    "1": "['gaia_ztf']\n"
+                },
+                "responses_text": {
+                    "0": "['gaia_ztf']\n",
+                    "1": "['gaia_ztf']\n"
+                },
+                "in_toks": 1300,
+                "out_toks": 16,
+                "id": {
+                    "0": "gSQgabG4DeWiqtsPz-nByA0",
+                    "1": "gSQgaey7KYSO6dkP4bL0uQ0"
+                },
+                "created": {
+                    "0": "gSQgabG4DeWiqtsPz-nByA0",
+                    "1": "gSQgaey7KYSO6dkP4bL0uQ0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "55": {
+        "0": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']\n",
+                    "1": "['object']\n"
+                },
+                "responses_text": {
+                    "0": "['object']\n",
+                    "1": "['object']\n"
+                },
+                "in_toks": 1216,
+                "out_toks": 8,
+                "id": {
+                    "0": "giQgadjVFdymmtkP6ej2-Qo",
+                    "1": "giQgadeWM8eiqtsP9MrqyAw"
+                },
+                "created": {
+                    "0": "giQgadjVFdymmtkP6ej2-Qo",
+                    "1": "giQgadeWM8eiqtsP9MrqyAw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object']\n",
+                    "1": "['object']\n"
+                },
+                "responses_text": {
+                    "0": "['object']\n",
+                    "1": "['object']\n"
+                },
+                "in_toks": 1216,
+                "out_toks": 8,
+                "id": {
+                    "0": "giQgadjVFdymmtkP6ej2-Qo",
+                    "1": "giQgadeWM8eiqtsP9MrqyAw"
+                },
+                "created": {
+                    "0": "giQgadjVFdymmtkP6ej2-Qo",
+                    "1": "giQgadeWM8eiqtsP9MrqyAw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "47": {
+        "0": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']\n",
+                    "1": "['detection']\n"
+                },
+                "responses_text": {
+                    "0": "['detection']\n",
+                    "1": "['detection']\n"
+                },
+                "in_toks": 1348,
+                "out_toks": 8,
+                "id": {
+                    "0": "gyQgadebEda3mtkPs-2Z4Aw",
+                    "1": "gyQgacWPLvC3qtsPofCpgAE"
+                },
+                "created": {
+                    "0": "gyQgadebEda3mtkPs-2Z4Aw",
+                    "1": "gyQgacWPLvC3qtsPofCpgAE"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection']\n",
+                    "1": "['detection']\n"
+                },
+                "responses_text": {
+                    "0": "['detection']\n",
+                    "1": "['detection']\n"
+                },
+                "in_toks": 1348,
+                "out_toks": 8,
+                "id": {
+                    "0": "gyQgadebEda3mtkPs-2Z4Aw",
+                    "1": "gyQgacWPLvC3qtsPofCpgAE"
+                },
+                "created": {
+                    "0": "gyQgadebEda3mtkPs-2Z4Aw",
+                    "1": "gyQgacWPLvC3qtsPofCpgAE"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "79": {
+        "0": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "responses_text": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "in_toks": 1248,
+                "out_toks": 10,
+                "id": {
+                    "0": "hCQgaaLfDtqnmtkP1ayD6Qw",
+                    "1": "hCQgabb4KeaIqtsPhK3i2Aw"
+                },
+                "created": {
+                    "0": "hCQgaaLfDtqnmtkP1ayD6Qw",
+                    "1": "hCQgabb4KeaIqtsPhK3i2Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "xmatch"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "responses_text": {
+                    "0": "['xmatch']\n",
+                    "1": "['xmatch']\n"
+                },
+                "in_toks": 1248,
+                "out_toks": 10,
+                "id": {
+                    "0": "hCQgaaLfDtqnmtkP1ayD6Qw",
+                    "1": "hCQgabb4KeaIqtsPhK3i2Aw"
+                },
+                "created": {
+                    "0": "hCQgaaLfDtqnmtkP1ayD6Qw",
+                    "1": "hCQgabb4KeaIqtsPhK3i2Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "94": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']\n",
+                    "1": "['object', 'reference']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'reference']\n",
+                    "1": "['object', 'reference']\n"
+                },
+                "in_toks": 1238,
+                "out_toks": 14,
+                "id": {
+                    "0": "hSQgaa_cCOqKmtkPpbCq0Aw",
+                    "1": "hSQgaaiOI9a5qtsPqfTa0Q0"
+                },
+                "created": {
+                    "0": "hSQgaa_cCOqKmtkPpbCq0Aw",
+                    "1": "hSQgaaiOI9a5qtsPqfTa0Q0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "reference"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'reference']\n",
+                    "1": "['object', 'reference']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'reference']\n",
+                    "1": "['object', 'reference']\n"
+                },
+                "in_toks": 1238,
+                "out_toks": 14,
+                "id": {
+                    "0": "hSQgaa_cCOqKmtkPpbCq0Aw",
+                    "1": "hSQgaaiOI9a5qtsPqfTa0Q0"
+                },
+                "created": {
+                    "0": "hSQgaa_cCOqKmtkPpbCq0Aw",
+                    "1": "hSQgaaiOI9a5qtsPqfTa0Q0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "90": {
+        "0": {
+            "pred_tables": [
+                "probability",
+                "feature_version",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'feature_version', 'feature']\n",
+                    "1": "['probability', 'feature_version', 'feature']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'feature_version', 'feature']\n",
+                    "1": "['probability', 'feature_version', 'feature']\n"
+                },
+                "in_toks": 1304,
+                "out_toks": 24,
+                "id": {
+                    "0": "hiQgaZKsA-mnmtkP1-CuiQ0",
+                    "1": "hiQgaZbOJ4mtqtsP16PaqAs"
+                },
+                "created": {
+                    "0": "hiQgaZKsA-mnmtkP1-CuiQ0",
+                    "1": "hiQgaZbOJ4mtqtsP16PaqAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "probability",
+                "feature_version",
+                "feature"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['probability', 'feature_version', 'feature']\n",
+                    "1": "['probability', 'feature_version', 'feature']\n"
+                },
+                "responses_text": {
+                    "0": "['probability', 'feature_version', 'feature']\n",
+                    "1": "['probability', 'feature_version', 'feature']\n"
+                },
+                "in_toks": 1304,
+                "out_toks": 24,
+                "id": {
+                    "0": "hiQgaZKsA-mnmtkP1-CuiQ0",
+                    "1": "hiQgaZbOJ4mtqtsP16PaqAs"
+                },
+                "created": {
+                    "0": "hiQgaZKsA-mnmtkP1-CuiQ0",
+                    "1": "hiQgaZbOJ4mtqtsP16PaqAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "51": {
+        "0": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']\n",
+                    "1": "['forced_photometry']\n"
+                },
+                "responses_text": {
+                    "0": "['forced_photometry']\n",
+                    "1": "['forced_photometry']\n"
+                },
+                "in_toks": 1286,
+                "out_toks": 14,
+                "id": {
+                    "0": "hyQgaaj3BsiGqtsPyf6gkA0",
+                    "1": "hyQgaZOVIqq2qtsP-Zn44Aw"
+                },
+                "created": {
+                    "0": "hyQgaaj3BsiGqtsPyf6gkA0",
+                    "1": "hyQgaZOVIqq2qtsP-Zn44Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['forced_photometry']\n",
+                    "1": "['forced_photometry']\n"
+                },
+                "responses_text": {
+                    "0": "['forced_photometry']\n",
+                    "1": "['forced_photometry']\n"
+                },
+                "in_toks": 1286,
+                "out_toks": 14,
+                "id": {
+                    "0": "hyQgaaj3BsiGqtsPyf6gkA0",
+                    "1": "hyQgaZOVIqq2qtsP-Zn44Aw"
+                },
+                "created": {
+                    "0": "hyQgaaj3BsiGqtsPyf6gkA0",
+                    "1": "hyQgaZOVIqq2qtsP-Zn44Aw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "59": {
+        "0": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "in_toks": 1250,
+                "out_toks": 10,
+                "id": {
+                    "0": "iCQgaee1AoL5qtsPgcWdiAs",
+                    "1": "iCQgaZKTII-kmtkP7uz2uA0"
+                },
+                "created": {
+                    "0": "iCQgaee1AoL5qtsPgcWdiAs",
+                    "1": "iCQgaZKTII-kmtkP7uz2uA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['magstat']\n",
+                    "1": "['magstat']\n"
+                },
+                "in_toks": 1250,
+                "out_toks": 10,
+                "id": {
+                    "0": "iCQgaee1AoL5qtsPgcWdiAs",
+                    "1": "iCQgaZKTII-kmtkP7uz2uA0"
+                },
+                "created": {
+                    "0": "iCQgaee1AoL5qtsPgcWdiAs",
+                    "1": "iCQgaZKTII-kmtkP7uz2uA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "100": {
+        "0": {
+            "pred_tables": [
+                "detection",
+                "non_detection",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'non_detection', 'forced_photometry']\n",
+                    "1": "['detection', 'non_detection', 'forced_photometry']\n"
+                },
+                "responses_text": {
+                    "0": "['detection', 'non_detection', 'forced_photometry']\n",
+                    "1": "['detection', 'non_detection', 'forced_photometry']\n"
+                },
+                "in_toks": 1364,
+                "out_toks": 30,
+                "id": {
+                    "0": "iCQgadbYO7aJ6dkPhPiluQs",
+                    "1": "iSQgafCjKY61qtsP65GFkQs"
+                },
+                "created": {
+                    "0": "iCQgadbYO7aJ6dkPhPiluQs",
+                    "1": "iSQgafCjKY61qtsP65GFkQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "detection",
+                "non_detection",
+                "forced_photometry"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['detection', 'non_detection', 'forced_photometry']\n",
+                    "1": "['detection', 'non_detection', 'forced_photometry']\n"
+                },
+                "responses_text": {
+                    "0": "['detection', 'non_detection', 'forced_photometry']\n",
+                    "1": "['detection', 'non_detection', 'forced_photometry']\n"
+                },
+                "in_toks": 1364,
+                "out_toks": 30,
+                "id": {
+                    "0": "iCQgadbYO7aJ6dkPhPiluQs",
+                    "1": "iSQgafCjKY61qtsP65GFkQs"
+                },
+                "created": {
+                    "0": "iCQgadbYO7aJ6dkPhPiluQs",
+                    "1": "iSQgafCjKY61qtsP65GFkQs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "106": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "in_toks": 1458,
+                "out_toks": 14,
+                "id": {
+                    "0": "iiQgaefjC_P5qtsP3ZaO0A0",
+                    "1": "iiQgaeSnKrfmqtsP9-at8Qo"
+                },
+                "created": {
+                    "0": "iiQgaefjC_P5qtsP3ZaO0A0",
+                    "1": "iiQgaeSnKrfmqtsP9-at8Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability']\n",
+                    "1": "['object', 'probability']\n"
+                },
+                "in_toks": 1458,
+                "out_toks": 14,
+                "id": {
+                    "0": "iiQgaefjC_P5qtsP3ZaO0A0",
+                    "1": "iiQgaeSnKrfmqtsP9-at8Qo"
+                },
+                "created": {
+                    "0": "iiQgaefjC_P5qtsP3ZaO0A0",
+                    "1": "iiQgaeSnKrfmqtsP9-at8Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "56": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "in_toks": 1386,
+                "out_toks": 14,
+                "id": {
+                    "0": "iyQgadm0CrynqtsPu96tiQs",
+                    "1": "iyQgabj5KJu-mtkPvpq5-Qo"
+                },
+                "created": {
+                    "0": "iyQgadm0CrynqtsPu96tiQs",
+                    "1": "iyQgabj5KJu-mtkPvpq5-Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "detection"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'detection']\n",
+                    "1": "['object', 'detection']\n"
+                },
+                "in_toks": 1386,
+                "out_toks": 14,
+                "id": {
+                    "0": "iyQgadm0CrynqtsPu96tiQs",
+                    "1": "iyQgabj5KJu-mtkPvpq5-Qo"
+                },
+                "created": {
+                    "0": "iyQgadm0CrynqtsPu96tiQs",
+                    "1": "iyQgabj5KJu-mtkPvpq5-Qo"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "48": {
+        "0": {
+            "pred_tables": [
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'feature_version']\n",
+                    "1": "['feature', 'feature_version']\n"
+                },
+                "responses_text": {
+                    "0": "['feature', 'feature_version']\n",
+                    "1": "['feature', 'feature_version']\n"
+                },
+                "in_toks": 1266,
+                "out_toks": 18,
+                "id": {
+                    "0": "jCQgaZmWFuiP6dkPpP3zwQ0",
+                    "1": "jCQgadrFMdGiqtsPwaWY-Ao"
+                },
+                "created": {
+                    "0": "jCQgaZmWFuiP6dkPpP3zwQ0",
+                    "1": "jCQgadrFMdGiqtsPwaWY-Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "feature",
+                "feature_version"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['feature', 'feature_version']\n",
+                    "1": "['feature', 'feature_version']\n"
+                },
+                "responses_text": {
+                    "0": "['feature', 'feature_version']\n",
+                    "1": "['feature', 'feature_version']\n"
+                },
+                "in_toks": 1266,
+                "out_toks": 18,
+                "id": {
+                    "0": "jCQgaZmWFuiP6dkPpP3zwQ0",
+                    "1": "jCQgadrFMdGiqtsPwaWY-Ao"
+                },
+                "created": {
+                    "0": "jCQgaZmWFuiP6dkPpP3zwQ0",
+                    "1": "jCQgadrFMdGiqtsPwaWY-Ao"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "58": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "in_toks": 1302,
+                "out_toks": 16,
+                "id": {
+                    "0": "jSQgabC3ENa2mtkP-O3y-Ao",
+                    "1": "jSQgabjTLbSlqtsP3MffgAs"
+                },
+                "created": {
+                    "0": "jSQgabC3ENa2mtkP-O3y-Ao",
+                    "1": "jSQgabjTLbSlqtsP3MffgAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'magstat']\n",
+                    "1": "['object', 'magstat']\n"
+                },
+                "in_toks": 1302,
+                "out_toks": 16,
+                "id": {
+                    "0": "jSQgabC3ENa2mtkP-O3y-Ao",
+                    "1": "jSQgabjTLbSlqtsP3MffgAs"
+                },
+                "created": {
+                    "0": "jSQgabC3ENa2mtkP-O3y-Ao",
+                    "1": "jSQgabjTLbSlqtsP3MffgAs"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "78": {
+        "0": {
+            "pred_tables": [
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['taxonomy']\n",
+                    "1": "['taxonomy']\n"
+                },
+                "responses_text": {
+                    "0": "['taxonomy']\n",
+                    "1": "['taxonomy']\n"
+                },
+                "in_toks": 1224,
+                "out_toks": 8,
+                "id": {
+                    "0": "jiQgaZqFD_GqqtsPvurF-Qo",
+                    "1": "jiQgaYWNKoK-qtsPyY320Qw"
+                },
+                "created": {
+                    "0": "jiQgaZqFD_GqqtsPvurF-Qo",
+                    "1": "jiQgaYWNKoK-qtsPyY320Qw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "taxonomy"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['taxonomy']\n",
+                    "1": "['taxonomy']\n"
+                },
+                "responses_text": {
+                    "0": "['taxonomy']\n",
+                    "1": "['taxonomy']\n"
+                },
+                "in_toks": 1224,
+                "out_toks": 8,
+                "id": {
+                    "0": "jiQgaZqFD_GqqtsPvurF-Qo",
+                    "1": "jiQgaYWNKoK-qtsPyY320Qw"
+                },
+                "created": {
+                    "0": "jiQgaZqFD_GqqtsPvurF-Qo",
+                    "1": "jiQgaYWNKoK-qtsPyY320Qw"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    },
+    "39": {
+        "0": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'magstat']\n",
+                    "1": "['object', 'probability', 'detection', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'detection', 'magstat']\n",
+                    "1": "['object', 'probability', 'detection', 'magstat']\n"
+                },
+                "in_toks": 1418,
+                "out_toks": 28,
+                "id": {
+                    "0": "jyQgaenVEOGiqtsP2KaeoA0",
+                    "1": "jyQgabXuLqaCqtsP84rgyA0"
+                },
+                "created": {
+                    "0": "jyQgaenVEOGiqtsP2KaeoA0",
+                    "1": "jyQgabXuLqaCqtsP84rgyA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        },
+        "1": {
+            "pred_tables": [
+                "object",
+                "probability",
+                "detection",
+                "magstat"
+            ],
+            "schema_linking_response": {
+                "responses": {
+                    "0": "['object', 'probability', 'detection', 'magstat']\n",
+                    "1": "['object', 'probability', 'detection', 'magstat']\n"
+                },
+                "responses_text": {
+                    "0": "['object', 'probability', 'detection', 'magstat']\n",
+                    "1": "['object', 'probability', 'detection', 'magstat']\n"
+                },
+                "in_toks": 1418,
+                "out_toks": 28,
+                "id": {
+                    "0": "jyQgaenVEOGiqtsP2KaeoA0",
+                    "1": "jyQgabXuLqaCqtsP84rgyA0"
+                },
+                "created": {
+                    "0": "jyQgaenVEOGiqtsP2KaeoA0",
+                    "1": "jyQgabXuLqaCqtsP84rgyA0"
+                },
+                "model": "gemini-2.0-flash-lite"
+            }
+        }
+    }
+}

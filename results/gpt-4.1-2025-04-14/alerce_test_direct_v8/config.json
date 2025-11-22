@@ -4,7 +4,7 @@
     "model_name": "gpt-4.1-2025-04-14",
     "exp_name": "alerce_test_direct_v8",
     "sql_gen_method": "direct",
-    "n_exps": 5,
+    "n_exps": 10,
     "save_path": "./results",
     "eval": true,
     "self_correction": true,
@@ -13,7 +13,7 @@
     "promptV_diff_class": "diff_v8",
     "promptV_gen": "dir_v8",
     "promptV_sc": "sc_v3",
-    "num_processes": 4,
+    "num_processes": 3,
     "parallel": true,
     "access_time": 2,
     "n_tries": 5,
@@ -24,7 +24,7 @@
     "max_new_tokens_decomp": 4000,
     "t": 0.0,
     "top_p": null,
-    "date_executed": "2025-10-21 02:10:41",
+    "date_executed": "2025-11-09 21:23:07",
     "experiment_settings": {
         "schema_linking": {
             "model": {

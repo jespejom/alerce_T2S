@@ -24,7 +24,7 @@ from evaluation import evaluate_alerce_queries
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-
+CHECK_EXPERIMENTS = True
 from constants import GenerationMethod, DifficultyLevel
 
 def seq_predict_tables(data: pd.DataFrame,
@@ -63,11 +63,18 @@ def seq_predict_tables(data: pd.DataFrame,
         else:
             schlink_experiments[req_id] = {}
             pred_tables, schlink_response = schema_linking_model.predict_tables(request, n=n_exps)
-            for i in range(n_exps):
-                schlink_experiments[req_id][str(i)] = {
-                    "pred_tables": pred_tables[i],
+            
+            if n_exps == 1:
+                schlink_experiments[req_id]["0"] = {
+                    "pred_tables": pred_tables,
                     "schema_linking_response": schlink_response
                 }
+            else:
+                for i in range(n_exps):
+                    schlink_experiments[req_id][str(i)] = {
+                        "pred_tables": pred_tables[i],
+                        "schema_linking_response": schlink_response
+                    }
 
     return schlink_experiments
 
@@ -144,57 +151,103 @@ def sequential_generate_sql(
         dom_knowledge = row['domain_knowledge']
         
         if req_id in all_experiments and len(all_experiments[req_id]) >= n_exps:
-            logger.info(f"Skipping SQL generation for request {req_id} as it already has {len(all_experiments[req_id])} experiments.")
-            continue
+
+            if CHECK_EXPERIMENTS:
+                for i in range(n_exps):
+                    if (all_experiments[req_id][str(i)]["sql_query"] == "") or (isinstance(all_experiments[req_id][str(i)]["sql_query"], list)):
+                        logger.info(f"Experiment {i + 1}/{n_exps} for request ID: {req_id} has empty SQL query. Regenerating...")
+                        pred_tables = schlink_experiments[req_id][str(i)]["pred_tables"]
+                        schlink_response = schlink_experiments[req_id][str(i)]["schema_linking_response"]
+                        if diff_experiments is not None:
+                            # If difficulty classification is provided, use it
+                            difficulty = diff_experiments[req_id][str(i)]["pred_diff"]
+                            diff_response = diff_experiments[req_id][str(i)]["diff_response"]
+                        else:
+                            # If not, set difficulty to None
+                            difficulty = None
+                            diff_response = None
+
+                        experiment_id = f"run_{i}"
+                        # Generate SQL
+                        if sql_gen_method == GenerationMethod.DIRECT:
+                            sql_query_results, sql_response = sql_gen.generate_sql(request, tables_list=pred_tables, ext_knowledge=ext_knowledge, dom_knowledge=dom_knowledge)
+                        elif sql_gen_method in [GenerationMethod.STEP_BY_STEP, GenerationMethod.STEP_BY_STEP_COT]:
+                            # Generate SQL using step-by-step method
+                            sql_query_results, sql_response = sql_gen.generate_sql(request, tables_list=pred_tables, ext_knowledge=ext_knowledge, dom_knowledge=dom_knowledge, difficulty_class=difficulty)
+                        else:
+                            raise ValueError(f"Unsupported SQL generation method: {sql_gen_method}")
+                        print(sql_query_results)
+                        # Save experiment results for this run
+                        experiment_results = {
+                            "req_id": req_id,
+                            "experiment_id": experiment_id,
+                            "pred_tables": pred_tables,
+                            "schema_linking_response": schlink_response,
+                            "sql_query": sql_query_results[0],
+                            "sql_response": sql_response,
+                            "pred_diff": difficulty,
+                            "diff_response": diff_response,
+                        }
+                        
+                        all_experiments[req_id][str(i)] = experiment_results
+            else:   
+                logger.info(f"Skipping SQL generation for request {req_id} as it already has {len(all_experiments[req_id])} experiments.")
+                continue
 
         elif req_id in all_experiments and len(all_experiments[req_id]) < n_exps:
             logger.info(f"Continuing SQL generation for request {req_id} as it has {len(all_experiments[req_id])} experiments, predicting the remaining {n_exps - len(all_experiments[req_id])} experiments.")
             # Generate SQL for the remaining experiments
-            for i in range(len(all_experiments[req_id]), n_exps):
-                pred_tables = schlink_experiments[req_id][str(i)]["pred_tables"]
-                schlink_response = schlink_experiments[req_id][str(i)]["schema_linking_response"]
-                if diff_experiments is not None:
-                    # If difficulty classification is provided, use it
-                    difficulty = diff_experiments[req_id][str(i)]["pred_diff"]
-                    diff_response = diff_experiments[req_id][str(i)]["diff_response"]
-                else:
-                    # If not, set difficulty to None
-                    difficulty = None
-                    diff_response = None
+            # for i in range(len(all_experiments[req_id]), n_exps):
+            for i in range(n_exps):
+                if str(i) in all_experiments[req_id]:
+                    continue
 
-                experiment_id = f"run_{i}"
-                # Generate SQL
-                if sql_gen_method == GenerationMethod.DIRECT:
-                    sql_query_results, sql_response = sql_gen.generate_sql(request, tables_list=pred_tables, ext_knowledge=ext_knowledge, dom_knowledge=dom_knowledge)
-                elif sql_gen_method in [GenerationMethod.STEP_BY_STEP, GenerationMethod.STEP_BY_STEP_COT]:
-                    # Generate SQL using step-by-step method
-                    sql_query_results, sql_response = sql_gen.generate_sql(request, tables_list=pred_tables, ext_knowledge=ext_knowledge, dom_knowledge=dom_knowledge, difficulty_class=difficulty)
                 else:
-                    raise ValueError(f"Unsupported SQL generation method: {sql_gen_method}")
-                
-                # Save experiment results for this run
-                experiment_results = {
-                    "req_id": req_id,
-                    "experiment_id": experiment_id,
-                    "pred_tables": pred_tables,
-                    "schema_linking_response": schlink_response,
-                    "sql_query": sql_query_results[0],
-                    "sql_response": sql_response,
-                    "pred_diff": difficulty,
-                    "diff_response": diff_response,
-                }
-                experiment_pipeline = {
-                    "schema_linking": schema_linking_model,
-                    "sql_generation": sql_gen.to_dict(),
-                    "difficulty_classification": diff_class_model
-                }
-                
-                all_experiments[req_id][i] = experiment_results
-                experiment_settings[req_id][i] = experiment_pipeline
+                    logger.info(f"Running experiment {i + 1}/{n_exps} for request ID: {req_id}")
+                    pred_tables = schlink_experiments[req_id][str(i)]["pred_tables"]
+                    schlink_response = schlink_experiments[req_id][str(i)]["schema_linking_response"]
+                    if diff_experiments is not None:
+                        # If difficulty classification is provided, use it
+                        difficulty = diff_experiments[req_id][str(i)]["pred_diff"]
+                        diff_response = diff_experiments[req_id][str(i)]["diff_response"]
+                    else:
+                        # If not, set difficulty to None
+                        difficulty = None
+                        diff_response = None
+
+                    experiment_id = f"run_{i}"
+                    # Generate SQL
+                    if sql_gen_method == GenerationMethod.DIRECT:
+                        sql_query_results, sql_response = sql_gen.generate_sql(request, tables_list=pred_tables, ext_knowledge=ext_knowledge, dom_knowledge=dom_knowledge)
+                    elif sql_gen_method in [GenerationMethod.STEP_BY_STEP, GenerationMethod.STEP_BY_STEP_COT]:
+                        # Generate SQL using step-by-step method
+                        sql_query_results, sql_response = sql_gen.generate_sql(request, tables_list=pred_tables, ext_knowledge=ext_knowledge, dom_knowledge=dom_knowledge, difficulty_class=difficulty)
+                    else:
+                        raise ValueError(f"Unsupported SQL generation method: {sql_gen_method}")
+                    
+                    # Save experiment results for this run
+                    experiment_results = {
+                        "req_id": req_id,
+                        "experiment_id": experiment_id,
+                        "pred_tables": pred_tables,
+                        "schema_linking_response": schlink_response,
+                        "sql_query": sql_query_results[0],
+                        "sql_response": sql_response,
+                        "pred_diff": difficulty,
+                        "diff_response": diff_response,
+                    }
+                    # experiment_pipeline = {
+                    #     "schema_linking": schema_linking_model,
+                    #     "sql_generation": sql_gen.to_dict(),
+                    #     "difficulty_classification": diff_class_model
+                    # }
+                    
+                    all_experiments[req_id][str(i)] = experiment_results
+                    # experiment_settings[req_id][str(i)] = experiment_pipeline
 
         else:
             all_experiments[req_id] = {}
-            experiment_settings[req_id] = {}
+            # experiment_settings[req_id] = {}
 
             logger.info(f"Running experiments for request ID: {req_id}")
             for i in range(n_exps):
@@ -236,10 +289,15 @@ def sequential_generate_sql(
                     "difficulty_classification": diff_class_model
                 }
                 
-                all_experiments[req_id][i] = experiment_results
-                experiment_settings[req_id][i] = experiment_pipeline
+                all_experiments[req_id][str(i)] = experiment_results
+                # experiment_settings[req_id][str(i)] = experiment_pipeline
                 # logger.info(f"Experiment {i + 1}/{n_exps} completed")
-
+    experiment_settings = {
+        "schema_linking": schema_linking_model,
+        "sql_generation": sql_gen.to_dict(),
+        "difficulty_classification": diff_class_model
+        }
+    
     return all_experiments, experiment_settings
     
 def batch_generate_sql(

@@ -51,6 +51,7 @@ class GPTModel(LLMModel):
         max_retries = 6
         for retry_attempt, delay_secs in enumerate((2**x for x in range(0, max_retries))):
             try:
+                #TODO: add reasoning models
                 # Prepare parameters for the API call
                 params = {
                     "model": model_name,
